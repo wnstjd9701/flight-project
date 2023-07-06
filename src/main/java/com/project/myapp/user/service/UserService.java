@@ -15,7 +15,7 @@ public class UserService implements IUserService {
 	IUserRepository userRepository;
 	
 	@Override
-	public List<User> getUserInformation() {
+	public User getUserInformation() {
 		return userRepository.getUserInformation(); 
 	}
 

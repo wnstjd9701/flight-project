@@ -22,7 +22,7 @@ public class UserController {
 	
 	@GetMapping("/test")
 	public String userTest(Model model) {
-		List<User> user = userService.getUserInformation();
+		User user = userService.getUserInformation();
 		logger.info("UserTest" + user.toString());
 		return "home";
 	}
