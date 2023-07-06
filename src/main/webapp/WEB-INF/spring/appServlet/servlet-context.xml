@@ -21,8 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.project.myapp" />
-	
-	
-	
+	<!-- Controller 추가 -->
+	<context:component-scan base-package="com.project.myapp.user.controller" />
+	<context:component-scan base-package="com.project.myapp"/>
 </beans:beans>
