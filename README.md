@@ -1,2 +1,2 @@
-# flight-project
-spring flight project
+# flight-reservation project
+spring flight reservation application 
