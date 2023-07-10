@@ -6,4 +6,6 @@ import com.project.myapp.user.model.User;
 
 public interface IUserService {
 	User getUserInformation();
+	User getUserPassword(String id);
+	
 }

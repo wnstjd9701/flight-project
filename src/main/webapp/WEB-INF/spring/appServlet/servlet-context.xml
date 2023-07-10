@@ -24,4 +24,15 @@
 	<!-- Controller 추가 -->
 	<context:component-scan base-package="com.project.myapp.user.controller" />
 	<context:component-scan base-package="com.project.myapp"/>
+	
+	<!-- 로그인을 위한 인터셉터 -->
+	<!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/"/>
+			<mapping path="/home"/>
+			<beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>

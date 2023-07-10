@@ -6,4 +6,5 @@ import com.project.myapp.user.model.User;
 
 public interface IUserRepository {
 	User getUserInformation();
+	User getUserPassword(String id);
 }

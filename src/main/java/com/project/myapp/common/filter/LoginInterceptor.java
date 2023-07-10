@@ -18,12 +18,17 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		// 로그인 처리 로직
 		// jwt
+		String userId = (String) request.getSession().getAttribute("id"); 
 		try {
-			
+			if(userId == null || userId.equals("")) {
+				logger.info("URI:" + request.getRequestURI() + " ID: " + request.getSession().getAttribute("id") + " Password: " + request.getSession().getAttribute("password"));
+				response.sendRedirect(request.getContextPath() + "/login");
+				return false;
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return true;
 	}
 	
 	// Controller 진입 후  View가 랜더링 되기 전에 수행

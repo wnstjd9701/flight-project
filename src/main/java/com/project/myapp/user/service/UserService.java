@@ -19,4 +19,9 @@ public class UserService implements IUserService {
 		return userRepository.getUserInformation(); 
 	}
 
+	@Override
+	public User getUserPassword(String id) {
+		return userRepository.getUserPassword(id);
+	}
+
 }
