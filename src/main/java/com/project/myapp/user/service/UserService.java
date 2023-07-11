@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import com.project.myapp.user.dao.IUserRepository;
 import com.project.myapp.user.model.User;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserService implements IUserService {
 	
-	@Autowired
-	IUserRepository userRepository;
+	private final IUserRepository userRepository;
 	
 	@Override
 	public User getUserInformation() {
