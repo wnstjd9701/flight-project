@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Airline {
 	private int airlineId;
-	private String name;
+	private String airlineName;
 	private int airplaneTypeId;
 	private String airplaneTypeName;
 	private String image;
