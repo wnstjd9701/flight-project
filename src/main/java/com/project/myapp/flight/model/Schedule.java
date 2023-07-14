@@ -31,4 +31,18 @@ public class Schedule {
 	
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	
+	// Airline Table
+	private String name;
+	private String airplaneTypeName;
+	private String image;
+	
+	// Check Person Count
+	private int person;
+	
+	// 페이징 처리
+	private int page;
+	
+	// Grade
+	private int grade;
 }

@@ -1,6 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.myapp.user.dao.IFlightRepository">
+
+	<select id="getEconomyClassSchedule" parameterType="com.project.myapp.flight.model.Schedule" resultType="com.project.myapp.flight.model.Schedule">
+		<![CDATA[
+			SELECT
+    			ROWNUM,
+    			s.schedule_id,
+    			s.airline_id,
+    			s.department_nation,
+			    s.arrival_nation,
+			    s.department_date,
+			    s.arrival_date,
+			    s.department_time,
+			    s.arrival_time,
+			    s.flight_time,
+			    s.economy_class_fare,
+			    s.economy_class_remain
+			FROM
+			    (
+			        SELECT
+			            ROWNUM,
+			            schedule_id,
+			            airline_id,
+			            department_nation,
+			            arrival_nation,
+			            department_date,
+			            arrival_date,
+			            department_time,
+			            arrival_time,
+			            flight_time,
+			            economy_class_fare,
+			            economy_class_remain
+			        FROM
+			            schedule
+			        ORDER BY
+			            economy_class_fare
+			    ) 	s
+			    LEFT JOIN airline a ON s.airline_id = a.airline_id
+			WHERE
+			        s.department_nation = #{departmentNation}
+			    AND s.arrival_nation = #{arrivalNation}
+			    AND s.department_date = #{departmentDate}
+			    AND s.arrival_date = #{arrivalDate}
+			    AND s.economy_class_remain >= #{person}
+			    AND ROWNUM <= #{page}
+			ORDER BY
+			    s.economy_class_fare;
+		]]>
+	</select>
 	
+	<select id="getBusinessClassSchedule" parameterType="com.project.myapp.flight.model.Schedule" resultType="com.project.myapp.flight.model.Schedule">
+		<![CDATA[
+			SELECT
+    			ROWNUM,
+    			s.schedule_id,
+    			s.airline_id,
+    			s.department_nation,
+			    s.arrival_nation,
+			    s.department_date,
+			    s.arrival_date,
+			    s.department_time,
+			    s.arrival_time,
+			    s.flight_time,
+			    s.business_class_fare,
+			    s.business_class_remain
+			FROM
+			    (
+			        SELECT
+			            ROWNUM,
+			            schedule_id,
+			            airline_id,
+			            department_nation,
+			            arrival_nation,
+			            department_date,
+			            arrival_date,
+			            department_time,
+			            arrival_time,
+			            flight_time,
+			            business_class_fare,
+			            business_class_remain
+			        FROM
+			            schedule
+			        ORDER BY
+			           	business_class_fare
+			    ) 	s
+			    LEFT JOIN airline a ON s.airline_id = a.airline_id
+			WHERE
+			        s.department_nation = #{departmentNation}
+			    AND s.arrival_nation = #{arrivalNation}
+			    AND s.department_date = #{departmentDate}
+			    AND s.arrival_date = #{arrivalDate}
+			    AND s.business_class_remain >= #{person}
+			    AND ROWNUM <= #{page}
+			ORDER BY
+			    s.business_class_fare;
+		]]>
+	</select>
+	
+	<select id="getFirstClassSchedule" parameterType="com.project.myapp.flight.model.Schedule" resultType="com.project.myapp.flight.model.Schedule">
+		<![CDATA[
+			SELECT
+    			ROWNUM,
+    			s.schedule_id,
+    			s.airline_id,
+    			s.department_nation,
+			    s.arrival_nation,
+			    s.department_date,
+			    s.arrival_date,
+			    s.department_time,
+			    s.arrival_time,
+			    s.flight_time,
+			    s.first_class_fare,
+			    s.first_class_remain
+			FROM
+			    (
+			        SELECT
+			            ROWNUM,
+			            schedule_id,
+			            airline_id,
+			            department_nation,
+			            arrival_nation,
+			            department_date,
+			            arrival_date,
+			            department_time,
+			            arrival_time,
+			            flight_time,
+			            first_class_fare,
+			            first_class_remain
+			        FROM
+			            schedule
+			        ORDER BY
+			           	first_class_fare
+			    ) 	s
+			    LEFT JOIN airline a ON s.airline_id = a.airline_id
+			WHERE
+			        s.department_nation = #{departmentNation}
+			    AND s.arrival_nation = #{arrivalNation}
+			    AND s.department_date = #{departmentDate}
+			    AND s.arrival_date = #{arrivalDate}
+			    AND s.first_class_remain >= #{person}
+			    AND ROWNUM <= #{page}
+			ORDER BY
+			    s.first_class_fare;
+		]]>
+	</select>
 
 </mapper>
