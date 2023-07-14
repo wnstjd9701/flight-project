@@ -21,11 +21,11 @@
 	
 	<!-- Service 추가 -->
 	<!-- User Service -->  	
- 	<context:component-scan base-package="com.example.myapp.user.service" />
+ 	<context:component-scan base-package="com.project.myapp.user.service" />
  	
  	
  	<!-- Flight Service -->
- 	<context:component-scan base-package="com.example.myapp.flight.service" />
+ 	<context:component-scan base-package="com.project.myapp.flight.service" />
  	 
 
 </beans>

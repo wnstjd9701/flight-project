@@ -1,9 +1,13 @@
 package com.project.myapp.flight.controller;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.myapp.flight.service.IFlightService;
 
@@ -16,12 +20,15 @@ public class FlightController {
 	private final IFlightService flightService;
 	
 	/*
+	 *  URL: /flight/ticket/search/{nation}/{departureDate}/{arrivalDate}?person=2
 	 *  API No: 13
 	 *  Method: GET
-	 *  Information: 항공권 검색
+	 *  Information: 항공권 검색 (기본: 가격순)
 	*/
-	@GetMapping("/flight/ticket/search")
-	public String searchTicket(Model model) {
+	@GetMapping("/flight/ticket/search/{nation}/{departureDate}/{arrivalDate}")
+	public String searchTicket(@PathVariable("nation") String nation, 
+			@PathVariable("departureDate") Date departureDate, @PathVariable("arrivalDate") Date arrivalDate, @RequestParam(value="person", required=true) int personCount) {
+		
 		return "/ticket/search";
 	}
 	
