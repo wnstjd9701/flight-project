@@ -28,6 +28,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 
+		View만 보여줘도 되는 페이지  
+		path로 요청이 들어오면 
+		view-name으로 찾아감 ex) /WEB-INF/views/login.jsp
+	-->
+	<view-controller view-name="login" path="/login"/>
 	
 	<!-- Controller 추가 -->
 	<context:component-scan base-package="com.project.myapp.user.controller" />
@@ -39,7 +45,6 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/"/>
-			<mapping path="/home"/>
 			<beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
