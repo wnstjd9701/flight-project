@@ -6,17 +6,17 @@
 		<![CDATA[
 			SELECT
     			ROWNUM,
-    			s.schedule_id,
-    			s.airline_id,
-    			s.department_nation,
-			    s.arrival_nation,
-			    s.department_date,
-			    s.arrival_date,
-			    s.department_time,
-			    s.arrival_time,
-			    s.flight_time,
-			    s.economy_class_fare,
-			    s.economy_class_remain
+    			s.schedule_id as scheduleId,
+    			s.airline_id as airlineId,
+    			s.department_nation as departmentNation,
+			    s.arrival_nation as arrivalNation,
+			    s.department_date as departmentDate,
+			    s.arrival_date as arrivalDate,
+			    s.department_time as departmentTime,
+			    s.arrival_time as arrivalTime,
+			    s.flight_time as flightTime,
+			    s.economy_class_fare as economyClassFare,
+			    s.economy_class_remain as economyClassRemain
 			FROM
 			    (
 			        SELECT
