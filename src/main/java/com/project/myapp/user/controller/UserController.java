@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.myapp.user.model.User;
@@ -70,5 +71,15 @@ public class UserController {
 		// session 삭제		
 		session.invalidate();
 		return "redirect:home";
+	}
+	
+	@RequestMapping("/signup")
+	public String signUp() {
+		return "signup";
+	}
+	
+	@RequestMapping("/qna")
+	public String QnA() {
+		return "qna";
 	}
 }

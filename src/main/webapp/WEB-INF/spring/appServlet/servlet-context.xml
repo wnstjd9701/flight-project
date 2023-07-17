@@ -20,6 +20,12 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/css/**" location="/css/" />
+	<resources mapping="/fontawesome/**" location="/fontawesome/" />
+	<resources mapping="/fonts/**" location="/fonts/" />
+	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/js/**" location="/js/" />
+	<resources mapping="/sass/**" location="/sass/" />
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -30,12 +36,13 @@
 	
 	
 	<!-- Controller 추가 -->
+	<context:component-scan base-package="com.project.myapp.test.controller" />
 	<context:component-scan base-package="com.project.myapp.user.controller" />
 	<context:component-scan base-package="com.project.myapp"/>
 	
 	
 	<!-- 로그인을 위한 인터셉터 -->
-	<!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
+	<!-- 로그인을 해야 들어갈 수 있는 페이지 추가
 	<interceptors>
 		<interceptor>
 			<mapping path="/"/>
@@ -44,12 +51,12 @@
 		</interceptor>
 	</interceptors>
 	
-	<!-- URL을 Logging을 위한 Interceptor -->
+	URL을 Logging을 위한 Interceptor
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:bean class="com.project.myapp.common.filter.LoggingInterceptor"/>
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 	
 </beans:beans>
