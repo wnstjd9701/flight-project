@@ -22,7 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		try {
 			if(userId == null || userId.equals("")) {
 				logger.info("URI:" + request.getRequestURI() + " ID: " + request.getSession().getAttribute("id") + " Password: " + request.getSession().getAttribute("password"));
-				response.sendRedirect(request.getContextPath() + "/login");
+				response.sendRedirect(request.getContextPath() + "/signin");
 				return false;
 			}
 		}catch (Exception e) {

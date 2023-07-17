@@ -11,10 +11,29 @@
 	
  	
  	<!-- Dao 추가 -->
+<<<<<<< HEAD
 	<mybatis-spring:scan base-package="com.project.myapp.member.dao" />
 	
 	<!-- Service 추가 -->  	
  	<context:component-scan base-package="com.example.myapp.member.service" /> 
+=======
+ 	<!--  User DAO -->
+	<mybatis-spring:scan base-package="com.project.myapp.user.dao" />
+	
+	
+	<!-- Flight DAO -->
+	<mybatis-spring:scan base-package="com.project.myapp.flight.dao"/>
+	
+	
+	<!-- Service 추가 -->
+	<!-- User Service -->  	
+ 	<context:component-scan base-package="com.project.myapp.user.service" />
+ 	
+ 	
+ 	<!-- Flight Service -->
+ 	<context:component-scan base-package="com.project.myapp.flight.service" />
+ 	 
+>>>>>>> eab5c1367dc5feb1fade2a372585d1f88cfdbb2b
 
 </beans>
 
