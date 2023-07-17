@@ -16,15 +16,27 @@ public class FlightService implements IFlightService {
 	
 	private final IFlightRepository flightRepository;
 
-	// 좌석 등급 별 스케줄 조회
+	// 가는편 좌석 등급 별 스케줄 조회
 	@Override
-	public List<Schedule> getFlightScheduleByGrade(Schedule schedule, int grade) {
+	public List<Schedule> getFlightScheduleToGoByGrade(Schedule schedule, int grade) {
 		if(grade == 1) {
-			return flightRepository.getEconomyClassSchedule(schedule);
+			return flightRepository.getEconomyClassScheduleToGo(schedule);
 		}else if(grade == 2) {
-			return flightRepository.getBusinessClassSchedule(schedule);
+			return flightRepository.getBusinessClassScheduleToGo(schedule);
 		}else {
-			return flightRepository.getFirstClassSchedule(schedule);
+			return flightRepository.getFirstClassScheduleToGo(schedule);
+		}
+	}
+	
+	// 오는편 좌석 등급 별 스케줄 조회
+	@Override
+	public List<Schedule> getFlightScheduleToComeByGrade(Schedule schedule, int grade) {
+		if(grade == 1) {
+			return flightRepository.getEconomyClassScheduleToCome(schedule);
+		}else if(grade == 2) {
+			return flightRepository.getBusinessClassScheduleToCome(schedule);
+		}else {
+			return flightRepository.getFirstClassScheduleToCome(schedule);
 		}
 	}
 }
