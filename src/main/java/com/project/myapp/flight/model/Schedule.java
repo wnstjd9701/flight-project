@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class Schedule {
+	private int ROWNUM;
 	private int scheduleId;
 	private int airlineId;
 	
@@ -16,8 +17,8 @@ public class Schedule {
 	private Date departmentDate;
 	private Date arrivalDate;
 	
-	private Timestamp departmentTime;
-	private Timestamp arrivalTime;
+	private String departmentTime;
+	private String arrivalTime;
 	private int flightTime;
 	
 	private int firstClassFare;
@@ -33,7 +34,7 @@ public class Schedule {
 	private Timestamp updatedAt;
 	
 	// Airline Table
-	private String name;
+	private String airlineName;
 	private String airplaneTypeName;
 	private String image;
 	
