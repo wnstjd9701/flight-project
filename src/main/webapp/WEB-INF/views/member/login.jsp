@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="<c:url value="/login"/>" method="post">
-	<input type="text" name="id">
+<form action="<c:url value="/member/login"/>" method="post">
+	<input type="text" name="memberId">
 	<input type="password" name="password">
 	<input type="submit" value="로그인">
 </form>

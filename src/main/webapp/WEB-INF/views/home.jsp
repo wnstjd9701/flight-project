@@ -10,10 +10,12 @@
 </h1>
 
 <P>  The time on the server </P>
-<p> UserId: ${id} </p>
+<c:if test="${not empty sessionScope.memberId}">
+<p> MemberId: ${memberId} </p>
 <p> Password: ${password} </p>
-<form action="<c:url value="/logout"/>">
+<form action="<c:url value="/member/logout"/>">
 	<input type="submit" value="logout">
 </form>
+</c:if>
 </body>
 </html>

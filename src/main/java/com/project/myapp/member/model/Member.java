@@ -25,7 +25,7 @@ public class Member {
 	private Date passportExpiryDate;
 
 	private int isAdmin;
-	private int isDelete;
+	private int isDeleted;
 
 	private Timestamp createdAt;
 	private Timestamp updatedAt;

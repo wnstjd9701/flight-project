@@ -11,9 +11,9 @@
 	
  	
  	<!-- Dao 추가 -->
-	<mybatis-spring:scan base-package="com.project.myapp.user.dao" />
+	<mybatis-spring:scan base-package="com.project.myapp.member.dao" />
 	
 	<!-- Service 추가 -->  	
- 	<context:component-scan base-package="com.example.myapp.user.service" /> 
+ 	<context:component-scan base-package="com.example.myapp.member.service" /> 
 
 </beans>
