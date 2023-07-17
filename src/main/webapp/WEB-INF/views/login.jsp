@@ -26,8 +26,6 @@
 					<div class="login-sub">
 						<ul>
 							<li><a href="signup">회원가입&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-							<li><a href="#">아이디
-									찾기&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 							<li><a href="#">비밀번호 찾기</a></li>
 						</ul>
 					</div>
