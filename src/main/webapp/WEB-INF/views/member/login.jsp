@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <form action="<c:url value="/member/login"/>" method="post">
 	<input type="text" name="memberId">
 	<input type="password" name="password">
