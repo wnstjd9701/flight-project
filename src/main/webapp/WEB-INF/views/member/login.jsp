@@ -7,18 +7,6 @@
 <jsp:include page="/WEB-INF/views/header.jsp" />
 </head>
 <body>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/member/login.jsp
-<form action="<c:url value="/member/login"/>" method="post">
-	<input type="text" name="memberId">
-	<input type="password" name="password">
-	<input type="submit" value="로그인">
-</form>
-=======
-	<%-- <form action="<c:url value="/login"/>" method="post">
-		<input type="text" name="id"> <input type="password"
-			name="password"> <input type="submit" value="로그인">
-	</form>
-	 --%>
 	<div class="loginpage-wrap">
 			<div class="section-left">
 
@@ -45,7 +33,5 @@
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/footer.jsp" />
-	
->>>>>>> eab5c1367dc5feb1fade2a372585d1f88cfdbb2b:src/main/webapp/WEB-INF/views/login.jsp
 </body>
 </html>
