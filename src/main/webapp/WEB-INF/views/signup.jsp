@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/header.jsp" />
 </head>
 <body>
-	<div class="sign-div" style="padding: 20px;">
+	<div class="sign-div">
 		<div class="sign">
 			<h2 style="padding: 20px; font-size: 30px;">회원가입</h2>
 

@@ -27,7 +27,8 @@
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/sass/**" location="/sass/" />
 
-
+	<!-- 시작 페이지 설정 -->
+	<view-controller path="/" view-name="home"/>
 
 
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -40,17 +41,18 @@
    <!-- Controller 추가 -->
    <context:component-scan base-package="com.project.myapp.member.controller" />
    <context:component-scan base-package="com.project.myapp"/>
+   <context:component-scan base-package="com.project.myapp.test.controller"/>
    
    
    <!-- 로그인을 위한 인터셉터 -->
    <!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
-   <interceptors>
+   <!-- <interceptors>
       <interceptor>
          <mapping path="/"/>
          <mapping path="/home"/>
          <beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
       </interceptor>
-   </interceptors>
+   </interceptors> -->
    
    <!-- URL을 Logging을 위한 Interceptor -->
    <interceptors>
