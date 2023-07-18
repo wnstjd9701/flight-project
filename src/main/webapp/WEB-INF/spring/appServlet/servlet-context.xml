@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:beans="http://www.springframework.org/schema/beans"
-   xmlns:context="http://www.springframework.org/schema/context"
-   xmlns:util="http://www.springframework.org/schema/util"
-   xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-   <!-- Enables the Spring MVC @Controller programming model -->
-   <annotation-driven />
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
 
    <!-- 
       Properties 파일을 읽어 오기 위한 태그 
@@ -46,13 +46,13 @@
    
    <!-- 로그인을 위한 인터셉터 -->
    <!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
-   <!-- <interceptors>
+   <interceptors>
       <interceptor>
          <mapping path="/"/>
-         <mapping path="/home"/>
+         <mapping path="/mypage"/>
          <beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
       </interceptor>
-   </interceptors> -->
+   </interceptors> 
    
    <!-- URL을 Logging을 위한 Interceptor -->
    <interceptors>

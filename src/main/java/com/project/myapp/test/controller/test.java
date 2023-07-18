@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class test {
 	@RequestMapping(value="/login")
 	public String goLogin(){
-		return "login";
+		return "member/login";
 	}
 	
 	@RequestMapping(value="/home")
@@ -15,9 +15,9 @@ public class test {
 		return "home";
 	}
 	
-	@RequestMapping(value="/signup")
+	@RequestMapping(value="/insert")
 	public String goSignup(){
-		return "signup";
+		return "member/insertForm";
 	}
 	
 	@RequestMapping(value="/qna")
@@ -25,9 +25,19 @@ public class test {
 		return "qna";
 	}
 	
-	@RequestMapping(value="/mypage")
+	@RequestMapping(value="/mp")
 	public String goMypage(){
-		return "login";
+		return "member/mypage";
+	}
+	
+	@RequestMapping(value="/pwFind")
+	public String goPw(){
+		return "member/pwFind";
+	}
+	
+	@RequestMapping(value="/meupdate")
+	public String gomeUpdate(){
+		return "member/meupdate";
 	}
 	
 }	

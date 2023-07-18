@@ -8,10 +8,10 @@
 			INSERT INTO 
 				MEMBER
 				(member_id, password, name, first_name, last_name, phone_number, birthday, address, email
-					gender, passport_number, passport_expiry_date, is_admin, is_delete, created_at, updated_at)
+					gender, passport_number, passport_expiry_date, is_admin, is_deleted, created_at, updated_at)
 				VALUES
 				(#{memberId},#{password}, #{name}, #{firstName}, #{lastName}, #{phoneNumber}, #{birthday}, #{address},#{email},
-					#{gender}, #{passportNumber}, #{passportExpiryDate}, #{isAdmin}, #{isDelete}, #{createdAt}, #{updatedAt})
+					#{gender}, #{passportNumber}, #{passportExpiryDate}, #{isAdmin}, #{isDeleted}, #{createdAt}, #{updatedAt})
 		]]>
 	</insert>
 	
@@ -19,7 +19,7 @@
 	resultType="com.project.myapp.member.model.Member">
 		<![CDATA[
 			SELECT 
-				memberId "memberId",
+				member_id "memberId",
 				password "password",
 				name "name",
 				first_name "firstName",
@@ -32,7 +32,7 @@
 				passport_number "passportNumber",
 				passport_expiry_date "passportExpiryDate",
 				is_admin "isAdmin",
-				is_delete "isDelete",
+				is_deleted "isDeleted",
 				created_at "createdAt",
 				updated_at "updatedAt"
 			FROM MEMBER
@@ -56,7 +56,7 @@
 				passport_number "passportNumber",
 				passport_expiry_date "passportExpiryDate",
 				is_admin "isAdmin",
-				is_delete "isDelete",
+				is_deleted "isDeleted",
 				created_at "createdAt",
 				updated_at "updatedAt"
 			FROM MEMBER
@@ -84,7 +84,7 @@
 	<update id="deleteMember" parameterType="com.project.myapp.member.model.Member">
 		<![CDATA[
 			UPDATE MEMBER
-			SET is_delete = #{isDelete}
+			SET is_deleted = 1
 			WHERE member_id = #{memberId}				
 		]]>
 	</update>
