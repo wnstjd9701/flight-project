@@ -51,10 +51,7 @@
     <!-- breadcrumb start-->
 
 	<!-- board list -->
-	
-
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-	
+		
 
 	<!-- jquery plugins here-->
     <script src="resources/js/jquery-1.12.1.min.js"></script>
