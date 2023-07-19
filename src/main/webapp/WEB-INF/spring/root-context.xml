@@ -14,7 +14,6 @@
  	
  	<!-- Member Dao 추가 -->
 	<mybatis-spring:scan base-package="com.project.myapp.member.dao" />
-	
 
 	<!-- Member Service 추가 -->  		
  	<context:component-scan base-package="com.project.myapp.member.service" /> 

@@ -10,7 +10,7 @@
 </head>
 <body>
 <button onclick="requestPay()">결제하기</button>
- 
+
 <script>
 	var IMP = window.IMP;
 	IMP.init("imp40033711"); // 예: imp00000000
@@ -20,7 +20,7 @@
       IMP.request_pay({ // param
           pg: "kakaopay.TC0ONETIME",
           pay_method: "card",
-          merchant_uid: "ORD20180131-0000011",
+          merchant_uid: "ORD20180131-0000015", // 반드시 다른 번호를 줘야함
           name: "노르웨이 회전 의자",
           amount: 64900,
           buyer_email: "gildong@gmail.com",
