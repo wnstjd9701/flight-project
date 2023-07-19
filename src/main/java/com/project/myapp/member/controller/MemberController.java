@@ -250,48 +250,29 @@ public class MemberController {
       }
    }
 
-
-//	/*	API no.10
-//		method : GET
-//		information : 동승자 정보 입력
-//	 */
-//	@RequestMapping(value="/member/passengerList" , method=RequestMethod.GET)
-//	public String insertPassenger() {
-//		return "member/passengerList";
-//	}
-//	/*	API no.10
-//		method : POST
-//		information : 동승자 정보 입력
-//		response : companion	
-//	 */
-//	@RequestMapping(value="member/insertPassenger", method=RequestMethod.POST)
-//	public String insertPassenger(Companion companion, HttpSession session, Model model) {
-//		try{
-//			memberService.insertPassenger(companion);
-//			return "member/passengerList";
-//		}catch(DuplicateKeyException e){
-//			model.addAttribute("message", e.getMessage());
-//			return "member/error";
-//		}
-//	}
-	/*	API no.11
-		method : GET
-		information : 예약정보조회
-	 */
-	@RequestMapping(value="member/reservationList", method=RequestMethod.GET)
-	public String viewReservation(HttpSession session, Model model,Member member) {
-		String memberId = (String) session.getAttribute("memberId");
-		if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
-			member = memberService.viewReservation(memberId);
-			model.addAttribute("member", member);
-			model.addAttribute("message", "VIEW_RESERVATION");
-			return "member/reservationList";
-		}else {
-			model.addAttribute("message", "NOT_LOGIN_MEMBER");
-			return "member/login";	
-		}
-	}
-
+//   /*   API no.10
+//      method : GET
+//      information : 동승자 정보 입력
+//    */
+//   @RequestMapping(value="/member/passengerList" , method=RequestMethod.GET)
+//   public String insertPassenger() {
+//      return "member/passengerList";
+//   }
+//   /*   API no.10
+//      method : POST
+//      information : 동승자 정보 입력
+//      response : companion   
+//    */
+//   @RequestMapping(value="member/insertPassenger", method=RequestMethod.POST)
+//   public String insertPassenger(Companion companion, HttpSession session, Model model) {
+//      try{
+//         memberService.insertPassenger(companion);
+//         return "member/passengerList";
+//      }catch(DuplicateKeyException e){
+//         model.addAttribute("message", e.getMessage());
+//         return "member/error";
+//      }
+//   }
    /*   API no.11
       method : GET
       information : 예약정보조회
@@ -309,5 +290,4 @@ public class MemberController {
          return "member/login";   
       }
    }
-
 }

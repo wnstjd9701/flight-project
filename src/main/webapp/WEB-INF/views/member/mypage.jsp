@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,21 +36,17 @@
 						<li style="width: 30%; padding: 5%;">
 							<div class="sub menu">
 								<ul>
-									<li><a>에약 내역</a></li>
-									<li><a>회원 정보 수정</a></li>
-									<li><a>비밀번호 수정</a></li>
-									<li><a>동승자 정보</a></li>
-									<li><a>회원 탈퇴</a></li>
+									<li><a href="<c:url value='/relist'/>">에약 내역</a></li>
+									<li><a href="<c:url value='/meupdate'/>">회원 정보 수정</a></li>
+									<li><a href="<c:url value='/pwupdate'/>">비밀번호 수정</a></li>
+									<li><a href="<c:url value='/colist'/>">동승자 정보</a></li>
+									<li><a href="<c:url value='/medelete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
 						</li>
 						<li style="width: 70%; padding: 5%;">
 							<div class="content">
-								<jsp:include page="/WEB-INF/views/member/relist.jsp" />
-								<jsp:include page="/WEB-INF/views/member/meupdate.jsp" />
-								<jsp:include page="/WEB-INF/views/member/pwupdate.jsp" />
-								<jsp:include page="/WEB-INF/views/member/colist.jsp" />
-								<jsp:include page="/WEB-INF/views/member/meupdate.jsp" />
+
 							</div>
 						</li>
 					</ul>
