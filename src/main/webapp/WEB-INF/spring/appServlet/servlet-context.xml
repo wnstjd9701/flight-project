@@ -45,13 +45,13 @@
 	
 	<!-- 로그인을 위한 인터셉터 -->
 	<!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
-	<interceptors>
+<!-- 	<interceptors>
 		<interceptor>
 			<mapping path="/"/>
-			<mapping path="/home"/>
+			<mapping path="/mp"/>
 			<beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 	
 	<!-- URL을 Logging을 위한 Interceptor -->
 	<interceptors>
