@@ -86,7 +86,7 @@
 	
 	<select id="idCheck" resultType="com.project.myapp.member.model.Member" parameterType="string">
 		<![CDATA[
-			SELECT member_id FROM MEMBER
+			SELECT member_id AS "memberId" FROM MEMBER
 			WHERE member_id = #{memberId}
 		]]>
 	</select>
