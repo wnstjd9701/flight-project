@@ -7,16 +7,15 @@
 		<![CDATA[
 			INSERT INTO 
 				MEMBER
-				(member_id, password, name, first_name, last_name, phone_number, birthday, address, email
-					gender, passport_number, passport_expiry_date, is_admin, is_deleted, created_at, updated_at)
+				(member_id, password, name, first_name, last_name, phone_number, birthday, address, email,
+					gender, passport_number, passport_expiry_date)
 				VALUES
 				(#{memberId},#{password}, #{name}, #{firstName}, #{lastName}, #{phoneNumber}, #{birthday}, #{address},#{email},
-					#{gender}, #{passportNumber}, #{passportExpiryDate}, #{isAdmin}, #{isDeleted}, #{createdAt}, #{updatedAt})
+					#{gender}, #{passportNumber}, #{passportExpiryDate})
 		]]>
 	</insert>
 	
-	<select id="selectMember" parameterType="string"
-	resultType="com.project.myapp.member.model.Member">
+	<select id="selectMember" parameterType="string" resultType="com.project.myapp.member.model.Member">
 		<![CDATA[
 			SELECT 
 				member_id "memberId",
@@ -32,9 +31,7 @@
 				passport_number "passportNumber",
 				passport_expiry_date "passportExpiryDate",
 				is_admin "isAdmin",
-				is_deleted "isDeleted",
-				created_at "createdAt",
-				updated_at "updatedAt"
+				is_deleted "isDeleted"
 			FROM MEMBER
 			WHERE member_id = #{memberId}
 		]]>
@@ -56,9 +53,7 @@
 				passport_number "passportNumber",
 				passport_expiry_date "passportExpiryDate",
 				is_admin "isAdmin",
-				is_deleted "isDeleted",
-				created_at "createdAt",
-				updated_at "updatedAt"
+				is_deleted "isDeleted"
 			FROM MEMBER
 		]]>
 	</select>
@@ -76,7 +71,7 @@
 			SET
 				password=#{password}, name={name}, first_name={firstName}, last_name={lastName}, phone_number={phoneNumber},
 				birthday=#{birthday}, address={address}, email={email}, gender={gender}, passportNumber=#{passportNumber},
-				passportExpiryDate=#{passport_expiry_date}, createdAt={created_at}, updatedAt=#{updated_at}
+				passportExpiryDate=#{passport_expiry_date}
 			WHERE member_id = #{memberId}		
 		]]>
 	</update>
@@ -89,14 +84,23 @@
 		]]>
 	</update>
 	
-	<select id="findPassword" resultType="string" parameterType="string">
+	<select id="idCheck" resultType="com.project.myapp.member.model.Member" parameterType="string">
 		<![CDATA[
-			SELECT password, email FROM MEMBER 
+			SELECT member_id AS "memberId" FROM MEMBER
 			WHERE member_id = #{memberId}
 		]]>
 	</select>
+
 	
-	<update id="updatePassword" parameterType="string">
+	<update id="updatePassword" parameterType="com.project.myapp.member.model.Member" >
+		<![CDATA[
+			UPDATE MEMBER
+			SET password = #{password}
+			WHERE member_id = #{memberId} 
+		]]>
+	</update>
+	
+		<update id="updatePasswordByMember" parameterType="com.project.myapp.member.model.Member" >
 		<![CDATA[
 			UPDATE MEMBER
 			SET password = #{password}
@@ -117,7 +121,8 @@
 		]]>
 	</insert>
 	
-	<select id="viewReservation" resultType="string" parameterType="string">
+	<select id="viewReservation" parameterType="string"
+	resultType="com.project.myapp.member.model.Member">
 		<![CDATA[
 			SELECT
 			 	t.reservation_id				AS "reservationId", 
