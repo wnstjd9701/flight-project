@@ -1,6 +1,12 @@
 package com.project.myapp.member.dao;
 
 import java.util.List;
+<<<<<<< HEAD
+=======
+
+import javax.servlet.http.HttpServletResponse;
+
+>>>>>>> 536f804e01ec16ebd81f531dac602143593a63d1
 import com.project.myapp.member.model.Companion;
 import com.project.myapp.member.model.Member;
 
@@ -21,4 +27,8 @@ public interface IMemberRepository {
 	void insertPassenger(Companion companion); //동승자 정보 추가
 	
 	Member viewReservation(String memberId); //예약 조회
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 536f804e01ec16ebd81f531dac602143593a63d1
