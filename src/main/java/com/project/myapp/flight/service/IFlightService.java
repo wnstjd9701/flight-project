@@ -12,5 +12,7 @@ public interface IFlightService {
 	Schedule getScheduleByScheduleId(int scheduleIdToGo); // 스케줄 아이디로 선택한 스케줄 조회 
 
 	Companion getMemberCompanionByName(String memberId, String name); // 멤버 아이디와 동승자 이름으로 등록되어 있는 탑승객 정보 조회
+
+	int insertPassengerInformation(Companion companion); // 탑승객 정보 입력
 	
 }

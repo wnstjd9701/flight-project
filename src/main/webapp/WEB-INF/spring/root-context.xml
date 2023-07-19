@@ -12,17 +12,20 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
  	
- 	<!-- Dao 추가 -->
+ 	<!-- Member Dao 추가 -->
 	<mybatis-spring:scan base-package="com.project.myapp.member.dao" />
-	
-	<!-- Service 추가 -->  	
- 	<context:component-scan base-package="com.example.myapp.member.service" /> 
+
+	<!-- Member Service 추가 -->  		
+ 	<context:component-scan base-package="com.project.myapp.member.service" /> 
 	
 	<!-- Flight DAO -->
 	<mybatis-spring:scan base-package="com.project.myapp.flight.dao"/>
  	
  	<!-- Flight Service -->
  	<context:component-scan base-package="com.project.myapp.flight.service" />
+
+	<!-- @Transactional 사용하기 위한 태그 -->
+	<tx:annotation-driven/>
  	 
 	<!-- Gmail -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -41,7 +44,5 @@
 	    </property>
 	</bean>
  	
-
-
 </beans>
 

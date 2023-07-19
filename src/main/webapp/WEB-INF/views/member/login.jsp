@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="loginform">
@@ -34,7 +35,10 @@
 			</div>
 		</div>
 	</section>
+
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+
+
 </body>
 </html>

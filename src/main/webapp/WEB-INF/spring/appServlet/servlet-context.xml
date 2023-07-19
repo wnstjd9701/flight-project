@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- MVC 어노테이션 위한 태그 -->
 	<annotation-driven />
 
    <!-- 
@@ -36,12 +36,26 @@
       <beans:property name="suffix" value=".jsp" />
    </beans:bean>
    
-   
    <!-- Controller 추가 -->
+<<<<<<< HEAD
    <context:component-scan base-package="com.project.myapp.member.controller" />
    <context:component-scan base-package="com.project.myapp.board.controller" />
    <context:component-scan base-package="com.project.myapp"/> 
+=======
+	<context:component-scan base-package="com.project.myapp.member.controller" />
+
+	<context:component-scan base-package="com.project.myapp.flight.controller" />
+>>>>>>> 2728b4360e307bad85c292af3bf0b7694aad5841
    
+   <!-- 
+		View-Controller
+		path="주소창에 이런 입력이 들어오면" view-name="이 페이지로 이동" />
+		View만 보여줘도 되는 페이지  
+		path로 요청이 들어오면 
+		view-name으로 찾아감 ex) /WEB-INF/views/login.jsp
+	-->
+	<view-controller path="flight/payment" view-name="/flight/payment"/>
+	
    <!-- 로그인을 위한 인터셉터 -->
    <!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
 <!--    <interceptors>
@@ -59,5 +73,6 @@
          <beans:bean class="com.project.myapp.common.filter.LoggingInterceptor"/>
       </interceptor>
    </interceptors>
+
 
 </beans:beans>

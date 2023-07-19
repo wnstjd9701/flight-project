@@ -595,6 +595,7 @@
 	</section>
 	<!--top place end-->
 
+
 	<!--::industries start::-->
 	<section class="best_services section_padding">
 		<div class="container">
@@ -651,6 +652,7 @@
 	<!--::industries end::-->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+
 </body>
 
 </html>

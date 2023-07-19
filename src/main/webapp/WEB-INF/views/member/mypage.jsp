@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<head>
 <!DOCTYPE html>
 <html lang="ko">
-<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp"/>
+
+<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -29,25 +31,28 @@
 						<li style="width: 30%; padding: 5%;">
 							<div class="sub menu">
 								<ul>
-									<li><a href="<c:url value='/member/reservationList'/>">에약 내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원 정보 수정</a></li>
-									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호 수정</a></li>
-									<li><a href="<c:url value='/member/passengerList'/>">동승자 정보</a></li>
+									<li><a href="<c:url value='/member/reservationList'/>">에약
+											내역</a></li>
+									<li><a href="<c:url value='/member/mp/update'/>">회원 정보
+											수정</a></li>
+									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
+											수정</a></li>
+									<li><a href="<c:url value='/member/passengerList'/>">동승자
+											정보</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
 						</li>
 						<li style="width: 70%; padding: 5%;">
-							<div class="content">
-
-							</div>
+							<div class="content"></div>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+
 </body>
 </html>
