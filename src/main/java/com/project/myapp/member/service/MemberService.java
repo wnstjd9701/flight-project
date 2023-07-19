@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.stereotype.Service;
 
 import com.project.myapp.member.dao.IMemberRepository;
@@ -18,8 +19,8 @@ import com.project.myapp.member.model.Member;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class MemberService implements IMemberService {
 
 	private final IMemberRepository IMemberRepository;

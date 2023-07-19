@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.myapp.flight.model.Schedule;
 import com.project.myapp.flight.service.IFlightService;
+import com.project.myapp.member.model.Companion;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,7 +45,7 @@ public class FlightController {
 			@RequestParam(value="person", required=true) int person,
 			@RequestParam(value="grade", required=true) int grade, 
 			@RequestParam(value="page", required=true) int page,
-			Model model) {
+			Model model, HttpSession session) {
 		
 		logger.info("nation:" + nation + " departmentDate:" + departmentDate + " arrivalDate:" + arrivalDate + " person:" + person + " grade:" + grade + " page:" + page);
 		
@@ -72,6 +76,11 @@ public class FlightController {
 			scheduleToGo.setGrade(grade);
 			scheduleToGo.setPage(page*10);
 			
+			List<Schedule> flightScheduleToGo = flightService.getFlightScheduleByGrade(scheduleToGo, grade);
+			int goListCount = flightScheduleToGo.size();
+			model.addAttribute("flightScheduleToGo", flightScheduleToGo);
+			model.addAttribute("goListCount", goListCount);
+			
 			scheduleToCome.setDepartmentNation(nation);
 			scheduleToCome.setArrivalNation("ICN");
 			scheduleToCome.setDepartmentDate(arrivalDateFormat);
@@ -79,19 +88,13 @@ public class FlightController {
 			scheduleToCome.setGrade(grade);
 			scheduleToCome.setPage(page*10);
 			
-			List<Schedule> flightScheduleToGo = flightService.getFlightScheduleToGoByGrade(scheduleToGo, grade);
-			int goListCount = flightScheduleToGo.size();
-			model.addAttribute("flightScheduleToGo", flightScheduleToGo);
-			model.addAttribute("goListCount", goListCount);
-			
-			List<Schedule> flightScheduleToCome = flightService.getFlightScheduleToComeByGrade(scheduleToCome, grade);
+			List<Schedule> flightScheduleToCome = flightService.getFlightScheduleByGrade(scheduleToCome, grade);
 			int comeListCount = flightScheduleToCome.size();
-			
 			model.addAttribute("flightScheduleToCome", flightScheduleToCome);
-			
 			model.addAttribute("comeListCount", comeListCount);
-			model.addAttribute("grade", grade);
-			model.addAttribute("person", person);
+			
+			session.setAttribute("grade", grade);
+			session.setAttribute("person", person);
 		
 		}catch (ParseException e) {
 			e.printStackTrace();
@@ -103,12 +106,24 @@ public class FlightController {
 	
 	/*
 	 * API No: 14
-	 * Method: POST
-	 * Information: 항공권 예매
+	 * Method: GET
+	 * Information: 항공권 선택
+	 * 스케줄 아이디를 가지고 해당 스케줄 조회
 	 */
-	@PostMapping("/flight/ticket/reservation")
-	public String reserveTicket(Schedule schedule, Model model) {
-		logger.info("Schedele: " + schedule.toString());
+	@GetMapping("/flight/ticket/select")
+	public String reserveTicket(String scheduleIdList, Model model, HttpSession session) {
+//		String memberId = (String) session.getAttribute("memberId");
+		
+		String[] scheduleIdLists = scheduleIdList.split(",");
+		int scheduleIdToGo = Integer.parseInt(scheduleIdLists[0]);
+		int scheduleIdToCome = Integer.parseInt(scheduleIdLists[1]);
+		
+		Schedule scheduleToGo = flightService.getScheduleByScheduleId(scheduleIdToGo);
+		Schedule scheduleToCome = flightService.getScheduleByScheduleId(scheduleIdToCome);
+		
+		session.setAttribute("flightScheduleToGo", scheduleToGo);
+		session.setAttribute("flightScheduleToCome", scheduleToCome);
+		
 		return "/flight/reservation";
 	}
 	
@@ -127,8 +142,24 @@ public class FlightController {
 	 * Information: 탑승자 정보 입력
 	 */
 	@PostMapping("/flight/passengers/insert")
-	public String insertPassengers(Model model) {
+	public String insertPassengers(Companion companion, Model model) {
+		
 		return "/passengers/insert";
+	}
+	
+	/*
+	 * API No: 18
+	 * Method: Get
+	 * Infromation: 등록된 탑승자 정보 가져오기 (Ajax 요청) 
+	 */
+	@GetMapping("/flight/companion")
+	@ResponseBody
+	public Companion getCompanionList(HttpSession session, Model model, String companionName) {
+//		String memberId = (String) session.getAttribute("memberId");
+		String memberId = "hello";
+		String name = "hi";
+		Companion companion = flightService.getMemberCompanionByName(memberId, name);
+		return companion;
 	}
 	
 	/*
