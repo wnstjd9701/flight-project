@@ -3,17 +3,21 @@ package com.project.myapp.flight.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,7 +51,8 @@ public class FlightController {
 			@RequestParam(value="page", required=true) int page,
 			Model model, HttpSession session) {
 		
-		logger.info("nation:" + nation + " departmentDate:" + departmentDate + " arrivalDate:" + arrivalDate + " person:" + person + " grade:" + grade + " page:" + page);
+		logger.info("nation:" + nation + " departmentDate:" + departmentDate + " arrivalDate:" + arrivalDate + 
+				" person:" + person + " grade:" + grade + " page:" + page);
 		
 		Schedule scheduleToGo = new Schedule();
 		Schedule scheduleToCome = new Schedule();
@@ -97,9 +102,7 @@ public class FlightController {
 			session.setAttribute("person", person);
 		
 		}catch (ParseException e) {
-			e.printStackTrace();
-		}catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return "flight/search";
 	}
@@ -121,10 +124,13 @@ public class FlightController {
 		Schedule scheduleToGo = flightService.getScheduleByScheduleId(scheduleIdToGo);
 		Schedule scheduleToCome = flightService.getScheduleByScheduleId(scheduleIdToCome);
 		
+		session.setAttribute("scheduleIdToGo", scheduleIdToGo);
+		session.setAttribute("scheduleIdToCome", scheduleToCome);
+		
 		session.setAttribute("flightScheduleToGo", scheduleToGo);
 		session.setAttribute("flightScheduleToCome", scheduleToCome);
 		
-		return "/flight/reservation";
+		return "flight/reservation";
 	}
 	
 	/* view-controller path="/flight/ticket/cancel" view-name="" 추가 하기
@@ -134,17 +140,55 @@ public class FlightController {
 	*/ 
 	@PostMapping("/flight/ticket/cancel")
 	public String ticketReservationCancel(Model model) {
-		return "/ticket/cancel";
+		return "ticket/cancel";
 	}
+	
 	/*
 	 * API No: 16
 	 * Method: POST
 	 * Information: 탑승자 정보 입력
 	 */
-	@PostMapping("/flight/passengers/insert")
-	public String insertPassengers(Companion companion, Model model) {
+	@PostMapping("/flight/ticket/insert")
+	public String insertTicket(@RequestParam("name") ArrayList<String> names,
+            @RequestParam("firstName") List<String> firstNames,
+            @RequestParam("lastName") List<String> lastNames,
+            @RequestParam("phoneNumber") List<String> phoneNumbers,
+            @RequestParam("birthday") List<String> birthdays,
+            @RequestParam("passportNumber") List<String> passportNumbers,
+            @RequestParam("passportExpiryDate") List<String> passportExpiryDates, HttpSession session) {
+		try {
+			int personCount = (Integer) session.getAttribute("person");
+			String memberId = (String) session.getAttribute("memberId");
+			ArrayList<Companion> companionList = new ArrayList<Companion>();
+			for(int i=0; i<personCount; i++) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Companion companion = new Companion();
+				companion.setMemberId(memberId);
+				companion.setName(names.get(i));
+				companion.setFirstName(firstNames.get(i));
+				companion.setLastName(lastNames.get(i));
+				companion.setPhoneNumber(phoneNumbers.get(i));
+				
+				java.util.Date utilbirthday = dateFormat.parse(birthdays.get(i));
+				Date sqlbirthday = new Date(utilbirthday.getTime());
+				companion.setBirthday(sqlbirthday);
+				
+				companion.setPassportNumber(passportNumbers.get(i));
 		
-		return "/passengers/insert";
+				java.util.Date utilpassportExpiryDate = dateFormat.parse(passportExpiryDates.get(i));
+				Date sqlpassportExpiryDate = new Date(utilpassportExpiryDate.getTime());
+				companion.setPassportExpiryDate(sqlpassportExpiryDate);
+			
+				logger.info("Companion: " + companion.toString());
+				companionList.add(companion);
+			}
+			
+			session.setAttribute("passengersList", companionList);
+			
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return "redirect:/flight/payment";
 	}
 	
 	/*
@@ -153,12 +197,12 @@ public class FlightController {
 	 * Infromation: 등록된 탑승자 정보 가져오기 (Ajax 요청) 
 	 */
 	@GetMapping("/flight/companion")
-	@ResponseBody
-	public Companion getCompanionList(HttpSession session, Model model, String companionName) {
+	public Companion getCompanionList(@RequestParam("name") String name, HttpSession session, Model model) {
 //		String memberId = (String) session.getAttribute("memberId");
-		String memberId = "hello";
-		String name = "hi";
+		logger.info("SelectedName: " + name);
+		String memberId = "wh4679";
 		Companion companion = flightService.getMemberCompanionByName(memberId, name);
+		logger.info("Companion: " + companion.toString());
 		return companion;
 	}
 	
