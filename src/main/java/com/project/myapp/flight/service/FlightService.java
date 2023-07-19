@@ -41,5 +41,13 @@ public class FlightService implements IFlightService {
 		return flightRepository.getMemberCompanionByName(memberId, name);
 	}
 
+	// 탑승객 정보 입력
+	@Override
+	public int insertPassengerInformation(Companion companion) {
+		return flightRepository.insertPassengerInformation(companion);
+	}
+
+	
+
 	
 }
