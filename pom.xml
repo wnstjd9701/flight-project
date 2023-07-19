@@ -116,6 +116,13 @@
 			<version>1.9.1</version>
 		</dependency>
 		
+		<!-- 메일 API -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
