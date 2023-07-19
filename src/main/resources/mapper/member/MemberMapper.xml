@@ -113,7 +113,7 @@
 		<![CDATA[
 			INSERT INTO
 				COMPANION
-					(companion_id, member_id, name, first_name, last_name, phone_number, birthday
+					(companion_id, member_id, name, first_name, last_name, phone_number, birthday,
 					passport_number, passport_expiry_date)
 				VALUES
 					(#{companionId}, #{memberId}, #{name}, #{firstName}, #{lastName}, #{phoneNumber},

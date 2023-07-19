@@ -3,10 +3,13 @@ package com.project.myapp.member.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.mail.HtmlEmail;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.project.myapp.member.dao.IMemberRepository;
@@ -20,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberService implements IMemberService {
 
 	private final IMemberRepository IMemberRepository;
+	private final JavaMailSenderImpl mailSender;
 
 	@Override
 	public void insertMember(Member member) {
@@ -74,14 +78,14 @@ public class MemberService implements IMemberService {
 	@Override
 	public void sendEmail(Member member, String method) {
 		// Mail Server 설정
-		String charSet = "utf-8";
-		String hostSMTP = "smtp.gmail.com";
-		String hostSMTPid = "flightEasy123@gmail.com";
-		String hostSMTPpwd = "flight123!@";
+		String charSet = "UTF-8";
+		String hostSMTP = "smtp.naver.com";
+		String hostSMTPid = "flightservice@naver.com";
+		String hostSMTPpwd = "fs4679123!@#";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "flightEasy123@gmail.com";
-		String fromName = "flightEasy";
+		String fromEmail = "flightservice@naver.com";
+		String fromName = "flighteasy";
 		String subject = "";
 		String msg = "";
 
@@ -97,20 +101,20 @@ public class MemberService implements IMemberService {
 		// 받는 사람 E-Mail 주소
 		String mail = member.getEmail();
 		try {
-			HtmlEmail email = new HtmlEmail();
-			email.setDebug(true);
-			email.setCharset(charSet);
-			email.setSSL(true);
-			email.setHostName(hostSMTP);
-			email.setSmtpPort(465);
+			Properties javaMailProperties = new Properties();
+			javaMailProperties.setProperty("mail.smtp.starttls.enable", "true");
+			javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
+			javaMailProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 
-			email.setAuthentication(hostSMTPid, hostSMTPpwd);
-			email.setTLS(true);
-			email.addTo(mail, charSet);
-			email.setFrom(fromEmail, fromName, charSet);
-			email.setSubject(subject);
-			email.setHtmlMsg(msg);
-			email.send();
+			mailSender.setJavaMailProperties(javaMailProperties);
+	        MimeMessage message = mailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message, true,charSet);
+	        helper.setFrom(fromEmail, fromName);
+	        helper.setTo(mail);
+	        helper.setSubject(subject);
+	        helper.setText(msg, true);
+
+	        mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 		}
