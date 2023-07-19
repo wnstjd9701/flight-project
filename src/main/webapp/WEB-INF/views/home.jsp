@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>    
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -42,8 +43,8 @@
                         <div class="banner_text_iner">
                             <h1>Airplane</h1>
                             <p>Let’s Go!</p>
-                            <a href="login" class="btn_1">Login</a>
-                            <a href="signup" class="btn_1">Sign Up</a>
+                            <a href="<c:url value='/login'/>" class="btn_1">Login</a>
+                            <a href="<c:url value='/insert'/>" class="btn_1">Sign Up</a>
                         </div>
                     </div>
                 </div>
@@ -628,7 +629,6 @@
     <!--::industries end::-->
     	<jsp:include page="/WEB-INF/views/footer.jsp" />
     
-
     <!-- jquery plugins here-->
     <script src="resources/js/jquery-1.12.1.min.js"></script>
     <!-- popper js -->
@@ -651,7 +651,7 @@
     <script src="resources/js/mail-script.js"></script>
     <script src="resources/js/contact.js"></script>
     <!-- custom js -->
-    <script src="resources/js/custom.js"></script>s
+    <script src="resources/js/custom.js"></script>
 </body>
 
 </html>
