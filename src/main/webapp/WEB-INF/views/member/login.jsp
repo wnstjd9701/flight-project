@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 	
-<<<<<<< HEAD
-=======
 
->>>>>>> 536f804e01ec16ebd81f531dac602143593a63d1
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,9 +8,9 @@
 <title>Insert title here</title>
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <!-- style CSS -->
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/style.css">
 <jsp:include page="/WEB-INF/views/header.jsp" />
 </head>
 <body>
@@ -46,7 +43,6 @@
 		</div>
 	</section>
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
-=======
 <jsp:include page="/WEB-INF/views/header.jsp" />
 </head>
 <body>

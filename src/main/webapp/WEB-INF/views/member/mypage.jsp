@@ -2,14 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/header.jsp" />
-</head>
-<body>
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-<!-- style CSS -->
-<link rel="stylesheet" href="resources/css/style.css">
+<head>
+<!DOCTYPE html>
+<html lang="ko">
 <jsp:include page="/WEB-INF/views/header.jsp" />
 </head>
 <body>

@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 	
 <!doctype html>
 <html lang="ko">
 <head>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 <!-- style CSS -->
-<link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
