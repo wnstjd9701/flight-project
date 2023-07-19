@@ -18,13 +18,15 @@
 	<mybatis-spring:scan base-package="com.project.myapp.member.dao" />
 	
 	<!-- Service 추가 -->  	
- 	<context:component-scan base-package="com.example.myapp.member.service" /> 
+ 	<context:component-scan base-package="com.project.myapp.member.service" /> 
 	
 	<!-- Flight DAO -->
 	<mybatis-spring:scan base-package="com.project.myapp.flight.dao"/>
  	
  	<!-- Flight Service -->
  	<context:component-scan base-package="com.project.myapp.flight.service" />
-
+	
+	<!-- @Transactional 사용하기 위한 태그 -->
+	<tx:annotation-driven/>
 </beans>
 

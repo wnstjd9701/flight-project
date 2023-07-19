@@ -17,6 +17,9 @@ public interface IFlightRepository {
 	Schedule getScheduleByScheduleId(int scheduleId);
 	
 	// 멤버 아이디와 동승자 이름으로 등록되어 있는 탑승객 정보 조회
-	Companion getMemberCompanionByName(@Param("memberId") String memberId,@Param("name") String name); 
+	Companion getMemberCompanionByName(@Param("memberId") String memberId,@Param("name") String name);
+	
+	// 탑승객 정보 입력
+	int insertPassengerInformation(Companion companion); 
 	
 }
