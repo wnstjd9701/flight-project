@@ -15,7 +15,6 @@ public interface IMemberService {
 	String getPassword(String memeberId); //로그인
 	void updateMember(Member member); //회원정보 수정
 	void deleteMember(Member member); //회원탈퇴
-	
 
 	public void sendEmail(Member member, String mail); //임시비밀번호 이메일발송
 	void findPassword(HttpServletResponse response, Member member); //비밀번호 찾기

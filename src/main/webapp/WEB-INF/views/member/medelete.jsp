@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/WEB-INF/views/header.jsp" />
-</head>
-<body>
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <!-- style CSS -->
@@ -46,7 +46,19 @@
 						</li>
 						<li style="width: 70%; padding: 5%;">
 							<div class="content">
-
+								<section class="medelete">
+									<div class="col-lg-12">
+										<h2>회원 탈퇴</h2>
+										<hr>
+										<form action="<c:url value='/member/medelete'/>" method="post">
+											<input class="long" name="id" type="text" placeholder="비밀번호 확인"><br>
+											<input type="submit" value="본인확인하기">
+											<div class="delete-Y/N">
+												<input type="button" name="deleteOK">
+											</div>
+										</form>
+									</div>
+								</section>
 							</div>
 						</li>
 					</ul>
@@ -54,6 +66,5 @@
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>
