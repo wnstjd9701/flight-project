@@ -3,18 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<jsp:include page="/WEB-INF/views/header.jsp" />
-</head>
+<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp"/>
 <body>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="insertform">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="sign">
-						<form action="<c:url value='/member/insert'/>">
+						<form action="<c:url value='/member/insert'/>" method="post" id="insertMember">
 							<h2>회원가입</h2>
 							<hr>
 							<br>
@@ -41,16 +38,6 @@
 										value="${member.password}" class="form-control"
 										pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>(영문
 									대소문자/숫자/특수문자 조합, 6자이상)
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="password2"></label>
-								<div class="sign">
-									<h5 style="line-height: 2.5em;">
-										비밀번호 확인<span style="color: red;">*</span>
-									</h5>
-									<input type="password" name="password2" id="password2"
-										class="form-control" required>
 								</div>
 							</div>
 							<hr>
@@ -168,8 +155,6 @@
 									이메일 수신에 동의하십니까? <input type="checkbox" name="agree" id="cb4">
 									<label for="cb4"></label> 동의함
 								</h6>
-								SNS 수신에 동의 하십니까? <input type="checkbox" name="agree" id="cb5">
-								<label for="cb5"></label> 동의함
 							</div>
 							<hr>
 							<div class="form-group">
@@ -184,5 +169,10 @@
 			</div>
 		</div>
 	</section>
+	    <!--::industries end::-->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 </body>
+
+
 </html>

@@ -17,17 +17,17 @@
    -->
    <util:properties id="pt" location="classpath:/config/application.properties"/>
    
-
-   
+   <!-- 시작화면 설정 -->
+	<view-controller path="/" view-name="/home"/>
 
    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
    	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/css/**" location="/css/" />
-	<resources mapping="/fontawesome/**" location="/fontawesome/" />
-	<resources mapping="/fonts/**" location="/fonts/" />
-	<resources mapping="/img/**" location="/img/" />
-	<resources mapping="/js/**" location="/js/" />
-	<resources mapping="/sass/**" location="/sass/" />
+	<resources mapping="/css/**" location="/resources/css/" />
+	<resources mapping="/fontawesome/**" location="/resources/fontawesome/" />
+	<resources mapping="/fonts/**" location="/resources/fonts/" />
+	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/sass/**" location="/resources/sass/" />
 
 
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -38,9 +38,7 @@
    
    <!-- Controller 추가 -->
 	<context:component-scan base-package="com.project.myapp.member.controller" />
-
 	<context:component-scan base-package="com.project.myapp.flight.controller" />
-   
    <!-- 
 		View-Controller
 		path="주소창에 이런 입력이 들어오면" view-name="이 페이지로 이동" />
