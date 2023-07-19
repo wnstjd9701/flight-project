@@ -3,146 +3,146 @@
 
 <mapper namespace="com.project.myapp.member.dao.IMemberRepository">
 
-	<insert id="insertMember" parameterType="com.project.myapp.member.model.Member">
-		<![CDATA[
-			INSERT INTO 
-				MEMBER
-				(member_id, password, name, first_name, last_name, phone_number, birthday, address, email,
-					gender, passport_number, passport_expiry_date)
-				VALUES
-				(#{memberId},#{password}, #{name}, #{firstName}, #{lastName}, #{phoneNumber}, #{birthday}, #{address},#{email},
-					#{gender}, #{passportNumber}, #{passportExpiryDate})
-		]]>
-	</insert>
-	
-	<select id="selectMember" parameterType="string" resultType="com.project.myapp.member.model.Member">
-		<![CDATA[
-			SELECT 
-				member_id "memberId",
-				password "password",
-				name "name",
-				first_name "firstName",
-				last_name "lastName",
-				phone_number "phoneNumber",
-				birthday "birthday",
-				address "address",
-				email "email",
-				gender "gender",
-				passport_number "passportNumber",
-				passport_expiry_date "passportExpiryDate",
-				is_admin "isAdmin",
-				is_deleted "isDeleted"
-			FROM MEMBER
-			WHERE member_id = #{memberId}
-		]]>
-	</select>
-	
-	<select id="selectAllMembers" resultType="com.project.myapp.member.model.Member">
-		<![CDATA[
-			SELECT 
-				memberId "memberId",
-				password "password",
-				name "name",
-				first_name "firstName",
-				last_name "lastName",
-				phone_number "phoneNumber",
-				birthday "birthday",
-				address "address",
-				email "email",
-				gender "gender",
-				passport_number "passportNumber",
-				passport_expiry_date "passportExpiryDate",
-				is_admin "isAdmin",
-				is_deleted "isDeleted"
-			FROM MEMBER
-		]]>
-	</select>
+   <insert id="insertMember" parameterType="com.project.myapp.member.model.Member">
+      <![CDATA[
+         INSERT INTO 
+            MEMBER
+            (member_id, password, name, first_name, last_name, phone_number, birthday, address, email,
+               gender, passport_number, passport_expiry_date)
+            VALUES
+            (#{memberId},#{password}, #{name}, #{firstName}, #{lastName}, #{phoneNumber}, #{birthday}, #{address},#{email},
+               #{gender}, #{passportNumber}, #{passportExpiryDate})
+      ]]>
+   </insert>
+   
+   <select id="selectMember" parameterType="string" resultType="com.project.myapp.member.model.Member">
+      <![CDATA[
+         SELECT 
+            member_id "memberId",
+            password "password",
+            name "name",
+            first_name "firstName",
+            last_name "lastName",
+            phone_number "phoneNumber",
+            birthday "birthday",
+            address "address",
+            email "email",
+            gender "gender",
+            passport_number "passportNumber",
+            passport_expiry_date "passportExpiryDate",
+            is_admin "isAdmin",
+            is_deleted "isDeleted"
+         FROM MEMBER
+         WHERE member_id = #{memberId}
+      ]]>
+   </select>
+   
+   <select id="selectAllMembers" resultType="com.project.myapp.member.model.Member">
+      <![CDATA[
+         SELECT 
+            memberId "memberId",
+            password "password",
+            name "name",
+            first_name "firstName",
+            last_name "lastName",
+            phone_number "phoneNumber",
+            birthday "birthday",
+            address "address",
+            email "email",
+            gender "gender",
+            passport_number "passportNumber",
+            passport_expiry_date "passportExpiryDate",
+            is_admin "isAdmin",
+            is_deleted "isDeleted"
+         FROM MEMBER
+      ]]>
+   </select>
 
-	<select id="getPassword" parameterType="string" resultType="string">
-		<![CDATA[
-			SELECT password FROM MEMBER
-			WHERE member_id = #{memberId}
-		]]>
-	</select>
-	
-	<update id="updateMember" parameterType="com.project.myapp.member.model.Member">
-		<![CDATA[
-			UPDATE MEMBER 
-			SET
-				password=#{password}, name={name}, first_name={firstName}, last_name={lastName}, phone_number={phoneNumber},
-				birthday=#{birthday}, address={address}, email={email}, gender={gender}, passportNumber=#{passportNumber},
-				passportExpiryDate=#{passport_expiry_date}
-			WHERE member_id = #{memberId}		
-		]]>
-	</update>
-	
-	<update id="deleteMember" parameterType="com.project.myapp.member.model.Member">
-		<![CDATA[
-			UPDATE MEMBER
-			SET is_deleted = 1
-			WHERE member_id = #{memberId}				
-		]]>
-	</update>
-	
-	<select id="idCheck" resultType="com.project.myapp.member.model.Member" parameterType="string">
-		<![CDATA[
-			SELECT member_id AS "memberId" FROM MEMBER
-			WHERE member_id = #{memberId}
-		]]>
-	</select>
+   <select id="getPassword" parameterType="string" resultType="string">
+      <![CDATA[
+         SELECT password FROM MEMBER
+         WHERE member_id = #{memberId}
+      ]]>
+   </select>
+   
+   <update id="updateMember" parameterType="com.project.myapp.member.model.Member">
+      <![CDATA[
+         UPDATE MEMBER 
+         SET
+            password=#{password}, name={name}, first_name={firstName}, last_name={lastName}, phone_number={phoneNumber},
+            birthday=#{birthday}, address={address}, email={email}, gender={gender}, passportNumber=#{passportNumber},
+            passportExpiryDate=#{passport_expiry_date}
+         WHERE member_id = #{memberId}      
+      ]]>
+   </update>
+   
+   <update id="deleteMember" parameterType="com.project.myapp.member.model.Member">
+      <![CDATA[
+         UPDATE MEMBER
+         SET is_deleted = 1
+         WHERE member_id = #{memberId}            
+      ]]>
+   </update>
+   
+   <select id="idCheck" resultType="com.project.myapp.member.model.Member" parameterType="string">
+      <![CDATA[
+         SELECT member_id AS "memberId" FROM MEMBER
+         WHERE member_id = #{memberId}
+      ]]>
+   </select>
 
-	
-	<update id="updatePassword" parameterType="com.project.myapp.member.model.Member" >
-		<![CDATA[
-			UPDATE MEMBER
-			SET password = #{password}
-			WHERE member_id = #{memberId} 
-		]]>
-	</update>
-	
-		<update id="updatePasswordByMember" parameterType="com.project.myapp.member.model.Member" >
-		<![CDATA[
-			UPDATE MEMBER
-			SET password = #{password}
-			WHERE member_id = #{memberId} AND password = #{password}
-		]]>
-	</update>
-	
-	
-	<insert id="insertPassenger" parameterType="com.project.myapp.member.model.Companion">
-		<![CDATA[
-			INSERT INTO
-				COMPANION
-					(companion_id, member_id, name, first_name, last_name, phone_number, birthday
-					passport_number, passport_expiry_date)
-				VALUES
-					(#{companionId}, #{memberId}, #{name}, #{firstName}, #{lastName}, #{phoneNumber},
-						#{birthday}, #{passportNumber}, #{passportExpiryDate})
-		]]>
-	</insert>
-	
-	<select id="viewReservation" parameterType="string"
-	resultType="com.project.myapp.member.model.Member">
-		<![CDATA[
-			SELECT
-			 	t.reservation_id				AS "reservationId", 
-			 	t.ticket_id 					AS "ticketId",
-			 	t.member_id						AS "memberId", 	
-			 	t.passport_number				AS "passportNumber", 
-			 	a.airline_name					AS "airlineName",
-				s.department_nation				AS "departmentNation", 
-				s.department_date				AS "departmentDate", 
-				s.department_time				AS "departmentTime", 
-				s.arrival_nation				AS "arrivalNation", 
-				s.arrival_date					AS "arrivalDate", 
-				s.arrival_time					AS "arrivalTime",
-				t.seat_type						AS "seatType", 
-				t.ticket_type					AS "ticketType"
-			FROM TICKEYT t
-				INNER JOIN SCHDULE s ON t.schedule_id = s.schedule_id
-				INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
-			WHERE t.member_id = #{memberId}
-		]]>
-	</select>
-	
+   
+   <update id="updatePassword" parameterType="com.project.myapp.member.model.Member" >
+      <![CDATA[
+         UPDATE MEMBER
+         SET password = #{password}
+         WHERE member_id = #{memberId} 
+      ]]>
+   </update>
+   
+      <update id="updatePasswordByMember" parameterType="com.project.myapp.member.model.Member" >
+      <![CDATA[
+         UPDATE MEMBER
+         SET password = #{password}
+         WHERE member_id = #{memberId} AND password = #{password}
+      ]]>
+   </update>
+   
+   
+   <insert id="insertPassenger" parameterType="com.project.myapp.member.model.Companion">
+      <![CDATA[
+         INSERT INTO
+            COMPANION
+               (companion_id, member_id, name, first_name, last_name, phone_number, birthday
+               passport_number, passport_expiry_date)
+            VALUES
+               (#{companionId}, #{memberId}, #{name}, #{firstName}, #{lastName}, #{phoneNumber},
+                  #{birthday}, #{passportNumber}, #{passportExpiryDate})
+      ]]>
+   </insert>
+   
+   <select id="viewReservation" parameterType="string"
+   resultType="com.project.myapp.member.model.Member">
+      <![CDATA[
+         SELECT
+             t.reservation_id            AS "reservationId", 
+             t.ticket_id                AS "ticketId",
+             t.member_id                  AS "memberId",    
+             t.passport_number            AS "passportNumber", 
+             a.airline_name               AS "airlineName",
+            s.department_nation            AS "departmentNation", 
+            s.department_date            AS "departmentDate", 
+            s.department_time            AS "departmentTime", 
+            s.arrival_nation            AS "arrivalNation", 
+            s.arrival_date               AS "arrivalDate", 
+            s.arrival_time               AS "arrivalTime",
+            t.seat_type                  AS "seatType", 
+            t.ticket_type               AS "ticketType"
+         FROM TICKEYT t
+            INNER JOIN SCHDULE s ON t.schedule_id = s.schedule_id
+            INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
+         WHERE t.member_id = #{memberId}
+      ]]>
+   </select>
+   
 </mapper>
