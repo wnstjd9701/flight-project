@@ -61,5 +61,4 @@
          <beans:bean class="com.project.myapp.common.filter.LoggingInterceptor"/>
       </interceptor>
    </interceptors>
-   
 </beans:beans>

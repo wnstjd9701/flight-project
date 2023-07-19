@@ -1,7 +1,6 @@
 package com.project.myapp.member.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.project.myapp.member.dao.IMemberRepository;
@@ -10,8 +9,8 @@ import com.project.myapp.member.model.Member;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class MemberService implements IMemberService {
 	
 	private final IMemberRepository IMemberRepository;

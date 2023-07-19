@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class test {
-	@RequestMapping(value="/login")
+	/*@RequestMapping(value="/login")
 	public String goLogin(){
 		return "member/login";
 	}
@@ -38,6 +38,6 @@ public class test {
 	@RequestMapping(value="/meupdate")
 	public String gomeUpdate(){
 		return "member/meupdate";
-	}
+	}*/
 	
 }	

@@ -16,14 +16,14 @@
 						<form action="<c:url value='/member/insert'/>">
 							<h2>회원가입</h2>
 							<hr>
-							<br> <label for="memberid"></label>
+							<br> <label for="memberId"></label>
 							<div class="sign">
 								<h5>
 									아이디<span style="color: red;">*</span>
 								</h5>
-								<input type="text" name="memberid" id="memberid"
-									value="${member['userid']}"
-									${empty member.userid ? "" : "readonly"} class="re" required>
+								<input type="text" name="memberId" id="memberId"
+									value="${member['memberId']}"
+									${empty member.memberId ? "" : "readonly"} class="re" required>
 							</div>
 							<hr>
 							<label for="password"></label>
@@ -148,7 +148,7 @@
 					</div>
 					<div class="sign">
 						<div class="sign-button">
-							<a class="signBtn">회원가입</a>
+							<input type="submit" class="btn btn-info">
 						</div>
 					</div>
 				</div>
@@ -156,4 +156,16 @@
 		</div>
 	</section>
 </body>
+<script type="text/javascript">
+	var pw1 = document.querySelector("#password");
+	var pw2 = document.querySelector("#password2");
+	var pwConfirm = document.querySelector("#passwordConfirm");
+	pw2.onkeyup = function(event) {
+		if (pw1.value !== pw2.value) {
+			pwConfirm.innerText = "비밀번호가 일치하지 않습니다.";
+		} else {
+			pwConfirm.innerText = "";
+		}
+	}
+</script>
 </html>
