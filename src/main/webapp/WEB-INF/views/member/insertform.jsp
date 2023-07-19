@@ -1,21 +1,17 @@
-<<<<<<< HEAD
-<%@ page contentType="text/html; charset=utf-8"
-	trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<jsp:include page="/WEB-INF/views/header.jsp" />
-</head>
+<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp"/>
 <body>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="insertform">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="sign">
-						<form action="<c:url value='/member/insert'/>">
+						<form action="<c:url value='/member/insert'/>" method="post" id="insertMember">
 							<h2>회원가입</h2>
 							<hr>
 							<br>
@@ -42,16 +38,6 @@
 										value="${member.password}" class="form-control"
 										pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>(영문
 									대소문자/숫자/특수문자 조합, 6자이상)
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="password2"></label>
-								<div class="sign">
-									<h5 style="line-height: 2.5em;">
-										비밀번호 확인<span style="color: red;">*</span>
-									</h5>
-									<input type="password" name="password2" id="password2"
-										class="form-control" required>
 								</div>
 							</div>
 							<hr>
@@ -169,8 +155,6 @@
 									이메일 수신에 동의하십니까? <input type="checkbox" name="agree" id="cb4">
 									<label for="cb4"></label> 동의함
 								</h6>
-								SNS 수신에 동의 하십니까? <input type="checkbox" name="agree" id="cb5">
-								<label for="cb5"></label> 동의함
 							</div>
 							<hr>
 							<div class="form-group">
@@ -185,125 +169,9 @@
 			</div>
 		</div>
 	</section>
+	    <!--::industries end::-->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 </body>
-<script type="text/javascript">
-	var pw1 = document.querySelector("#password");
-	var pw2 = document.querySelector("#password2");
-	var pwConfirm = document.querySelector("#passwordConfirm");
-	pw2.onkeyup = function(event) {
-		if (pw1.value !== pw2.value) {
-			pwConfirm.innerText = "비밀번호가 일치하지 않습니다.";
-		} else {
-			pwConfirm.innerText = "";
-		}
-	}
-=======
-<%@ page contentType="text/html; charset=utf-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html> 
-<html>
-<body>
-<div class="container">
-	<div class="pg-opt">
-        <div class="row">
-            <div class="col-md-6 pc">
-                <h2>INSERT_USER_INFO</h2>
-            </div>
-            <div class="col-md-6">
-                <ol class="breadcrumb">
-                    <li>MEMBER</li>
-                    <li class="active"><message key="INSERT_USER_INFO"/></li>
-                </ol>
-            </div>
-        </div>
-    </div>
-	<div class="content">
-	<form action="<c:url value='/member/insert'/>" method="post" id="joinForm" class="form-horizontal">
-	<div class="form-group">
-      <label class="control-label col-sm-2" for="memberId">MEMBER_ID</label>
-      <div class="col-sm-4">
-        <input type="text" name="memberId" id="memberId" value="${member['memberId']}" ${empty member.memberId? "" : "readonly"}class="form-control">
-      </div>
-    </div>
-	<div class="form-group">
-      <label class="control-label col-sm-2" for="password">MEMBER_PW</label>
-      <div class="col-sm-4">
-        <input type="password" name="password" id="password" value="${member.password}" class="form-control">
-      </div>
-    </div>
-	<div class="form-group">
-      <label class="control-label col-sm-2" for="name">MEMBER_NAME</label>
-      <div class="col-sm-4">
-        <input type="text" name="name" id="name" value="${member.name}" class="form-control" >
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="firstName">MEMBER_FIRST_NAME</label>
-      <div class="col-sm-4">
-        <input type="text" name="firstName" id="firstName" value="${member.firstName}" class="form-control" >
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="lastName">MEMBER_LAST_NAME</label>
-      <div class="col-sm-4">
-        <input type="text" name="lastName" id="lastName" value="${member.lastName}" class="form-control" required>
-      </div>
-    </div>
-	<div class="form-group">
-      <label class="control-label col-sm-2" for="phoneNumber">MEMBER_PHONE_NUMBER</label>
-      <div class="col-sm-6">
-        <input type="text" name="phoneNumber" id="phoneNumber" value="${member.phoneNumber}" class="form-control" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="birthday">MEMBER_BIRTHDAY</label>
-      <div class="col-sm-6">
-        <input type="date" name="birthday" id="birthday" value="${member.birthday}" class="form-control" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="address">MEMBER_ADDRESS</label>
-      <div class="col-sm-6">
-        <input type="text" name="address" id="address" value="${member.address}" class="form-control" required>
-      </div>
-    </div>
-	<div class="form-group">
-      <label class="control-label col-sm-2" for="email">MEMBER_EMAIL</label>
-      <div class="col-sm-8">
-        <input type="email" name="email" id="email" value="${member.email}" class="form-control" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="gender">MEMBER_GENDER</label>
-      <div class="col-sm-8">
-        <input type="text" name="gender" id="gender" value="${member.gender}" class="form-control" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="passportNumber">MEMBER_PASSPORT_NUMBER</label>
-      <div class="col-sm-8">
-        <input type="text" name="passportNumber" id="passportNumber" value="${member.passportNumber}" class="form-control" required>
-      </div>
-    </div>
-        <div class="form-group">
-      <label class="control-label col-sm-2" for="passportExpiryDate">MEMBER_PASSPORT_EXPIRY_DATE</label>
-      <div class="col-sm-6">
-        <input type="date" name="passportExpiryDate" id="passportExpiryDate" value="${member.passportExpiryDate}" class="form-control" required>
-      </div>
-    </div>
-    
-    <div class="form-group">
-    	<div class="col-sm-offset-2 col-sm-8">
-		<input type="submit" class="btn btn-info" value="SAVE">
-		<input type="reset" class="btn btn-info" value="CANCEL">
-		</div>
-	</div>
-	</form>
-	</div>
-</div>
-</body>
-<script type="text/javascript">
->>>>>>> 536f804e01ec16ebd81f531dac602143593a63d1
-</script>
 </html>

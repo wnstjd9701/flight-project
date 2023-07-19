@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<html lang="ko">
+<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
+	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 <p>검색 목록</p>
 <p>항공권 목록 개수: ${goListCount}</p>

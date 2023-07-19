@@ -32,7 +32,7 @@ public class MemberController {
     */
    @RequestMapping(value="/member/insert" , method=RequestMethod.GET)
    public String insertMember() {
-      return "/member/insertform";
+      return "member/insertform";
    }
 
    /*   API no.3
@@ -40,7 +40,7 @@ public class MemberController {
       information : 회원가입기능
       response : member   
     */
-   @RequestMapping(value="member/insert", method=RequestMethod.POST)
+   @RequestMapping(value="/member/insert", method=RequestMethod.POST)
    public String insertMember(Member member, HttpSession session, Model model) {
       try{
          memberService.insertMember(member);
@@ -48,13 +48,13 @@ public class MemberController {
          member.setMemberId(null);
          model.addAttribute("member", member);
          model.addAttribute("message", "ID_ALREADY_EXIST");
-         return "/member/insertform";
+         return "member/insertform";
       }
       session.invalidate();
       return "home";
    }
 
-   @RequestMapping(value="member/login", method=RequestMethod.GET)
+   @RequestMapping(value="/member/login", method=RequestMethod.GET)
    public String login() {
       return "member/login";
    }
@@ -62,7 +62,7 @@ public class MemberController {
       method : POST
       information : 로그인 기능   
     */
-   @RequestMapping(value="member/login", method=RequestMethod.POST)
+   @RequestMapping(value="/member/login", method=RequestMethod.POST)
    public String login(String memberId, String password, HttpSession session, Model model) {
       logger.info("memberId:" + memberId + "password : " + password );
       Member member = memberService.selectMember(memberId);
@@ -90,7 +90,7 @@ public class MemberController {
       method : GET
       information : 로그아웃 기능   
     */
-   @RequestMapping(value="member/logout", method=RequestMethod.GET)
+   @RequestMapping(value="/member/logout", method=RequestMethod.GET)
    public String logout(HttpSession session, HttpServletRequest request) {
       session.invalidate();
       return "redirect:/"; //주소 요청으로 변경
@@ -100,7 +100,7 @@ public class MemberController {
       method : GET
       information : 마이페이지 조회
     */
-   @RequestMapping(value="member/mp", method=RequestMethod.GET)
+   @RequestMapping(value="/member/mp", method=RequestMethod.GET)
    public String viewMypage(HttpSession session, Model model, Member member) {
       String memberId = (String) session.getAttribute("memberId");
       if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
@@ -118,7 +118,7 @@ public class MemberController {
       method : GET
       information : 마이페이지 수정
     */
-   @RequestMapping(value="member/mp/update", method=RequestMethod.GET)
+   @RequestMapping(value="/member/mp/update", method=RequestMethod.GET)
    public String updateMember(HttpSession session, Model model) {
       Member member = new Member();
       String memberId = (String) session.getAttribute("memberId");
@@ -137,7 +137,7 @@ public class MemberController {
       information : 마이페이지 수정
       response : member
     */
-   @RequestMapping(value="member/mp/update", method=RequestMethod.POST)
+   @RequestMapping(value="/member/mp/update", method=RequestMethod.POST)
    public String updateMember(Member member,HttpSession session, Model model) {
       try {
          memberService.updateMember(member);
@@ -154,7 +154,7 @@ public class MemberController {
       method : GET
       information : 회원탈퇴
     */
-   @RequestMapping(value="member/mp/delete", method=RequestMethod.GET)
+   @RequestMapping(value="/member/mp/delete", method=RequestMethod.GET)
    public String deleteMember(HttpSession session, Model model) {
       Member member = new Member();
       String memberId = (String) session.getAttribute("memberId");
@@ -174,7 +174,7 @@ public class MemberController {
       information : 회원탈퇴
     */
 
-   @RequestMapping(value="member/mp/delete", method=RequestMethod.POST)
+   @RequestMapping(value="/member/mp/delete", method=RequestMethod.POST)
    public String deleteMember(String password,Member member, HttpSession session, Model model) {
       try {
          member.setMemberId((String)session.getAttribute("memberId"));
@@ -199,7 +199,7 @@ public class MemberController {
       method : GET
       information : 비밀번호 찾기(이메일 인증)
     */
-   @RequestMapping(value = "member/findpwd", method = RequestMethod.GET)
+   @RequestMapping(value = "/member/findpwd", method = RequestMethod.GET)
    public String findPassword(){
       return "member/pwd";
    }
@@ -208,7 +208,7 @@ public class MemberController {
       method : POST
       information : 비밀번호 찾기(이메일 인증)
     */
-   @RequestMapping(value = "member/findpwd", method = RequestMethod.POST)
+   @RequestMapping(value = "/member/findpwd", method = RequestMethod.POST)
    public String findPassword(Member member, HttpServletResponse response){
       memberService.findPassword(response, member);
       return "member/login";
@@ -218,7 +218,7 @@ public class MemberController {
       method : GET
       information : 비밀번호 변경
     */
-   @RequestMapping(value="member/updatepwd", method = RequestMethod.GET)
+   @RequestMapping(value="/member/updatepwd", method = RequestMethod.GET)
    public String updatePassword(HttpSession session, Model model) {
       Member member = new Member();
       String memberId = (String) session.getAttribute("memberId");
@@ -236,7 +236,7 @@ public class MemberController {
       method : POST
       information : 비밀번호 변경
     */
-   @RequestMapping(value="member/updatepwd", method=RequestMethod.POST)
+   @RequestMapping(value="/member/updatepwd", method=RequestMethod.POST)
    public String updatePassword(Member member,HttpSession session, Model model) {
       try {
          memberService.updatePasswordByMember(member);
@@ -277,7 +277,7 @@ public class MemberController {
       method : GET
       information : 예약정보조회
     */
-   @RequestMapping(value="member/reservationList", method=RequestMethod.GET)
+   @RequestMapping(value="/member/reservationList", method=RequestMethod.GET)
    public String viewReservation(HttpSession session, Model model,Member member) {
       String memberId = (String) session.getAttribute("memberId");
       if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
