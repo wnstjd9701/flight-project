@@ -7,6 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.project.myapp.member.dao.IMemberRepository;
@@ -15,8 +18,8 @@ import com.project.myapp.member.model.Member;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class MemberService implements IMemberService {
 
 	private final IMemberRepository IMemberRepository;
