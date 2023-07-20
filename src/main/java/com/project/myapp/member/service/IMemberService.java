@@ -11,11 +11,12 @@ public interface IMemberService {
 	
 	void insertMember(Member member); //회원가입
 	Member selectMember(String memberId);//회원정보 조회
+	int idCheck(String memberId); //아이디 중복확인
 	List<Member> selectAllMembers();
 	String getPassword(String memeberId); //로그인
 	void updateMember(Member member); //회원정보 수정
 	void deleteMember(Member member); //회원탈퇴
-
+	
 	public void sendEmail(Member member, String mail); //임시비밀번호 이메일발송
 	void findPassword(HttpServletResponse response, Member member); //비밀번호 찾기
 	void updatePassword(Member member); //임시비밀번호받으면 임시비밀번호로 업데이트

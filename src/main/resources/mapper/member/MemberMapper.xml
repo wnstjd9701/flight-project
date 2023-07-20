@@ -7,11 +7,9 @@
       <![CDATA[
          INSERT INTO 
             MEMBER
-            (member_id, password, name, first_name, last_name, phone_number, birthday, address, email,
-               gender, passport_number, passport_expiry_date)
+            (member_id, password, name, first_name, last_name, phone_number, birthday, address, email, gender)
             VALUES
-            (#{memberId},#{password}, #{name}, #{firstName}, #{lastName}, #{phoneNumber}, #{birthday}, #{address},#{email},
-               #{gender}, #{passportNumber}, #{passportExpiryDate})
+            (#{memberId},#{password}, #{name}, #{firstName}, #{lastName}, #{phoneNumber}, #{birthday}, #{address},#{email}, #{gender})
       ]]>
    </insert>
    
@@ -28,8 +26,6 @@
             address "address",
             email "email",
             gender "gender",
-            passport_number "passportNumber",
-            passport_expiry_date "passportExpiryDate",
             is_admin "isAdmin",
             is_deleted "isDeleted"
          FROM MEMBER
@@ -50,8 +46,6 @@
             address "address",
             email "email",
             gender "gender",
-            passport_number "passportNumber",
-            passport_expiry_date "passportExpiryDate",
             is_admin "isAdmin",
             is_deleted "isDeleted"
          FROM MEMBER
@@ -70,8 +64,7 @@
          UPDATE MEMBER 
          SET
             password=#{password}, name={name}, first_name={firstName}, last_name={lastName}, phone_number={phoneNumber},
-            birthday=#{birthday}, address={address}, email={email}, gender={gender}, passportNumber=#{passportNumber},
-            passportExpiryDate=#{passport_expiry_date}
+            birthday=#{birthday}, address={address}, email={email}, gender={gender}
          WHERE member_id = #{memberId}      
       ]]>
    </update>
@@ -114,11 +107,9 @@
 		<![CDATA[
 			INSERT INTO
 				COMPANION
-					(companion_id, member_id, name, first_name, last_name, phone_number, birthday,
-					passport_number, passport_expiry_date)
+					(companion_id, member_id, name, first_name, last_name, phone_number, birthday)
 				VALUES
-					(#{companionId}, #{memberId}, #{name}, #{firstName}, #{lastName}, #{phoneNumber},
-						#{birthday}, #{passportNumber}, #{passportExpiryDate})
+					(#{companionId}, #{memberId}, #{name}, #{firstName}, #{lastName}, #{phoneNumber},#{birthday})
 		]]>
 	</insert>
 	
@@ -143,6 +134,12 @@
 				INNER JOIN SCHDULE s ON t.schedule_id = s.schedule_id
 				INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
 			WHERE t.member_id = #{memberId}
+		]]>
+	</select>
+	
+	<select id="checkId" parameterType="string" resultType="int">
+		<![CDATA[
+			SELECT COUNT(member_id) FROM MEMBER WHERE member_id = #{memberId}
 		]]>
 	</select>
 	
