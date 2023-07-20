@@ -226,7 +226,7 @@ public class MemberController {
          member = memberService.selectMember(memberId);
          model.addAttribute("member", member);
          model.addAttribute("message", "UPDATE_PASSWORD");
-         return "member/update";
+         return "member/updatepwd";
       }else {
          model.addAttribute("message", "NOT_LOGIN_MEMBER");
          return "member/login";   
@@ -240,10 +240,11 @@ public class MemberController {
    public String updatePassword(Member member,HttpSession session, Model model) {
       try {
          memberService.updatePasswordByMember(member);
-         model.addAttribute("message", "UPDATE_MEMBER_INFO");
+         model.addAttribute("message", "UPDATE_MEMBER_PASSWORD");
          model.addAttribute("member", member);
          session.setAttribute("password", member.getPassword());
-         return "member/mypage";
+         session.invalidate();//로그아웃
+         return "member/login";
       }catch(Exception e){
          model.addAttribute("message", e.getMessage());
          return "member/error";
