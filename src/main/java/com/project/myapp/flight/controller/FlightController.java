@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,10 @@ public class FlightController {
 	
 	private final IFlightService flightService;
 	
+	// iamport 결제를 위한 imp 번호
+	@Value("#{impNumber[impnumber]}")
+	private String impNumber;
+	
 	/*	/flight/ticket/search/JP/20230717/20230720?person=2&grade=1&page=1
 	 *  URL: /flight/ticket/search/{nation}/{departmentDate}/{arrivalDate}?person=2&grade=1&page=1
 	 *  API No: 13
@@ -50,7 +55,6 @@ public class FlightController {
 			@RequestParam(value="grade", required=true) int grade, 
 			@RequestParam(value="page", required=true) int page,
 			Model model, HttpSession session) {
-		
 		logger.info("nation:" + nation + " departmentDate:" + departmentDate + " arrivalDate:" + arrivalDate + 
 				" person:" + person + " grade:" + grade + " page:" + page);
 		
@@ -83,6 +87,15 @@ public class FlightController {
 			
 			List<Schedule> flightScheduleToGo = flightService.getFlightScheduleByGrade(scheduleToGo, grade);
 			int goListCount = flightScheduleToGo.size();
+			
+			for(int i=0; i<goListCount; i++) {
+				int time = flightScheduleToGo.get(i).getFlightTime();
+				int hours = time / 60;
+				int minutes = time % 60;
+				String detailTime = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분"; 
+				flightScheduleToGo.get(i).setFlightTimeDetail(detailTime);
+			}
+			
 			model.addAttribute("flightScheduleToGo", flightScheduleToGo);
 			model.addAttribute("goListCount", goListCount);
 			
@@ -95,6 +108,15 @@ public class FlightController {
 			
 			List<Schedule> flightScheduleToCome = flightService.getFlightScheduleByGrade(scheduleToCome, grade);
 			int comeListCount = flightScheduleToCome.size();
+			
+			for(int i=0; i<comeListCount; i++) {
+				int time = flightScheduleToCome.get(i).getFlightTime();
+				int hours = time / 60;
+				int minutes = time % 60;
+				String detailTime = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분"; 
+				flightScheduleToCome.get(i).setFlightTimeDetail(detailTime);
+			}
+			
 			model.addAttribute("flightScheduleToCome", flightScheduleToCome);
 			model.addAttribute("comeListCount", comeListCount);
 			
@@ -114,8 +136,12 @@ public class FlightController {
 	 * 스케줄 아이디를 가지고 해당 스케줄 조회
 	 */
 	@GetMapping("/flight/ticket/select")
+	@Transactional
 	public String reserveTicket(String scheduleIdList, Model model, HttpSession session) {
 //		String memberId = (String) session.getAttribute("memberId");
+		int person = Integer.parseInt(session.getAttribute("person").toString());
+		
+		int grade = Integer.parseInt(session.getAttribute("grade").toString());
 		
 		String[] scheduleIdLists = scheduleIdList.split(",");
 		int scheduleIdToGo = Integer.parseInt(scheduleIdLists[0]);
@@ -123,6 +149,41 @@ public class FlightController {
 		
 		Schedule scheduleToGo = flightService.getScheduleByScheduleId(scheduleIdToGo);
 		Schedule scheduleToCome = flightService.getScheduleByScheduleId(scheduleIdToCome);
+		
+		int remainSeatToGo = 0;
+		int remainSeatToCome = 0;
+		
+		if(grade == 1) {
+			session.setAttribute("totalPrice", (scheduleToGo.getEconomyClassFare()+ scheduleToCome.getEconomyClassFare()) * person);
+			remainSeatToGo = scheduleToGo.getEconomyClassRemain();
+			remainSeatToCome = scheduleToCome.getEconomyClassRemain();
+			logger.info("scheduleToGo: " + scheduleToGo.toString());
+		}else if(grade == 2) {
+			session.setAttribute("totalPrice",  (scheduleToGo.getBusinessClassFare() + scheduleToCome.getBusinessClassFare()) * person);
+			remainSeatToGo = scheduleToGo.getBusinessClassRemain();
+			remainSeatToCome = scheduleToCome.getBusinessClassRemain();
+			logger.info("scheduleToGo: " + scheduleToGo.toString());
+		}else if(grade == 3) {
+			session.setAttribute("totalPrice",  (scheduleToGo.getFirstClassFare() + scheduleToCome.getFirstClassFare()) * person);
+			remainSeatToGo = scheduleToGo.getFirstClassRemain();
+			remainSeatToCome = scheduleToCome.getFirstClassRemain();
+			logger.info("scheduleToGo: " + scheduleToGo.toString());
+		}
+		
+		if(remainSeatToGo < person || remainSeatToCome < person) {
+			return "redirect:/flight/ticket/search/" + scheduleToGo.getArrivalNation() + "/" + scheduleToGo.getDepartmentDate() + "/" + scheduleToCome.getDepartmentDate() 
+				+ "?person=" + person + "&grade=" + grade + "&page=" + 1;
+		}
+		remainSeatToGo = remainSeatToGo - person;
+		remainSeatToCome = remainSeatToCome - person;
+		logger.info("scheduleToGoRemain: " + remainSeatToGo);
+		logger.info("scheduleToComeRemain: " + remainSeatToCome);
+		
+		int resultToGo = flightService.updateRemainSeatByScheduleId(scheduleToGo.getScheduleId(), remainSeatToGo, grade);
+		int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleToCome.getScheduleId(), remainSeatToCome, grade);
+		
+		logger.info("가는편 좌석 예약중: " + resultToGo);
+		logger.info("오는편 좌석 예약중: " + resultToCome);
 		
 		session.setAttribute("scheduleIdToGo", scheduleIdToGo);
 		session.setAttribute("scheduleIdToCome", scheduleToCome);
@@ -133,32 +194,30 @@ public class FlightController {
 		return "flight/reservation";
 	}
 	
-	/* view-controller path="/flight/ticket/cancel" view-name="" 추가 하기
-	 * API No: 15
-	 * Method: POST
-	 * Information: 예약 취소
-	*/ 
-	@PostMapping("/flight/ticket/cancel")
-	public String ticketReservationCancel(Model model) {
-		return "ticket/cancel";
-	}
-	
 	/*
 	 * API No: 16
 	 * Method: POST
-	 * Information: 탑승자 정보 입력
+	 * Information: 선택한 항공권 결제 및 예약 정보 입력
 	 */
-	@PostMapping("/flight/ticket/insert")
-	public String insertTicket(@RequestParam("name") ArrayList<String> names,
+	@PostMapping("/flight/ticket/reservation")
+	public String insertTicket(@RequestParam("name") List<String> names,
             @RequestParam("firstName") List<String> firstNames,
             @RequestParam("lastName") List<String> lastNames,
             @RequestParam("phoneNumber") List<String> phoneNumbers,
             @RequestParam("birthday") List<String> birthdays,
             @RequestParam("passportNumber") List<String> passportNumbers,
-            @RequestParam("passportExpiryDate") List<String> passportExpiryDates, HttpSession session) {
+            @RequestParam("passportExpiryDate") List<String> passportExpiryDates, 
+            Model model, HttpSession session) {
+		
+		model.addAttribute("impNumber", impNumber);
+		Schedule scheduleToGo = (Schedule) session.getAttribute("flightScheduleToGo");
+		Schedule scheduleToCome = (Schedule) session.getAttribute("flightScheduleToCome");
+		logger.info("scheduleToGo: " + scheduleToGo.toString());
+		
 		try {
 			int personCount = (Integer) session.getAttribute("person");
 			String memberId = (String) session.getAttribute("memberId");
+			
 			ArrayList<Companion> companionList = new ArrayList<Companion>();
 			for(int i=0; i<personCount; i++) {
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -182,7 +241,8 @@ public class FlightController {
 				logger.info("Companion: " + companion.toString());
 				companionList.add(companion);
 			}
-			
+			logger.info("companionList: " + companionList.toString());
+			session.setAttribute("impNumber", impNumber);
 			session.setAttribute("passengersList", companionList);
 			
 		}catch (Exception e) {
@@ -190,30 +250,19 @@ public class FlightController {
 		}
 		return "redirect:/flight/payment";
 	}
-	
-	/*
-	 * API No: 18
-	 * Method: Get
-	 * Infromation: 등록된 탑승자 정보 가져오기 (Ajax 요청) 
-	 */
-	@GetMapping("/flight/companion")
-	public Companion getCompanionList(@RequestParam("name") String name, HttpSession session, Model model) {
-//		String memberId = (String) session.getAttribute("memberId");
-		logger.info("SelectedName: " + name);
-		String memberId = "wh4679";
-		Companion companion = flightService.getMemberCompanionByName(memberId, name);
-		logger.info("Companion: " + companion.toString());
-		return companion;
-	}
-	
 	/*
 	 * API No: 17
 	 * Method: POST
 	 * Information: 항공권 결제
 	 */
-	@PostMapping("/flight/ticket/pay")
+	@GetMapping("/flight/ticket/payment")
 	public String ticketPayment(Model model) {
-		return "/ticket/pay/confirm";
+		boolean status = true;
+		if(status) {
+			return "/";
+		}else {
+			return "redirect:/home";
+		}
 	}
 	
 }

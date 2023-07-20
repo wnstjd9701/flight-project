@@ -10,9 +10,8 @@ public interface IFlightService {
 	List<Schedule> getFlightScheduleByGrade(Schedule schedule, int grade); // 좌석 등급별 스케줄 조회
 	
 	Schedule getScheduleByScheduleId(int scheduleIdToGo); // 스케줄 아이디로 선택한 스케줄 조회 
-
-	Companion getMemberCompanionByName(String memberId, String name); // 멤버 아이디와 동승자 이름으로 등록되어 있는 탑승객 정보 조회
-
+	
 	int insertPassengerInformation(Companion companion); // 탑승객 정보 입력
 	
+	int updateRemainSeatByScheduleId(int scheduleId, int person, int grade); // 예약중인 좌석 업데이트 
 }
