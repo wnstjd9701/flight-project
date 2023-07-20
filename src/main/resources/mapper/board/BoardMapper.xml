@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.myapp.board.dao.IBoardRepository">
-
+<!-- 
 	
 	<insert id="insertArticle" parameterType="com.project.myapp.board.model.Board">
 	<![CDATA[
@@ -35,5 +35,5 @@
 		WHERE 
 			board_id=#{boardId}
 	]]>
-	</update>
+	</update> -->
 </mapper>
