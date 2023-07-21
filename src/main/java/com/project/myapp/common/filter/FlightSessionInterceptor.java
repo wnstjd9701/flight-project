@@ -3,28 +3,38 @@ package com.project.myapp.common.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+public class FlightSessionInterceptor implements HandlerInterceptor {
 
-public class LoggingInterceptor implements HandlerInterceptor {
-
-	static final Logger logger= LoggerFactory.getLogger(LoggingInterceptor.class);
+	/*
+	 *  URL 적용 
+	 *  /flight/ticket/select
+	 *  /flight/ticket/insert
+	 *  /flight/ticket/payment
+	 */
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-	    String requestURL = request.getRequestURL().toString();
-	    String contextPath = request.getContextPath();
-	    String requestURI = requestURL.replaceFirst(request.getScheme() + "://", "")
-	                                  .replaceFirst(":" + request.getServerPort(), "")
-	                                  .replaceFirst(request.getServerName(), "")
-	                                  .replaceFirst(contextPath, "");
-
-	    logger.info("요청 URL: " + requestURI);
-
+		/*
+		 * 1. memberId가 세션에 존재하는지 확인
+		 * 존재하지 않는다면 로그인 페이지로 이동
+		 */
+		if(request.getSession().getAttribute("memberId") == null) {
+			response.sendRedirect("/signin");
+			return false;
+		}
+		/* 
+		 * 2. 검색 기록이 존재하는지 확인
+		 * 존재하지 않으면 홈으로 이동
+		 */
+		if(request.getSession().getAttribute("search") == null || request.getSession().getAttribute("requestCount") == null) {
+			response.sendRedirect("/");
+			return false;
+		}
+		
 		return true;
 	}
 
@@ -41,5 +51,5 @@ public class LoggingInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

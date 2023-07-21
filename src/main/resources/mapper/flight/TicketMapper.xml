@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.myapp.flight.dao.IFlightRepository">
-	<insert id="insertReservationInformation" parameterType="com.project.myapp.flight.model.Ticket">
+	<insert id="insertPassengerInformation" parameterType="com.project.myapp.flight.model.Ticket">
 		<![CDATA[
 			INSERT
 			    INTO ticket (
+			    	ticket_id,
 			        member_id,
 			        schedule_id,
 			        reservation_id,
@@ -20,6 +21,7 @@
 			        seat_type,
 			        total_price
 			    ) VALUES (
+			    	ticket_seq.NEXTVAL,
 			        #{memberId},
 			        #{scheduleId},
 			        #{reservationId},

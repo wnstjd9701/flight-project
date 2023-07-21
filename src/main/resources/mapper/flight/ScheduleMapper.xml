@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.myapp.flight.dao.IFlightRepository">
 
-	<select id="getEconomyClassSchedule" parameterType="com.project.myapp.flight.model.Schedule" resultType="com.project.myapp.flight.model.Schedule">
+	<select id="getEconomyClassSchedule" parameterType="com.project.myapp.flight.model.Search" resultType="com.project.myapp.flight.model.Schedule">
 		<![CDATA[
 			SELECT
     			ROWNUM,
@@ -51,7 +51,7 @@
 		]]>
 	</select>
 	
-	<select id="getBusinessClassSchedule" parameterType="com.project.myapp.flight.model.Schedule" resultType="com.project.myapp.flight.model.Schedule">
+	<select id="getBusinessClassSchedule" parameterType="com.project.myapp.flight.model.Search" resultType="com.project.myapp.flight.model.Schedule">
 		<![CDATA[
 			SELECT
     			ROWNUM,
@@ -100,7 +100,7 @@
 		]]>
 	</select>
 	
-	<select id="getFirstClassSchedule" parameterType="com.project.myapp.flight.model.Schedule" resultType="com.project.myapp.flight.model.Schedule">
+	<select id="getFirstClassSchedule" parameterType="com.project.myapp.flight.model.Search" resultType="com.project.myapp.flight.model.Schedule">
 		<![CDATA[
 			SELECT
     			ROWNUM,
@@ -206,5 +206,38 @@
     			schedule_id = #{scheduleId}
 		]]>
 	</update>
+	
+	<select id="getEconomyRemainSeat" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT
+    			economy_class_remain as "economyClassRemain"
+			FROM 
+    			schedule
+			WHERE
+    			schedule_id = #{scheduleId}
+		]]>
+	</select>
+	
+	<select id="getBusinessRemainSeat" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT
+    			economy_class_remain as "economyClassRemain"
+			FROM
+    			schedule
+			WHERE
+    			schedule_id = #{scheduleId}
+		]]>
+	</select>
+	
+	<select id="getFirstRemainSeat" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT 
+				first_class_remain as "firstClassRemain"
+			FROM
+    			schedule
+			WHERE
+    			schedule_id = #{scheduleId};
+		]]>
+	</select>
 	
 </mapper>

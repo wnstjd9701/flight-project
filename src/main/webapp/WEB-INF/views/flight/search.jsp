@@ -8,13 +8,12 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
 <p>검색 목록</p>
-<p>항공권 목록 개수: ${goListCount}</p>
-<p>인원: ${sessionScope.person}</p>
+<p>인원: ${sessionScope.search.person}</p>
 <c:choose> 
-	<c:when test="${sessionScope.grade eq '1' }">
+	<c:when test="${sessionScope.search.grade eq '1' }">
 		 좌석 등급: 이코노미
 	</c:when> 
-	<c:when test="${sessionScope.grade eq '2'}">
+	<c:when test="${sessionScope.search.grade eq '2'}">
 		좌석 등급: 비즈니스
 	</c:when> 
 	<c:otherwise>
@@ -27,7 +26,10 @@
 	</c:when>
 	<c:otherwise>
 		<form action="<c:url value="/flight/ticket/select"/>" method="get">
-			<input type="hidden" name="grade" value="${sessionScope.grade}"> 
+			<input type="hidden" name="grade" value="${sessionScope.search.grade}"> 
+			<input type="hidden" name="person" value="${sessionScope.search.person}">
+			<input type="hidden" name="requestCount" value="${requestCount}">
+			
 			<p>가는편 항공권: ${goListCount}</p>
 			<c:forEach var="flightScheduleToGo" items="${flightScheduleToGo}" varStatus="status">
 				<p>
@@ -44,11 +46,11 @@
 					/ 도착 시간: ${flightScheduleToGo.arrivalTime}
 					/ 비행 시간: ${flightScheduleToGo.flightTimeDetail}
 					<c:choose> 
-						<c:when test="${sessionScope.grade eq '1'}">
+						<c:when test="${sessionScope.search.grade eq '1'}">
 							/ 잔여 좌석: ${flightScheduleToGo.economyClassRemain}
 							/ 좌석 금액: ${flightScheduleToGo.economyClassFare}
 						</c:when> 
-						<c:when test="${sessionScope.grade eq '2'}">
+						<c:when test="${sessionScope.search.grade eq '2'}">
 							/ 잔여 좌석: ${flightScheduleToGo.businessClassRemain}
 							/ 좌석 금액: ${flightScheduleToGo.businessClassFare}
 						</c:when> 
@@ -66,7 +68,7 @@
 					<c:out value="${status.count}"/>
 					항공사 이름: ${flightScheduleToCome.airlineName}
 					/ 비행기 기종: ${flightScheduleToCome.airplaneTypeName}
-					/ 항공사 이미지: <img src="${flightScheduleToCome.image}" alt="${flightScheduleToCome.image}">
+					<%-- / 항공사 이미지: <img src="${flightScheduleToCome.image}" alt="${flightScheduleToCome.image}"> --%>
 					/ 출발 도시: ${flightScheduleToCome.departmentNation}
 					/ 도착 도시: ${flightScheduleToCome.arrivalNation}
 					/ 출발 날짜: ${flightScheduleToCome.departmentDate}
@@ -75,11 +77,11 @@
 					/ 도착 시간: ${flightScheduleToCome.arrivalTime}
 					/ 비행 시간: ${flightScheduleToCome.flightTimeDetail}
 					<c:choose> 
-						<c:when test="${sessionScope.grade eq '1' }">
+						<c:when test="${sessionScope.search.grade eq '1' }">
 							/ 잔여 좌석: ${flightScheduleToCome.economyClassRemain}
 							/ 좌석 금액: ${flightScheduleToCome.economyClassFare}
 						</c:when> 
-						<c:when test="${sessionScope.grade eq '2'}">
+						<c:when test="${sessionScope.search.grade eq '2'}">
 							/ 잔여 좌석: ${flightScheduleToCome.businessClassRemain}
 							/ 좌석 금액: ${flightScheduleToCome.businessClassFare}
 						</c:when> 
@@ -89,7 +91,11 @@
 						</c:otherwise> 
 					</c:choose> 
 			</c:forEach>
-			<p><input type="submit" value="선택"></p>
+			<p>
+				<c:if test="${goListCount ne '0' || comeListCount ne '0'}">
+					<input type="submit" value="선택">
+				</c:if>
+			</p>
 		</form>
 	</c:otherwise>
 </c:choose>
