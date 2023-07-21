@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,7 +48,7 @@ public class FlightController {
 	 *  Information: 항공권 검색 (기본: 가격순), Date 형식: 2023-07-14, grade 1.이코노미  2.비즈니스  3.퍼스트 
 	 *  Response: flightSchedule(스케줄 리스트)
 	*/
-	@GetMapping("/flight/ticket/search/{nation}/{departmentDate}/{arrivalDate}")
+	@RequestMapping("/flight/ticket/search/{nation}/{departmentDate}/{arrivalDate}")
 	public String searchTicket(@PathVariable("nation") String nation, 
 			@PathVariable("departmentDate") String departmentDate, 
 			@PathVariable("arrivalDate") String arrivalDate, 
@@ -265,6 +266,23 @@ public class FlightController {
 		}
 		return "redirect:/flight/payment";
 	}
+	
+	/*
+	 * API No: 18
+	 * Method: Get
+	 * Information: 등록된 탑승자 정보 가져오기 (Ajax 요청) 
+	 */
+	@GetMapping("/flight/companion")
+	public Companion getCompanionList(@RequestParam("name") String name, HttpSession session, Model model) {
+//		String memberId = (String) session.getAttribute("memberId");
+		logger.info("SelectedName: " + name);
+		String memberId = "wh4679";
+		Companion companion = flightService.getMemberCompanionByName(memberId, name);
+		logger.info("Companion: " + companion.toString());
+		return companion;
+	}
+	
+
 	/*
 	 * API No: 17
 	 * Method: POST
