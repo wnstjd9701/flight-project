@@ -46,7 +46,7 @@
 		path로 요청이 들어오면 
 		view-name으로 찾아감 ex) /WEB-INF/views/login.jsp
 	-->
-	<view-controller path="flight/payment" view-name="/flight/payment"/>
+	<view-controller path="/flight/payment" view-name="/flight/payment"/>
 	
    <!-- 로그인을 위한 인터셉터 -->
    <!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
