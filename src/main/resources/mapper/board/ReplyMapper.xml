@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.myapp.board.dao.IReplyRepository">
+
+	<select id="selectReply" parameterType="int" resultType="com.project.myapp.board.model.Reply">
+		<![CDATA[
+			SELECT
+				reply_id	"replyId",
+				member_id	"memberId",
+				board_id	"boardId",
+				cotent		"content"
+			FROM reply
+			WHERE board_id = #{boardId}
+		]]>
+	</select>
+	
+	<insert id="insertReply" parameterType="com.project.myapp.board.model.Reply">
+		<![CDATA[
+			INSERT INTO REPLY
+				(member_id, board_id, content)
+			VALUES
+				(#{memberId}, #{boardId}, #{content})
+			WHERE board_id = #{boardId}
+		]]>
+	</insert>
+	
+	<update id="updateReply" parameterType="com.project.myapp.board.model.Reply">
+		<![CDATA[
+			UPDATE REPLY SET
+				(content = #{content})
+			WHERE reply_id = #{replyId}
+		]]>
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		<![CDATA[
+			DELETE FROM REPLY
+			WHERE reply_id=#{replyId}
+		]]>
+	</delete>
+
+</mapper>
