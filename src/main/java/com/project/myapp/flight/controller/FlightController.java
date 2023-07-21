@@ -150,6 +150,18 @@ public class FlightController {
 		Schedule scheduleToGo = flightService.getScheduleByScheduleId(scheduleIdToGo);
 		Schedule scheduleToCome = flightService.getScheduleByScheduleId(scheduleIdToCome);
 		
+		int time = scheduleToGo.getFlightTime();
+		int hours = time / 60;
+		int minutes = time % 60;
+		String detailTimeToGo = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분";
+		scheduleToGo.setFlightTimeDetail(detailTimeToGo);
+		
+		time = scheduleToCome.getFlightTime();
+		hours = time / 60;
+		minutes = time % 60;
+		String detailTimeToCome = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분";
+		scheduleToCome.setFlightTimeDetail(detailTimeToCome);
+		
 		int remainSeatToGo = 0;
 		int remainSeatToCome = 0;
 		
@@ -174,6 +186,7 @@ public class FlightController {
 			return "redirect:/flight/ticket/search/" + scheduleToGo.getArrivalNation() + "/" + scheduleToGo.getDepartmentDate() + "/" + scheduleToCome.getDepartmentDate() 
 				+ "?person=" + person + "&grade=" + grade + "&page=" + 1;
 		}
+		
 		remainSeatToGo = remainSeatToGo - person;
 		remainSeatToCome = remainSeatToCome - person;
 		logger.info("scheduleToGoRemain: " + remainSeatToGo);
@@ -186,10 +199,12 @@ public class FlightController {
 		logger.info("오는편 좌석 예약중: " + resultToCome);
 		
 		session.setAttribute("scheduleIdToGo", scheduleIdToGo);
-		session.setAttribute("scheduleIdToCome", scheduleToCome);
+		session.setAttribute("scheduleIdToCome", scheduleIdToCome);
 		
 		session.setAttribute("flightScheduleToGo", scheduleToGo);
 		session.setAttribute("flightScheduleToCome", scheduleToCome);
+		
+		session.setAttribute("impNumber", impNumber);
 		
 		return "flight/reservation";
 	}
@@ -199,7 +214,7 @@ public class FlightController {
 	 * Method: POST
 	 * Information: 선택한 항공권 결제 및 예약 정보 입력
 	 */
-	@PostMapping("/flight/ticket/reservation")
+	@PostMapping("/flight/ticket/insert")
 	public String insertTicket(@RequestParam("name") List<String> names,
             @RequestParam("firstName") List<String> firstNames,
             @RequestParam("lastName") List<String> lastNames,
@@ -209,7 +224,7 @@ public class FlightController {
             @RequestParam("passportExpiryDate") List<String> passportExpiryDates, 
             Model model, HttpSession session) {
 		
-		model.addAttribute("impNumber", impNumber);
+		
 		Schedule scheduleToGo = (Schedule) session.getAttribute("flightScheduleToGo");
 		Schedule scheduleToCome = (Schedule) session.getAttribute("flightScheduleToCome");
 		logger.info("scheduleToGo: " + scheduleToGo.toString());
@@ -255,11 +270,13 @@ public class FlightController {
 	 * Method: POST
 	 * Information: 항공권 결제
 	 */
-	@GetMapping("/flight/ticket/payment")
-	public String ticketPayment(Model model) {
+	@GetMapping("/flight/ticket/test")
+	@ResponseBody
+	public String ticketPayment() {
+		logger.info("Test");
 		boolean status = true;
 		if(status) {
-			return "/";
+			return "redirect:/home";
 		}else {
 			return "redirect:/home";
 		}
