@@ -320,12 +320,22 @@ public class MemberController {
    */
    
    //Id 중복체크
-   @PostMapping("/member/idCheck")
-   @ResponseBody
-	public int idCheck(@RequestParam("memberId") String memberId) {
-		int cnt = memberService.idCheck(memberId);
-		return cnt;
-		
+   @RequestMapping("/member/idcheck")
+   @ResponseBody //view 없을 때 사용	
+   public String idCheck(String memberId) {
+	   String result = "";
+	   Member member = null;
+	   try {
+		   member = memberService.selectMember(memberId);
+		   if(member==null) {
+			   result = "true";
+		   }else {
+			   result = "false";
+		   }
+	   }catch(Exception e){
+		   e.printStackTrace();
+	   }
+	   return result;
 	}
   
 }

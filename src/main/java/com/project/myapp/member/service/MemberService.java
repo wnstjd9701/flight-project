@@ -164,11 +164,6 @@ public class MemberService implements IMemberService {
       
    }
 
-	@Override
-	public int idCheck(String memberId) {
-		int cnt = IMemberRepository.checkId(memberId);
-		return cnt;
-	}
 
 }
 
