@@ -20,12 +20,15 @@ public class Ticket {
 	private String passportNumber;
 	private Date passport_expiry_date;
 	
-	private String seatType;
+	private int seatType;
 	private int ticketType;
 	private int fare;
 	private int totalPrice;
 	
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	
+	// 예약 상태
+	private String reservationStatus;
 	
 }

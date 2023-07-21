@@ -24,6 +24,12 @@
  	<!-- Flight Service -->
  	<context:component-scan base-package="com.project.myapp.flight.service" />
 
+	<!-- Board DAO -->
+	<mybatis-spring:scan base-package="com.project.myapp.board.dao"/>
+	
+	<!-- Board Service -->
+	<context:component-scan base-package="com.project.myapp.board.service"/>
+	
 	<!-- @Transactional 사용하기 위한 태그 -->
 	<tx:annotation-driven/>
  	 

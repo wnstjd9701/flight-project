@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,7 +48,7 @@ public class FlightController {
 	 *  Information: 항공권 검색 (기본: 가격순), Date 형식: 2023-07-14, grade 1.이코노미  2.비즈니스  3.퍼스트 
 	 *  Response: flightSchedule(스케줄 리스트)
 	*/
-	@GetMapping("/flight/ticket/search/{nation}/{departmentDate}/{arrivalDate}")
+	@RequestMapping("/flight/ticket/search/{nation}/{departmentDate}/{arrivalDate}")
 	public String searchTicket(@PathVariable("nation") String nation, 
 			@PathVariable("departmentDate") String departmentDate, 
 			@PathVariable("arrivalDate") String arrivalDate, 
@@ -150,6 +151,18 @@ public class FlightController {
 		Schedule scheduleToGo = flightService.getScheduleByScheduleId(scheduleIdToGo);
 		Schedule scheduleToCome = flightService.getScheduleByScheduleId(scheduleIdToCome);
 		
+		int time = scheduleToGo.getFlightTime();
+		int hours = time / 60;
+		int minutes = time % 60;
+		String detailTimeToGo = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분";
+		scheduleToGo.setFlightTimeDetail(detailTimeToGo);
+		
+		time = scheduleToCome.getFlightTime();
+		hours = time / 60;
+		minutes = time % 60;
+		String detailTimeToCome = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분";
+		scheduleToCome.setFlightTimeDetail(detailTimeToCome);
+		
 		int remainSeatToGo = 0;
 		int remainSeatToCome = 0;
 		
@@ -174,6 +187,7 @@ public class FlightController {
 			return "redirect:/flight/ticket/search/" + scheduleToGo.getArrivalNation() + "/" + scheduleToGo.getDepartmentDate() + "/" + scheduleToCome.getDepartmentDate() 
 				+ "?person=" + person + "&grade=" + grade + "&page=" + 1;
 		}
+		
 		remainSeatToGo = remainSeatToGo - person;
 		remainSeatToCome = remainSeatToCome - person;
 		logger.info("scheduleToGoRemain: " + remainSeatToGo);
@@ -186,10 +200,12 @@ public class FlightController {
 		logger.info("오는편 좌석 예약중: " + resultToCome);
 		
 		session.setAttribute("scheduleIdToGo", scheduleIdToGo);
-		session.setAttribute("scheduleIdToCome", scheduleToCome);
+		session.setAttribute("scheduleIdToCome", scheduleIdToCome);
 		
 		session.setAttribute("flightScheduleToGo", scheduleToGo);
 		session.setAttribute("flightScheduleToCome", scheduleToCome);
+		
+		session.setAttribute("impNumber", impNumber);
 		
 		return "flight/reservation";
 	}
@@ -199,7 +215,7 @@ public class FlightController {
 	 * Method: POST
 	 * Information: 선택한 항공권 결제 및 예약 정보 입력
 	 */
-	@PostMapping("/flight/ticket/reservation")
+	@PostMapping("/flight/ticket/insert")
 	public String insertTicket(@RequestParam("name") List<String> names,
             @RequestParam("firstName") List<String> firstNames,
             @RequestParam("lastName") List<String> lastNames,
@@ -209,7 +225,7 @@ public class FlightController {
             @RequestParam("passportExpiryDate") List<String> passportExpiryDates, 
             Model model, HttpSession session) {
 		
-		model.addAttribute("impNumber", impNumber);
+		
 		Schedule scheduleToGo = (Schedule) session.getAttribute("flightScheduleToGo");
 		Schedule scheduleToCome = (Schedule) session.getAttribute("flightScheduleToCome");
 		logger.info("scheduleToGo: " + scheduleToGo.toString());
@@ -242,7 +258,6 @@ public class FlightController {
 				companionList.add(companion);
 			}
 			logger.info("companionList: " + companionList.toString());
-			session.setAttribute("impNumber", impNumber);
 			session.setAttribute("passengersList", companionList);
 			
 		}catch (Exception e) {
@@ -250,16 +265,35 @@ public class FlightController {
 		}
 		return "redirect:/flight/payment";
 	}
+	
+	/*
+	 * API No: 18
+	 * Method: Get
+	 * Information: 등록된 탑승자 정보 가져오기 (Ajax 요청) 
+	 */
+	@GetMapping("/flight/companion")
+	public Companion getCompanionList(@RequestParam("name") String name, HttpSession session, Model model) {
+//		String memberId = (String) session.getAttribute("memberId");
+		logger.info("SelectedName: " + name);
+		String memberId = "wh4679";
+		Companion companion = flightService.getMemberCompanionByName(memberId, name);
+		logger.info("Companion: " + companion.toString());
+		return companion;
+	}
+	
+
 	/*
 	 * API No: 17
 	 * Method: POST
 	 * Information: 항공권 결제
 	 */
-	@GetMapping("/flight/ticket/payment")
-	public String ticketPayment(Model model) {
+	@GetMapping("/flight/ticket/test")
+	@ResponseBody
+	public String ticketPayment() {
+		logger.info("Test");
 		boolean status = true;
 		if(status) {
-			return "/";
+			return "redirect:/home";
 		}else {
 			return "redirect:/home";
 		}

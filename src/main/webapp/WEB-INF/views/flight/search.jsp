@@ -66,6 +66,7 @@
 					<c:out value="${status.count}"/>
 					항공사 이름: ${flightScheduleToCome.airlineName}
 					/ 비행기 기종: ${flightScheduleToCome.airplaneTypeName}
+					/ 항공사 이미지: <img src="${flightScheduleToCome.image}" alt="${flightScheduleToCome.image}">
 					/ 출발 도시: ${flightScheduleToCome.departmentNation}
 					/ 도착 도시: ${flightScheduleToCome.arrivalNation}
 					/ 출발 날짜: ${flightScheduleToCome.departmentDate}

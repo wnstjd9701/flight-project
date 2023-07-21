@@ -14,4 +14,5 @@ public interface IFlightService {
 	int insertPassengerInformation(Companion companion); // 탑승객 정보 입력
 	
 	int updateRemainSeatByScheduleId(int scheduleId, int person, int grade); // 예약중인 좌석 업데이트 
+
 }

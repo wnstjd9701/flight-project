@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp"/>
+<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -29,32 +29,40 @@
 						<li style="width: 30%; padding: 5%;">
 							<div class="sub menu">
 								<ul>
-									<li><a href="<c:url value='/member/reservationList'/>">에약 내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원 정보 수정</a></li>
-									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호 수정</a></li>
-									<li><a href="<c:url value='/member/passengerList'/>">동승자 정보</a></li>
+									<li><a href="<c:url value='/member/reservationList'/>">에약내역</a></li>
+									<li><a href="<c:url value='/member/mp/update'/>">회원
+											정보수정</a></li>
+									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호수정</a></li>
+									<li><a href="<c:url value='/member/passengerList'/>">동승자정보</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
 						</li>
 						<li style="width: 70%; padding: 5%;">
 							<div class="content">
-								<section class="pwupdate">
+								<section class="updatepw">
 									<div class="col-lg-12">
 										<h2>비밀번호 변경</h2>
 										<hr>
-										<form action="<c:url value='/member/pwupdate'/>" method="post">
-											<input class="long" name="id" type="text" placeholder="아이디"><br>
-											<input class="long" name="password" type="password"
-												placeholder="비밀번호"> <br> <input type="checkbox"
-												class="cb1">아이디 저장 <br> <input type="submit"
-												value="로그인"><br>
+										<form action="<c:url value='/member/updatepw'/>" method="get">
+											<div class="form-group">
+												<h5>기존 비밀번호</h5>
+												<input name="password" type="password" class="form-control"
+													placeholder="비밀번호확인" value="${member.password}"><br>
+											</div>
+										</form>
+										<form action="<c:url value='/member/updatepw'/>" method="post">
+											<h5>변경할 비밀번호</h5>
+											<input type="password" name="password" id="password"
+												value="${member.password}" class="form-control"
+												pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>(영문
+											대소문자/숫자/특수문자 조합, 6자이상)
 
-											<div class="login-sub">
-												<ul>
-													<li><a href="member/insertform">회원가입</a></li>
-													<li><a href="pwFind">비밀번호 찾기</a></li>
-												</ul>
+											<div class="form-group">
+												<div class="col-sm-offset-2 col-sm-8">
+													<input type="submit" class="btn btn-info" value="SAVE">
+													<input type="reset" class="btn btn-info" value="CANCEL">
+												</div>
 											</div>
 										</form>
 									</div>

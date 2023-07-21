@@ -1,5 +1,6 @@
 package com.project.myapp.board.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,11 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.myapp.board.dao.IBoardRepository;
 import com.project.myapp.board.model.Board;
+=======
+import org.springframework.stereotype.Service;
+>>>>>>> dba48f28d4caa21a8c55a8aeb3f3a4f26bd1bfbd
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+<<<<<<< HEAD
 public class BoardService implements IBoardService {
 	
 	private final IBoardRepository IBoardRepository;
@@ -74,5 +79,8 @@ public class BoardService implements IBoardService {
 		return IBoardRepository.selectTotalBoardCountByKeyword("%"+keyword+"%");
 	}
 
+=======
+public class BoardService {
+>>>>>>> dba48f28d4caa21a8c55a8aeb3f3a4f26bd1bfbd
 
 }
