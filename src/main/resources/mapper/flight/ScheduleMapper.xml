@@ -63,8 +63,8 @@
 			    TO_CHAR(s.department_time, 'HH24:MI') as "departmentTime",
 			    TO_CHAR(s.arrival_time, 'HH24:MI') as "arrivalTime",
 			    s.flight_time as "flightTime",
-			    s.business_class_fare as "economyClassFare",
-			    s.business_class_remain as "economyClassRemain",
+			    s.business_class_fare as "businessClassFare",
+			    s.business_class_remain as "businessClassRemain",
 			    a.airline_name as "airlineName",
 			    a.airplane_type_name as "airplaneTypeName",
 			    a.image as "image"
@@ -142,7 +142,6 @@
 			        s.department_nation = #{departmentNation}
 			    AND s.arrival_nation = #{arrivalNation}
 			    AND s.department_date = #{departmentDate}
-			    AND s.arrival_date = #{arrivalDate}
 			    AND s.first_class_remain >= #{person}
 			    AND ROWNUM <= #{page}
 			ORDER BY
@@ -162,8 +161,11 @@
     			to_char(s.arrival_time, 'HH24:MI')    AS "arrivalTime",
     			s.flight_time                         AS "flightTime",
     			s.first_class_fare                    AS "firstClassFare",
+    			s.first_class_remain				  AS "firstClassRemain",
     			s.business_class_fare                 AS "businessClassFare",
+    			s.business_class_remain				  AS "businessClassRemain",
     			s.economy_class_fare                  AS "economyClassFare",
+    			s.economy_class_remain				  AS "economyClassRemain",
     			a.airline_name                        AS "airlineName",
     			a.airplane_type_name                  AS "airplaneTypeName",
     			a.image                               AS "image"
@@ -174,5 +176,35 @@
    				s.schedule_id = #{scheduleId}
 		]]>
 	</select>
-
+	
+	<update id="updateEconomyRemainSeatByScheduleId">
+		<![CDATA[
+			UPDATE schedule
+			SET
+    			economy_class_remain = ${remainSeat}
+			WHERE
+    			schedule_id = ${scheduleId}
+		]]>
+	</update>
+	
+	<update id="updateBusinessRemainSeatByScheduleId">
+		<![CDATA[
+			UPDATE schedule
+			SET
+    			business_class_remain = #{remainSeat}
+			WHERE
+    			schedule_id = #{scheduleId}
+		]]>
+	</update>
+	
+	<update id="updateFirstRemainSeatByScheduleId">
+		<![CDATA[
+			UPDATE schedule
+			SET
+    			business_class_remain = #{remainSeat}
+			WHERE
+    			schedule_id = #{scheduleId}
+		]]>
+	</update>
+	
 </mapper>

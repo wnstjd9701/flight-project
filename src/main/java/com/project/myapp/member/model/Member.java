@@ -7,22 +7,22 @@ import lombok.Data;
 
 @Data
 public class Member {
+	
 
 	private String memberId;
 	private String password;
+	private String password2;
+
 
 	private String name;
 	private String firstName;
 	private String lastName;
-
+	
 	private String phoneNumber;
 	private Date birthday;
 	private String address;
 	private String email;
 	private String gender;
-
-	private String passportNumber;
-	private Date passportExpiryDate;
 
 	private int isAdmin;
 	private int isDeleted;

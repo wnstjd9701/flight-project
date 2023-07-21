@@ -20,6 +20,8 @@ public class Schedule {
 	private String departmentTime;
 	private String arrivalTime;
 	private int flightTime;
+	// 시간 / 분을 나타내기 위한 필드
+	private String flightTimeDetail;
 	
 	private int firstClassFare;
 	private int firstClassRemain;
@@ -46,4 +48,7 @@ public class Schedule {
 	
 	// Grade
 	private int grade;
+	
+	// 예약 상태
+	private String reservationStatus;
 }

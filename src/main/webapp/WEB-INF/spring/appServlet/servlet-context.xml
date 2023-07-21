@@ -15,11 +15,11 @@
       Properties 파일을 읽어 오기 위한 태그 
       Java코드에서 @Value('#{id['properties속성']}')
    -->
-   <util:properties id="pt" location="classpath:/config/application.properties"/>
+   <util:properties id="impNumber" location="classpath:/config/application.properties"/>
    
    <!-- 시작화면 설정 -->
 	<view-controller path="/" view-name="/home"/>
-
+	
    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
    	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/css/**" location="/resources/css/" />

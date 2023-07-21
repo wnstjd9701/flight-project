@@ -16,10 +16,12 @@ public interface IFlightRepository {
 	// 스케줄 아이디로 스케줄 조회
 	Schedule getScheduleByScheduleId(int scheduleId);
 	
-	// 멤버 아이디와 동승자 이름으로 등록되어 있는 탑승객 정보 조회
-	Companion getMemberCompanionByName(@Param("memberId") String memberId,@Param("name") String name);
-	
 	// 탑승객 정보 입력
-	int insertPassengerInformation(Companion companion); 
+	int insertPassengerInformation(Companion companion);
+	
+	// 예약중인 좌석 업데이트 
+	int updateEconomyRemainSeatByScheduleId(@Param("scheduleId") int scheduleId,@Param("remainSeat") int remainSeat); 
+	int updateBusinessRemainSeatByScheduleId(@Param("scheduleId") int scheduleId,@Param("remainSeat") int remainSeat);
+	int updateFirstRemainSeatByScheduleId(@Param("scheduleId") int scheduleId,@Param("remainSeat") int remainSeat);
 	
 }

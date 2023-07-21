@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.myapp.flight.dao.IFlightRepository">
-	<select id="getMemberCompanionByName" parameterType="hashmap" 
-	resultType="com.project.myapp.member.model.Companion">
+	<insert id="insertReservationInformation" parameterType="com.project.myapp.flight.model.Ticket">
 		<![CDATA[
-			SELECT 
-   				companion_id as "companionId",
-   				member_id as "memberId",
-    			name as "name",
-    			first_name as "firstName",
-    			last_name as "lastName",
-    			phone_number as "phoneNumber",
-    			birthday as "birthday",
-    			passport_number as "passportNumber",
-    			passport_expiry_date as "passportExpiryDate"
-			FROM 
-    			companion
-    		WHERE 
-    			member_id = #{memberId} AND name = #{name}
+			INSERT
+			    INTO ticket (
+			        member_id,
+			        schedule_id,
+			        reservation_id,
+			        name,
+			        first_name,
+			        last_name,
+			        phone_number,
+			        birthday,
+			        passport_number,
+			        passport_expiry_date,
+			        ticket_type,
+			        fare,
+			        seat_type,
+			        total_price
+			    ) VALUES (
+			        #{memberId},
+			        #{scheduleId},
+			        #{reservationId},
+			        #{name},
+			        #{firstName},
+			        #{lastName},
+			        #{phoneNumber},
+			        #{birthday},
+			        #{passportNumber},
+			        #{passportExpiryDate},
+			        #{ticketType},
+			        #{fare},
+			        #{seatType},
+			        #{totalPrice}
+			    )
 		]]>
-	</select>
+	</insert>
 </mapper>

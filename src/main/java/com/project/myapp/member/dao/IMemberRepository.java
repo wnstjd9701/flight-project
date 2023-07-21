@@ -16,6 +16,7 @@ public interface IMemberRepository {
 	
 
 	Member idCheck(String memberId);//아이디 체크
+	int checkId(String memberId);//아이디 중복체크
 	void updatePassword(Member member); //임시비밀번호받으면 임시비밀번호로 업데이트
 	void updatePasswordByMember(Member member);
 	
