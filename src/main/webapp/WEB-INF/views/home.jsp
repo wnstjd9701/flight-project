@@ -52,8 +52,9 @@
 								aria-labelledby="hotel-tab">
 								<div class="booking_form">
 									<form
-										action='<c:url value="/flight/ticket/search/${nation}/${departmentDate}/${arrivalDate}"/>'	
+										action='<c:url value="/flight/ticket/search"/>'	
 										method="get">
+										<input type="hidden" name="page" value="1">
 										<div class="form-row">
 											<div class="form_colum">
 												<select class="nc_select" name="nation">

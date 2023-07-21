@@ -48,7 +48,4 @@ public class Schedule {
 	
 	// Grade
 	private int grade;
-	
-	// 예약 상태
-	private String reservationStatus;
 }
