@@ -11,7 +11,6 @@ public interface IMemberService {
 	
 	void insertMember(Member member); //회원가입
 	Member selectMember(String memberId);//회원정보 조회
-	int idCheck(String memberId); //아이디 중복확인
 	List<Member> selectAllMembers();
 	String getPassword(String memeberId); //로그인
 	void updateMember(Member member); //회원정보 수정

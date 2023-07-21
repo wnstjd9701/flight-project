@@ -14,10 +14,17 @@
 				<div class="col-lg-10">
 					<div class="banner_text text-center">
 						<div class="banner_text_iner">
-							<h1>Airplane</h1>
-							<p>Let’s Go!</p>
-							<a href="<c:url value='/member/login'/>" class="btn_1">Login</a>
-							<a href="<c:url value='/member/insert'/>" class="btn_1">SignUp</a>
+							<c:if test="${empty sessionScope.memberId}">
+
+								<h1>Airplane</h1>
+								<h3>Join!</h3>
+								<a href="<c:url value='/member/login'/>" class="btn_1">Login</a>
+								<a href="<c:url value='/member/insert'/>" class="btn_1">SignUp</a>
+							</c:if>
+							<c:if test="${not empty sessionScope.memberId}">
+								<h1>Welcome!! ${memberId}</h1>
+								<h3>Let’s Fly!</h3>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -32,17 +39,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="booking_menu">
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item"><a class="nav-link active"
-								id="hotel-tab" data-toggle="tab" href="#hotel" role="tab"
-								aria-controls="hotel" aria-selected="true">왕복</a></li>
-							<!-- <li class="nav-item"><a class="nav-link" id="tricket-tab"
-								data-toggle="tab" href="#tricket" role="tab"
-								aria-controls="tricket" aria-selected="false">편도</a></li> -->
-							<!-- <li class="nav-item">
-                            <a class="nav-link" id="place-tab" data-toggle="tab" href="#place" role="tab" aria-controls="place" aria-selected="false">place</a>
-                            </li> -->
-						</ul>
+						<p class="nav-tag">왕복</p>
 					</div>
 				</div>
 				<div class="col-lg-12">
@@ -52,7 +49,7 @@
 								aria-labelledby="hotel-tab">
 								<div class="booking_form">
 									<form
-										action='<c:url value="/flight/ticket/search/${nation}/${departmentDate}/${arrivalDate}"/>'	
+										action='<c:url value="/flight/ticket/search/${nation}/${departmentDate}/${arrivalDate}"/>'
 										method="get">
 										<div class="form-row">
 											<div class="form_colum">
@@ -95,12 +92,12 @@
 													<option value="3">일등석</option>
 												</select>
 											</div>
-											<br>
-											<div class="form_btn">
-												<input type="submit" class="genric-btn info" value="검색">
+											<div class="form_colum" style="width: 100%;">
+												<div class="form_btn">
+													<input type="submit" class="genric-btn info" value="검색">
+												</div>
 											</div>
 										</div>
-
 									</form>
 								</div>
 							</div>
@@ -592,6 +589,18 @@
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 
 	<style>
+.btn_1 {
+	margin: 2%;
+}
+
+.nav-tag {
+	border-bottom: 3px solid #2493e0 !important;
+	color: #0c3e72;;
+	padding: 20px 0;
+	text-align: center;
+	padding: 20px 0;
+}
+
 input[type='date']::before {
 	content: attr(data-placeholder);
 	width: 100%;
@@ -599,6 +608,16 @@ input[type='date']::before {
 
 input[type='date']:focus::before, input[type='date']:valid::before {
 	display: none;
+}
+
+.genric-btn.info {
+	float: right;
+	margin-top: 40px;
+	width: 100%;
+}
+
+.form-row {
+	justify-content: center;
 }
 </style>
 </body>

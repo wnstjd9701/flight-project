@@ -98,6 +98,7 @@
 	</c:choose>
 	</p>
 </div>
+<p>결제 금액: ${sessionScope.totalPrice}</p>
 <p>인원수: ${sessionScope.person}</p>
 <form action="<c:url value="/flight/ticket/insert"/>" method="post">
 	<c:forEach var="i" begin="1" end="${sessionScope.person}">

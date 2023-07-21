@@ -258,7 +258,6 @@ public class FlightController {
 				companionList.add(companion);
 			}
 			logger.info("companionList: " + companionList.toString());
-			session.setAttribute("impNumber", impNumber);
 			session.setAttribute("passengersList", companionList);
 			
 		}catch (Exception e) {
