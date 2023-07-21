@@ -26,3 +26,5 @@
 <script src="<c:url value='/resources/js/custom.js'/>"></script>
 <!-- min js -->
 <script src="<c:url value='http://code.jquery.com/jquery-latest.min.js'/>"></script>
+<!-- loading js -->
+<script src="<c:url value='/resources/js/loading.js'/>"></script>

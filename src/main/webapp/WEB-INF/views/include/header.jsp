@@ -40,7 +40,7 @@
 										</li>
 										<li class="nav-item"><a class="nav-link" href="<c:url value='/mp'/>">MyPage</a>
 										</li>
-										<li class="nav-item"><a class="nav-link" href="<c:url value='/home'/>">Logout</a>
+										<li class="nav-item"><a class="nav-link" href="<c:url value='/home'/>" action="<c:url value='/member/logout'/>" method=get>Logout</a>
 										</li>
 									</ul>
 								</div>

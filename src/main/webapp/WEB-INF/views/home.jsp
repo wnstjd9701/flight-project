@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
-<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp"/>
+<jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -36,9 +36,9 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="hotel-tab" data-toggle="tab" href="#hotel" role="tab"
 								aria-controls="hotel" aria-selected="true">왕복</a></li>
-							<li class="nav-item"><a class="nav-link" id="tricket-tab"
+							<!-- <li class="nav-item"><a class="nav-link" id="tricket-tab"
 								data-toggle="tab" href="#tricket" role="tab"
-								aria-controls="tricket" aria-selected="false">편도</a></li>
+								aria-controls="tricket" aria-selected="false">편도</a></li> -->
 							<!-- <li class="nav-item">
                             <a class="nav-link" id="place-tab" data-toggle="tab" href="#place" role="tab" aria-controls="place" aria-selected="false">place</a>
                             </li> -->
@@ -51,118 +51,56 @@
 							<div class="tab-pane fade show active" id="hotel" role="tabpanel"
 								aria-labelledby="hotel-tab">
 								<div class="booking_form">
-									<form action="#">
+									<form
+										action='<c:url value="/flight/ticket/search/${nation}/${departmentDate}/${arrivalDate}"/>'	
+										method="get">
 										<div class="form-row">
 											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>출발 장소</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
-											<div class="form_colum">
-												<select class="nc_select">
+												<select class="nc_select" name="nation">
 													<option selected>도착 장소</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
+													<option value="ICN">서울</option>
+													<option value="JP">도쿄</option>
+													<option value="OSA">오사카</option>
+													<option value="HKG">홍콩</option>
+													<option value="BKK">방콕</option>
+													<option value="SIN">싱가포르</option>
+													<option value="BJS">베이징</option>
+													<option value="LON">런던</option>
+													<option value="PAR">파리</option>
+													<option value="ROM">로마</option>
+													<option value="FRA">프랑크푸르트</option>
+													<option value="NYC">뉴욕</option>
+													<option value="LAX">로스앤젤레스</option>
+													<option value="SFO">샌프란시스코</option>
 												</select>
 											</div>
 											<div class="form_colum">
-												<input id="datepicker_1" placeholder="출발 날짜">
+												<input name="departmentDate" type="date" class="nc_input"
+													placeholder="출발 날짜" pattern="YYYYMMdd">
 											</div>
 											<div class="form_colum">
-												<input id="datepicker_2" placeholder="출발 날짜">
+												<input name="arrivalDate" type="date" class="nc_input"
+													placeholder="오는 날짜" pattern="YYYYMMdd">
 											</div>
 											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>Persone</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
-											<br>
-											<div class="form_btn">
-												<a href="<c:url value='/flight/search'/>" class="btn_1">search</a>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="tricket" role="tabpanel"
-								aria-labelledby="tricket-tab">
-								<div class="booking_form">
-									<form action="#">
-										<div class="form-row">
-											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>출발 장소</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
+												<input class="nc_input" type="number" name="person"
+													id="person" placeholder="인원수">
+
 											</div>
 											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>도착 장소</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
-											<div class="form_colum">
-												<input id="datepicker_3" placeholder="출발 날짜">
-											</div>
-											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>Persone</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
+												<select class="nc_select" name="grade">
+													<option selected>좌석등급</option>
+													<option value="1">이코노미</option>
+													<option value="2">비즈니스</option>
+													<option value="3">일등석</option>
 												</select>
 											</div>
 											<br>
 											<div class="form_btn">
-												<a href="#" class="btn_1">search</a>
+												<input type="submit" class="genric-btn info" value="검색">
 											</div>
 										</div>
-									</form>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="place" role="tabpanel"
-								aria-labelledby="place-tab">
-								<div class="booking_form">
-									<form action="#">
-										<div class="form-row">
-											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>Choosace place</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
-											<div class="form_colum">
-												<input id="datepicker_5" placeholder="Check in date">
-											</div>
-											<div class="form_colum">
-												<input id="datepicker_6" placeholder="Check in date">
-											</div>
-											<div class="form_colum">
-												<select class="nc_select">
-													<option selected>Persone</option>
-													<option value="1">One</option>
-													<option value="2">Two</option>
-													<option value="3">Three</option>
-												</select>
-											</div>
-											<br>
-											<div class="form_btn">
-												<a href="#" class="btn_1">search</a>
-											</div>
-										</div>
+
 									</form>
 								</div>
 							</div>
@@ -653,6 +591,16 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 
+	<style>
+input[type='date']::before {
+	content: attr(data-placeholder);
+	width: 100%;
+}
+
+input[type='date']:focus::before, input[type='date']:valid::before {
+	display: none;
+}
+</style>
 </body>
 
 </html>
