@@ -117,30 +117,6 @@
 											</div>
 											<hr>
 											<div class="form-group">
-												<label for="passportNumber"></label>
-												<div class="sign">
-													<h5 style="line-height: 1.7em;">
-														여권번호<span style="color: red;">*</span>
-													</h5>
-													<input type="text" name="passportNumber"
-														id="passportNumber" value="${member.passportNumber}"
-														class="form-control" required>
-												</div>
-											</div>
-											<div class="form-group">
-												<label for="passportExpiryDate"></label>
-												<div class="sign">
-													<h5 style="line-height: 1.7em;">
-														여권만료일(YY/MM/DD)<span style="color: red;">*</span>
-													</h5>
-													<input type="date" name="passportExpiryDate"
-														id="passportExpiryDate"
-														value="${member.passportExpiryDate}" class="form-control"
-														required>
-												</div>
-											</div>
-											<hr>
-											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-8">
 													<input type="submit" class="btn btn-info" value="SAVE">
 													<input type="reset" class="btn btn-info" value="CANCEL">

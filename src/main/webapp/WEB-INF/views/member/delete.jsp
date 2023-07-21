@@ -45,13 +45,13 @@
 							<div class="content">
 								<section class="updatepw">
 									<div class="col-lg-12">
-										<h2>비밀번호 변경</h2>
+										<h2>회원 탈퇴</h2>
 										<hr>
-										<form action="<c:url value='/member/updatepw'/>" method="get">
+										<form action="<c:url value=/member/mp/delete/>" method="get">
 											<div class="form-group">
 												<h5>기존 비밀번호</h5>
 												<input name="password" type="password" class="form-control"
-													placeholder="비밀번호확인" value="${member.password}"><br>
+													placeholder="비밀번호확인"><br>
 											</div>
 											<div class="form-group">
 												<div class="col-sm-offset-2 col-sm-8">
