@@ -136,12 +136,7 @@
 			WHERE t.member_id = #{memberId}
 		]]>
 	</select>
-	
-	<select id="checkId" parameterType="string" resultType="int">
-		<![CDATA[
-			SELECT COUNT(member_id) FROM MEMBER WHERE member_id = #{memberId}
-		]]>
-	</select>
+
 	
 
 </mapper>
