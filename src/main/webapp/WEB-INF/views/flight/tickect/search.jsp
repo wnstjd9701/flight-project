@@ -7,7 +7,135 @@
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
-<p>검색 목록</p>
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner">
+						<div class="breadcrumb_iner_item text-center">
+							<h2>항공권 검색</h2>
+							<br>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="booking_part">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="booking_menu">
+						<p class="nav-tag">Round Trip</p>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="booking_content">
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" role="tabpanel">
+								<div class="booking_form">
+									<form
+										action='<c:url value="/flight/ticket/search/${nation}/${departmentDate}/${arrivalDate}"/>'
+										method="get">
+										<div class="form-row">
+											<div class="form_colum">
+												<select class="nc_select" name="nation">
+													<option selected>Arrival Nation</option>
+													<option value="ICN">seoul</option>
+													<option value="TOK">Tokyo</option>
+													<option value="OSA">Osaka</option>
+													<option value="HKG">HongKong</option>
+													<option value="BKK">BangKok</option>
+													<option value="SIN">Singapore</option>
+													<option value="BJS">Beijing</option>
+													<option value="LON">London</option>
+													<option value="PAR">Paris</option>
+													<option value="ROM">Roma</option>
+													<option value="FRA">Frankfurt</option>
+													<option value="NYC">New York City</option>
+													<option value="LAX">Los Angeles</option>
+													<option value="SFO">San Francisco</option>
+												</select>
+											</div>
+											<div class="form_colum">
+												<input name="departmentDate" type="date" class="nc_input"
+													data-placeholder="Department Date" pattern="YYYYMMdd"
+													required>
+											</div>
+											<div class="form_colum">
+												<input name="arrivalDate" type="date" class="nc_input"
+													data-placeholder="Arrival Date" pattern="YYYYMMdd" required>
+											</div>
+											<div class="form_colum">
+												<input class="nc_input" type="number" name="person"
+													id="person" placeholder="Person" required>
+
+											</div>
+											<div class="form_colum">
+												<select class="nc_select" name="grade">
+													<option selected>Seat Grade</option>
+													<option value="1">EconomyClass</option>
+													<option value="2">BusinessClass</option>
+													<option value="3">firstClass</option>
+												</select>
+											</div>
+											<div class="form_colum" style="width: 100%;">
+												<div class="form_btn">
+													<input type="submit" class="genric-btn info" value="Search">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="search_part">
+		<div>
+			
+		</div>
+	</section>
+	<section>
+	<p>검색 목록</p>
+		<table>
+			<thead>
+				<tr>
+					<th>항공사이름</th>
+					<th>비행기 기종</th>
+					<th>항공사 이미지</th>
+					<th>출발도시</th>
+					<th>도착도시</th>
+					<th>출발시간</th>
+					<th>도착시간</th>
+					<th>비행시간</th>
+					<th>잔여 좌석</th>
+					<th>금액</th>
+				</tr>
+			</thead>
+			<c:forEach var="flight" items="${goList}">
+				<tr>
+					<td>${flightScheduleToGo.airlineName}</td>
+					<td>${flightScheduleToGo.airplaneTypeName}</td>
+					<td>${flightScheduleToGo.image}</td>
+					<td>${flightScheduleToGo.departmentNation}</td>
+					<td>${flightScheduleToGo.arrivalNation}</td>
+					<td>${flightScheduleToGo.departmentDate}</td>
+					<td>${flightScheduleToGo.arrivalDate}</td>
+					<td>${flightScheduleToGo.departmentTime}</td>
+					<td>${flightScheduleToGo.arrivalTime}</td>
+					<td>${flightScheduleToGo.flightTimeDetail}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</section>
+	<!-- Header part end-->
+	<%-- 
 <p>항공권 목록 개수: ${goListCount}</p>
 <p>인원: ${sessionScope.person}</p>
 <c:choose> 
@@ -93,6 +221,7 @@
 		</form>
 	</c:otherwise>
 </c:choose>
-
-</body>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+</body> --%>
 </html>

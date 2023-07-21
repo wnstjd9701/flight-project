@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <!-- jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<script type="text/javascript">
-	
-    function requestPay() {
+     function requestPay() {
     	var IMP = window.IMP;
     	var impNumber = "";
     	impNumber = $('#impNumber').val();
@@ -44,17 +45,19 @@
       });
     }
   </script>
+  <section>
+		<p>예약확인</p>
 <input type="text" id="impNumber" name="impNumber" value="${sessionScope.impNumber}">
 <div>
-	항공사 이름: ${sessionScope.flightScheduleToGo.airlineName}
-	/ 비행기 기종: ${sessionScope.flightScheduleToGo.airplaneTypeName}
-	/ 출발 도시: ${sessionScope.flightScheduleToGo.departmentNation}
-	/ 도착 도시: ${sessionScope.flightScheduleToGo.arrivalNation}
-	/ 출발 날짜: ${sessionScope.flightScheduleToGo.departmentDate}
-	/ 도착 날짜: ${sessionScope.flightScheduleToGo.arrivalDate}
-	/ 출발 시간: ${sessionScope.flightScheduleToGo.departmentTime}
-	/ 도착 시간: ${sessionScope.flightScheduleToGo.arrivalTime}
-	/ 비행 시간: ${sessionScope.flightScheduleToGo.flightTimeDetail} 
+	<div><p>항공사 이름</p> <p>${sessionScope.flightScheduleToGo.airlineName}</p></div>
+	<div><p>비행기 기종</p> <p>${sessionScope.flightScheduleToGo.airplaneTypeName}</p></div>
+	<div><p>출발 도시</p> <p>${sessionScope.flightScheduleToGo.departmentNation}</p></div>
+	<div><p>도착 도시</p> <p>${sessionScope.flightScheduleToGo.arrivalNation}</p></div>
+	<div><p>출발 날짜</p> <p>${sessionScope.flightScheduleToGo.departmentDate}</p></div>
+	<div><p>도착 날짜</p> <p>${sessionScope.flightScheduleToGo.arrivalDate}</p></div>
+	<div><p>출발 시간</p> <p>${sessionScope.flightScheduleToGo.departmentTime}</p></div>
+	<div><p>도착 시간</p> <p>${sessionScope.flightScheduleToGo.arrivalTime}</p></div>
+	<div><p>비행 시간</p> <p>${sessionScope.flightScheduleToGo.flightTimeDetail}</p></div>
 	<c:choose> 
 		<c:when test="${sessionScope.grade eq '1' }">
 			/ 좌석 등급: 이코노미
@@ -116,5 +119,6 @@
 	<input type="submit" value="결제">
 </form>
 	<button onclick="requestPay()">결제하기</button>
+	</section> 
 </body>
 </html>

@@ -31,13 +31,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="sign">
+					<div class="sign" style="width: 70%; margin: 0 auto;">
 						<c:url var="insertURL" value='/member/insert' />
 						<form:form action="${insertURL}" method="post" id="insertMember"
 							modelAttribute="member">
-							
-							<br>
 							<div class="form-group">
+							<br>
 								<label for="memberId"></label>
 								<div class="sign">
 									<h5>
@@ -60,6 +59,7 @@
 									<h5 style="line-height: 2.5em;">
 										비밀번호<span style="color: red;">*</span>
 									</h5>
+									<p>(영문 대소문자/숫자/특수문자 조합, 6자이상)</p>
 									<form:input type="password" path="password" id="password"
 										class="form-control" required="required" />
 									<form:errors path="password" class="error" />
@@ -68,13 +68,13 @@
 							<div class="form-group">
 								<label for="password2"></label>
 								<div class="sign">
-									<h5 style="line-height: 2.5em;" plceholder>
-										비밀번호<span style="color: red;">*</span>
+									<h5 style="line-height: 2.5em;">
+										비밀번호 확인<span style="color: red;">*</span>
 									</h5>
 									<form:input type="password" path="password2" id="password2"
 										class="form-control" required="required" />
 									<form:errors path="password2" class="error" />
-									<span id="passwordConfirm" />
+									<span id="passwordConfirm"></span>
 								</div>
 							</div>
 							<hr>
@@ -172,18 +172,20 @@
 								</div>
 							</div>
 							<hr>
-							<div class="signagree">
-								<h6>
-									이메일 수신에 동의하십니까? <input type="checkbox" name="agree" id="cb4">
-									<label for="cb4"></label> 동의함
-								</h6>
+							<div class="signagree" style="margin: 10px 0;">
+								<h5 style="line-height: 1.7em;">이메일 수신에 동의하십니까?</h5>
+								<div>
+									<p>동의함</p>
+									<div class="confirm-switch">
+										<input type="checkbox" name="agree" id="cb4"> <label
+											for="cb4"></label>
+									</div>
+								</div>
 							</div>
 							<hr>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-8">
-									<input type="submit" class="btn btn-info" value="SAVE">
-									<input type="reset" class="btn btn-info" value="CANCEL">
-								</div>
+								<input type="submit" class="genric-btn success" value="SAVE">
+								<input type="reset" class="genric-btn success" value="CANCEL">
 							</div>
 						</form:form>
 					</div>
@@ -195,6 +197,18 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 </body>
+<style>
+#ispan {
+	margin-top: 2%;
+	font-size: 15px;
+	color: #0c3e72;
+}
+
+.genric-btn success {
+	margin-right: 10%;
+	text-align: center;
+}
+</style>
 <script type="text/javascript">
 	var pwd1 = document.querySelector("#password");
 	var pwd2 = document.querySelector("#password2");

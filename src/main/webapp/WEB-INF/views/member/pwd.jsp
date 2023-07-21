@@ -5,59 +5,71 @@
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <style type="text/css">
-.mybtn{
-  display:inline; 
-  border-radius: 4px; 
-  background: #212529;
-  color: #fff;
-  margin-top: 20px;
-  border: solid 2px #212529; 
-  transition: all 0.5s ease-in-out 0s;
+.mybtn {
+	display: inline;
+	border-radius: 4px;
+	background: #212529;
+	color: #fff;
+	margin-top: 20px;
+	border: solid 2px #212529;
+	transition: all 0.5s ease-in-out 0s;
 }
+
 .mybtn:hover .mybtn:focus {
-  background: white;
-  color: #212529;
-  text-decoration: none;
+	background: white;
+	color: #212529;
+	text-decoration: none;
 }
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<section class="breadcrumb breadcrumb_bg">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="breadcrumb_iner">
+						<div class="breadcrumb_iner_item text-center">
+							<h2>Find Password</h2>
+							<p>비밀번호 찾기</p>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section class="pwform">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="breadcrumb_iner">
-						<div class="breadcrumb_iner_item text-center">
-							<h2>비밀번호 찾기</h2>
-							<form action="<c:url value='/member/findpwd'/>" method="post"
-								id="findPasswordForm" class="form-horizontal">
-								<div class="w3-content w3-container w3-margin-top">
-									<div class="w3-container w3-card-4 w3-auto">
-										<div class="w3-center w3-large w3-margin-top">
-										</div>
-										<div>
-											<p>
-												<label>아이디</label> <input class="w3-input" type="text"
-													id="memberId" name="memberId"
-													placeholder="회원가입한 아이디를 입력하세요" required>
-											</p>
-											<p>
-												<label>이메일</label> <input class="w3-input" type="text"
-													id="email" name="email" placeholder="회원가입한 이메일주소를 입력하세요"
-													required>
-											</p>
-											<p class="w3-center">
-												<button type="button" id="findBtn"
-													class="w3-button w3-hover-white w3-ripple w3-margin-top w3-round mybtn">찾기</button>
-												<button type="button" onclick="history.go(-1);"
-													class="w3-button w3-hover-white w3-ripple w3-margin-top w3-round mybtn">로그인으로</button>
-											</p>
-										</div>
-									</div>
-								</div>
-							</form>
+					<form action="<c:url value='/member/findpwd'/>" method="post"
+						style="border-shadow: 3px solid; width: 70%; margin: 0 auto; padding: 40px;">
+						<div class="form-group">
+							<label for="memberId"></label>
+							<div class="sign">
+								<h5>ID</h5>
+								<input class="form-control" name="memberId" type="text"
+									placeholder="회원가입한 아이디를 입력하세요" required>
+							</div>
+							<label for="password"></label>
+							<div class="sign">
+								<h5>Password</h5>
+								<input class="form-control" name="email" type="text"
+									placeholder="회원가입한 이메일주소를 입력하세요" required>
+							</div>
+							<br>
+							<div class="login-sub ">
+								<button type="button" id="findBtn"
+									class="genric-btn success">찾기</button>
+								<button type="button" onclick="history.go(-1);"
+									class="genric-btn success">로그인으로</button>
+
+
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>

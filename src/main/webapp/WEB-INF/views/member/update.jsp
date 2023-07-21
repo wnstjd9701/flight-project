@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-
 	<section class="breadcrumb breadcrumb_bg">
 		<div class="container">
 			<div class="row">
@@ -26,17 +25,16 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<ul style="display: flex;">
-						<li style="width: 30%; padding: 5%;">
-							<div class="sub menu">
+						<li style="width: 30%; padding: 5%;" class="submenu">
+							<div>
 								<ul>
-									<li><a href="<c:url value='/member/reservationList'/>">에약
+									<li><a href="<c:url value='/member/mp'/>">회원정보 조회</a></li>
+									<li><a href="<c:url value='/member/reservationList'/>">예약
 											내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원 정보
+									<li><a href="<c:url value='/member/mp/update'/>">회원정보
 											수정</a></li>
 									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
 											수정</a></li>
-									<li><a href="<c:url value='/member/passengerList'/>">동승자
-											정보</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
@@ -48,7 +46,6 @@
 										<form action="<c:url value='/member/update'/>">
 											<h2>회원 정보 수정</h2>
 											<hr>
-											<br>
 											<div class="form-group">
 												<label for="lastName"></label>
 												<div class="sign">
@@ -115,12 +112,12 @@
 														value="${member.gender}" class="form-control" required>
 												</div>
 											</div>
-											<hr>
+											<br>
 											<div class="form-group">
-												<div class="col-sm-offset-2 col-sm-8">
-													<input type="submit" class="btn btn-info" value="SAVE">
-													<input type="reset" class="btn btn-info" value="CANCEL">
-												</div>
+
+												<input type="submit" class="genric-btn success" value="SAVE">
+												<input type="reset" class="genric-btn success"
+													value="CANCEL">
 											</div>
 										</form>
 									</div>
@@ -134,6 +131,33 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+	<style>
+.submenu {
+	color: #415094;
+}
+
+.submenu li {
+	margin-top: 5px;
+	padding: 20px;
+	font-size: 15px;
+	font-size: 18px;
+	padding: 20px;
+}
+
+.submenu li:hover {
+	background: #f9f9ff;
+}
+
+li a {
+	display: block;
+	color: #0c3e72;
+	transition: none;
+}
+
+li a:hover {
+	color: #007bff;
+}
+</style>
 </body>
 
 
