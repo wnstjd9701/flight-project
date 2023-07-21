@@ -2638,6 +2638,16 @@ ul {
 	align-items: center;
 }
 
+.booking_part .form-row .form_colum .nc_input {
+	border: 1px solid #2493e0;
+	padding: 16px;
+	color: #2493e0;
+	font-size: 14px;
+	align-items: center;
+	    width: 100%;
+	        height: 50px;
+}
+
 /* line 52, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_booking.scss */
 .booking_part .form-row .form_colum .nice-select:after {
 	border-bottom: 2px solid #2493e0;

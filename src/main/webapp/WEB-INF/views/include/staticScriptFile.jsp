@@ -24,5 +24,6 @@
 <script src="<c:url value='/js/contact.js'/>"></script>
 <!-- custom js -->
 <script src="<c:url value='/js/custom.js'/>"></script>
-<!-- min js -->
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+<!-- loading js -->
+<script src="<c:url value='/resources/js/loading.js'/>"></script>
+
