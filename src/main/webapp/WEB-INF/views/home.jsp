@@ -47,9 +47,9 @@
 						<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" role="tabpanel">
 								<div class="booking_form">
-									<form
-										action='<c:url value="/flight/ticket/search/${nation}/${departmentDate}/${arrivalDate}"/>'
+									<form action='<c:url value="/flight/ticket/search"/>'
 										method="get">
+										<input type="hidden" name="page" value="1">
 										<div class="form-row">
 											<div class="form_colum">
 												<select class="nc_select" name="nation">
@@ -72,11 +72,12 @@
 											</div>
 											<div class="form_colum">
 												<input name="departmentDate" type="date" class="nc_input"
-													data-placeholder="Department Date" pattern="YYYYMMdd"  required>
+													data-placeholder="Department Date" pattern="YYYYMMdd"
+													required>
 											</div>
 											<div class="form_colum">
 												<input name="arrivalDate" type="date" class="nc_input"
-													data-placeholder="Arrival Date" pattern="YYYYMMdd"  required>
+													data-placeholder="Arrival Date" pattern="YYYYMMdd" required>
 											</div>
 											<div class="form_colum">
 												<input class="nc_input" type="number" name="person"
@@ -316,7 +317,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
-					<div class="single_ihotel_list" >
+					<div class="single_ihotel_list">
 						<img src="resources/img/services_1.png" alt="">
 						<h3>
 							<a href="#"> Transportation</a>
@@ -353,15 +354,13 @@
 	padding: 20px 0;
 }
 
- 
-  input[type='date']::before {
-  content: attr(data-placeholder);
-  width: 100%;
+input[type='date']::before {
+	content: attr(data-placeholder);
+	width: 100%;
 }
 
-input[type='date']:focus::before,
-input[type='date']:valid::before {
-  display: none;
+input[type='date']:focus::before, input[type='date']:valid::before {
+	display: none;
 }
 
 .genric-btn.info {

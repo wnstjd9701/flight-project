@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class Board {
 	private int boardId;
+	private int categoryId;
 	private String memberId;
 	private String title;
 	private Clob content;

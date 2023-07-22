@@ -8,23 +8,34 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.myapp.flight.model.Search;
 
-public class LoggingInterceptor implements HandlerInterceptor {
-
-	static final Logger logger= LoggerFactory.getLogger(LoggingInterceptor.class);
+public class FlightInterceptor implements HandlerInterceptor{
 	
+	static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
+	
+	// URL: /flight/ticket/insert 외의 모든 요청시
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-	    String requestURL = request.getRequestURL().toString();
+		int requestCount = 0;
+		int person = 0;
+		String requestURL = request.getRequestURL().toString();
 	    String contextPath = request.getContextPath();
 	    String requestURI = requestURL.replaceFirst(request.getScheme() + "://", "")
 	                                  .replaceFirst(":" + request.getServerPort(), "")
 	                                  .replaceFirst(request.getServerName(), "")
 	                                  .replaceFirst(contextPath, "");
-
-	    logger.info("요청 URL: " + requestURI);
-
+		
+		if(request.getSession().getAttribute("requestCount") != null && request.getSession().getAttribute("search") != null ) {
+			requestCount = Integer.parseInt(request.getSession().getAttribute("requestCount").toString());
+			person = ((Search)request.getSession().getAttribute("search")).getPerson();
+			
+			logger.info("SessionRequestCount: " + requestCount);
+			response.sendRedirect("/update/seat");
+			return false;
+		}
+		response.sendRedirect(request.getContextPath() + "/" + requestURI);
 		return true;
 	}
 
