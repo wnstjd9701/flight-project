@@ -1,3 +1,4 @@
+<!-- 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.myapp.board.dao.IBoardCategoryRepository">
@@ -13,8 +14,9 @@
 	<select id="selectAllCategory" resultType="com.project.myapp.board.model.BoardCategory">
 		<![CDATA[
 			SELECT
-				category_id		"categoryId"
-				category_name	"categoryname"
+				category_id		"categoryId",
+				 ,는 써야지
+				category_name	"categoryName"
 			FROM BOARD_CATEGORY
 			ORDER BY category_id
 		]]>
@@ -24,6 +26,7 @@
 		<![CDATA[
 			INSERT INTO BOARD_CATEGORY
 				(category_id, category_name)
+				또 안쓰네? 
 			VALUES
 				(#{categoryId}, #{categoryName})
 		]]>
@@ -42,8 +45,12 @@
 	
 	<delete id="deleteCategory" parameterType="com.project.myapp.board.model.BoardCategory">
 		<![CDATA[
-			DELETE BOARD_CATEGORY
+			DELETE FROM BOARD_CATEGORY as "boardCategory"
+			별칭 안써서 또 오류 날려고? 
+			제발 천천히 해도 되니까 급하게좀 하지마
+			오타랑 , 별칭 이런거 찾기 존나 어려우니까
 			WHERE category_id = #{categoryId}
 		]]>
 	</delete>
-</mapper>
+</mapper> 
+-->
