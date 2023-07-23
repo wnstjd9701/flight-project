@@ -39,17 +39,4 @@
 			    )
 		]]>
 	</insert>
-	
-	<select id="checkReservationIsExists" parameterType="String" resultType="int">
-		<![CDATA[
-			SELECT
-    			COUNT(*)
-			FROM
-    			ticket
-			WHERE
-        		reservation_id = #{reservationId}
-    			AND reservation_status = '예약중';
-		]]>
-	</select>
-	
 </mapper>

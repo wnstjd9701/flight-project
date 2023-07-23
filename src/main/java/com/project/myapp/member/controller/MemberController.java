@@ -97,7 +97,6 @@ public class MemberController {
             if(dbpassword.equals(password)) {
                session.setAttribute("memberId", memberId);
                session.setAttribute("email", member.getEmail());
-               session.setAttribute("phoneNumber", member.getPhoneNumber());
                return "home";
             }else {
                model.addAttribute("message", "WRONG_PASSWORD");

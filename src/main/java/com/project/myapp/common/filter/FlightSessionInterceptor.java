@@ -30,7 +30,7 @@ public class FlightSessionInterceptor implements HandlerInterceptor {
 		 * 2. 검색 기록이 존재하는지 확인
 		 * 존재하지 않으면 홈으로 이동
 		 */
-		if(request.getSession().getAttribute("search") == null) {
+		if(request.getSession().getAttribute("search") == null || request.getSession().getAttribute("requestCount") == null) {
 			response.sendRedirect("/");
 			return false;
 		}
