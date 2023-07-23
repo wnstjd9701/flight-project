@@ -33,7 +33,7 @@
 			<p>가는편 항공권: ${goListCount}</p>
 			<c:forEach var="flightScheduleToGo" items="${flightScheduleToGo}" varStatus="status">
 				<p>
-					<input type="checkbox" name="scheduleIdList" value="${flightScheduleToGo.scheduleId}">
+					<input type="checkbox" name="scheduleListIdToGo" value="${flightScheduleToGo.scheduleId}">
 					<c:out value="${status.count}"/>
 					항공사 이름: ${flightScheduleToGo.airlineName}
 					/ 비행기 기종: ${flightScheduleToGo.airplaneTypeName} 
@@ -64,7 +64,7 @@
 			<p>오는편 항공권: ${comeListCount}</p>
 			<c:forEach var="flightScheduleToCome" items="${flightScheduleToCome}" varStatus="status">
 				<p>
-					<input type="checkbox" name="scheduleIdList" value="${flightScheduleToCome.scheduleId}">
+					<input type="checkbox" name="scheduleListIdToCome" value="${flightScheduleToCome.scheduleId}">
 					<c:out value="${status.count}"/>
 					항공사 이름: ${flightScheduleToCome.airlineName}
 					/ 비행기 기종: ${flightScheduleToCome.airplaneTypeName}

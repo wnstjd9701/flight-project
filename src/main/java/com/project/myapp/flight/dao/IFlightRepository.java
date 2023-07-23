@@ -31,13 +31,10 @@ public interface IFlightRepository {
 	int getBusinessRemainSeat(int scheduleId);
 	int getFirstRemainSeat(int scheduleId);
 	
-<<<<<<< HEAD
 	// 예약이 존재하는지 체크
 	int checkReservationIsExists(String reservationId);
 	
 	// 예약 상태 변경
 	int	updateReservationStatusByReservationId(String reservationId);
-	
-=======
->>>>>>> 58a762dc9101822cc6e8a0b71fee4a71c68f2660
+
 }
