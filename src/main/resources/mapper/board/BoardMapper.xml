@@ -59,7 +59,7 @@
 				reply.reply_content				    AS	"replyContent"
 			FROM BOARD
 			LEFT OUTER JOIN board_category ON board.category_id = board_category.category_id
-			LEFT OUTER JOIN reply ON board.board_id = reply.board_id;
+			LEFT OUTER JOIN reply ON board.board_id = reply.board_id
 			WHERE board.board_id = #{boardId}
 		]]>
 	</select>
@@ -78,7 +78,7 @@
 		parameterType="com.project.myapp.board.model.Board">
 		<![CDATA[
 			UPDATE BOARD SET
-				(category_id={categoryId}, title=#{title}, content=#{content})
+				(category_id=#{categoryId}, title=#{title}, content=#{content})
 			WHERE board_id = #{boardId}                                                    
 		]]>
 	</update>
@@ -120,7 +120,7 @@
 	
 	<select id="searchListByContentKeyword" parameterType="hashmap" resultType="com.project.myapp.board.model.Board">
 		<![CDATA[
-					SELECT
+			SELECT
 				board_id	"boardId",
 				category_id	"categoryId",
 				member_id	"memberId",

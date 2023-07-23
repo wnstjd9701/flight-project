@@ -1,6 +1,5 @@
 package com.project.myapp.board.controller;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -83,16 +82,5 @@ public class BoardController {
 		return "board/qnadetail";
 	}
 	
-	@RequestMapping("/board/{boardId}")
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-public class BoardController {
-//	@RequestMapping(value="/board/qna")
-//	   public String insertMember() {
-//	      return "board/qna";
-//	   }
->>>>>>> dba48f28d4caa21a8c55a8aeb3f3a4f26bd1bfbd
 }
