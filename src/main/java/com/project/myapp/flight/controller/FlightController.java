@@ -4,9 +4,6 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -59,33 +56,20 @@ public class FlightController {
 	*/
 	@RequestMapping("/flight/ticket/search")
 	public String searchTicket(Search search, Model model, HttpSession session) {
-		// 이전 검색 내역이 존재 할 때 다시 검색 했을 때
-//		if (session.getAttribute("search") != null) {
-//	        // 세션에 있는 검색 기록 삭제
-//	        List<String> keysToKeep = Arrays.asList("memberId", "phoneNumber", "email");
-//	        Iterator<String> attributeNames = session.getAttributeNames();
-//	        while (attributeNames.hasNext()) {
-//	            String attributeName = attributeNames.next();
-//	            if (!keysToKeep.contains(attributeName)) {
-//	                session.removeAttribute(attributeName);
-//	            }
-//	        }
-//	    }
-		
+
 	    search.setDepartmentNation("ICN");
 	    search.setArrivalNation(search.getNation());
 	    search.setPage(search.getPage() * 10);
+	    logger.info("SearchInfo: " + search.toString());
 	    
 	    List<Schedule> flightScheduleToGo = flightService.getFlightScheduleByGrade(search);
 	    int goListCount = flightScheduleToGo.size();
-//	    flightScheduleToGo.forEach(schedule -> {
-//	        int time = schedule.getFlightTime();
-//	        String detailTime = flightService.getTimeDetail(time);
-//	        schedule.setFlightTimeDetail(detailTime);
-//	    });
+	    
 	    for(int i=0; i<goListCount; i++) {
 	    	int time = flightScheduleToGo.get(i).getFlightTime();
-	    	String detailTime = flightService.getTimeDetail(time);
+	    	int hours = time / 60;
+	    	int minutes = time % 60;
+	    	String detailTime = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분"; 
 	    	flightScheduleToGo.get(i).setFlightTimeDetail(detailTime);
 	    }
 	    
@@ -107,13 +91,16 @@ public class FlightController {
 	    
 	    for(int i=0; i<comeListCount; i++) {
 	    	int time = flightScheduleToCome.get(i).getFlightTime();
-	    	String detailTime = flightService.getTimeDetail(time);
+	    	int hours = time / 60;
+	    	int minutes = time % 60;
+	    	String detailTime = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분"; 
 	    	flightScheduleToCome.get(i).setFlightTimeDetail(detailTime);
 	    }
 	    
 	    model.addAttribute("flightScheduleToCome", flightScheduleToCome);
 	    model.addAttribute("comeListCount", comeListCount);
 	    
+	    session.setAttribute("requestCount", 1);
 	    session.setAttribute("search", search);
 		
 		return "flight/search";
@@ -124,24 +111,26 @@ public class FlightController {
 	 * Method: GET
 	 * Information: 항공권 선택
 	 * 스케줄 아이디를 가지고 해당 스케줄 조회
-	 * 인터셉터에서 잡아서 search session 확인
 	 */
 	@GetMapping("/flight/ticket/select")
-	public String reserveTicket(String scheduleListIdToGo, String scheduleListIdToCome, @RequestParam("person") int person, @RequestParam("grade") int grade, Model model, HttpSession session) {
+	public String reserveTicket(String scheduleIdList,@RequestParam("person") int person, @RequestParam("grade") int grade, Model model, HttpSession session) {
 		String memberId = (String) session.getAttribute("memberId");
 		
 		Search search = (Search) session.getAttribute("search");
 		
 		// 스케줄 선택을 하지 않거나 2개 이상 선택했을 때
-		if(scheduleListIdToGo == null || scheduleListIdToGo.length() > 2 || scheduleListIdToCome == null || scheduleListIdToCome.length() > 2) {
+		if(scheduleIdList == null || scheduleIdList.split(",").length > 2) {
 			search.setPage(1);
 			session.setAttribute("search", search);
 			return "redirect:/flight/ticket/search?page=" + search.getPage() + "&nation=" + search.getNation() +"&departmentDate=" + search.getDepartmentDate() 
 				+ "&arrivalDate=" + search.getArrivalDate() + "&person=" + search.getPerson() + "&grade=" + search.getPage();
 		}
 		
-		int scheduleIdToGo = Integer.parseInt(scheduleListIdToGo);
-		int scheduleIdToCome = Integer.parseInt(scheduleListIdToCome);
+		String[] scheduleIdLists = scheduleIdList.split(",");
+		int scheduleIdToGo = Integer.parseInt(scheduleIdLists[0]);
+		int scheduleIdToCome = Integer.parseInt(scheduleIdLists[1]);
+		
+		logger.info("scheduleIdList: " + scheduleIdLists);
 		
 		Schedule scheduleToGo = flightService.getScheduleByScheduleId(scheduleIdToGo);
 		Schedule scheduleToCome = flightService.getScheduleByScheduleId(scheduleIdToCome);
@@ -165,12 +154,12 @@ public class FlightController {
 			remainSeatToGo = scheduleToGo.getFirstClassRemain();
 			remainSeatToCome = scheduleToCome.getFirstClassRemain();
 		}
-
-		// 선택 시 항공편 잔여 좌석이 인원수 보다 작을 경우
+		
 		if(remainSeatToGo < person || remainSeatToCome < person) {
 			return "redirect:/flight/ticket/search?nation=" + scheduleToGo.getArrivalNation() + "/departmentDate" + scheduleToGo.getDepartmentDate() + "/" + scheduleToCome.getDepartmentDate() 
 				+ "?person=" + person + "&grade=" + grade + "&page=" + 1;
 		}
+		
 		
 		// 선택한 스케줄 아이디
 		session.setAttribute("scheduleIdToGo", scheduleIdToGo);
@@ -199,29 +188,19 @@ public class FlightController {
             @RequestParam(value="fareToGo", required = false) int fareToGo,
             @RequestParam(value="fareToCome", required = false) int fareToCome,
             HttpSession session) {
-		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null || session.getAttribute("search") == null) {
-			return "/";
+		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null) {
+			logger.info("error");
 		}
 		int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
 		
 		Search search = (Search) session.getAttribute("search");
+		logger.info("SearchInformation: " + search.toString());
+		logger.info("Select ScheduleIdToGo: " + scheduleIdToGo + "/ScheduleIdToCome: " + scheduleIdToCome);
 		
 		try {
 			int personCount = search.getPerson();
 //			String memberId = (String) session.getAttribute("memberId");
-			if(session.getAttribute("reservationId") != null) {
-				int checkReservation = flightService.checkReservationId(session.getAttribute("reservationId").toString());
-				if(checkReservation >= 1) {
-					// 예약이 이미 존재함
-					// 예약 조회 페이지로 redirect
-					logger.info("이미 예약이 존재");
-					return "/";
-				}
-			}
-			
-			// 예약 번호 생성
-			String reservationId = flightService.generateReservationId();
 			
 			ArrayList<Ticket> passengerList = new ArrayList<Ticket>();
 			for(int i=0; i<personCount; i++) {
@@ -231,7 +210,8 @@ public class FlightController {
 				passenger.setScheduleIdToGo(scheduleIdToGo);
 				passenger.setScheduleIdToCome(scheduleIdToCome);
 				
-				passenger.setReservationId(reservationId);
+				// 예약 번호 생성
+				passenger.setReservationId("");
 				
 				passenger.setName(names.get(i));
 				passenger.setFirstName(firstNames.get(i));
@@ -258,6 +238,7 @@ public class FlightController {
 				}
 				passengerList.add(passenger);
 			}
+<<<<<<< HEAD
 			session.setAttribute("impNumber", impNumber);
 			session.setAttribute("reservationId", reservationId);
 			session.setAttribute("passengerList", passengerList);
@@ -272,10 +253,52 @@ public class FlightController {
 			session.setAttribute("memberEmail", member.getEmail());
 			session.setAttribute("memberPhoneNumber", member.getPhoneNumber());
 			
+=======
+			logger.info("passengerList: " + passengerList.toString());
+			session.setAttribute("passengerList", passengerList);
+			session.setAttribute("impNumber", impNumber);
+>>>>>>> 58a762dc9101822cc6e8a0b71fee4a71c68f2660
 		}catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return "redirect:/flight/payment";
+	}
+	
+	// 결제 완료 시 Update
+	@GetMapping("/flight/ticket/paymentCompleted")
+	public String paymentCompleted(HttpSession session) {
+		
+		Schedule scheduleToGo = (Schedule) session.getAttribute("scheduleToGo");
+		Schedule scheduleToCome = (Schedule) session.getAttribute("scheduleToCome");
+		
+		Search search = (Search) session.getAttribute("search");
+		
+		int remainSeatToGo = 0;
+		int remainSeatToCome = 0;
+		int grade = search.getGrade();
+		int person = search.getPerson();
+		
+		if(grade == 1) {
+			remainSeatToGo = scheduleToGo.getEconomyClassRemain();
+			remainSeatToCome = scheduleToCome.getEconomyClassRemain();
+		}else if(grade == 2) {
+			remainSeatToGo = scheduleToGo.getBusinessClassRemain();
+			remainSeatToCome = scheduleToCome.getBusinessClassRemain();
+		}else if(grade == 3) {
+			remainSeatToGo = scheduleToGo.getFirstClassRemain();
+			remainSeatToCome = scheduleToCome.getFirstClassRemain();
+		}
+		remainSeatToGo = remainSeatToGo - person;
+		remainSeatToCome = remainSeatToCome - person;
+
+		// 만약 결제 완료 
+		if(remainSeatToGo <= 0 || remainSeatToCome <= 0) {
+			return "redirect:/";
+		}
+		int reulstToGo = flightService.updateRemainSeatByScheduleId(scheduleToGo.getScheduleId(), person, grade);
+		int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleToCome.getScheduleId(), person, grade);
+		
+		return "";
 	}
 	
 	/*
@@ -289,14 +312,14 @@ public class FlightController {
 	@ResponseBody
 	public ResponseEntity<Boolean> checkRemainSeat(HttpSession session) {
 //		String memberId = (String) session.getAttribute("memberId");
-		
-		// 만약 세션에 scheduleId나 검색 내역이 없는데 결제 버튼을 눌렀다면 -> 마이 페이지에서 예약 조회 후 예약 하기 버튼 (여기서 세션에 예약 내역 저장)
-		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null
-				|| session.getAttribute("search") == null) {
+		logger.info("session: " + session);
+		// 만약 세션에 scheduleId나 검색 내역이 없다면
+		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null || session.getAttribute("search") == null) {
 			/* 다시 예약 하도록 
 			 * 예약 상태가 있으면 삭제해주기
-			 * flightService.deleteReservation(memberId, reservationId, "예약중");
+			 * flightService.deleteReservation(memberId, "예약중");
 			 */
+			logger.info("errorInIF");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
 		}
 		Search search = (Search) session.getAttribute("search");
@@ -308,13 +331,14 @@ public class FlightController {
 		
 		int remainSeatToGo = flightService.getRemainSeatByGrade(scheduleIdToGo, grade);
 		int remainSeatToCome = flightService.getRemainSeatByGrade(scheduleIdToCome, grade);
-		
-		// 좌석이 부족 하면 에약 실패
+		logger.info("remainSeat:" + remainSeatToGo);
+		logger.info("remainSeatToCome: " + remainSeatToCome);
 		if(remainSeatToGo - person < 0 || remainSeatToCome - person < 0) {
+			logger.info("errorInSeat");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
 		}
-		
 		// 결제 정보와 결제 시 필요한 정보 가져오기
+<<<<<<< HEAD
 		
 		int totalPrice = 0;
 		if(session.getAttribute("totalPrice") == null) {
@@ -327,10 +351,23 @@ public class FlightController {
 			}
 		}
 		session.setAttribute("amount", totalPrice);
+=======
+		if(session.getAttribute("impNumber") == null) {
+			session.setAttribute("impNumber", impNumber);
+		}
+		session.setAttribute("merchantUid", "");
+		session.setAttribute("flightName", "구매 내용");
+		session.setAttribute("memberName", "구매자 이름");
+		session.setAttribute("amount", 10000);
+		session.setAttribute("memberEmail", "구매자 이메일");
+		session.setAttribute("memberPhoneNumber", "구매자 핸드폰 번호");
+		session.setAttribute("memberAddress", "구매자 주소");
+>>>>>>> 58a762dc9101822cc6e8a0b71fee4a71c68f2660
 		
 		return ResponseEntity.ok(true);
 	}
 	
+<<<<<<< HEAD
 	// 결제 완료 시 Update
 	@GetMapping("/flight/ticket/paymentCompleted")
 	@ResponseBody
@@ -357,7 +394,23 @@ public class FlightController {
 		session.invalidate();
 		
 		return ResponseEntity.ok(result);
+=======
+	/*
+	 * API No: 17
+	 * Method: POST
+	 * Information: 항공권 결제
+	 */
+	@GetMapping("/flight/ticket/test")
+	@ResponseBody
+	public String ticketPayment() {
+		logger.info("Test");
+		boolean status = true;
+		if(status) {
+			return "redirect:/home";
+		}else {
+			return "redirect:/home";
+		}
+>>>>>>> 58a762dc9101822cc6e8a0b71fee4a71c68f2660
 	}
-	
 	
 }

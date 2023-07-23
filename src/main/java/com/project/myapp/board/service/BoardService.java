@@ -1,6 +1,5 @@
 package com.project.myapp.board.service;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.myapp.board.dao.IBoardRepository;
 import com.project.myapp.board.model.Board;
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
@@ -75,5 +73,4 @@ public class BoardService implements IBoardService {
 	public int selectTotalBoardCountByKeyword(String keyword) {
 		return IBoardRepository.selectTotalBoardCountByKeyword("%"+keyword+"%");
 	}
-
 }
