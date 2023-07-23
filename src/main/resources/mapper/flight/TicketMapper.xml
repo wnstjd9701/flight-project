@@ -52,4 +52,12 @@
 		]]>
 	</select>
 	
+	<update id="updateReservationStatusByReservationId" parameterType="String">
+		<![CDATA[
+			UPDATE ticket
+			SET reservation_status='예약 완료'
+			WHERE reservation_id=#{reservationId}
+		]]>
+	</update>
+	
 </mapper>
