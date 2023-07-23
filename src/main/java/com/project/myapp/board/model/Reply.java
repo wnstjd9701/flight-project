@@ -7,7 +7,7 @@ public class Reply {
 	private int replyId;
 	private String memberId;
 	private int boardId;
-	private Clob replyContent;
+	private String replyContent;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 }
