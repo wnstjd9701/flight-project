@@ -31,7 +31,4 @@ public interface IFlightRepository {
 	int getBusinessRemainSeat(int scheduleId);
 	int getFirstRemainSeat(int scheduleId);
 	
-	// 예약이 존재하는지 체크
-	int checkReservationIsExists(String reservationId);
-	
 }
