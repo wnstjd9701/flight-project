@@ -48,7 +48,7 @@
     			ticket
 			WHERE
         		reservation_id = #{reservationId}
-    			AND reservation_status = '예약중';
+    			AND reservation_status = '예약중'
 		]]>
 	</select>
 	
