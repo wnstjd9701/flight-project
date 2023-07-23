@@ -32,6 +32,8 @@ import com.project.myapp.flight.model.Search;
 import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.flight.service.IFlightService;
 import com.project.myapp.member.model.Companion;
+import com.project.myapp.member.model.Member;
+import com.project.myapp.member.service.IMemberService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,6 +44,7 @@ public class FlightController {
 	static final Logger logger = LoggerFactory.getLogger(FlightController.class);
 	
 	private final IFlightService flightService;
+	private final IMemberService memberService;
 	
 	// iamport 결제를 위한 imp 번호
 	@Value("#{impNumber[impnumber]}")
@@ -255,9 +258,19 @@ public class FlightController {
 				}
 				passengerList.add(passenger);
 			}
+			session.setAttribute("impNumber", impNumber);
 			session.setAttribute("reservationId", reservationId);
 			session.setAttribute("passengerList", passengerList);
-			session.setAttribute("impNumber", impNumber);
+			
+			String purchaseDetails = search.getNation() + "편 항공권";
+			session.setAttribute("purchaseDetails", purchaseDetails);
+			
+//			String memberId = session.getAttribute("memberId").toString();
+			String memberId = "wh4679";
+			Member member = memberService.selectMember(memberId);
+			session.setAttribute("memberName", member.getName());
+			session.setAttribute("memberEmail", member.getEmail());
+			session.setAttribute("memberPhoneNumber", member.getPhoneNumber());
 			
 		}catch (Exception e) {
 			throw new RuntimeException(e);
@@ -303,16 +316,6 @@ public class FlightController {
 		
 		// 결제 정보와 결제 시 필요한 정보 가져오기
 		
-		session.setAttribute("impNumber", impNumber);
-		
-		String merchantUid = session.getAttribute("reservationId").toString();
-		session.setAttribute("merchantUid", merchantUid);
-		
-		flightService.getScheduleByScheduleId(scheduleIdToGo);
-		
-		String purchaseDetails = "항공권";
-		session.setAttribute("purchaseDetails", "123456");
-		
 		int totalPrice = 0;
 		if(session.getAttribute("totalPrice") == null) {
 			if(grade == 1) {
@@ -325,21 +328,13 @@ public class FlightController {
 		}
 		session.setAttribute("amount", totalPrice);
 		
-//		session.setAttribute("memberName", session.getAttribute("memberId"));
-		session.setAttribute("memberName", "Hello");
-		
-//		session.setAttribute("memberEmail", session.getAttribute("email"));
-		session.setAttribute("memberEmail", "MemberEmail");
-		
-//		session.setAttribute("memberPhoneNumber", session.getAttribute("phoneNumber"));
-		session.setAttribute("memberPhoneNumber", "MemberPhoneNumber");
-		
 		return ResponseEntity.ok(true);
 	}
 	
 	// 결제 완료 시 Update
 	@GetMapping("/flight/ticket/paymentCompleted")
-	public String paymentCompleted(HttpSession session) {
+	@ResponseBody
+	public ResponseEntity<Integer> paymentCompleted(HttpSession session) {
 		
 		int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
@@ -349,11 +344,19 @@ public class FlightController {
 		int grade = search.getGrade();
 		int person = search.getPerson();
 		
+		// 예약 reservation Status 완료로 변경
+		String reservationId = session.getAttribute("reservationId").toString();
+		int reservationStatus = flightService.updateReservationStatusByReservationId(reservationId);
+		
 		// 예약이 완료되었으므로 좌석 업데이트
 		int resultToGo = flightService.updateRemainSeatByScheduleId(scheduleIdToGo, person, grade);
 		int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleIdToCome, person, grade);
 		
-		return "/";
+		int result = resultToGo + resultToCome;
+
+		session.invalidate();
+		
+		return ResponseEntity.ok(result);
 	}
 	
 	

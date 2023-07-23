@@ -57,6 +57,7 @@
       <interceptor>
          <mapping path="/"/>
          <mapping path="/mp"/>
+         <mapping path="/flight/ticket/**"/>
          <beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
       </interceptor>
    </interceptors> --> 

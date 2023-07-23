@@ -9,16 +9,6 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
-<!--  <input type="text" id="impNumber" name="impNumber" value="${sessionScope.impNumber}"> -->
-
-<%-- <input type="hidden" id="impNumber" name="impNumber" value="${sessionScope.impNumber}">
-<input type="hidden" id="merchantUid" name="merchantUid" value="${sessionScope.merchantUid}">
-<input type="hidden" id="flightName" name="flightName" value="${sessionScope.flightName}">
-<input type="hidden" id="amount" name="amount" value="${sessionScope.amount}">
-<input type="hidden" id="memberEmail" name="memberEmail" value="${sessionScope.memberEmail}">
-<input type="hidden" id="memberName" name="memberName" value="${sessionScope.memberName}">
-<input type="hidden" id="memberPhoneNumber" name="memberPhoneNumber" value="${sessionScope.memberPhoneNumber}">
- --%>
 <div>
 	<div>탑승객 정보 </div>
 	<div>
@@ -66,7 +56,7 @@
     function iamPort() {
     	var IMP = window.IMP;
     	var impNumber = "${sessionScope.impNumber}";
-    	var merchantUid = "${sessionScope.merchantUid}";
+    	var merchantUid = "${sessionScope.reservationId}";
     	var purchaseDetails = "${sessionScope.purchaseDetails}";
     	var amount = "${sessionScope.totalPrice}";
     	var memberEmail = "${sessionScope.memberEmail}";
@@ -91,8 +81,20 @@
 	      }, function (rsp) { // callback
 	      if (rsp.success) {
 	         // 결제 성공 시 로직
-	         alert(rsp);
-	         window.location.href="/flight/ticket/paymentCompleted";
+	         alert(rsp.success);
+	         $.ajax({
+	        	 method: 'GET',
+	        	 url: '/flight/ticket/paymentCompleted',
+	        	 success: function(data) {
+	        		 alert("좌석이 성공적으로 예약되었습니다.");
+	        		 console.log(data);
+	        		 window.location.href="/";
+	        	 },
+	        	 error: function(err){
+	        		 alert(err);
+	        		 window.location.href="/";
+	        	 }
+	         })
 	      } else {
 	          console.log(rsp);
 	          alert(rsp.error_msg);

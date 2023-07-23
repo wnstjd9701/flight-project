@@ -24,4 +24,6 @@ public interface IFlightService {
 
 	int checkReservationId(String reservationId); // 예약이 존재하는지 확인하는 메서드
 
+	int updateReservationStatusByReservationId(String reservationId);
+
 }

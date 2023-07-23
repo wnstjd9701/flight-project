@@ -130,4 +130,10 @@ public class FlightService implements IFlightService {
 		return flightRepository.checkReservationIsExists(reservationId);
 	}
 
+	@Override
+	public int updateReservationStatusByReservationId(String reservationId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
