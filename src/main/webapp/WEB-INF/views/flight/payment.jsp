@@ -72,7 +72,7 @@
       	IMP.request_pay({ // param
 	          pg: "html5_inicis.INIBillTst",
 	          pay_method: "card",
-	          merchant_uid: merchantUid, // 반드시 다른 번호를 줘야함
+	          merchant_uid: merchantUid,
 	          name: purchaseDetails,
 	          amount: amount,
 	          buyer_email: memberEmail,
