@@ -28,14 +28,14 @@
 				views		"views"
 			FROM(
 				SELECT
-					board_id, category_id, member_id, title, content, views, rownum
+					board_id, category_id, member_id, title, content, views, rownum AS rnum
 				FROM(
 					SELECT * FROM BOARD
 					WHERE category_id = #{categoryId}
 					ORDER BY board_id DESC
 					)
 				)
-				WHERE rownum BETWEEN #{start} AND {end}
+				WHERE rnum BETWEEN #{start} AND #{end}
 		]]>
 	</select>
 	
@@ -104,7 +104,7 @@
 		]]>
 	</select>
 	
-	<select id="selectTotalBoardCountByCategoryId" parameterType="int">
+	<select id="selectTotalBoardCountByCategoryId" parameterType="int" resultType="int">
 		<![CDATA[
 			SELECT COUNT(board_id) AS "count" FROM BOARD
 			WHERE category_id = #{categoryId}
@@ -138,6 +138,15 @@
 				)
 				WHERE rownum BETWEEN #{start} AND {end}
 		]]>
+	</select>
+	
+	<select id="selectDeleteBoard" parameterType="int" resultType="com.project.myapp.board.model.Board">
+		<![CDATA[
+			SELECT 
+				category_id	"categoryId"
+			FROM BOARD
+			WHERE board_id = #{boardId}
+		]]>		
 	</select>
 
 </mapper>

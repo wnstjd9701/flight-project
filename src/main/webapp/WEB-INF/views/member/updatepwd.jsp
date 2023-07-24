@@ -46,28 +46,22 @@
 										<h2>비밀번호 변경</h2>
 										<hr>
 										<br>
-										<form action="<c:url value='/member/updatepwd'/>" method="get">
+										<form action="<c:url value='/member/updatepwd'/>"
+											method="post">
 											<div class="form-group">
-												<h5>기존 비밀번호</h5>
-												<input name="password" type="password" class="form-control"
-													placeholder="비밀번호확인"><br>
+												<label for="originPassword">기존 비밀번호</label> <input
+													type="password" id="originPassword" name="originPassword"
+													class="form-control" required>
 											</div>
-											<!-- <div class="form-group">
-												<input type="submit" class="genric-btn success" value="Check">
-											</div> -->
-										</form>
-										<form action="<c:url value='/member/updatepwd'/>" method="post">
-											<h5>변경할 비밀번호</h5>
-											<input type="password" name="password" id="password"
-												" class="form-control" value="${member.name}
-												pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required ">
-											<p>(영문 대소문자/숫자/특수문자 조합, 6자이상) </p>
-											<br>
 											<div class="form-group">
-												<input type="submit" class="genric-btn success" value="SAVE">
-												<input type="reset" class="genric-btn success"
-													value="CANCEL">
+												<label for="updatePassword">새로운 비밀번호</label> <input
+													type="password" id="updatePassword" name="updatePassword"
+													class="form-control"
+													pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+												<small class="form-text text-muted"> (영문
+													대소문자/숫자/특수문자 조합, 6자 이상) </small>
 											</div>
+											<button type="submit" class="btn btn-primary">비밀번호변경</button>
 										</form>
 									</div>
 								</section>
@@ -107,5 +101,24 @@ li a:hover {
 	color: #007bff;
 }
 </style>
+
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+	//비밀번호 변경 체크
+	$('#updatepwd').submit(
+			function(){
+				if($('#originpassword').val()==''){
+					alert('현재 비밀번호를 입력하세요');
+					$('#originPassword').focus();
+					return false;
+				}
+				if($('#updatepassword').val()==''){
+					alert('변경할 비밀번호를 입력하세요');
+					$('#updatepassword').focus();
+					return false;
+				}
+		});
+	});
+</script>
 </html>

@@ -47,8 +47,8 @@
 										<h2>회원 탈퇴</h2>
 										<hr>
 										<br>
-										<form action="<c:url value='/member/mp/delete'/>"
-											method="post">
+
+										<form action="<c:url value='/member/mp/delete'/>" method="post">
 											<div class="form-group">
 												<h5>기존 비밀번호</h5>
 												<input type="password" name="password"> <input

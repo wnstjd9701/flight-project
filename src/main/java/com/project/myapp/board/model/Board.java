@@ -17,4 +17,7 @@ public class Board {
 	private int views;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	
+	private int page;
+	
 }
