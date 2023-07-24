@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.myapp.board.dao.IBoardRepository;
 import com.project.myapp.board.model.Board;
 
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -73,6 +74,5 @@ public class BoardService implements IBoardService {
 	public int selectTotalBoardCountByKeyword(String keyword) {
 		return IBoardRepository.selectTotalBoardCountByKeyword("%"+keyword+"%");
 	}
-
 
 }

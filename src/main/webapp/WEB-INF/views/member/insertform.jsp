@@ -11,18 +11,32 @@
 
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="breadcrumb_iner">
+						<div class="breadcrumb_iner_item text-center">
+							<h2>Signup</h2>
+							<p>회원가입</p>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section class="insertform">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="sign">
+					<div class="sign" style="width: 70%; margin: 0 auto;">
 						<c:url var="insertURL" value='/member/insert' />
 						<form:form action="${insertURL}" method="post" id="insertMember"
 							modelAttribute="member">
-							<h2>회원가입</h2>
-							<hr>
-							<br>
 							<div class="form-group">
+							<br>
 								<label for="memberId"></label>
 								<div class="sign">
 									<h5>
@@ -45,6 +59,7 @@
 									<h5 style="line-height: 2.5em;">
 										비밀번호<span style="color: red;">*</span>
 									</h5>
+									<p>(영문 대소문자/숫자/특수문자 조합, 6자이상)</p>
 									<form:input type="password" path="password" id="password"
 										class="form-control" required="required" />
 									<form:errors path="password" class="error" />
@@ -54,12 +69,12 @@
 								<label for="password2"></label>
 								<div class="sign">
 									<h5 style="line-height: 2.5em;">
-										비밀번호<span style="color: red;">*</span>
+										비밀번호 확인<span style="color: red;">*</span>
 									</h5>
 									<form:input type="password" path="password2" id="password2"
 										class="form-control" required="required" />
 									<form:errors path="password2" class="error" />
-									<span id="passwordConfirm" />
+									<span id="passwordConfirm"></span>
 								</div>
 							</div>
 							<hr>
@@ -157,18 +172,20 @@
 								</div>
 							</div>
 							<hr>
-							<div class="signagree">
-								<h6>
-									이메일 수신에 동의하십니까? <input type="checkbox" name="agree" id="cb4">
-									<label for="cb4"></label> 동의함
-								</h6>
+							<div class="signagree" style="margin: 10px 0;">
+								<h5 style="line-height: 1.7em;">이메일 수신에 동의하십니까?</h5>
+								<div>
+									<p>동의함</p>
+									<div class="confirm-switch">
+										<input type="checkbox" name="agree" id="cb4"> <label
+											for="cb4"></label>
+									</div>
+								</div>
 							</div>
 							<hr>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-8">
-									<input type="submit" class="btn btn-info" value="SAVE">
-									<input type="reset" class="btn btn-info" value="CANCEL">
-								</div>
+								<input type="submit" class="genric-btn success" value="저장">
+								<input type="reset" class="genric-btn success" value="취소">
 							</div>
 						</form:form>
 					</div>
@@ -180,35 +197,51 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 </body>
+<style>
+#ispan {
+	margin-top: 2%;
+	font-size: 15px;
+	color: #0c3e72;
+}
+
+.genric-btn success {
+	margin-right: 10%;
+	text-align: center;
+}
+.form-control {
+	width: 100%;
+}
+</style>
 <script type="text/javascript">
 	var pwd1 = document.querySelector("#password");
 	var pwd2 = document.querySelector("#password2");
 	var pwdConfirm = document.querySelector("#passwordConfirm");
-	pwd2.onkeyup = function(event){
-		if(pwd1.value !== pwd2.value){
-			pwdConfirm.innerText="❗비밀번호가 일치하지 않습니다❗";
-		}else{
-			pwdConfirm.innerText="check✅";
+	pwd2.onkeyup = function(event) {
+		if (pwd1.value !== pwd2.value) {
+			pwdConfirm.innerText = "❗비밀번호가 일치하지 않습니다❗";
+		} else {
+			pwdConfirm.innerText = "check✅";
 		}
 	}
-	
-	$(document).ready(function(){
-		$('#memberId').keyup(function(){
-		    var memberId = $(this).val(); //memberId값이 "memberId"인 입력란의 값을 저장
-		    $.ajax({
-		        url:'/myapp/member/idcheck', //Controller에서 요청 받을 주소
-		        /* type:'post', //POST 방식으로 전달 */
-		        data:{ 'memberId' : memberId},
-		        success:function(result){ 
-		        	if(result == 'true'){
+
+	$(document).ready(function() {
+		$('#memberId').keyup(function() {
+			var memberId = $(this).val(); //memberId값이 "memberId"인 입력란의 값을 저장
+			$.ajax({
+				url : '/myapp/member/idcheck', //Controller에서 요청 받을 주소
+				/* type:'post', //POST 방식으로 전달 */
+				data : {
+					'memberId' : memberId
+				},
+				success : function(result) {
+					if (result == 'true') {
 						$('#ispan').text('사용 가능한 아이디입니다.');
-					}else{
-						$('#ispan').text('이미 존재하는 아이디입니다.');					
+					} else {
+						$('#ispan').text('이미 존재하는 아이디입니다.');
 					}
-		        }
-		    	});
+				}
 			});
 		});
+	});
 </script>
-
 </html>

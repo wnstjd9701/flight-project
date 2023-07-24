@@ -28,12 +28,12 @@
     }
     .form-row{
         display: flex;
-        justify-content: space-between;
+            justify-content: center;
         .form_colum{
             width: 20%;
             
             @media #{$tab}{
-                width: 48%;
+                width: 45%;
                 margin-bottom: 15px;
             }
             @media #{$small_mobile}{

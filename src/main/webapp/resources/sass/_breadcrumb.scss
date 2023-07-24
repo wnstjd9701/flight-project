@@ -2,6 +2,10 @@
 	@include background("../img/breadcrumb.png");
 }
 
+.flightsearch{
+	@include background("../img/flightsearch.jpg");
+}
+
 .breadcrumb {
 	position: relative;
 	z-index: 1;
