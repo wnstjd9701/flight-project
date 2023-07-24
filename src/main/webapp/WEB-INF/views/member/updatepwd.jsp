@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
-
 	<section class="breadcrumb breadcrumb_bg">
 		<div class="container">
 			<div class="row">
@@ -26,43 +25,48 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<ul style="display: flex;">
-						<li style="width: 30%; padding: 5%;">
-							<div class="sub menu">
+						<li style="width: 30%; padding: 5%;" class="submenu">
+							<div>
 								<ul>
-									<li><a href="<c:url value='/member/reservationList'/>">에약내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원
-											정보수정</a></li>
-									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호수정</a></li>
-									<li><a href="<c:url value='/member/passengerList'/>">동승자정보</a></li>
+									<li><a href="<c:url value='/member/mp'/>">회원정보 조회</a></li>
+									<li><a href="<c:url value='/member/reservationList'/>">예약
+											내역</a></li>
+									<li><a href="<c:url value='/member/mp/update'/>">회원정보
+											수정</a></li>
+									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
+											수정</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
 						</li>
 						<li style="width: 70%; padding: 5%;">
 							<div class="content">
-								<section class="updatepw">
+								<section class="updatepwd">
 									<div class="col-lg-12">
 										<h2>비밀번호 변경</h2>
 										<hr>
-										<form action="<c:url value='/member/updatepw'/>" method="get">
+										<br>
+										<form action="<c:url value='/member/updatepwd'/>" method="get">
 											<div class="form-group">
 												<h5>기존 비밀번호</h5>
 												<input name="password" type="password" class="form-control"
-													placeholder="비밀번호확인" value="${member.password}"><br>
+													placeholder="비밀번호확인"><br>
 											</div>
+											<!-- <div class="form-group">
+												<input type="submit" class="genric-btn success" value="Check">
+											</div> -->
 										</form>
-										<form action="<c:url value='/member/updatepw'/>" method="post">
+										<form action="<c:url value='/member/updatepwd'/>" method="post">
 											<h5>변경할 비밀번호</h5>
 											<input type="password" name="password" id="password"
-												value="${member.password}" class="form-control"
-												pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>(영문
-											대소문자/숫자/특수문자 조합, 6자이상)
-
+												" class="form-control"
+												pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
+											<p>(영문 대소문자/숫자/특수문자 조합, 6자이상)</p>
+											<br>
 											<div class="form-group">
-												<div class="col-sm-offset-2 col-sm-8">
-													<input type="submit" class="btn btn-info" value="SAVE">
-													<input type="reset" class="btn btn-info" value="CANCEL">
-												</div>
+												<input type="submit" class="genric-btn success" value="SAVE">
+												<input type="reset" class="genric-btn success"
+													value="CANCEL">
 											</div>
 										</form>
 									</div>
@@ -76,5 +80,32 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+	<style>
+.submenu {
+	color: #415094;
+}
+
+.submenu li {
+	margin-top: 5px;
+	padding: 20px;
+	font-size: 15px;
+	font-size: 18px;
+	padding: 20px;
+}
+
+.submenu li:hover {
+	background: #f9f9ff;
+}
+
+li a {
+	display: block;
+	color: #0c3e72;
+	transition: none;
+}
+
+li a:hover {
+	color: #007bff;
+}
+</style>
 </body>
 </html>

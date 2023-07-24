@@ -19,11 +19,12 @@
 <!-- contact js -->
 <script src="<c:url value='/js/jquery.ajaxchimp.min.js'/>"></script>
 <script src="<c:url value='/js/jquery.form.js'/>"></script>
+<script src="<c:url value='js/jquery.validate.min.js'/>"></script>
 <script src="<c:url value='/js/jquery.validate.js'/>"></script>
 <script src="<c:url value='/js/mail-script.js'/>"></script>
 <script src="<c:url value='/js/contact.js'/>"></script>
 <!-- custom js -->
 <script src="<c:url value='/js/custom.js'/>"></script>
 <!-- loading js -->
-<script src="<c:url value='/resources/js/loading.js'/>"></script>
+<script src="<c:url value='/js/loading.js'/>"></script>
 

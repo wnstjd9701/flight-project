@@ -82,5 +82,6 @@ public class BoardController {
 		return "board/qnadetail";
 	}
 	
+	//@RequestMapping("/board/{boardId}")
 
 }
