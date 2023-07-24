@@ -149,6 +149,8 @@ public class MemberController {
 			member = memberService.selectMember(memberId);
 			model.addAttribute("member", member);
 			model.addAttribute("message", "UPDATE_MEMBER_INFO");
+			System.out.println("get탐?");
+			System.out.println(member);
 			return "member/update";
 		}else {
 			model.addAttribute("message", "NOT_LOGIN_MEMBER");
