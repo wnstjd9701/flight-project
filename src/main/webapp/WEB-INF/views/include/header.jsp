@@ -36,7 +36,7 @@
 									<ul class="navbar-nav">
 										<li class="nav-item"><a class="nav-link" href="<c:url value='/home'/>">Home</a>
 										</li>
-										<li class="nav-item"><a class="nav-link" href="<c:url value='/qna'/>">QnA</a>
+										<li class="nav-item"><a class="nav-link" href="<c:url value='/board/{page}'/>">QnA</a>
 										</li>
 										<li class="nav-item"><a class="nav-link" href="<c:url value='/mp'/>">MyPage</a>
 										</li>
