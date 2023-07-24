@@ -43,7 +43,7 @@
 							<div class="content">
 								<section class="insertform">
 									<div class="col-lg-12">
-										<form action="<c:url value='/member/update'/>">
+										<form action="<c:url value='/member/mp/update'/>" method="post">
 											<h2>회원 정보 수정</h2>
 											<hr>
 											<div class="form-group">

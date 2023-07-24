@@ -59,9 +59,9 @@
 										<form action="<c:url value='/member/updatepwd'/>" method="post">
 											<h5>변경할 비밀번호</h5>
 											<input type="password" name="password" id="password"
-												" class="form-control"
-												pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
-											<p>(영문 대소문자/숫자/특수문자 조합, 6자이상)</p>
+												" class="form-control" value="${member.name}
+												pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required ">
+											<p>(영문 대소문자/숫자/특수문자 조합, 6자이상) </p>
 											<br>
 											<div class="form-group">
 												<input type="submit" class="genric-btn success" value="SAVE">
