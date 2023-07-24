@@ -228,7 +228,9 @@ svg {
 }
 
 table {
-	border-collapse: collapse
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
 }
 
 caption {
@@ -1596,6 +1598,7 @@ pre code {
 .table-sm td, .table-sm th {
 	padding: .3rem
 }
+
 
 .table-bordered {
 	border: 1px solid #dee2e6
