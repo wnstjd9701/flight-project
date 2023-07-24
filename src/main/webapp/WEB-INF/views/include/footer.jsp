@@ -10,18 +10,20 @@
 				<div class="single-footer-widget">
 					<h4>Discover Destination</h4>
 					<ul>
-						<li><a href="#">Miami, USA</a></li>
-						<li><a href="#">California, USA</a></li>
-						<li><a href="#">London, UK</a></li>
-						<li><a href="#">Saintmartine, Bangladesh</a></li>
-						<li><a href="#">Mount Everast, India</a></li>
-						<li><a href="#">Sidney, Australia</a></li>
-						<li><a href="#">Miami, USA</a></li>
-						<li><a href="#">California, USA</a></li>
-						<li><a href="#">London, UK</a></li>
-						<li><a href="#">Saintmartine, Bangladesh</a></li>
-						<li><a href="#">Mount Everast, India</a></li>
-						<li><a href="#">Sidney, Australia</a></li>
+						<li><a href="#">Seoul, Republic Of Korea</a></li>
+						<li><a href="#">Tokyo, Japan</a></li>
+						<li><a href="#">Osaka, Japan</a></li>
+						<li><a href="#">Hongkong, Hongkong</a></li>
+						<li><a href="#">BangKok, Thailand</a></li>
+						<li><a href="#">Singapore, Singapore</a></li>
+						<li><a href="#">Beiging, China</a></li>
+						<li><a href="#">London, British</a></li>
+						<li><a href="#">Paris, France</a></li>
+						<li><a href="#">Roma, Italy</a></li>
+						<li><a href="#">Frankfurt, Germany</a></li>
+						<li><a href="#">New York, USA</a></li>
+						<li><a href="#">Los Angeles, USA</a></li>
+						<li><a href="#">San Francisco, USA</a></li>
 					</ul>
 
 				</div>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
-<title>iamport</title>
+<title>항공권 결제</title>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -54,7 +54,7 @@
 						<label for="memberId"></label>
 						<div class="view">
 							<h5 style="line-height: 2.5em;">예약자 정보</h5>
-							<h3>${memberId}</h3>
+							<h3>${sessionScope.memberId}</h3>
 						</div>
 						<hr>
 						<label for="scheduleIdToGo"></label>
@@ -199,7 +199,6 @@
 			var memberPhoneNumber = "${sessionScope.memberPhoneNumber}";
 
 			console.log("구매 번호: " + merchantUid);
-			console.log("구매 내용: " + paymentName);
 			console.log("가격: " + amount);
 			console.log("사용자 정보: " + memberEmail + "/" + memberName + "/"
 					+ memberPhoneNumber);
@@ -224,7 +223,7 @@
 						success : function(data) {
 							alert("좌석이 성공적으로 예약되었습니다.");
 							console.log(data);
-							window.location.href = "/";
+							window.location.href = "/"; // 여기에 누나 마이페이지 예약조회 url 넣으면 됨 ㅇㅋㅇㅋ ㅇㅋㅋ
 						},
 						error : function(err) {
 							alert(err);

@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<title>항공권 검색</title>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
@@ -58,9 +59,9 @@
 									<thead>
 										<tr>
 											<th>선택</th>
+											<th>항공사 이미지</th>
 											<th>항공사 이름</th>
 											<th>비행기 기종</th>
-											<th>항공사 이미지</th>
 											<th>도시</th>
 											<th>날짜 및 시간</th>
 											<th>비행 시간</th>
@@ -71,20 +72,27 @@
 									<tbody>
 										<c:forEach var="flightScheduleToGo"
 											items="${flightScheduleToGo}" varStatus="status">
-											<tr>
+											<tr class="schedule">
 												<td><input type="checkbox" name="scheduleListIdToGo"
 													value="${flightScheduleToGo.scheduleId}"
 													class="confirm-checkbox"></td>
+												<!-- 여기 이미지가 안떠서 수정 해주시면 됩니다. -->
+												<td><img src="" alt="${flightScheduleToGo.image}"></td>
 												<td>${flightScheduleToGo.airlineName}</td>
 												<td>${flightScheduleToGo.airplaneTypeName}</td>
-												<td>${Airline.image}</td>
-												<td>출발: ${flightScheduleToGo.departmentNation}<br>
-													도착: ${flightScheduleToGo.arrivalNation}
+												<td>${flightScheduleToGo.departmentNation} -> ${flightScheduleToGo.arrivalNation}
 												</td>
-												<td>출발: ${flightScheduleToGo.departmentDate},
-													${flightScheduleToGo.departmentTime}<br> 도착:
-													${flightScheduleToGo.arrivalDate},
-													${flightScheduleToGo.arrivalTime}
+												<td>
+													<c:choose>
+														<c:when test="${flightScheduleToGo.departmentDate eq flightScheduleToGo.arrivalDate}">
+														출발: ${flightScheduleToGo.departmentDate}<br>
+														${flightScheduleToGo.departmentTime} -> ${flightScheduleToGo.arrivalTime}														
+														</c:when>
+														<c:otherwise>
+														출발: ${flightScheduleToGo.departmentDate} (+1)<br>
+														${flightScheduleToGo.arrivalDate} -> ${flightScheduleToGo.arrivalTime} 
+														</c:otherwise>
+													</c:choose>
 												</td>
 												<td>${flightScheduleToGo.flightTimeDetail}</td>
 												<c:choose>
@@ -114,9 +122,9 @@
 									<thead>
 										<tr>
 											<th>선택</th>
+											<th>항공사 이미지</th>
 											<th>항공사 이름</th>
 											<th>비행기 기종</th>
-											<th>항공사 이미지</th>
 											<th>도시</th>
 											<th>날짜 및 시간</th>
 											<th>비행 시간</th>
@@ -127,20 +135,26 @@
 									<tbody>
 										<c:forEach var="flightScheduleToCome"
 											items="${flightScheduleToCome}" varStatus="status">
-											<tr class=>
+											<tr class="schedule">
 												<td><input type="checkbox" name="scheduleListIdToCome"
 													value="${flightScheduleToCome.scheduleId}"
 													class="confirm-checkbox"></td>
+												<td><img src="" alt="${flightScheduleToCome.image}"></td>
 												<td>${flightScheduleToCome.airlineName}</td>
 												<td>${flightScheduleToCome.airplaneTypeName}</td>
-												<td>${flightScheduleToCome.image}</td>
-												<td>출발: ${flightScheduleToCome.departmentNation}<br>
-													도착: ${flightScheduleToCome.arrivalNation}
+												<td>${flightScheduleToCome.departmentNation} -> ${flightScheduleToCome.arrivalNation}
 												</td>
-												<td>출발: ${flightScheduleToCome.departmentDate},
-													${flightScheduleToCome.departmentTime}<br> 도착:
-													${flightScheduleToCome.arrivalDate},
-													${flightScheduleToCome.arrivalTime}
+												<td>
+													<c:choose>
+														<c:when test="${flightScheduleToCome.departmentDate eq flightScheduleToCome.arrivalDate}">
+															출발: ${flightScheduleToCome.departmentDate}<br>
+															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
+														</c:when>
+														<c:otherwise>
+															출발: ${flightScheduleToCome.departmentDate} (+1)<br>
+															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
+														</c:otherwise>
+													</c:choose>
 												</td>
 												<td>${flightScheduleToCome.flightTimeDetail}</td>
 												<c:choose>
@@ -173,10 +187,25 @@
 			</c:choose>
 		</div>
 	</div>
-
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
-
-	<style>
+	<script>
+	$('.schedule').on('click', function(event){
+		  console.log("a");
+		  var currentTarget = $(event.target);
+		  var row = currentTarget.closest('tr'); 
+		  
+		  if ($(event.target).is('input[type=checkbox]')) {
+			    return;
+		  }
+		  if (row.find('input[type=checkbox]').prop('checked')) {
+		    row.find('input[type=checkbox]').prop('checked', false);
+		  } else {
+		    row.find('input[type=checkbox]').prop('checked', true);
+		  }
+		});
+	</script>
+</body>
+<style>
 .search {
 	color: #a2a2a2;
 	font-family: "Open Sans", sans-serif;
@@ -230,6 +259,11 @@ table {
 	flex-direction: row-reverse;
 	margin-top: 20px;
 }
+/* 항공권 선택 마우스 올려놓을 때 색상  */
+.schedule:hover{
+	background-color: #b0dbff;
+	transition: 1.5s ease;
+	cursor: pointer;
+}
 </style>
-</body>
 </html>

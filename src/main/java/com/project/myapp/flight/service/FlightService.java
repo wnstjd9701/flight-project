@@ -69,10 +69,6 @@ public class FlightService implements IFlightService {
 	@Override
 	@Transactional
 	public int insertPassengerInformation(Ticket passenger) {
-		
-		String reservationId = generateReservationId();
-		passenger.setReservationId(reservationId);
-		
 		passenger.setScheduleId(passenger.getScheduleIdToGo());
 		passenger.setFare(passenger.getFareToGo());
 		
@@ -113,6 +109,7 @@ public class FlightService implements IFlightService {
 		}
 	}
 
+	// 잔여 좌석 등급별로 가져오기
 	@Override
 	public int getRemainSeatByGrade(int scheduleId, int grade) {
 		if(grade == 1) {
@@ -125,11 +122,13 @@ public class FlightService implements IFlightService {
 		return 0;
 	}
 
+	// 예약 상태 확인
 	@Override
 	public int checkReservationId(String reservationId) {
 		return flightRepository.checkReservationIsExists(reservationId);
 	}
 
+	// 예약 상태 변경
 	@Override
 	public int updateReservationStatusByReservationId(String reservationId) {
 		return flightRepository.updateReservationStatusByReservationId(reservationId);
