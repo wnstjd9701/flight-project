@@ -229,7 +229,6 @@
 			var memberId = $(this).val(); //memberId값이 "memberId"인 입력란의 값을 저장
 			$.ajax({
 				url : '/myapp/member/idcheck', //Controller에서 요청 받을 주소
-				/* type:'post', //POST 방식으로 전달 */
 				data : {
 					'memberId' : memberId
 				},

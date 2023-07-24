@@ -97,7 +97,7 @@
 		<update id="updatePasswordByMember" parameterType="com.project.myapp.member.model.Member" >
 		<![CDATA[
 			UPDATE MEMBER
-			SET password = #{password}
+			SET password = #{newPassword}
 			WHERE member_id = #{memberId} AND password = #{password}
 		]]>
 	</update>
