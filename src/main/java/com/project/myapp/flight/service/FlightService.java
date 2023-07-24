@@ -3,6 +3,7 @@ package com.project.myapp.flight.service;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +36,9 @@ public class FlightService implements IFlightService {
 			return flightRepository.getBusinessClassSchedule(search);
 		}else if(search.getGrade() == 3){
 			return flightRepository.getFirstClassSchedule(search);
+		}else {
+			throw new IllegalArgumentException("Invalid Grade: " + search.getGrade());
 		}
-		return null;
 	}
 
 	// 스케줄 아이디로 스케줄 조회
@@ -44,19 +46,33 @@ public class FlightService implements IFlightService {
 	public Schedule getScheduleByScheduleId(int scheduleId) {
 		return flightRepository.getScheduleByScheduleId(scheduleId);
 	}
+	
+	/* 
+	 * 예약 번호 생성
+	 * UUID를 통해 고유한 식별 번호
+	 */
+	@Override
+	public String generateReservationId() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String currentDate = dateFormat.format(new java.util.Date());
 
+        // UUID 생성
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString().replaceAll("-", "");
+
+        // 예약 번호 생성
+        String reservationNumber = "F" + currentDate + "-" + uuidString.substring(0, 6);
+
+        return reservationNumber;
+	}
 	// 탑승객 정보 입력
 	@Override
 	@Transactional
 	public int insertPassengerInformation(Ticket passenger) {
 		
-		SimpleDateFormat reservationDateFormat = new SimpleDateFormat("yyyyMMDD");
-		
-		java.util.Date now = new java.util.Date();
-        String reservationCode = reservationDateFormat.format(now);
-        
-		String reservationId = "F" + reservationCode + "-" + passenger.getMemberId();
+		String reservationId = generateReservationId();
 		passenger.setReservationId(reservationId);
+		
 		passenger.setScheduleId(passenger.getScheduleIdToGo());
 		passenger.setFare(passenger.getFareToGo());
 		
@@ -81,8 +97,8 @@ public class FlightService implements IFlightService {
 		int time = flightTime;
 		int hours = time / 60;
 		int minutes = time % 60;
-		String detailTimeToGo = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분";
-		return detailTimeToGo;
+		String detailTime = Integer.toString(hours) + "시간 " + Integer.toString(minutes) + "분";
+		return detailTime;
 	}
 	
 	// 예약중인 좌석 업데이트
@@ -109,6 +125,14 @@ public class FlightService implements IFlightService {
 		return 0;
 	}
 
-	
+	@Override
+	public int checkReservationId(String reservationId) {
+		return flightRepository.checkReservationIsExists(reservationId);
+	}
+
+	@Override
+	public int updateReservationStatusByReservationId(String reservationId) {
+		return flightRepository.updateReservationStatusByReservationId(reservationId);
+	}
 
 }

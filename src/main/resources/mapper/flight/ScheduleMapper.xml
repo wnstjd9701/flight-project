@@ -236,7 +236,7 @@
 			FROM
     			schedule
 			WHERE
-    			schedule_id = #{scheduleId};
+    			schedule_id = #{scheduleId}
 		]]>
 	</select>
 	

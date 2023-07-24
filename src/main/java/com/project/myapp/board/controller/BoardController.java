@@ -83,5 +83,5 @@ public class BoardController {
 	}
 	
 	//@RequestMapping("/board/{boardId}")
-	
+
 }

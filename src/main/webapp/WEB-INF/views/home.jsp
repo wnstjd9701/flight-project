@@ -16,14 +16,14 @@
 						<div class="banner_text_iner">
 							<c:if test="${empty sessionScope.memberId}">
 
-								<h1>Airplane</h1>
-								<h3>Join!</h3>
-								<a href="<c:url value='/member/login'/>" class="btn_1">Login</a>
-								<a href="<c:url value='/member/insert'/>" class="btn_1">SignUp</a>
+								<h1>새로운 여행을<br>찾아보세요.</h1>
+								<h3>같이 찾아볼까요?</h3>
+								<a href="<c:url value='/member/login'/>" class="btn_1">로그인</a>
+								<a href="<c:url value='/member/insert'/>" class="btn_1">회원가입</a>
 							</c:if>
 							<c:if test="${not empty sessionScope.memberId}">
-								<h1>Welcome!! ${memberId}</h1>
-								<h3>Let’s Fly!</h3>
+								<h1>환영합니다! <br> ${memberId}님</h1>
+								<h3>같이 떠나볼까요!</h3>
 							</c:if>
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="booking_menu">
-						<p class="nav-tag">Round Trip</p>
+						<p class="nav-tag">왕복</p>
 					</div>
 				</div>
 				<div class="col-lg-12">
@@ -53,48 +53,48 @@
 										<div class="form-row">
 											<div class="form_colum">
 												<select class="nc_select" name="nation">
-													<option selected>Arrival Nation</option>
-													<option value="ICN">seoul</option>
-													<option value="TOK">Tokyo</option>
-													<option value="OSA">Osaka</option>
-													<option value="HKG">HongKong</option>
-													<option value="BKK">BangKok</option>
-													<option value="SIN">Singapore</option>
-													<option value="BJS">Beijing</option>
-													<option value="LON">London</option>
-													<option value="PAR">Paris</option>
-													<option value="ROM">Roma</option>
-													<option value="FRA">Frankfurt</option>
-													<option value="NYC">New York City</option>
-													<option value="LAX">Los Angeles</option>
-													<option value="SFO">San Francisco</option>
+													<option selected>도착 공항</option>
+													<option value="ICN">서울(ICN)</option>
+													<option value="JP">도쿄(TOK)</option>
+													<option value="OSA">오사카(OSA)</option>
+													<option value="HKG">홍콩(HKG)</option>
+													<option value="BKK">방콕(BKK)</option>
+													<option value="SIN">싱가포르(SIN)</option>
+													<option value="BJS">베이징(BJS)</option>
+													<option value="LON">런던(LON)</option>
+													<option value="PAR">파리(PAR)</option>
+													<option value="ROM">로마(ROM)</option>
+													<option value="FRA">프랑크푸르트(FRA)</option>
+													<option value="NYC">뉴욕(NYC)</option>
+													<option value="LAX">로스엔젤레스(LAX)</option>
+													<option value="SFO">샌프란시스코(SFO)</option>
 												</select>
 											</div>
 											<div class="form_colum">
 												<input name="departmentDate" type="date" class="nc_input"
-													data-placeholder="Department Date" pattern="YYYYMMdd"
+													data-placeholder="출발 날짜" pattern="YYYYMMdd"
 													required>
 											</div>
 											<div class="form_colum">
 												<input name="arrivalDate" type="date" class="nc_input"
-													data-placeholder="Arrival Date" pattern="YYYYMMdd" required>
+													data-placeholder="도착 날짜" pattern="YYYYMMdd" required>
 											</div>
 											<div class="form_colum">
 												<input class="nc_input" type="number" name="person"
-													id="person" placeholder="Person" required>
+													id="person" placeholder="인원" required>
 
 											</div>
 											<div class="form_colum">
 												<select class="nc_select" name="grade">
-													<option selected>Seat Grade</option>
-													<option value="1">EconomyClass</option>
-													<option value="2">BusinessClass</option>
-													<option value="3">firstClass</option>
+													<option selected>좌석 등급</option>
+													<option value="1">일반석</option>
+													<option value="2">비즈니스석</option>
+													<option value="3">일등석</option>
 												</select>
 											</div>
 											<div class="form_colum" style="width: 100%;">
 												<div class="form_btn">
-													<input type="submit" class="genric-btn info" value="Search">
+													<input type="submit" class="genric-btn info" value="검색하기">
 												</div>
 											</div>
 										</div>
@@ -115,119 +115,98 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-6">
 					<div class="section_tittle text-center">
-						<h2>Top Places to visit</h2>
-						<p>Waters make fish every without firmament saw had. Morning
-							air subdue. Our. Air very one. Whales grass is fish whales
-							winged.</p>
+						<h2>해외 인기 도시</h2>
+						<p>이번 여름 휴가는 소중한 사람들과 특별한 곳으로 떠나볼까요?</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_1.png" alt="">
+						<img src="resources/img/single_place_1.jpg" alt="">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
-								<a href="#" class="place_btn">travel</a>
-								<h3>Saintmartine Iceland</h3>
-								<p>Technaf, Bangladesh</p>
+								<h3>방콕</h3>
+								<p>BangKok(Thailand)</p>
 								<div class="place_review">
 									<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> <span>(210 review)</span>
+										class="fas fa-star"></i></a>
 								</div>
-							</div>
-							<div class="details_icon text-right">
-								<i class="ti-share"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_2.png" alt="">
+						<img src="resources/img/single_place_2.jpg" alt="">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
-								<a href="#" class="place_btn">travel</a>
-								<h3>Saintmartine Iceland</h3>
-								<p>Technaf, Bangladesh</p>
+								<h3>싱가포르</h3>
+								<p>Singapore</p>
 								<div class="place_review">
 									<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> <span>(210 review)</span>
+										class="fas fa-star"></i></a>
 								</div>
-							</div>
-							<div class="details_icon text-right">
-								<i class="ti-share"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_3.png" alt="">
+						<img src="resources/img/single_place_3.jpg" alt="">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
-								<a href="#" class="place_btn">travel</a>
-								<h3>Saintmartine Iceland</h3>
-								<p>Technaf, Bangladesh</p>
+								<h3>프랑크푸르트</h3>
+								<p>Frankfurt(Germany)</p>
 								<div class="place_review">
 									<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> <span>(210 review)</span>
+										class="fas fa-star"></i></a> 
 								</div>
-							</div>
-							<div class="details_icon text-right">
-								<i class="ti-share"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_4.png" alt="">
+						<img src="resources/img/single_place_4.jpg" alt="">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
-								<a href="#" class="place_btn">travel</a>
-								<h3>Saintmartine Iceland</h3>
-								<p>Technaf, Bangladesh</p>
+								<h3>파리</h3>
+								<p>Paris(France)</p>
 								<div class="place_review">
 									<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> <span>(210 review)</span>
+										class="fas fa-star"></i></a> 
 								</div>
-							</div>
-							<div class="details_icon text-right">
-								<i class="ti-share"></i>
 							</div>
 						</div>
 					</div>
 				</div>
-				<a href="#" class="btn_1 text-cnter">Discover more</a>
 			</div>
 		</div>
 	</section>
 	<!--top place end-->
 
 	<!--top place start-->
-	<section class="client_review section_padding">
+	<!-- <section class="client_review section_padding">
 		<div class="container">
 			<div class="row ">
 				<div class="col-xl-6">
 					<div class="section_tittle">
-						<h2>What they said</h2>
+						<h2>고객의 소리</h2>
 					</div>
 				</div>
 			</div>
@@ -298,7 +277,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!--top place end-->
 
 
@@ -308,7 +287,7 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-6">
 					<div class="section_tittle text-center">
-						<h2>We offered best services</h2>
+						<h2>최고의 서비스를 제공하기 위해서 노력하겠습니다.</h2>
 						<p>Waters make fish every without firmament saw had. Morning
 							air subdue. Our. Air very one. Whales grass is fish whales
 							winged.</p>

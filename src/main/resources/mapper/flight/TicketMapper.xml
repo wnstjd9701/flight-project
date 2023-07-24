@@ -39,4 +39,25 @@
 			    )
 		]]>
 	</insert>
+	
+	<select id="checkReservationIsExists" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT
+    			COUNT(*)
+			FROM
+    			ticket
+			WHERE
+        		reservation_id = #{reservationId}
+    			AND reservation_status = '예약중'
+		]]>
+	</select>
+	
+	<update id="updateReservationStatusByReservationId" parameterType="String">
+		<![CDATA[
+			UPDATE ticket
+			SET reservation_status='예약 완료'
+			WHERE reservation_id=#{reservationId}
+		]]>
+	</update>
+	
 </mapper>

@@ -27,22 +27,20 @@
 									<!-- 로그인 이전 화면 -->
 									<ul class="navbar-nav">
 										<li class="nav-item"><a class="nav-link"
-											href="<c:url value='/'/>">Home</a></li>
+											href="<c:url value='/board'/>">고객센터</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="<c:url value='/board/qna'/>">QnA</a></li>
+											href="<c:url value='/member/login'/>">로그인</a></li>
 									</ul>
 								</c:if>
 								<c:if test="${not empty sessionScope.memberId}">
 									<!-- 로그인 이후 화면 -->
 									<ul class="navbar-nav">
 										<li class="nav-item"><a class="nav-link"
-											href="<c:url value='/'/>">Home</a></li>
+											href="<c:url value='/board'/>">고객센터</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="<c:url value='/board/qna'/>">QnA</a></li>
+											href="<c:url value='/member/mp'/>">마이페이지</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="<c:url value='/member/mp'/>">MyPage</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="<c:url value='/member/logout'/>">Logout</a></li>
+											href="<c:url value='/member/logout'/>">로그아웃</a></li>
 									</ul>
 								</c:if>
 							</div>

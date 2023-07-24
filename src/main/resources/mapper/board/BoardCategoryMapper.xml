@@ -13,8 +13,8 @@
 	<select id="selectAllCategory" resultType="com.project.myapp.board.model.BoardCategory">
 		<![CDATA[
 			SELECT
-				category_id		"categoryId"
-				category_name	"categoryname"
+				category_id		"categoryId",
+				category_name	"categoryName"
 			FROM BOARD_CATEGORY
 			ORDER BY category_id
 		]]>

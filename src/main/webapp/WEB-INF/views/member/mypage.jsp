@@ -42,6 +42,20 @@
 									<div class="col-lg-12">
 										<h2>회원 정보 조회</h2>
 										<hr>
+										<label for="name"></label>
+										<div class="view">
+											<h5 style="line-height: 2.5em;">이름(한글)</h5>
+											<h3>${member.name}</h3>
+										</div>
+
+										<hr>
+										<label for="FirstName"></label>
+										<div class="view">
+											<h5 style="line-height: 2.5em;">이름(영문, FristName)</h5>
+											<h3>${member.firstName}</h3>
+										</div>
+
+										<hr>
 										<label for="lastName"></label>
 										<div class="view">
 											<h5 style="line-height: 2.5em;">이름(영문, LastName)</h5>

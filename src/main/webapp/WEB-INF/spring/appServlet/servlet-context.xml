@@ -39,6 +39,7 @@
    <!-- Controller 추가 -->
 	<context:component-scan base-package="com.project.myapp.member.controller" />
 	<context:component-scan base-package="com.project.myapp.flight.controller" />
+	<context:component-scan base-package="com.project.myapp.board.controller" />
    <!-- 
 		View-Controller
 		path="주소창에 이런 입력이 들어오면" view-name="이 페이지로 이동" />
@@ -54,6 +55,7 @@
       <interceptor>
          <mapping path="/"/>
          <mapping path="/mp"/>
+         <mapping path="/flight/ticket/**"/>
          <beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
       </interceptor>
    </interceptors> --> 

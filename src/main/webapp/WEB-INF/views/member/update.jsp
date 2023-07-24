@@ -47,6 +47,26 @@
 											<h2>회원 정보 수정</h2>
 											<hr>
 											<div class="form-group">
+												<label for="name"></label>
+												<div class="sign">
+													<h5 style="line-height: 2.5em;">
+														이름(한글)<span style="color: red;">*</span>
+													</h5>
+													<input type="text" name="name" id="name"
+														value="${member.name}" class="form-control" required />
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="firstName"></label>
+												<div class="sign">
+													<h5 style="line-height: 2.5em;">
+														이름(영문, FirstName)<span style="color: red;">*</span>
+													</h5>
+													<input type="text" name="firstName" id="firstName"
+														value="${member.firstName}" class="form-control" required />
+												</div>
+											</div>
+											<div class="form-group">
 												<label for="lastName"></label>
 												<div class="sign">
 													<h5 style="line-height: 2.5em;">
@@ -156,6 +176,9 @@ li a {
 
 li a:hover {
 	color: #007bff;
+}
+.form-control {
+	width: 100%;
 }
 </style>
 </body>

@@ -33,21 +33,21 @@
 					<form action="<c:url value='/member/login'/>" method="post"
 						style="border-shadow: 3px solid; width: 70%; margin: 0 auto; padding: 40px;">
 						<div class="form-group">
-							<h5>ID</h5>
+							<h5>아이디</h5>
 							<label for="memberId"></label>
 							<div class="sign">
 								<input class="form-control" name="memberId" type="text"
-									placeholder="UserId">
+									placeholder="아이디를 입력하세요.">
 							</div>
 							<label for="password"></label>
 							<div class="sign">
-								<h5>Password</h5>
+								<h5>비밀번호</h5>
 								<input class="form-control" name="password" type="password"
-									placeholder="Password">
+									placeholder="비밀번호를 입력하세요.">
 							</div>
 							<div style="display: flex; justify-content: space-between;">
 								<div>
-									<p>Remember Id</p>
+									<p>아이디 저장</p>
 									<div class="confirm-switch">
 										<input type="checkbox" id="confirm-switch"></input> <label
 											for="confirm-switch"></label>
@@ -57,8 +57,7 @@
 									<input type="submit" class="genric-btn success" value="Login">
 								</div>
 							</div>
-							<br>
-							<br>
+							<br> <br>
 							<div class="login-sub ">
 								<a href="<c:url value='/member/insert'/>"
 									class="genric-btn link">Sign Up</a> <a
@@ -82,6 +81,10 @@
 	padding: 10px 15px;
 	border: 1px solid #ccc;
 	color: #ccc;
+}
+
+.form-control {
+	width: 100%;
 }
 </style>
 </body>

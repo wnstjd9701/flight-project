@@ -5,10 +5,10 @@
 	<select id="selectReply" parameterType="int" resultType="com.project.myapp.board.model.Reply">
 		<![CDATA[
 			SELECT
-				reply_id	"replyId",
-				member_id	"memberId",
-				board_id	"boardId",
-				cotent		"content"
+				reply_id			"replyId",
+				member_id			"memberId",
+				board_id			"boardId",
+				reply_content		"replyContent"
 			FROM reply
 			WHERE board_id = #{boardId}
 		]]>
@@ -17,17 +17,16 @@
 	<insert id="insertReply" parameterType="com.project.myapp.board.model.Reply">
 		<![CDATA[
 			INSERT INTO REPLY
-				(member_id, board_id, content)
+				(member_id, board_id, reply_content)
 			VALUES
-				(#{memberId}, #{boardId}, #{content})
-			WHERE board_id = #{boardId}
+				(#{memberId}, #{boardId}, #{replyContent})
 		]]>
 	</insert>
 	
 	<update id="updateReply" parameterType="com.project.myapp.board.model.Reply">
 		<![CDATA[
 			UPDATE REPLY SET
-				(content = #{content})
+				(reply_content = #{replyContent})
 			WHERE reply_id = #{replyId}
 		]]>
 	</update>

@@ -184,8 +184,8 @@
 							</div>
 							<hr>
 							<div class="form-group">
-								<input type="submit" class="genric-btn success" value="SAVE">
-								<input type="reset" class="genric-btn success" value="CANCEL">
+								<input type="submit" class="genric-btn success" value="저장">
+								<input type="reset" class="genric-btn success" value="취소">
 							</div>
 						</form:form>
 					</div>
@@ -207,6 +207,9 @@
 .genric-btn success {
 	margin-right: 10%;
 	text-align: center;
+}
+.form-control {
+	width: 100%;
 }
 </style>
 <script type="text/javascript">
@@ -241,5 +244,4 @@
 		});
 	});
 </script>
-
 </html>
