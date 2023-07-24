@@ -19,6 +19,7 @@ public interface IBoardRepository {
 	void insertBoard(Board board); //Q&A 작성
 	void updateBoard(Board board);// Q&A 수정
 	void deleteBoard(int boardId); // Q&A 삭제
+	Board selectDeleteBoard(int boardId);
 	void updateViews(int boardId); // 조회수 업데이트
 	
 	int selectTotalBoardCount(); //총 Q&A 개수

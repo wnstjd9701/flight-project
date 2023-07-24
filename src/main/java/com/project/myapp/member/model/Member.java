@@ -12,6 +12,7 @@ public class Member {
 	private String memberId;
 	private String password;
 	private String password2;
+	private String newPassword;
 
 
 	private String name;
