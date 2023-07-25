@@ -30,6 +30,28 @@ public class Member {
 
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	
+	
+	//join테이블
+	private String reservationId;
+	
+	private String airlineName;
+	
+	private String departmentNation;
+	private String arrivalNation;
+	
+	private Date departmentDate;
+	private Date arrivalDate;
+	
+	private String departmentTime;
+	private String arrivalTime;
+	
+	private int seatType;
+	private int ticketType;
+	
+	private String reservationStatus;
+	
+	private int totalPrice;
 
 	
 }

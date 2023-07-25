@@ -29,7 +29,7 @@
 							<div>
 								<ul>
 									<li><a href="<c:url value='/member/mp'/>">회원정보 조회</a></li>
-									<li><a href="<c:url value='/member/reservationList'/>">예약
+									<li><a href="<c:url value='/member/reservationlist'/>">예약
 											내역</a></li>
 									<li><a href="<c:url value='/member/mp/update'/>">회원정보
 											수정</a></li>
