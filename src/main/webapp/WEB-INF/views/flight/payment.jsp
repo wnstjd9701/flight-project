@@ -166,7 +166,7 @@
 		</div>
 	</div>
 
-	<input type="" onclick="requestPay()" value="결제하기"
+	<input type="submit" onclick="requestPay()" value="결제하기"
 		class="genric-btn info radius">
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 
@@ -233,6 +233,9 @@
 				} else {
 					console.log(rsp);
 					alert(rsp.error_msg);
+					if(merchantUid == null){
+						window.location.href = "/";
+					}
 					window.location.href = "/flight/payment";
 				}
 			});

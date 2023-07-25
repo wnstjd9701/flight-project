@@ -56,7 +56,6 @@ public class FlightController {
 	*/
 	@RequestMapping("/flight/ticket/search")
 	public String searchTicket(Search search, Model model, HttpSession session) {
-
 	    search.setDepartmentNation("ICN");
 	    search.setArrivalNation(search.getNation());
 	    search.setPage(search.getPage() * 10);
@@ -103,7 +102,7 @@ public class FlightController {
 	 */
 	@GetMapping("/flight/ticket/select")
 	public String reserveTicket(String scheduleListIdToGo, String scheduleListIdToCome, @RequestParam("person") int person, @RequestParam("grade") int grade, Model model, HttpSession session) {
-		String memberId = (String) session.getAttribute("memberId");
+		String memberId = session.getAttribute("memberId").toString();
 
 		Search search = (Search) session.getAttribute("search");
 
@@ -180,30 +179,28 @@ public class FlightController {
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
 		
 		Search search = (Search) session.getAttribute("search");
-		logger.info("SearchInformation: " + search.toString());
-		logger.info("Select ScheduleIdToGo: " + scheduleIdToGo + "/ScheduleIdToCome: " + scheduleIdToCome);
 		
 		try {
 			int personCount = search.getPerson();
-//			String memberId = (String) session.getAttribute("memberId");
+			String memberId = session.getAttribute("memberId").toString();
 			if(session.getAttribute("reservationId") != null) {
 				int checkReservation = flightService.checkReservationId(session.getAttribute("reservationId").toString());
 				if(checkReservation >= 1) {
 					// 예약이 이미 존재함
 					// 예약 조회 페이지로 redirect
 					logger.info("이미 예약이 존재");
-					return "/";
+					return "redirect:/member/reservationlist";
 				}
 			}
 
 			// 예약 번호 생성
 			String reservationId = flightService.generateReservationId();
-			ArrayList<Ticket> passengerList = new ArrayList<Ticket>();
+			List<Ticket> passengerList = new ArrayList<Ticket>();
 			for(int i=0; i<personCount; i++) {
 				Ticket passenger = new Ticket();
 				
 				// 세션 설정시 "wh4679 -> memberId로 바꾸기
-				passenger.setMemberId("wh4679");
+				passenger.setMemberId(memberId);
 				passenger.setScheduleIdToGo(scheduleIdToGo);
 				passenger.setScheduleIdToCome(scheduleIdToCome);
 				
@@ -242,8 +239,6 @@ public class FlightController {
 			String purchaseDetails = search.getNation() + "편 항공권";
 			session.setAttribute("purchaseDetails", purchaseDetails);
 
-//			String memberId = session.getAttribute("memberId").toString();
-			String memberId = "wh4679";
 			Member member = memberService.selectMember(memberId);
 			session.setAttribute("memberName", member.getName());
 			session.setAttribute("memberEmail", member.getEmail());
@@ -265,8 +260,6 @@ public class FlightController {
 	@GetMapping("/flight/seat/check")
 	@ResponseBody
 	public ResponseEntity<Boolean> checkRemainSeat(HttpSession session) {
-//		String memberId = (String) session.getAttribute("memberId");
-		
 		// 만약 세션에 scheduleId나 검색 내역이 없는데 결제 버튼을 눌렀다면 -> 마이 페이지에서 예약 조회 후 예약 하기 버튼 (여기서 세션에 예약 내역 저장)
 		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null
 						|| session.getAttribute("search") == null) {
@@ -309,7 +302,8 @@ public class FlightController {
 	@GetMapping("/flight/ticket/paymentCompleted")
 	@ResponseBody
 	public ResponseEntity<Integer> paymentCompleted(HttpSession session) {
-		
+		String memberId = session.getAttribute("memberId").toString();
+				
 		int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
 		
@@ -333,10 +327,14 @@ public class FlightController {
 		int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleIdToCome, remainSeatToCome - person, grade);
 		
 		int result = resultToGo + resultToCome;
-
+		Member member = memberService.selectMember(memberId);
+		flightService.sendCompletePaymentEmail(member, search, reservationId);
+		
 		// 여기서 회원 session정보 빼고 나머지 다 지우기
-		// 수정해야됨
 		session.invalidate();
+		session.setAttribute("memberId", member.getMemberId());
+		session.setAttribute("email", member.getEmail());
+		session.setAttribute("phoneNumber", member.getPhoneNumber());
 		
 		return ResponseEntity.ok(result);
 	}

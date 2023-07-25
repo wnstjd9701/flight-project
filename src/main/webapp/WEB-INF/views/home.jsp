@@ -80,13 +80,29 @@
 												<input name="arrivalDate" type="date" class="nc_input" id="arrival_date"
 													data-placeholder="도착 날짜" pattern="YYYYMMdd" required>
 											</div>
-											<!-- 현재 날짜 이전은 선택 불가능  -->
+											<!-- 출발 도착 날짜 선택 시 오늘 - 출발 - 도착 순으로 선택 가능하도록 -->
 											<script>
-												var now_utc = Date.now()
-												var timeOff = new Date().getTimezoneOffset()*60000;
-												var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-												document.getElementById("department_date").setAttribute("min", today);
-												document.getElementById("arrival_date").setAttribute("min", today);
+											  var departmentDate = document.getElementById("department_date");
+											  var arrivalDate = document.getElementById("arrival_date");
+											
+											  departmentDate.setAttribute("min", new Date().toISOString().split("T")[0]);
+											  arrivalDate.setAttribute("min", new Date().toISOString().split("T")[0]);
+											  
+											  departmentDate.addEventListener("change", function() {
+											    var selectedDate = new Date(departmentDate.value);
+											    var nextDay = new Date(selectedDate);
+											    nextDay.setDate(selectedDate.getDate() + 1);
+											
+											    arrivalDate.setAttribute("min", nextDay.toISOString().split("T")[0]);
+											  });
+											
+											  arrivalDate.addEventListener("change", function() {
+											    var selectedDate = new Date(arrivalDate.value);
+											    var previousDay = new Date(selectedDate);
+											    previousDay.setDate(selectedDate.getDate() - 1); 
+											
+											    departmentDate.setAttribute("max", previousDay.toISOString().split("T")[0]);
+											  });
 											</script>
 											<div class="form_colum">
 												<input class="nc_input" type="number" name="person"
