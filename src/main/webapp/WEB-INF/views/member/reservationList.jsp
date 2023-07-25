@@ -36,7 +36,7 @@
 									<li><a href="<c:url value='/member/mp/update'/>">회원정보
 											수정</a></li>
 									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
-											수정</a></li>
+											변경</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>

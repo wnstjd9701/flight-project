@@ -35,7 +35,7 @@
 									<li><a href="<c:url value='/member/mp/update'/>">회원정보
 											수정</a></li>
 									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
-											수정</a></li>
+											변경</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
@@ -59,7 +59,7 @@
 														readonly="readonly" />
 												</div>
 											</div>
-											<div class="form-group">
+											<div class="form-group" style="height: 0px; margin: 0px;">
 												<label for="password"></label>
 												<div class="sign">
 													<h5 style="line-height: 2.5em;">
@@ -133,10 +133,10 @@
 														type="button" onclick="sample6_execDaumPostcode()"
 														value="우편번호 찾기"><br> <input type="text"
 														id="sample6_address" placeholder="주소" name="address"
-														value="${member.address}"><br> <input
+														value="${member.address}"class="form-control-2"><br> <input
 														type="text" id="sample6_detailAddress" placeholder="상세주소"
-														name="address"> <input type="text"
-														id="sample6_extraAddress" placeholder="참고항목">
+														name="address" class="form-control-2"> <input type="text"
+														id="sample6_extraAddress" placeholder="참고항목" class="form-control-2">
 												</div>
 											</div>
 											<hr>
@@ -164,9 +164,9 @@
 											<br>
 											<div class="form-group">
 
-												<input type="submit" class="genric-btn success" value="SAVE">
+												<input type="submit" class="genric-btn success" value="수정하기">
 												<input type="reset" class="genric-btn success"
-													value="CANCEL">
+													value="취소">
 											</div>
 										</form>
 									</div>

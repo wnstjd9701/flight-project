@@ -60,8 +60,7 @@
 									<thead>
 										<tr>
 											<th>선택</th>
-											<th>항공사 이미지</th>
-											<th>항공사 이름</th>
+											<th colspan="2">항공사</th>
 											<th>비행기 기종</th>
 											<th>도시</th>
 											<th>날짜 및 시간</th>
@@ -77,15 +76,14 @@
 												<td><input type="checkbox" name="scheduleListIdToGo"
 													value="${flightScheduleToGo.scheduleId}"
 													class="confirm-checkbox"></td>
-												<!-- 여기 이미지가 안떠서 수정 해주시면 됩니다. -->
-												<td><img src="" alt="${flightScheduleToGo.image}"></td>
+												<td><img src="<c:url value="/img/${flightScheduleToGo.image}"/>"></td>
 												<td>${flightScheduleToGo.airlineName}</td>
 												<td>${flightScheduleToGo.airplaneTypeName}</td>
-												<td>${flightScheduleToGo.departmentNation} -> ${flightScheduleToGo.arrivalNation}
-												</td>
-												<td>
-													<c:choose>
-														<c:when test="${flightScheduleToGo.departmentDate eq flightScheduleToGo.arrivalDate}">
+												<td>${flightScheduleToGo.departmentNation}->
+													${flightScheduleToGo.arrivalNation}</td>
+												<td><c:choose>
+														<c:when
+															test="${flightScheduleToGo.departmentDate eq flightScheduleToGo.arrivalDate}">
 														출발: ${flightScheduleToGo.departmentDate}<br>
 														${flightScheduleToGo.departmentTime} -> ${flightScheduleToGo.arrivalTime}														
 														</c:when>
@@ -93,8 +91,7 @@
 														출발: ${flightScheduleToGo.departmentDate} (+1)<br>
 														${flightScheduleToGo.arrivalDate} -> ${flightScheduleToGo.arrivalTime} 
 														</c:otherwise>
-													</c:choose>
-												</td>
+													</c:choose></td>
 												<td>${flightScheduleToGo.flightTimeDetail}</td>
 												<c:choose>
 													<c:when test="${sessionScope.search.grade eq '1'}">
@@ -123,8 +120,7 @@
 									<thead>
 										<tr>
 											<th>선택</th>
-											<th>항공사 이미지</th>
-											<th>항공사 이름</th>
+											<th colspan="2">항공사</th>
 											<th>비행기 기종</th>
 											<th>도시</th>
 											<th>날짜 및 시간</th>
@@ -140,14 +136,14 @@
 												<td><input type="checkbox" name="scheduleListIdToCome"
 													value="${flightScheduleToCome.scheduleId}"
 													class="confirm-checkbox"></td>
-												<td><img src="" alt="${flightScheduleToCome.image}"></td>
+												<td><img src="<c:url value="/img/${flightScheduleToCome.image}"/>"></td>
 												<td>${flightScheduleToCome.airlineName}</td>
 												<td>${flightScheduleToCome.airplaneTypeName}</td>
-												<td>${flightScheduleToCome.departmentNation} -> ${flightScheduleToCome.arrivalNation}
-												</td>
-												<td>
-													<c:choose>
-														<c:when test="${flightScheduleToCome.departmentDate eq flightScheduleToCome.arrivalDate}">
+												<td>${flightScheduleToCome.departmentNation}->
+													${flightScheduleToCome.arrivalNation}</td>
+												<td><c:choose>
+														<c:when
+															test="${flightScheduleToCome.departmentDate eq flightScheduleToCome.arrivalDate}">
 															출발: ${flightScheduleToCome.departmentDate}<br>
 															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
 														</c:when>
@@ -155,8 +151,7 @@
 															출발: ${flightScheduleToCome.departmentDate} (+1)<br>
 															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
 														</c:otherwise>
-													</c:choose>
-												</td>
+													</c:choose></td>
 												<td>${flightScheduleToCome.flightTimeDetail}</td>
 												<c:choose>
 													<c:when test="${sessionScope.search.grade eq '1'}">
@@ -190,19 +185,19 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 	<script>
-	$('.schedule').on('click', function(event){
-		  console.log("a");
-		  var currentTarget = $(event.target);
-		  var row = currentTarget.closest('tr'); 
-		  
-		  if ($(event.target).is('input[type=checkbox]')) {
-			    return;
-		  }
-		  if (row.find('input[type=checkbox]').prop('checked')) {
-		    row.find('input[type=checkbox]').prop('checked', false);
-		  } else {
-		    row.find('input[type=checkbox]').prop('checked', true);
-		  }
+		$('.schedule').on('click', function(event) {
+			console.log("a");
+			var currentTarget = $(event.target);
+			var row = currentTarget.closest('tr');
+
+			if ($(event.target).is('input[type=checkbox]')) {
+				return;
+			}
+			if (row.find('input[type=checkbox]').prop('checked')) {
+				row.find('input[type=checkbox]').prop('checked', false);
+			} else {
+				row.find('input[type=checkbox]').prop('checked', true);
+			}
 		});
 	</script>
 </body>
@@ -261,7 +256,7 @@ table {
 	margin-top: 20px;
 }
 /* 항공권 선택 마우스 올려놓을 때 색상  */
-.schedule:hover{
+.schedule:hover {
 	background-color: #b0dbff;
 	transition: 1.5s ease;
 	cursor: pointer;

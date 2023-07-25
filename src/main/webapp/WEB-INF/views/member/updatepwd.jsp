@@ -35,7 +35,7 @@
 									<li><a href="<c:url value='/member/mp/update'/>">회원정보
 											수정</a></li>
 									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
-											수정</a></li>
+											변경</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
@@ -50,19 +50,19 @@
 										<form action="<c:url value='/member/updatepwd'/>"
 											method="post">
 											<div class="form-group">
-												<label for="originPassword">기존 비밀번호</label> <input
+												<h5>현재 비밀번호</h5> <input
 													type="password" id="originPassword" name="originPassword"
 													class="form-control" required>
 											</div>
 											<div class="form-group">
-												<label for="updatePassword">새로운 비밀번호</label> <input
+												<h5>새로운 비밀번호</h5> <input
 													type="password" id="updatePassword" name="updatePassword"
 													class="form-control"
 													pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required>
 												<small class="form-text text-muted"> (영문
 													대소문자/숫자/특수문자 조합, 6자 이상) </small>
 											</div>
-											<button type="submit" class="btn btn-primary">비밀번호변경</button>
+											<button type="submit" class="genric-btn success">비밀번호 변경</button>
 										</form>
 									</div>
 								</section>

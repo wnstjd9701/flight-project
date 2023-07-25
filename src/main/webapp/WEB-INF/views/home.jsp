@@ -17,13 +17,17 @@
 						<div class="banner_text_iner">
 							<c:if test="${empty sessionScope.memberId}">
 
-								<h1>새로운 여행을<br>찾아보세요.</h1>
+								<h1>
+									새로운 여행을<br>찾아보세요.
+								</h1>
 								<h3>같이 찾아볼까요?</h3>
 								<a href="<c:url value='/member/login'/>" class="btn_1">로그인</a>
 								<a href="<c:url value='/member/insert'/>" class="btn_1">회원가입</a>
 							</c:if>
 							<c:if test="${not empty sessionScope.memberId}">
-								<h1>환영합니다! <br> ${memberId}님</h1>
+								<h1>
+									환영합니다! <br> ${memberId}님
+								</h1>
 								<h3>같이 떠나볼까요!</h3>
 							</c:if>
 						</div>
@@ -40,7 +44,9 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="booking_menu">
-						<p class="nav-tag">왕복</p>
+						<p class="nav-tag">
+							<img src="<c:url value="/img/airplaneicon.png"/>" style="width:3%;"> 왕복
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-12">
@@ -72,21 +78,32 @@
 												</select>
 											</div>
 											<div class="form_colum">
-												<input name="departmentDate" type="date" class="nc_input" id="department_date"
-													data-placeholder="출발 날짜" pattern="YYYYMMdd"
-													required>
+												<input name="departmentDate" type="date" class="nc_input"
+													id="department_date" data-placeholder="출발 날짜"
+													pattern="YYYYMMdd" required>
 											</div>
 											<div class="form_colum">
-												<input name="arrivalDate" type="date" class="nc_input" id="arrival_date"
-													data-placeholder="도착 날짜" pattern="YYYYMMdd" required>
+												<input name="arrivalDate" type="date" class="nc_input"
+													id="arrival_date" data-placeholder="도착 날짜"
+													pattern="YYYYMMdd" required>
 											</div>
 											<!-- 현재 날짜 이전은 선택 불가능  -->
 											<script>
 												var now_utc = Date.now()
-												var timeOff = new Date().getTimezoneOffset()*60000;
-												var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-												document.getElementById("department_date").setAttribute("min", today);
-												document.getElementById("arrival_date").setAttribute("min", today);
+												var timeOff = new Date()
+														.getTimezoneOffset() * 60000;
+												var today = new Date(now_utc
+														- timeOff)
+														.toISOString().split(
+																"T")[0];
+												document.getElementById(
+														"department_date")
+														.setAttribute("min",
+																today);
+												document.getElementById(
+														"arrival_date")
+														.setAttribute("min",
+																today);
 											</script>
 											<div class="form_colum">
 												<input class="nc_input" type="number" name="person"
@@ -103,7 +120,7 @@
 											</div>
 											<div class="form_colum" style="width: 100%;">
 												<div class="form_btn">
-													<input type="submit" class="genric-btn info" value="검색하기">
+													<input type="submit" class="genric-btn info" value="검색">
 												</div>
 											</div>
 										</div>
@@ -132,7 +149,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_1.jpg" alt="">
+						<img src="<c:url value="/img/single_place_1.jpg"/>">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
@@ -151,7 +168,7 @@
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_2.jpg" alt="">
+						<img src="<c:url value="/img/single_place_2.jpg"/>">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
@@ -170,7 +187,7 @@
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_3.jpg" alt="">
+						<img src="<c:url value="/img/single_place_3.jpg"/>">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
@@ -180,7 +197,7 @@
 									<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> 
+										class="fas fa-star"></i></a>
 								</div>
 							</div>
 						</div>
@@ -188,7 +205,7 @@
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="single_place">
-						<img src="resources/img/single_place_4.jpg" alt="">
+						<img src="<c:url value="/img/single_place_4.jpg"/>">
 						<div
 							class="hover_Text d-flex align-items-end justify-content-between">
 							<div class="hover_text_iner">
@@ -198,7 +215,7 @@
 									<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
 										class="fas fa-star"></i></a> <a href="#"><i
-										class="fas fa-star"></i></a> 
+										class="fas fa-star"></i></a>
 								</div>
 							</div>
 						</div>
@@ -209,85 +226,6 @@
 	</section>
 	<!--top place end-->
 
-	<!--top place start-->
-	<!-- <section class="client_review section_padding">
-		<div class="container">
-			<div class="row ">
-				<div class="col-xl-6">
-					<div class="section_tittle">
-						<h2>고객의 소리</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="client_review_slider owl-carousel">
-						<div class="single_review_slider">
-							<div class="place_review">
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a> <a href="#"><i class="fas fa-star"></i></a>
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a>
-							</div>
-							<p>Waters make fish every without firmament saw had. Morning
-								air subdue. Our Air very one whales grass is fish whales winged
-								night yielding land creeping that seed</p>
-							<h5>- Allen Miller</h5>
-						</div>
-						<div class="single_review_slider">
-							<div class="place_review">
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a> <a href="#"><i class="fas fa-star"></i></a>
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a>
-							</div>
-							<p>Waters make fish every without firmament saw had. Morning
-								air subdue. Our Air very one whales grass is fish whales winged
-								night yielding land creeping that seed</p>
-							<h5>- Allen Miller</h5>
-						</div>
-						<div class="single_review_slider">
-							<div class="place_review">
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a> <a href="#"><i class="fas fa-star"></i></a>
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a>
-							</div>
-							<p>Waters make fish every without firmament saw had. Morning
-								air subdue. Our Air very one whales grass is fish whales winged
-								night yielding land creeping that seed</p>
-							<h5>- Allen Miller</h5>
-						</div>
-						<div class="single_review_slider">
-							<div class="place_review">
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a> <a href="#"><i class="fas fa-star"></i></a>
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a>
-							</div>
-							<p>Waters make fish every without firmament saw had. Morning
-								air subdue. Our Air very one whales grass is fish whales winged
-								night yielding land creeping that seed</p>
-							<h5>- Allen Miller</h5>
-						</div>
-						<div class="single_review_slider">
-							<div class="place_review">
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a> <a href="#"><i class="fas fa-star"></i></a>
-								<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-									class="fas fa-star"></i></a>
-							</div>
-							<p>Waters make fish every without firmament saw had. Morning
-								air subdue. Our Air very one whales grass is fish whales winged
-								night yielding land creeping that seed</p>
-							<h5>- Allen Miller</h5>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!--top place end-->
 
 
 	<!--::industries start::-->
@@ -297,29 +235,27 @@
 				<div class="col-xl-6">
 					<div class="section_tittle text-center">
 						<h2>최고의 서비스를 제공하기 위해서 노력하겠습니다.</h2>
-						<p>Waters make fish every without firmament saw had. Morning
-							air subdue. Our. Air very one. Whales grass is fish whales
-							winged.</p>
+						<p>Flight Easy와 함께 항공권 예매 빠르고 간편하게 하세요.</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
 					<div class="single_ihotel_list">
-						<img src="resources/img/services_1.png" alt="">
+						<img src="<c:url value="/img/services_1.png"/>">
 						<h3>
-							<a href="#"> Transportation</a>
+							<a href="#">항공권 예매</a>
 						</h3>
-						<p>All transportation cost we bear</p>
+						<p>원하는 항공권을 간편하고 빠르게 찾아<br>예약할 수 있도록 도와드리고 있습니다.</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="single_ihotel_list">
-						<img src="resources/img/services_2.png" alt="">
+						<img src="<c:url value="/img/services_2.png"/>">
 						<h3>
-							<a href="#"> Guidence</a>
+							<a href="#">고객센터</a>
 						</h3>
-						<p>We offer the best guidence for you</p>
+						<p>Flight Easy는 고객님의 개별 예약 번호를 <br> 통해 빠른상담을 도와드리고 있습니다.</p>
 					</div>
 				</div>
 			</div>
@@ -337,7 +273,6 @@
 .nav-tag {
 	border-bottom: 3px solid #2493e0 !important;
 	color: #0c3e72;;
-	padding: 20px 0;
 	text-align: center;
 	padding: 20px 0;
 }
