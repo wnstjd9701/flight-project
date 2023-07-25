@@ -152,8 +152,6 @@ public class MemberController {
 			member = memberService.selectMember(memberId);
 			model.addAttribute("member", member);
 			model.addAttribute("message", "UPDATE_MEMBER_INFO");
-			System.out.println("get탐?");
-			System.out.println(member);
 			return "member/update";
 		}else {
 			model.addAttribute("message", "NOT_LOGIN_MEMBER");
@@ -268,9 +266,7 @@ public class MemberController {
 	public String updatePassword(@RequestParam("originPassword") String originPassword,
 			@RequestParam("updatePassword") String updatePassword,
 			HttpSession session, Model model) {
-		
 		String memberId = (String) session.getAttribute("memberId");
-		System.out.println(memberId);
 		if (memberId != null && !memberId.isEmpty()) {
 			// 기존 비밀번호 검증
 			Member member = memberService.selectMember(memberId);
@@ -322,12 +318,10 @@ public class MemberController {
 @RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
 public String viewReservation(HttpSession session, Model model,Member member) {
 	String memberId = (String) session.getAttribute("memberId");
-	
 	List<Member> memberList = null;
 	if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
 		memberList = memberService.viewReservation(memberId);
 		model.addAttribute("memberList", memberList);
-		System.out.println(memberList);
 		model.addAttribute("message", "VIEW_RESERVATION");
 		return "member/reservationList";
 	}else {

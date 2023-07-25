@@ -55,7 +55,7 @@
 												<select class="nc_select" name="nation">
 													<option selected>도착 공항</option>
 													<option value="ICN">서울(ICN)</option>
-													<option value="JP">도쿄(TOK)</option>
+													<option value="TOK">도쿄(TOK)</option>
 													<option value="OSA">오사카(OSA)</option>
 													<option value="HKG">홍콩(HKG)</option>
 													<option value="BKK">방콕(BKK)</option>

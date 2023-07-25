@@ -146,7 +146,6 @@ public class FlightController {
 				+ "?person=" + person + "&grade=" + grade + "&page=" + 1;
 		}
 		
-		
 		// 선택한 스케줄 아이디
 		session.setAttribute("scheduleIdToGo", scheduleIdToGo);
 		session.setAttribute("scheduleIdToCome", scheduleIdToCome);
@@ -175,7 +174,7 @@ public class FlightController {
             @RequestParam(value="fareToCome", required = false) int fareToCome,
             HttpSession session) {
 		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null || session.getAttribute("search") == null) {
-			return "/";
+			return "redirect:/";
 		}
 		int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
@@ -193,7 +192,7 @@ public class FlightController {
 					// 예약이 이미 존재함
 					// 예약 조회 페이지로 redirect
 					logger.info("이미 예약이 존재");
-					return "/";
+					return "redirect:/";
 				}
 			}
 
@@ -203,6 +202,7 @@ public class FlightController {
 			for(int i=0; i<personCount; i++) {
 				Ticket passenger = new Ticket();
 				
+				// 세션 설정시 "wh4679 -> memberId로 바꾸기
 				passenger.setMemberId("wh4679");
 				passenger.setScheduleIdToGo(scheduleIdToGo);
 				passenger.setScheduleIdToCome(scheduleIdToCome);
@@ -305,7 +305,6 @@ public class FlightController {
 		return ResponseEntity.ok(true);
 	}
 	
-
 	// 결제 완료 시 Update
 	@GetMapping("/flight/ticket/paymentCompleted")
 	@ResponseBody
@@ -319,16 +318,23 @@ public class FlightController {
 		int grade = search.getGrade();
 		int person = search.getPerson();
 		
+		int remainSeatToGo = flightService.getRemainSeatByGrade(scheduleIdToGo, grade);
+		int remainSeatToCome = flightService.getRemainSeatByGrade(scheduleIdToCome, grade);
+
 		// 예약 reservation Status 완료로 변경
 		String reservationId = session.getAttribute("reservationId").toString();
 		int reservationStatus = flightService.updateReservationStatusByReservationId(reservationId);
+		if(reservationStatus >= 1) {
+			logger.info("좌석 업데이트가 성공적으로 되었습니다.");
+		}
 		
 		// 예약이 완료되었으므로 좌석 업데이트
-		int resultToGo = flightService.updateRemainSeatByScheduleId(scheduleIdToGo, person, grade);
-		int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleIdToCome, person, grade);
+		int resultToGo = flightService.updateRemainSeatByScheduleId(scheduleIdToGo, remainSeatToGo - person, grade);
+		int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleIdToCome, remainSeatToCome - person, grade);
 		
 		int result = resultToGo + resultToCome;
 
+		// 여기서 회원 session정보 빼고 나머지 다 지우기
 		session.invalidate();
 		
 		return ResponseEntity.ok(result);
