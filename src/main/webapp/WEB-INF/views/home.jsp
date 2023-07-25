@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
+<title>여행떠나조</title>
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -71,14 +72,22 @@
 												</select>
 											</div>
 											<div class="form_colum">
-												<input name="departmentDate" type="date" class="nc_input"
+												<input name="departmentDate" type="date" class="nc_input" id="department_date"
 													data-placeholder="출발 날짜" pattern="YYYYMMdd"
 													required>
 											</div>
 											<div class="form_colum">
-												<input name="arrivalDate" type="date" class="nc_input"
+												<input name="arrivalDate" type="date" class="nc_input" id="arrival_date"
 													data-placeholder="도착 날짜" pattern="YYYYMMdd" required>
 											</div>
+											<!-- 현재 날짜 이전은 선택 불가능  -->
+											<script>
+												var now_utc = Date.now()
+												var timeOff = new Date().getTimezoneOffset()*60000;
+												var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+												document.getElementById("department_date").setAttribute("min", today);
+												document.getElementById("arrival_date").setAttribute("min", today);
+											</script>
 											<div class="form_colum">
 												<input class="nc_input" type="number" name="person"
 													id="person" placeholder="인원" required>

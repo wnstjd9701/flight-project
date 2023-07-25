@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<title>항공권 검색</title>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
@@ -13,21 +14,22 @@
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
 							<h2>항공권 검색</h2>
-							<div class="bar_search_panel";>
-								<span class="search">왕복</span> <span class="search">도시
-									${sessionScope.search.departmentNation} →
-									${sessionScope.search.arrivalNation}</span> <span class="search">날짜${sessionScope.search.departmentDate}
-									~ ${sessionScope.search.arrivalDate}</span> <span class="search">인원:
-									${sessionScope.search.person}명</span>
+							<div class="bar_search_panel">
+								<p class="search">왕복</p>
+								<p class="search">도시 ${sessionScope.search.departmentNation}
+									→ ${sessionScope.search.arrivalNation}</p>
+								<p class="search">날짜${sessionScope.search.departmentDate} ~
+									${sessionScope.search.arrivalDate}</p>
+								<p class="search">인원: ${sessionScope.search.person}명</p>
 								<c:choose>
 									<c:when test="${sessionScope.search.grade eq '1' }">
-										<span class="search">좌석 등급: 이코노미</span>
+										<p class="search">좌석 등급: 이코노미</p>
 									</c:when>
 									<c:when test="${sessionScope.search.grade eq '2'}">
-										<span class="search">좌석 등급: 비즈니스</span>
+										<p class="search">좌석 등급: 비즈니스</p>
 									</c:when>
 									<c:otherwise>
-										<span class="search">좌석 등급: 퍼스트</span>
+										<p class="search">좌석 등급: 퍼스트</p>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -50,112 +52,131 @@
 							value="${sessionScope.search.grade}"> <input
 							type="hidden" name="person" value="${sessionScope.search.person}">
 						<input type="hidden" name="requestCount" value="${requestCount}">
-
-						<h3>가는편 항공권: ${goListCount}</h3>
-						<hr>
-						<div class="progress-table">
-							<table>
-								<tr class="progress-table">
-									<th>선택</th>
-									<th>항공사 이름</th>
-									<th>비행기 기종</th>
-									<th>항공사 이미지</th>
-									<th>출발 도시</th>
-									<th>도착 도시</th>
-									<th>출발 날짜</th>
-									<th>도착 날짜</th>
-									<th>출발 시간</th>
-									<th>도착 시간</th>
-									<th>비행 시간</th>
-									<th>잔여 좌석</th>
-									<th>좌석 금액</th>
-								</tr>
-								<c:forEach var="flightScheduleToGo"
-									items="${flightScheduleToGo}" varStatus="status">
-									<tr class="table-content">
-										<td><input type="checkbox" name="scheduleListIdToGo"
-											value="${flightScheduleToGo.scheduleId}"></td>
-										<td>${flightScheduleToGo.airlineName}</td>
-										<td>${flightScheduleToGo.airplaneTypeName}</td>
-										<td>${flightScheduleToGo.image}</td>
-										<td>${flightScheduleToGo.departmentNation}</td>
-										<td>${flightScheduleToGo.arrivalNation}</td>
-										<td>${flightScheduleToGo.departmentDate}</td>
-										<td>${flightScheduleToGo.arrivalDate}</td>
-										<td>${flightScheduleToGo.departmentTime}</td>
-										<td>${flightScheduleToGo.arrivalTime}</td>
-										<td>${flightScheduleToGo.flightTimeDetail}</td>
-										<c:choose>
-											<c:when test="${sessionScope.search.grade eq '1'}">
-												<td>${flightScheduleToGo.economyClassRemain}</td>
-												<td>${flightScheduleToGo.economyClassFare}</td>
-											</c:when>
-											<c:when test="${sessionScope.search.grade eq '2'}">
-												<td>${flightScheduleToGo.businessClassRemain}</td>
-												<td>${flightScheduleToGo.businessClassFare}</td>
-											</c:when>
-											<c:otherwise>
-												<td>${flightScheduleToGo.firstClassRemain}</td>
-												<td>${flightScheduleToGo.firstClassFare}</td>
-											</c:otherwise>
-										</c:choose>
-									</tr>
-								</c:forEach>
-							</table>
+						<div style="margin-bottom: 30px;">
+							<h3>가는편 항공권: ${goListCount}</h3>
+							<div style="margin: 20px 0;">
+								<table>
+									<thead>
+										<tr>
+											<th>선택</th>
+											<th>항공사 이미지</th>
+											<th>항공사 이름</th>
+											<th>비행기 기종</th>
+											<th>도시</th>
+											<th>날짜 및 시간</th>
+											<th>비행 시간</th>
+											<th>잔여 좌석</th>
+											<th>좌석 금액</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="flightScheduleToGo"
+											items="${flightScheduleToGo}" varStatus="status">
+											<tr class="schedule">
+												<td><input type="checkbox" name="scheduleListIdToGo"
+													value="${flightScheduleToGo.scheduleId}"
+													class="confirm-checkbox"></td>
+												<!-- 여기 이미지가 안떠서 수정 해주시면 됩니다. -->
+												<td><img src="" alt="${flightScheduleToGo.image}"></td>
+												<td>${flightScheduleToGo.airlineName}</td>
+												<td>${flightScheduleToGo.airplaneTypeName}</td>
+												<td>${flightScheduleToGo.departmentNation} -> ${flightScheduleToGo.arrivalNation}
+												</td>
+												<td>
+													<c:choose>
+														<c:when test="${flightScheduleToGo.departmentDate eq flightScheduleToGo.arrivalDate}">
+														출발: ${flightScheduleToGo.departmentDate}<br>
+														${flightScheduleToGo.departmentTime} -> ${flightScheduleToGo.arrivalTime}														
+														</c:when>
+														<c:otherwise>
+														출발: ${flightScheduleToGo.departmentDate} (+1)<br>
+														${flightScheduleToGo.arrivalDate} -> ${flightScheduleToGo.arrivalTime} 
+														</c:otherwise>
+													</c:choose>
+												</td>
+												<td>${flightScheduleToGo.flightTimeDetail}</td>
+												<c:choose>
+													<c:when test="${sessionScope.search.grade eq '1'}">
+														<td>${flightScheduleToGo.economyClassRemain}석</td>
+														<td>${flightScheduleToGo.economyClassFare}원</td>
+													</c:when>
+													<c:when test="${sessionScope.search.grade eq '2'}">
+														<td>${flightScheduleToGo.businessClassRemain}석</td>
+														<td>${flightScheduleToGo.businessClassFare}원</td>
+													</c:when>
+													<c:otherwise>
+														<td>${flightScheduleToGo.firstClassRemain}석</td>
+														<td>${flightScheduleToGo.firstClassFare}원</td>
+													</c:otherwise>
+												</c:choose>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
-
-						<h3>오는편 항공권: ${comeListCount}</h3>
-						<hr>
-						<div class="progress-table">
-							<table>
-								<tr>
-									<th>선택</th>
-									<th>항공사 이름</th>
-									<th>비행기 기종</th>
-									<th>항공사 이미지</th>
-									<th>출발 도시</th>
-									<th>도착 도시</th>
-									<th>출발 날짜</th>
-									<th>도착 날짜</th>
-									<th>출발 시간</th>
-									<th>도착 시간</th>
-									<th>비행 시간</th>
-									<th>잔여 좌석</th>
-									<th>좌석 금액</th>
-								</tr>
-								<c:forEach var="flightScheduleToCome"
-									items="${flightScheduleToCome}" varStatus="status">
-									<tr class="table-content">
-										<td><input type="checkbox" name="scheduleListIdToCome"
-											value="${flightScheduleToCome.scheduleId}"></td>
-										<td>${flightScheduleToCome.airlineName}</td>
-										<td>${flightScheduleToCome.airplaneTypeName}</td>
-										<td>${flightScheduleToCome.image}</td>
-										<td>${flightScheduleToCome.departmentNation}</td>
-										<td>${flightScheduleToCome.arrivalNation}</td>
-										<td>${flightScheduleToCome.departmentDate}</td>
-										<td>${flightScheduleToCome.arrivalDate}</td>
-										<td>${flightScheduleToCome.departmentTime}</td>
-										<td>${flightScheduleToCome.arrivalTime}</td>
-										<td>${flightScheduleToCome.flightTimeDetail}</td>
-										<c:choose>
-											<c:when test="${sessionScope.search.grade eq '1'}">
-												<td>${flightScheduleToCome.economyClassRemain}</td>
-												<td>${flightScheduleToCome.economyClassFare}</td>
-											</c:when>
-											<c:when test="${sessionScope.search.grade eq '2'}">
-												<td>${flightScheduleToCome.businessClassRemain}</td>
-												<td>${flightScheduleToCome.businessClassFare}</td>
-											</c:when>
-											<c:otherwise>
-												<td>${flightScheduleToCome.firstClassRemain}</td>
-												<td>${flightScheduleToCome.firstClassFare}</td>
-											</c:otherwise>
-										</c:choose>
-									</tr>
-								</c:forEach>
-							</table>
-							<p>
+						<div>
+							<h3>오는편 항공권: ${comeListCount}</h3>
+							<div style="margin: 20px 0;">
+								<table>
+									<thead>
+										<tr>
+											<th>선택</th>
+											<th>항공사 이미지</th>
+											<th>항공사 이름</th>
+											<th>비행기 기종</th>
+											<th>도시</th>
+											<th>날짜 및 시간</th>
+											<th>비행 시간</th>
+											<th>잔여 좌석</th>
+											<th>좌석 금액</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="flightScheduleToCome"
+											items="${flightScheduleToCome}" varStatus="status">
+											<tr class="schedule">
+												<td><input type="checkbox" name="scheduleListIdToCome"
+													value="${flightScheduleToCome.scheduleId}"
+													class="confirm-checkbox"></td>
+												<td><img src="" alt="${flightScheduleToCome.image}"></td>
+												<td>${flightScheduleToCome.airlineName}</td>
+												<td>${flightScheduleToCome.airplaneTypeName}</td>
+												<td>${flightScheduleToCome.departmentNation} -> ${flightScheduleToCome.arrivalNation}
+												</td>
+												<td>
+													<c:choose>
+														<c:when test="${flightScheduleToCome.departmentDate eq flightScheduleToCome.arrivalDate}">
+															출발: ${flightScheduleToCome.departmentDate}<br>
+															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
+														</c:when>
+														<c:otherwise>
+															출발: ${flightScheduleToCome.departmentDate} (+1)<br>
+															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
+														</c:otherwise>
+													</c:choose>
+												</td>
+												<td>${flightScheduleToCome.flightTimeDetail}</td>
+												<c:choose>
+													<c:when test="${sessionScope.search.grade eq '1'}">
+														<td>${flightScheduleToCome.economyClassRemain}석</td>
+														<td>${flightScheduleToCome.economyClassFare}원</td>
+													</c:when>
+													<c:when test="${sessionScope.search.grade eq '2'}">
+														<td>${flightScheduleToCome.businessClassRemain}석</td>
+														<td>${flightScheduleToCome.businessClassFare}원</td>
+													</c:when>
+													<c:otherwise>
+														<td>${flightScheduleToCome.firstClassRemain}석</td>
+														<td>${flightScheduleToCome.firstClassFare}원</td>
+													</c:otherwise>
+												</c:choose>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<p class="serach-btn">
 								<c:if test="${goListCount ne '0' || comeListCount ne '0'}">
 									<input type="submit" class="genric-btn info radius" value="선택">
 								</c:if>
@@ -166,72 +187,83 @@
 			</c:choose>
 		</div>
 	</div>
-
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
-
-	<style>
+	<script>
+	$('.schedule').on('click', function(event){
+		  console.log("a");
+		  var currentTarget = $(event.target);
+		  var row = currentTarget.closest('tr'); 
+		  
+		  if ($(event.target).is('input[type=checkbox]')) {
+			    return;
+		  }
+		  if (row.find('input[type=checkbox]').prop('checked')) {
+		    row.find('input[type=checkbox]').prop('checked', false);
+		  } else {
+		    row.find('input[type=checkbox]').prop('checked', true);
+		  }
+		});
+	</script>
+</body>
+<style>
 .search {
 	color: #a2a2a2;
 	font-family: "Open Sans", sans-serif;
 	line-height: 28px;
 	font-size: 20px;
-	margin-bottom: 0px;
-	font-weight: 400;
-}
-
-th {
-	font-size: 18px;
-	line-height: 1.2em;
 	font-weight: 400;
 }
 
 td {
-	color: #a2a2a2;
 	font-family: "Open Sans", sans-serif;
 	line-height: 28px;
 	font-size: 16px;
-	margin-bottom: 0px;
 	font-weight: 400;
-}
-
-.table {
-	float: left;
-	margin-left: 300px;
-	width: calc(100% - 300px);
-	border-bottom: 1px solid #eee;
-	background-color: #eee3;
-	margin-bottom: 10%;
-}
-
-.table-header {
-	font-family: 'Noto Sans KR', sans-serif;
-	display: flex;
-	width: 100%;
-	background: #fff;
-	padding-left: 4%
-}
-
-.table-row {
-	cursor: pointer;
-	display: relative;
-	width: 100%;
-	height: auto;
+	font-size: 14px;
+	color: black;
+	line-height: 1.4;
 	position: relative;
-	overflow: hidden;
-	transition: all 0.3s ease-in-out;
-	font-size: 15px;
-	border-top: 1px solid #eee;
-	padding-left: 4%;
+	padding: 15px;
+	border-bottom: 1px solid gray;
 }
 
-.table-data, .header_item {
-	padding: 15px 0px;
-	text-align: left;
-	width: 10%;
-	align-items: center;
-	float: left;
-	word-break: keep-all;
+thead {
+	background-color: #38a4ff;
+	font-size: 18px;
+	line-height: 1.2em;
+	font-weight: 400;
+	color: white;
+	height: 100%;
+}
+
+th {
+	padding: 15px;
+	border-bottom: 1px solid gray;
+}
+
+table {
+	border-bottom: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+.bar_search_panel {
+	display: inline-flex;
+}
+
+.search {
+	padding: 10px;
+}
+
+.serach-btn {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-top: 20px;
+}
+/* 항공권 선택 마우스 올려놓을 때 색상  */
+.schedule:hover{
+	background-color: #b0dbff;
+	transition: 1.5s ease;
+	cursor: pointer;
 }
 </style>
-</body>
 </html>

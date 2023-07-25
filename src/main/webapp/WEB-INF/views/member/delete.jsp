@@ -33,6 +33,7 @@
 									<li><a href="<c:url value='/member/reservationlist'/>">예약 내역</a></li>
 									<li><a href="<c:url value='/member/mp/update'/>">회원정보 수정</a></li>
 									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호 수정</a></li>
+
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
@@ -44,16 +45,16 @@
 										<h2>회원 탈퇴</h2>
 										<hr>
 										<br>
+
 										<form action="<c:url value='/member/mp/delete'/>" method="post">
 											<div class="form-group">
 												<h5>기존 비밀번호</h5>
-												<input name="password" type="password" class="form-control"
-													placeholder="비밀번호확인"><br>
-											</div>
-											<div class="form-group">
-													<input type="submit" class="genric-btn success"
-														value="DELETE"> <input type="reset"
-														class="genric-btn success" value="CANCEL">
+												<input type="password" name="password"> <input
+													name="memberId" type="hidden" class="form-control"
+													value="${member.memberId}"><hr> <input
+													type="submit" class="genric-btn success" value="DELETE">
+												<input type="reset" class="genric-btn success"
+													value="CANCEL">
 											</div>
 										</form>
 									</div>
