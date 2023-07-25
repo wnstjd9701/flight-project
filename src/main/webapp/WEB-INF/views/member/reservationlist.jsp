@@ -51,89 +51,55 @@
 										method="get">
 										<label for="memberId"></label>
 										<div class="view">
-											<h5 style="line-height: 2.5em;">ID</h5>
-											<h3>${member.memberId}</h3>
+											<h4 style="line-height: 2.5em;">ID: ${memberId}</h4>
 										</div>
-										<c:forEach var="member" items="${memberList}"
-											varStatus="status">
-											<hr>
-											<label for="name"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">NAME(KOREAN)</h5>
-												<h3>${member.name}</h3>
-											</div>
-											<hr>
-											<label for="deartmentNation"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">DEPARTMENT</h5>
-												<h3>${member.departmentNation}</h3>
-											</div>
-											<hr>
-											<label for="deartmentDate"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">DEPARTMENT DATE</h5>
-												<h3>${member.departmentDate}</h3>
-											</div>
-											<hr>
-											<label for="deartmentTime"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">DEPARTMENT TIME</h5>
-												<h3>${member.departmentTime}</h3>
-											</div>
-											<hr>
-											<label for="arrivalNation"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">ARRIVAL</h5>
-												<h3>${member.arrivalNation}</h3>
-											</div>
-											<hr>
-											<label for="arrivalDate"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">ARRIVAL DATE</h5>
-												<h3>${member.arrivalDate}</h3>
-											</div>
-											<hr>
-											<label for="arrivalTime"></label>
-											<div class="view">
-												<h5 style="line-height: 2.5em;">ARRIVAL TIME</h5>
-												<h3>${member.arrivalTime}</h3>
-											</div>
-											<label for="phoneNumber"></label>
-											<div class="sign">
-												<h5 style="line-height: 1.7em;">PHONENUMBER</h5>
-												<h3>${member.phoneNumber}</h3>
-											</div>
-											<hr>
-											<label for="seatType"></label>
-											<div class="sign">
-												<h5>SEAT TYPE</h5>
-												<h3>${member.seatType}</h3>
-											</div>
+										<table>
+											<thead style="background: #f9f9ff;">
+												<tr>
+													<th>예약번호</th>
+													<th>이름(한글)</th>
+													<th>나라</th>
+													<th>날짜</th>
+													<th>시간</th>
+													<!-- <th>휴대폰 번호</th> -->
+													<th>좌석 타입</th>
+													<!-- <th>티켓 타입</th> -->
+													<th>예약상태</th>
+													<th>총합 요금</th>
+												</tr>
+											</thead>
 
-											<hr>
-											<label for="ticketType"></label>
-											<div class="sign">
-												<h5>TICKET TYPE</h5>
-												<h3>${member.ticketType}</h3>
-											</div>
-											<hr>
-											<label for="ticketType"></label>
-											<div class="sign">
-												<h5>티켓 타입</h5>
-												<h3>${member.ticketType}</h3>
-											</div>
-											<hr>
-											<label for="reservationStatus"></label>
-											<div class="sign">
-												<h5>예약 상태</h5>
-												<h3>${member.reservationStatus}</h3>
-											</div>
-											<label for="totalPrice"></label>
-											<div class="sign">
-												<h5>총합 요금</h5>
-												<h3>${member.totalPrice}</h3>
-											</div>
-										</c:forEach>
+											<c:forEach var="member" items="${memberList}"
+												varStatus="status">
+												<tbody>
+													<tr>
+														<td>${member.reservationId}</td>
+														<td>${member.name}</td>
+														<td>${member.departmentNation}->
+															${member.arrivalNation}</td>
+														<td>${member.departmentDate}</td>
+														<td>${member.departmentTime}~<br>
+															${member.arrivalTime}
+														</td>
+														<%-- <td>${member.phoneNumber}</td> --%>
+														<td><c:choose>
+																<c:when test="${passenger.seatType eq '1' }">
+																	이코노미 클래스
+																</c:when>
+																<c:when test="${passenger.seatType eq '2'}">
+																	비즈니스 클래스
+																</c:when>
+																<c:otherwise>
+																	퍼스트 클래스
+																</c:otherwise>
+															</c:choose></td>
+														<%-- <td>${member.ticketType}</td> --%>
+														<td>${member.reservationStatus}</td>
+														<td>${member.totalPrice}</td>
+													</tr>
+											</c:forEach>
+											</tbody>
+										</table>
 									</form>
 								</div>
 							</section>

@@ -17,10 +17,11 @@
 							<h2>항공권 검색</h2>
 							<div class="bar_search_panel">
 								<p class="search">왕복</p>
-								<p class="search">도시 ${sessionScope.search.departmentNation}
-									→ ${sessionScope.search.arrivalNation}</p>
-								<p class="search">날짜${sessionScope.search.departmentDate} ~
-									${sessionScope.search.arrivalDate}</p>
+								<p class="search">도시:
+									${sessionScope.search.departmentNation} →
+									${sessionScope.search.arrivalNation}</p>
+								<p class="search">날짜: ${sessionScope.search.departmentDate}
+									~ ${sessionScope.search.arrivalDate}</p>
 								<p class="search">인원: ${sessionScope.search.person}명</p>
 								<c:choose>
 									<c:when test="${sessionScope.search.grade eq '1' }">
@@ -45,8 +46,14 @@
 
 			<c:choose>
 				<c:when test="${goListCount eq '0' || comeListCount eq '0'}">
-		검색된 항공권이 없습니다.
-	</c:when>
+					<div style="text-align: center;">
+						<h2>
+							검색된 항공권이 없습니다. <img src="<c:url value="/img/sadface.png" />"
+								style="width: 10%; margin-left: 10px;">
+						</h2>
+						<a class="genric-btn info" href="<c:url value='/'/>">다시 검색하기</a>
+					</div>
+				</c:when>
 				<c:otherwise>
 					<form action="<c:url value="/flight/ticket/select"/>" method="get">
 						<input type="hidden" name="grade"
@@ -55,21 +62,22 @@
 						<input type="hidden" name="requestCount" value="${requestCount}">
 						<div style="margin-bottom: 30px;">
 							<h3>
-								<img src="<c:url value="/img/tackoff.png" />" style="width: 3%; margin-right: 10px;"> 
-								가는편 항공권: ${goListCount}건
+								<img src="<c:url value="/img/tackoff.png" />"
+									style="width: 3%; margin-right: 10px;"> 가는편 항공권:
+								${goListCount}건
 							</h3>
 							<div style="margin: 20px 0;">
 								<table>
 									<thead>
 										<tr>
-											<th>선택</th>
-											<th colspan="2">항공사</th>
-											<th>비행기 기종</th>
-											<th>도시</th>
-											<th>날짜 및 시간</th>
-											<th>비행 시간</th>
-											<th>잔여 좌석</th>
-											<th>좌석 금액</th>
+											<th style="width: 7%">선택</th>
+											<th colspan="2" style="width: 16%">항공사</th>
+											<th style="width: 12%">비행기 기종</th>
+											<th style="width: 15%">도시</th>
+											<th style="width: 15%">날짜 및 시간</th>
+											<th style="width: 15%">비행 시간</th>
+											<th style="width: 10%">잔여 좌석</th>
+											<th style="width: 10%">좌석 금액</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -83,7 +91,7 @@
 													src="<c:url value="/img/${flightScheduleToGo.image}"/>"></td>
 												<td>${flightScheduleToGo.airlineName}</td>
 												<td>${flightScheduleToGo.airplaneTypeName}</td>
-												<td>${flightScheduleToGo.departmentNation}->
+												<td>${flightScheduleToGo.departmentNation} ->
 													${flightScheduleToGo.arrivalNation}</td>
 												<td><c:choose>
 														<c:when
@@ -119,21 +127,22 @@
 						</div>
 						<div>
 							<h3>
-								<img src="<c:url value="/img/landing.png"/>" style="width: 3%; margin-right: 10px;">
-								오는편 항공권: ${comeListCount}건
+								<img src="<c:url value="/img/landing.png"/>"
+									style="width: 3%; margin-right: 10px;"> 오는편 항공권:
+								${comeListCount}건
 							</h3>
 							<div style="margin: 20px 0;">
 								<table>
 									<thead>
 										<tr>
-											<th>선택</th>
-											<th colspan="2">항공사</th>
-											<th>비행기 기종</th>
-											<th>도시</th>
-											<th>날짜 및 시간</th>
-											<th>비행 시간</th>
-											<th>잔여 좌석</th>
-											<th>좌석 금액</th>
+											<th style="width: 7%">선택</th>
+											<th colspan="2" style="width: 16%">항공사</th>
+											<th style="width: 12%">비행기 기종</th>
+											<th style="width: 15%">도시</th>
+											<th style="width: 15%">날짜 및 시간</th>
+											<th style="width: 15%">비행 시간</th>
+											<th style="width: 10%">잔여 좌석</th>
+											<th style="width: 10%">좌석 금액</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -147,7 +156,7 @@
 													src="<c:url value="/img/${flightScheduleToCome.image}"/>"></td>
 												<td>${flightScheduleToCome.airlineName}</td>
 												<td>${flightScheduleToCome.airplaneTypeName}</td>
-												<td>${flightScheduleToCome.departmentNation}->
+												<td>${flightScheduleToCome.departmentNation} ->
 													${flightScheduleToCome.arrivalNation}</td>
 												<td><c:choose>
 														<c:when

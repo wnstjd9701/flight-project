@@ -327,7 +327,7 @@ public String viewReservation(HttpSession session, Model model,Member member) {
 		model.addAttribute("memberList", memberList);
 		System.out.println(memberList);
 		model.addAttribute("message", "VIEW_RESERVATION");
-		return "member/reservationList";
+		return "member/reservationlist";
 	}else {
 		model.addAttribute("message", "NOT_LOGIN_MEMBER");
 		return "member/login";   

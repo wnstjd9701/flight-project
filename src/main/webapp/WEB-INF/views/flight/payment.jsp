@@ -46,37 +46,32 @@
 		</div>
 	</section>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
+		<div class="row" >
+			<div class="col-lg-12" style="margin-top: 3%;">
 				<c:forEach var="passenger" items="${sessionScope.passengerList}"
 					varStatus="status">
-					<div style="display: flex;">
-						<label for="memberId"></label>
-						<div class="view">
-							<h5 style="line-height: 2.5em;">예약자 정보</h5>
-							<h3>${sessionScope.memberId}</h3>
-						</div>
-						<hr>
-						<label for="scheduleIdToGo"></label>
-						<div class="view">
+					<label for="memberId"></label>
+					<div class="view">
+						<h5 style="line-height: 2.5em;">예약자 정보</h5>
+						<h3>${sessionScope.memberId}</h3>
+					</div>
+					<hr>
+					<label for="scheduleIdToGo"></label>
+					<%-- <div class="view">
 							<h5 style="line-height: 2.5em;">가는 항공편 아이디</h5>
 							<h3>${passenger.scheduleIdToGo}</h3>
 						</div>
-						<hr>
 						<label for="scheduleIdToCome"></label>
 						<div class="view">
 							<h5 style="line-height: 2.5em;">오는 항공편 아이디</h5>
 							<h3>${passenger.scheduleIdToCome}</h3>
-						</div>
-						<hr>
-						<label for="reservationId"></label>
-						<div class="view">
-							<h5 style="line-height: 2.5em;">예약 번호</h5>
-							<h3>${passenger.reservationId}</h3>
-						</div>
+						</div> --%>
+					<label for="reservationId"></label>
+					<div class="view">
+						<h5 style="line-height: 2.5em;">예약 번호</h5>
+						<h3>${passenger.reservationId}</h3>
 					</div>
 					<hr>
-
 					<label for="name"></label>
 					<div class="view">
 						<h5 style="line-height: 2.5em;">
@@ -86,81 +81,82 @@
 						<h3>${passenger.name}</h3>
 					</div>
 					<hr>
-					<label for="FirstName"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">영문 이름</h5>
-						<h3>${passenger.firstName}</h3>
-					</div>
-					<hr>
-					<label for="lastName"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">영문 성</h5>
-						<h3>${passenger.lastName}</h3>
-					</div>
-					<hr>
-					<label for="phoneNumber"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">핸드폰 번호</h5>
-						<h3>${passenger.phoneNumber}</h3>
-					</div>
-					<hr>
-					<label for="birthday"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">생일</h5>
-						<h3>${passenger.birthday}</h3>
-					</div>
-					<hr>
-					<label for="passportNumber"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">여권 번호</h5>
-						<h3>${passenger.passportNumber}</h3>
-					</div>
-					<hr>
-					<label for="passportExpiryDate"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">여권 만료일</h5>
-						<h3>${passenger.passportExpiryDate}</h3>
-					</div>
-					<hr>
-					<label for="seatType"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">좌석 등급</h5>
-						<c:choose>
-							<c:when test="${passenger.seatType eq '1' }">
-								<h3>이코노미</h3>
-							</c:when>
-							<c:when test="${passenger.seatType eq '2'}">
-								<h3>비즈니스</h3>
-							</c:when>
-							<c:otherwise>
+					<div>
+						<label for="FirstName"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">영문 이름</h5>
+							<h3>${passenger.firstName}</h3>
+						</div>
+						<hr>
+						<label for="lastName"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">영문 성</h5>
+							<h3>${passenger.lastName}</h3>
+						</div>
+						<hr>
+						<label for="phoneNumber"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">핸드폰 번호</h5>
+							<h3>${passenger.phoneNumber}</h3>
+						</div>
+						<hr>
+						<label for="birthday"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">생일</h5>
+							<h3>${passenger.birthday}</h3>
+						</div>
+						<hr>
+						<label for="passportNumber"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">여권 번호</h5>
+							<h3>${passenger.passportNumber}</h3>
+						</div>
+						<hr>
+						<label for="passportExpiryDate"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">여권 만료일</h5>
+							<h3>${passenger.passportExpiryDate}</h3>
+						</div>
+						<hr>
+						<label for="seatType"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">좌석 등급</h5>
+							<c:choose>
+								<c:when test="${passenger.seatType eq '1' }">
+									<h3>이코노미</h3>
+								</c:when>
+								<c:when test="${passenger.seatType eq '2'}">
+									<h3>비즈니스</h3>
+								</c:when>
+								<c:otherwise>
 									<h3>퍼스트</h3>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<hr>
-					<label for="fareToGo"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">가는편 항공권 요금</h5>
-						<h3>${passenger.fareToGo}</h3>
-					</div>
-					<hr>
-					<label for="fareToCome"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">오는편 항공권 요금</h5>
-						<h3>${passenger.fareToCome}</h3>
-					</div>
-					<hr>
-					<label for="totalPrice"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">총 결제 금액:</h5>
-						<h3>${passenger.totalPrice}</h3>
-					</div>
-					<hr>
-					<label for="reservationStatus"></label>
-					<div class="view">
-						<h5 style="line-height: 2.5em;">예약 상태</h5>
-						<h3>${passenger.reservationStatus}</h3>
-					</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<hr>
+						<label for="fareToGo"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">가는편 항공권 요금</h5>
+							<h3>${passenger.fareToGo}</h3>
+						</div>
+						<hr>
+						<label for="fareToCome"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">오는편 항공권 요금</h5>
+							<h3>${passenger.fareToCome}</h3>
+						</div>
+						<hr>
+						<label for="totalPrice"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">총 결제 금액:</h5>
+							<h3>${passenger.totalPrice}</h3>
+						</div>
+						<hr>
+						<label for="reservationStatus"></label>
+						<div class="view">
+							<h5 style="line-height: 2.5em;">예약 상태</h5>
+							<h3>${passenger.reservationStatus}</h3>
+						</div>
 				</c:forEach>
 			</div>
 		</div>
@@ -183,6 +179,7 @@
 				},
 				error : function(error) {
 					console.log(JSON.stringify(error));
+					alert(error);
 					//window.location.href="/";
 				}
 			});
@@ -238,7 +235,9 @@
 			});
 		}
 	</script>
-	<style>
+
+</body>
+<style>
 .search {
 	color: #a2a2a2;
 	font-family: "Open Sans", sans-serif;
@@ -252,5 +251,4 @@
 	display: inline-flex;
 }
 </style>
-</body>
 </html>
