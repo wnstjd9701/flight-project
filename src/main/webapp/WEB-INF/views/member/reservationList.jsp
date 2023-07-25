@@ -46,15 +46,19 @@
 								<div class="col-lg-12">
 									<h2>회원 정보 조회</h2>
 									<hr>
-									<form action="<c:url value='/member/reservationlist'/>" method="get">
 									<label for="memberId"></label>
 									<div class="view">
 										<h5 style="line-height: 2.5em;">ID</h5>
-										<h3>${member.memberId}</h3>
+										<h3>${sessionScope.memberId}</h3>
 									</div>
 									<c:forEach var="member"
 									items="${memberList}" varStatus="status">
 									<hr>
+									<label for="reservationId"></label>
+									<div class="view">
+										<h5 style="line-height: 2.5em;">RESERVATION ID</h5>
+										<h3>${member.reservationId}</h3>
+									</div>
 									<label for="name"></label>
 									<div class="view">
 										<h5 style="line-height: 2.5em;">NAME(KOREAN)</h5>
@@ -131,8 +135,13 @@
 										<h5>총합 요금</h5>
 										<h3>${member.totalPrice}</h3>
 									</div>
+									<c:if test="${member.reservationStatus eq '예약중'}">
+										<form action="<c:url value="/member/flight/payment"/>" method="post">
+											<input type="hidden" name="reservationId" value="${member.reservationId}">
+											<input type="submit" value="결제">
+										</form>
+									</c:if>
 									</c:forEach>
-									</form>
 							</section>
 						</li>
 					</ul>

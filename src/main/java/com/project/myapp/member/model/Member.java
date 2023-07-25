@@ -50,7 +50,6 @@ public class Member {
 	private int ticketType;
 	
 	private String reservationStatus;
-	
 	private int totalPrice;
 
 	

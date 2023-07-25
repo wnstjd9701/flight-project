@@ -7,6 +7,7 @@ import com.project.myapp.flight.model.Schedule;
 import com.project.myapp.flight.model.Search;
 import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.member.model.Companion;
+import com.project.myapp.member.model.Member;
 
 public interface IFlightService {
 	List<Schedule> getFlightScheduleByGrade(Search search); // 좌석 등급별 스케줄 조회
@@ -24,5 +25,9 @@ public interface IFlightService {
 
 	int checkReservationId(String reservationId); // 예약이 존재하는지 확인하는 메서드
 
-	int updateReservationStatusByReservationId(String reservationId);
+	int updateReservationStatusByReservationId(String reservationId); // 예약 완료 시 좌석 업데이트
+	
+	void sendCompletePaymentEmail(Member member, Search search, String reservationId); // 결제 완료 이메일
+	
+	
 }
