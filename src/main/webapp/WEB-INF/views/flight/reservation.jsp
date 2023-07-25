@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
+<title>항공권 예약</title>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -19,7 +20,26 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2 style="width: 100%; padding: 20px;">항공권 예약</h2>
+							<h2>항공권 예약</h2>
+							<div class="bar_search_panel">
+								<p class="search">왕복</p>
+								<p class="search">도시 ${sessionScope.search.departmentNation}
+									→ ${sessionScope.search.arrivalNation}</p>
+								<p class="search">날짜${sessionScope.search.departmentDate} ~
+									${sessionScope.search.arrivalDate}</p>
+								<p class="search">인원: ${sessionScope.search.person}명</p>
+								<c:choose>
+									<c:when test="${sessionScope.search.grade eq '1' }">
+										<p class="search">좌석 등급: 이코노미</p>
+									</c:when>
+									<c:when test="${sessionScope.search.grade eq '2'}">
+										<p class="search">좌석 등급: 비즈니스</p>
+									</c:when>
+									<c:otherwise>
+										<p class="search">좌석 등급: 퍼스트</p>
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -78,8 +98,8 @@
 								</div>
 								<hr>
 								<div class="view">
-									<h4>출발 도시 / 도착도시</h4>
-									<p>${sessionScope.selectScheduleToGo.departmentNation}/
+									<h4>출발 도시 -> 도착도시</h4>
+									<p>${sessionScope.selectScheduleToGo.departmentNation}->
 										${sessionScope.selectScheduleToGo.arrivalNation}</p>
 								</div>
 								<hr>
@@ -120,8 +140,8 @@
 								</div>
 								<hr>
 								<div class="view">
-									<h4>출발 도시 / 도착도시</h4>
-									<p>${sessionScope.selectScheduleToCome.departmentNation}/
+									<h4>출발 도시 -> 도착도시</h4>
+									<p>${sessionScope.selectScheduleToCome.departmentNation}->
 										${sessionScope.selectScheduleToCome.arrivalNation}</p>
 								</div>
 								<hr>
@@ -150,16 +170,17 @@
 											${sessionScope.selectScheduleToCome.firstClassFare}</p>
 									</c:otherwise>
 								</c:choose>
-								<hr>
-								<h3 style="color: red;">총 결제 금액: ${sessionScope.totalPrice}</h3>
 							</div>
 						</li>
 					</ul>
+					<hr>
+					<h3 style="color: red; text-align: right; margin-bottom: 10px;">총
+						결제 금액: ${sessionScope.totalPrice}</h3>
 				</div>
 				<h3>인원수: ${sessionScope.search.person}</h3>
 				<hr>
 				<div class="container">
-					<div class="row" style="justify-content: space-around;">
+					<div class="row" style="justify-content: center;">
 						<div>
 							<hr>
 							<form action="<c:url value="/flight/ticket/insert"/>"
@@ -187,29 +208,36 @@
 									</c:otherwise>
 								</c:choose>
 								<c:forEach var="i" begin="1" end="${sessionScope.search.person}">
-									<div class="nc_select">
-									<p>탑승객 ${i} </p>
-									<hr>
+									<div class="nc_select" style="margin-bottom:10px;">
+										<p>${i}번탑승객 정보 입력</p>
+										<hr>
 										이름: <input type="text" name="name" class="form-control">
-										영문 이름: <input type="text" name="firstName"
-											class="form-control"> 영문 성: <input type="text"
-											name="lastName" class="form-control">
-										<hr>
+										영문 이름:<input type="text" name="firstName" class="form-control">
+										영문 성:<input type="text" name="lastName" class="form-control">
 										전화 번호: <input type="text" name="phoneNumber"
-											class="form-control"> 생일: <input type="date"
-											name="birthday" class="form-control">
+											class="form-control">
 										<hr>
+										생일: <input type="date" name="birthday" id="birthday" class="form-control">
 										여권 번호: <input type="text" name="passportNumber"
-											class="form-control"> 여권 만료일: <input type="date"
+											class="form-control"> 
+										여권 만료일: <input type="date" id="passportExpiryDate"
 											name="passportExpiryDate" class="form-control">
+										<!-- 생일은 오늘 이전 날짜만 선택 가능 / 여권 만료일은 오늘 이후만 가능 -->
+										<script>
+											var now_utc = Date.now()
+											var timeOff = new Date().getTimezoneOffset()*60000;
+											var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+											document.getElementById("birthday").setAttribute("max", today);
+											document.getElementById("passportExpiryDate").setAttribute("min", today);
+										</script>
 									</div>
 									<hr>
 								</c:forEach>
-								<input type="submit" value="탑승객 정보 입력" class="genric-btn info radius">
+								<input type="submit" value="탑승객 정보 입력"
+									class="genric-btn info radius">
 							</form>
 						</div>
 					</div>
-					class="genric-btn info radius"
 				</div>
 			</div>
 		</div>
@@ -218,6 +246,20 @@
 	<style>
 .form-control {
 	display: inline-block;
+	width: 18%;
+}
+
+.search {
+	color: #a2a2a2;
+	font-family: "Open Sans", sans-serif;
+	line-height: 28px;
+	font-size: 20px;
+	font-weight: 400;
+	padding: 10px;
+}
+
+.bar_search_panel {
+	display: inline-flex;
 }
 </style>
 </body>
