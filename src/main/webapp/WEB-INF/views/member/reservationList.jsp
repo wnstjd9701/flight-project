@@ -30,7 +30,7 @@
 							<div>
 								<ul>
 									<li><a href="<c:url value='/member/mp'/>">회원정보 조회</a></li>
-									<li><a href="<c:url value='/member/reservationlist'/>">예약
+									<li><a href="<c:url value='/member/reservationList'/>">예약
 											내역</a></li>
 									<li><a href="<c:url value='/member/mp/update'/>">회원정보
 											수정</a></li>
@@ -46,93 +46,80 @@
 								<div class="col-lg-12">
 									<h2>회원 정보 조회</h2>
 									<hr>
-									<form action="<c:url value='/member/reservationlist'/>" method="get">
-									<label for="memberId"></label>
+									<label for="reservationId"></label>
 									<div class="view">
-										<h5 style="line-height: 2.5em;">ID</h5>
-										<h3>${member.memberId}</h3>
+										<h5 style="line-height: 2.5em;">예약번호</h5>
+										<h3>${tickect.reservationId}</h3>
 									</div>
-									<c:forEach var="member"
-									items="${memberList}" varStatus="status">
 									<hr>
 									<label for="name"></label>
 									<div class="view">
-										<h5 style="line-height: 2.5em;">NAME(KOREAN)</h5>
+										<h5 style="line-height: 2.5em;">이름(한글)</h5>
 										<h3>${member.name}</h3>
 									</div>
 									<hr>
-									<label for="deartmentNation"></label>
+									<label for="FirstName"></label>
 									<div class="view">
-										<h5 style="line-height: 2.5em;">DEPARTMENT</h5>
-										<h3>${member.departmentNation}</h3>
+										<h5 style="line-height: 2.5em;">이름(영문, FristName)</h5>
+										<h3>${member.firstName}</h3>
+									</div>
+
+									<hr>
+									<label for="lastName"></label>
+									<div class="view">
+										<h5 style="line-height: 2.5em;">이름(영문, LastName)</h5>
+										<h3>${member.lastName}</h3>
 									</div>
 									<hr>
-									<label for="deartmentDate"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">DEPARTMENT DATE</h5>
-										<h3>${member.departmentDate}</h3>
-									</div>
-									<hr>
-									<label for="deartmentTime"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">DEPARTMENT TIME</h5>
-										<h3>${member.departmentTime}</h3>
-									</div>
-									<hr>
-									<label for="arrivalNation"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ARRIVAL</h5>
-										<h3>${member.arrivalNation}</h3>
-									</div>
-									<hr>
-									<label for="arrivalDate"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ARRIVAL DATE</h5>
-										<h3>${member.arrivalDate}</h3>
-									</div>
-									<hr>
-									<label for="arrivalTime"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ARRIVAL TIME</h5>
-										<h3>${member.arrivalTime}</h3>
-									</div>
 									<label for="phoneNumber"></label>
 									<div class="sign">
-										<h5 style="line-height: 1.7em;">PHONENUMBER</h5>
+										<h5 style="line-height: 1.7em;">휴대전화</h5>
 										<h3>${member.phoneNumber}</h3>
 									</div>
 									<hr>
-									<label for="seatType"></label>
+									<label for="birthday"></label>
 									<div class="sign">
-										<h5>SEAT TYPE</h5>
-										<h3>${member.seatType}</h3>
+										<h5>생년월일(YY/MM/DD)</h5>
+										<h3>${member.birthday}</h3>
 									</div>
 									
 									<hr>
-									<label for="ticketType"></label>
+									<label for="seatType"></label>
 									<div class="sign">
-										<h5>TICKET TYPE</h5>
-										<h3>${member.ticketType}</h3>
+										<h5>좌석 등급</h5>
+										<h3>${tickect.seatType}</h3>
 									</div>
 									<hr>
 									<label for="ticketType"></label>
 									<div class="sign">
 										<h5>티켓 타입</h5>
-										<h3>${member.ticketType}</h3>
+										<h3>${tickect.ticketType}</h3>
+									</div>
+									<hr>
+									<label for="fareToGo"></label>
+									<div class="sign">
+										<h5>출발 항공기 요금</h5>
+										<h3>${tickect.fareToGo}</h3>
+									</div>
+									<hr>
+									<label for="fareToCome"></label>
+									<div class="sign">
+										<h5>도착 항공기 요금</h5>
+										<h3>${tickect.fareToCome}</h3>
+									</div>
+									<hr>
+									<label for="totalPrice"></label>
+									<div class="sign">
+										<h5>총합 요금</h5>
+										<h3>${tickect.totalPrice}</h3>
 									</div>
 									<hr>
 									<label for="reservationStatus"></label>
 									<div class="sign">
 										<h5>예약 상태</h5>
-										<h3>${member.reservationStatus}</h3>
+										<h3>${tickect.reservationStatus}</h3>
 									</div>
-									<label for="totalPrice"></label>
-									<div class="sign">
-										<h5>총합 요금</h5>
-										<h3>${member.totalPrice}</h3>
-									</div>
-									</c:forEach>
-									</form>
+								</div>
 							</section>
 						</li>
 					</ul>
