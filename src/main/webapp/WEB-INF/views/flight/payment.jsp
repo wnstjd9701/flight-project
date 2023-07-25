@@ -11,6 +11,7 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+<title>여행떠나조</title>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="breadcrumb breadcrumb_bg">
