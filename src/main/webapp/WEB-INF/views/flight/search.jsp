@@ -54,7 +54,10 @@
 							type="hidden" name="person" value="${sessionScope.search.person}">
 						<input type="hidden" name="requestCount" value="${requestCount}">
 						<div style="margin-bottom: 30px;">
-							<h3>가는편 항공권: ${goListCount}</h3>
+							<h3>
+								<img src="<c:url value="/img/tackoff.png" />" style="width: 3%; margin-right: 10px;"> 
+								가는편 항공권: ${goListCount}건
+							</h3>
 							<div style="margin: 20px 0;">
 								<table>
 									<thead>
@@ -76,7 +79,8 @@
 												<td><input type="checkbox" name="scheduleListIdToGo"
 													value="${flightScheduleToGo.scheduleId}"
 													class="confirm-checkbox"></td>
-												<td><img src="<c:url value="/img/${flightScheduleToGo.image}"/>"></td>
+												<td><img
+													src="<c:url value="/img/${flightScheduleToGo.image}"/>"></td>
 												<td>${flightScheduleToGo.airlineName}</td>
 												<td>${flightScheduleToGo.airplaneTypeName}</td>
 												<td>${flightScheduleToGo.departmentNation}->
@@ -114,7 +118,10 @@
 							</div>
 						</div>
 						<div>
-							<h3>오는편 항공권: ${comeListCount}</h3>
+							<h3>
+								<img src="<c:url value="/img/landing.png"/>" style="width: 3%; margin-right: 10px;">
+								오는편 항공권: ${comeListCount}건
+							</h3>
 							<div style="margin: 20px 0;">
 								<table>
 									<thead>
@@ -136,7 +143,8 @@
 												<td><input type="checkbox" name="scheduleListIdToCome"
 													value="${flightScheduleToCome.scheduleId}"
 													class="confirm-checkbox"></td>
-												<td><img src="<c:url value="/img/${flightScheduleToCome.image}"/>"></td>
+												<td><img
+													src="<c:url value="/img/${flightScheduleToCome.image}"/>"></td>
 												<td>${flightScheduleToCome.airlineName}</td>
 												<td>${flightScheduleToCome.airplaneTypeName}</td>
 												<td>${flightScheduleToCome.departmentNation}->

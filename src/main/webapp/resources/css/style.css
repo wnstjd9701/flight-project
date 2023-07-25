@@ -22,6 +22,9 @@ body {
 body::-webkit-scrollbar {
 	display: none;
 }
+logo{
+	height: 70%;
+}
 
 .scroll {
 	-ms-overflow-style: none; /* 인터넷 익스플로러 */

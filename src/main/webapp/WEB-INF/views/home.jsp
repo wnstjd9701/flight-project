@@ -16,19 +16,11 @@
 					<div class="banner_text text-center">
 						<div class="banner_text_iner">
 							<c:if test="${empty sessionScope.memberId}">
-
-								<h1>
+								<h1 style="font-size: 80px;">
 									새로운 여행을<br>찾아보세요.
 								</h1>
-								<h3>같이 찾아볼까요?</h3>
 								<a href="<c:url value='/member/login'/>" class="btn_1">로그인</a>
 								<a href="<c:url value='/member/insert'/>" class="btn_1">회원가입</a>
-							</c:if>
-							<c:if test="${not empty sessionScope.memberId}">
-								<h1>
-									환영합니다! <br> ${memberId}님
-								</h1>
-								<h3>같이 떠나볼까요!</h3>
 							</c:if>
 						</div>
 					</div>
@@ -39,13 +31,22 @@
 	<!-- banner part start-->
 
 	<!-- booking part start-->
+	<c:if test="${not empty sessionScope.memberId}">
+		<style>
+.booking_part {
+	margin-top: -550px;
+	margin-bottom: 265px;
+}
+</style>
+	</c:if>
 	<section class="booking_part">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="booking_menu">
 						<p class="nav-tag">
-							<img src="<c:url value="/img/airplaneicon.png"/>" style="width:3%;"> 왕복
+							<img src="<c:url value="/img/airplaneicon.png"/>"
+								style="width: 3%;"> 왕복
 						</p>
 					</div>
 				</div>
@@ -246,7 +247,9 @@
 						<h3>
 							<a href="#">항공권 예매</a>
 						</h3>
-						<p>원하는 항공권을 간편하고 빠르게 찾아<br>예약할 수 있도록 도와드리고 있습니다.</p>
+						<p>
+							원하는 항공권을 간편하고 빠르게 찾아<br>예약할 수 있도록 도와드리고 있습니다.
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
@@ -255,7 +258,9 @@
 						<h3>
 							<a href="#">고객센터</a>
 						</h3>
-						<p>Flight Easy는 고객님의 개별 예약 번호를 <br> 통해 빠른상담을 도와드리고 있습니다.</p>
+						<p>
+							Flight Easy는 고객님의 개별 예약 번호를 <br> 통해 빠른상담을 도와드리고 있습니다.
+						</p>
 					</div>
 				</div>
 			</div>
