@@ -335,6 +335,7 @@ public class FlightController {
 		int result = resultToGo + resultToCome;
 
 		// 여기서 회원 session정보 빼고 나머지 다 지우기
+		// 수정해야됨
 		session.invalidate();
 		
 		return ResponseEntity.ok(result);
