@@ -102,7 +102,7 @@ public class FlightController {
 	 */
 	@GetMapping("/flight/ticket/select")
 	public String reserveTicket(String scheduleListIdToGo, String scheduleListIdToCome, @RequestParam("person") int person, @RequestParam("grade") int grade, Model model, HttpSession session) {
-		String memberId = (String) session.getAttribute("memberId");
+		String memberId = session.getAttribute("memberId").toString();
 
 		Search search = (Search) session.getAttribute("search");
 
@@ -260,8 +260,6 @@ public class FlightController {
 	@GetMapping("/flight/seat/check")
 	@ResponseBody
 	public ResponseEntity<Boolean> checkRemainSeat(HttpSession session) {
-//		String memberId = (String) session.getAttribute("memberId");
-		
 		// 만약 세션에 scheduleId나 검색 내역이 없는데 결제 버튼을 눌렀다면 -> 마이 페이지에서 예약 조회 후 예약 하기 버튼 (여기서 세션에 예약 내역 저장)
 		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null
 						|| session.getAttribute("search") == null) {
@@ -304,7 +302,7 @@ public class FlightController {
 	@GetMapping("/flight/ticket/paymentCompleted")
 	@ResponseBody
 	public ResponseEntity<Integer> paymentCompleted(HttpSession session) {
-		String memberId = (String) session.getAttribute("memberId");
+		String memberId = session.getAttribute("memberId").toString();
 				
 		int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
