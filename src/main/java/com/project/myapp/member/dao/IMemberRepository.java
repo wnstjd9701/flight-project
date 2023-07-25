@@ -2,7 +2,6 @@ package com.project.myapp.member.dao;
 
 import java.util.List;
 
-import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.member.model.Companion;
 import com.project.myapp.member.model.Member;
 
@@ -23,7 +22,7 @@ public interface IMemberRepository {
 	
 	void insertPassenger(Companion companion); //동승자 정보 추가
 	
-	List<Member> viewReservation(String memberId); //예약 조회
+	Member viewReservation(String memberId); //예약 조회
 
 }
 

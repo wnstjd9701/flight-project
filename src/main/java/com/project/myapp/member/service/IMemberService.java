@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.member.model.Companion;
 import com.project.myapp.member.model.Member;
 
@@ -24,6 +23,6 @@ public interface IMemberService {
 	
 	void insertPassenger(Companion companion); //동승자 정보 추가
 	
-	List<Member> viewReservation(String memberId); //예약 조회
+	Member viewReservation(String memberId); //예약 조회
 	
 }

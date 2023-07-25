@@ -5,15 +5,17 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Properties;
 
+
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.project.myapp.flight.model.Ticket;
+
+import org.springframework.stereotype.Service;
+
 import com.project.myapp.member.dao.IMemberRepository;
 import com.project.myapp.member.model.Companion;
 import com.project.myapp.member.model.Member;
@@ -72,7 +74,10 @@ public class MemberService implements IMemberService {
 
    }
 
-
+   @Override
+   public Member viewReservation(String memberId) {
+      return IMemberRepository.viewReservation(memberId);
+   }
 
    @Override
    public void sendEmail(Member member, String method) {
@@ -158,11 +163,6 @@ public class MemberService implements IMemberService {
       IMemberRepository.updatePasswordByMember(member);
       
    }
-
-@Override
-public List<Member> viewReservation(String memberId) {
-	return IMemberRepository.viewReservation(memberId);
-}
 
 
 }

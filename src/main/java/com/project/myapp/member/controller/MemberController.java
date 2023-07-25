@@ -1,7 +1,5 @@
 package com.project.myapp.member.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.member.model.Member;
 import com.project.myapp.member.service.IMemberService;
 
@@ -319,15 +316,12 @@ public class MemberController {
       method : GET
       information : 예약정보조회
  */
-@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
+@RequestMapping(value="/member/reservationList", method=RequestMethod.GET)
 public String viewReservation(HttpSession session, Model model,Member member) {
 	String memberId = (String) session.getAttribute("memberId");
-	
-	List<Member> memberList = null;
 	if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
-		memberList = memberService.viewReservation(memberId);
-		model.addAttribute("memberList", memberList);
-		System.out.println(memberList);
+		member = memberService.viewReservation(memberId);
+		model.addAttribute("member", member);
 		model.addAttribute("message", "VIEW_RESERVATION");
 		return "member/reservationList";
 	}else {
