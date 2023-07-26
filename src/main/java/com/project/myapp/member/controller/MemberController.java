@@ -40,7 +40,7 @@ public class MemberController {
 	private final IMemberService memberService;
 
 	private final IFlightService flightService;
-	
+
 	private final MemberValidator memberValidator;
 
 	//스프링 밸리데이터 메서드 추가(유효성검사)
@@ -242,7 +242,7 @@ public class MemberController {
       information : 비밀번호 찾기(이메일 인증)
 	 */
 	@RequestMapping(value = "/member/findpwd", method = RequestMethod.POST)
-	public String findPassword(Member member, HttpServletResponse response){
+	public String findPassword(Member member,HttpServletResponse response){
 		memberService.findPassword(response, member);
 		return "member/login";
 	}
@@ -295,111 +295,49 @@ public class MemberController {
 	}
 
 
-//   /*   API no.10
-//      method : GET
-//      information : 동승자 정보 입력
-//    */
-//   @RequestMapping(value="/member/passengerList" , method=RequestMethod.GET)
-//   public String insertPassenger() {
-//      return "member/passengerList";
-//   }
-//   /*   API no.10
-//      method : POST
-//      information : 동승자 정보 입력
-//      response : companion   
-//    */
-//   @RequestMapping(value="member/insertPassenger", method=RequestMethod.POST)
-//   public String insertPassenger(Companion companion, HttpSession session, Model model) {
-//      try{
-//         memberService.insertPassenger(companion);
-//         return "member/passengerList";
-//      }catch(DuplicateKeyException e){
-//         model.addAttribute("message", e.getMessage());
-//         return "member/error";
-//      }
-//   }
-/*   API no.11
+
+	/*   API no.11
       method : GET
       information : 예약정보조회
- */
-@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
-public String viewReservation(HttpSession session, Model model,Member member) {
-	String memberId = (String) session.getAttribute("memberId");
-	List<Member> memberList = null;
-	if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
-		memberList = memberService.viewReservation(memberId);
-		model.addAttribute("memberList", memberList);
-		model.addAttribute("message", "VIEW_RESERVATION");
-		return "member/reservationList";
-	}else {
-		model.addAttribute("message", "NOT_LOGIN_MEMBER");
-		return "member/login";   
+	 */
+	@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
+	public String viewReservation(HttpSession session, Model model,Member member) {
+		String memberId = (String) session.getAttribute("memberId");
+		List<Member> memberList = null;
+		if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
+			memberList = memberService.viewReservation(memberId);
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("message", "VIEW_RESERVATION");
+			return "member/reservationList";
+		}else {
+			model.addAttribute("message", "NOT_LOGIN_MEMBER");
+			return "member/login";   
+		}
 	}
-}
-/*   API no.15
+	/*   API no.15
    		method : POST
    		information : 예약취소
- */
+	 */
 
-//Id 중복체크
-@RequestMapping("/member/idcheck")
-@ResponseBody //view 없을 때 사용	
-public String idCheck(String memberId) {
-	String result = "";
-	Member member = null;
-	try {
-		member = memberService.selectMember(memberId);
-		if(member==null) {
-			result = "true";
-		}else {
-			result = "false";
+	//Id 중복체크
+	@RequestMapping("/member/idcheck")
+	@ResponseBody //view 없을 때 사용	
+	public String idCheck(String memberId) {
+		String result = "";
+		Member member = null;
+		try {
+			member = memberService.selectMember(memberId);
+			if(member==null) {
+				result = "true";
+			}else {
+				result = "false";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-	}catch(Exception e){
-		e.printStackTrace();
+		return result;
 	}
-	return result;
-}
 
-// 마이페이지에서 결제 하게 만들려 했는데 세션 죽으면 결제를 할 수가 없네 .. 너무 졸려서 자러갈게 안녕 이거 내일 좀 지워줘 
-@GetMapping("/member/flight/check/seat")
-@ResponseBody
-public ResponseEntity<Boolean> checkRemainSeat(HttpSession session){
-	boolean result = true;
-	return ResponseEntity.ok(result);
-}
-
-// 마이페이지 -> 예약 내역 -> 결제 버튼
-@GetMapping("/member/flight/payment")
-public String changeMemberReservationStatus(String reservationId, HttpSession session) {
-	String memberId = (String) session.getAttribute("memberId");
-	
-	int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
-	int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
-	
-	Search search = (Search) session.getAttribute("search");
-	
-	int grade = search.getGrade();
-	int person = search.getPerson();
-	
-	int remainSeatToGo = flightService.getRemainSeatByGrade(scheduleIdToGo, grade);
-	int remainSeatToCome = flightService.getRemainSeatByGrade(scheduleIdToCome, grade);
-
-	// 예약 reservation Status 완료로 변경
-	int reservationStatus = flightService.updateReservationStatusByReservationId(reservationId);
-	if(reservationStatus >= 1) {
-		logger.info("좌석 업데이트가 성공적으로 되었습니다.");
-	}
-	
-	// 예약이 완료되었으므로 좌석 업데이트
-	int resultToGo = flightService.updateRemainSeatByScheduleId(scheduleIdToGo, remainSeatToGo - person, grade);
-	int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleIdToCome, remainSeatToCome - person, grade);
-	
-	int result = resultToGo + resultToCome;
-	Member member = memberService.selectMember(memberId);
-	flightService.sendCompletePaymentEmail(member, search, reservationId);
-
-	return "redirect:/member/reservationlist";
-}
 
 
 

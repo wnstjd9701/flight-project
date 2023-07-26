@@ -22,7 +22,6 @@ public interface IMemberService {
 	void updatePassword(Member member); //임시비밀번호받으면 임시비밀번호로 업데이트
 	void updatePasswordByMember(Member member); //비밀번호 수정
 	
-	void insertPassenger(Companion companion); //동승자 정보 추가
 	
 	List<Member> viewReservation(String memberId); //예약 조회
 	

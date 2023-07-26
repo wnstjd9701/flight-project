@@ -101,15 +101,6 @@
 	</update>
 	
 	
-	<insert id="insertPassenger" parameterType="com.project.myapp.member.model.Companion">
-		<![CDATA[
-			INSERT INTO
-				COMPANION
-					(companion_id, member_id, name, first_name, last_name, phone_number, birthday)
-				VALUES
-					(#{companionId}, #{memberId}, #{name}, #{firstName}, #{lastName}, #{phoneNumber},#{birthday})
-		]]>
-	</insert>
 	
  	<select id="viewReservation" parameterType="string" resultType="com.project.myapp.member.model.Member">
 		<![CDATA[ 
@@ -124,7 +115,6 @@
 				s.arrival_nation				AS "arrivalNation", 
 				s.arrival_date					AS "arrivalDate", 
 				s.arrival_time					AS "arrivalTime",
-				t.reservation_id 				AS "reservationId",
 				t.phone_number					AS "phoneNumber",
 				t.seat_type						AS "seatType", 
 				t.ticket_type					AS "ticketType",
@@ -133,7 +123,7 @@
 			FROM TICKET t
 				INNER JOIN SCHEDULE s ON t.schedule_id = s.schedule_id
 				INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
-			WHERE t.member_id = #{memberId}
+			WHERE t.member_id = #{memberId} 
 		]]>
 	</select>
  
