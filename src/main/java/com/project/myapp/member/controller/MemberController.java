@@ -297,10 +297,9 @@ public class MemberController {
 
 
 	/*   API no.11
-      method : GET
-      information : 예약정보조회
-<<<<<<< HEAD
-	 */
+      	method : GET
+      	information : 예약정보조회
+	*/
 	@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
 	public String viewReservation(HttpSession session, Model model,Member member) {
 		String memberId = (String) session.getAttribute("memberId");
@@ -309,54 +308,34 @@ public class MemberController {
 			memberList = memberService.viewReservation(memberId);
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("message", "VIEW_RESERVATION");
-			return "member/reservationList";
+			return "member/reservationlist";
 		}else {
 			model.addAttribute("message", "NOT_LOGIN_MEMBER");
-			return "member/login";   
+			return "member/login";  
 		}
-=======
- */
-@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
-public String viewReservation(HttpSession session, Model model,Member member) {
-	String memberId = (String) session.getAttribute("memberId");
-	
-	List<Member> memberList = null;
-	if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
-		memberList = memberService.viewReservation(memberId);
-		model.addAttribute("memberList", memberList);
-		model.addAttribute("message", "VIEW_RESERVATION");
-		return "member/reservationlist";
-	}else {
-		model.addAttribute("message", "NOT_LOGIN_MEMBER");
-		return "member/login";   
->>>>>>> 62defb32392bd47644eb0b4174ff8c4ea76ab3ca
 	}
-	/*   API no.15
-   		method : POST
-   		information : 예약취소
-	 */
 
-	//Id 중복체크
-	@RequestMapping("/member/idcheck")
-	@ResponseBody //view 없을 때 사용	
-	public String idCheck(String memberId) {
-		String result = "";
-		Member member = null;
-		try {
-			member = memberService.selectMember(memberId);
-			if(member==null) {
-				result = "true";
-			}else {
-				result = "false";
+		//Id 중복체크
+		@RequestMapping("/member/idcheck")
+		@ResponseBody //view 없을 때 사용	
+		public String idCheck(String memberId) {
+			String result = "";
+			Member member = null;
+			try {
+				member = memberService.selectMember(memberId);
+				if(member==null) {
+					result = "true";
+				}else {
+					result = "false";
+				}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
-		}catch(Exception e){
-			e.printStackTrace();
+			return result;
 		}
-		return result;
+
+
+
+
+
 	}
-
-
-
-
-
-}
