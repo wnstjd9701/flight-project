@@ -12,35 +12,15 @@
 <div class="container">
 	<div class="pg-opt">
 	    <div class="row">
-	        <div class="col-md-6 pc">
-	            <h2><fmt:message key="BOARD_LIST"/> 
-<%-- 	            <c:if test="${empty name}">
-	            <small style="color:red;"><fmt:message key="LOGIN"/></small>
-	            </c:if> --%>
-	            </h2>
-	        </div>
-<%-- 	        <div class="col-md-6">
-	            <ol class="breadcrumb">
-	                <li><fmt:message key="BOARD"/></li>
-	                <li class="active"><fmt:message key="BOARD_LIST"/></li>
-	            </ol>
-	        </div> --%>
+
 	    </div>
     </div>
-	${message}
+<%-- 	${message} --%>
 	<div class="content">
-		<form action="<c:url value='/board/search/1'/>" method="get">
-			<div class="pull-right" style="margin-bottom: 5px;">
-			<div class="col-xs-9">
-		        <input type="text" name="keyword" class="form-control">
-		    </div>
-		        <input type="submit" class="btn btn-warning" value="<fmt:message key="SEARCH"/>">
-			</div>
-		</form>
 	    <table class="table table-hover table-bordered">
 		<thead>
 		<tr>
-			<td><fmt:message key="BOARD_ID"/></td>
+			<td>카테고리명</td>
 			<td class="pc"><fmt:message key="WRITER"/></td>
 			<td><fmt:message key="SUBJECT"/></td>
 			<td class="pc"><fmt:message key="WRITE_DATE"/></td>
@@ -48,15 +28,14 @@
 		</tr>
 		</thead>
 		<c:forEach var="board" items="${boardList}">
-		<tr>
-			<td value="${board.boardCategoryName}"></td>
+			<td>${board.boardCategoryName}</td>
 			
 			<td class="pc">${board.memberId}</td>
 			<td>
 			<c:url var="viewLink" value="/board/${board.boardId}/${board.page}"/>
 			<a href='${viewLink}'>${board.title}</a>
 			</td>
-			<td class="pc"><fmt:formatDate value="${board.createdAt}" pattern="YYYY-MM-dd"/></td>
+			<td>${board.createdAt}</td>
 			<td class="pc">${board.views}</td>
 		</tr>
 		</c:forEach>
@@ -71,6 +50,14 @@
 			</td>
 		</tr>
 		</table>
+				<form action="<c:url value='/board/search/1'/>" method="get">
+			<div class="pull-right" style="margin-bottom: 5px;">
+			<div class="col-xs-9">
+		        <input type="text" name="keyword" class="form-control">
+		        <input type="submit" class="btn btn-warning" value="<fmt:message key="SEARCH"/>">
+		    </div>
+			</div>
+		</form>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

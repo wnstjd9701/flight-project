@@ -1,5 +1,7 @@
 package com.project.myapp.board.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.project.myapp.board.dao.IReplyRepository;
@@ -14,8 +16,8 @@ public class ReplyService implements IReplyService {
 	private final IReplyRepository IReplyRepository;
 
 	@Override
-	public Reply selectReply(int boardId, int replyId) {
-		return IReplyRepository.selectReply(boardId, replyId);
+	public List<Reply> selectReply(int boardId) {
+		return IReplyRepository.selectReply(boardId);
 	}
 
 	@Override
