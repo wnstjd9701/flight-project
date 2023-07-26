@@ -13,7 +13,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>mypage</h2>
+							<h2>마이페이지</h2>
 							<p>예약 내역 확인 및 회원 정보 수정</p>
 						</div>
 					</div>

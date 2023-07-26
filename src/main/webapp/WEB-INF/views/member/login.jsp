@@ -16,8 +16,7 @@
 
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>login</h2>
-							<p>로그인</p>
+							<h2>로그인</h2>
 							<hr>
 						</div>
 					</div>
@@ -121,7 +120,8 @@
 							<div class="login-sub ">
 								<a href="<c:url value='/member/insert'/>"
 									class="genric-btn success-border radius">회원가입</a> <a
-									href="<c:url value='/member/findpwd'/>" class="genric-btn success-border radius">비밀번호 찾기</a>
+									href="<c:url value='/member/findpwd'/>"
+									class="genric-btn success-border radius">비밀번호 찾기</a>
 
 							</div>
 						</div>
@@ -134,6 +134,8 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 
+
+</body>
 	<style>
 .sign input {
 	margin: 0 0 20px;
@@ -146,5 +148,4 @@
 	width: 100%;
 }
 </style>
-</body>
 </html>

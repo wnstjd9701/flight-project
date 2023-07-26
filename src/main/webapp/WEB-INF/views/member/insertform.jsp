@@ -18,8 +18,7 @@
 
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>Signup</h2>
-							<p>회원가입</p>
+							<h2>회원가입</h2>
 							<hr>
 						</div>
 					</div>
@@ -41,6 +40,7 @@
 									<h5>
 										아이디<span style="color: red;">*</span>
 									</h5>
+									<p>(영문 소문자/숫자, 6자이상)</p>
 									<input type="text" value="${member.memberId}" name="memberId"
 										id="memberId"
 										${empty member.memberId? "" : "readonly='readonly'" }
@@ -141,11 +141,14 @@
 									<h5 style="line-height: 1.7em;">
 										주소<span style="color: red;">*</span>
 									</h5>
-										<input type="hidden" id="sample6_postcode" placeholder="우편번호" name="postno"> 
-										<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-										<input type="text" id="sample6_address" placeholder="주소" name="address"> 
-										<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="address"> 
-										<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+									<input type="hidden" id="sample6_postcode" placeholder="우편번호"
+										name="postno"> <input type="button"
+										onclick="sample6_execDaumPostcode()" value="우편번호 찾기"
+										class="genric-btn success-border medium"> <input
+										type="text" id="sample6_address" placeholder="주소"
+										name="address"> <input type="text"
+										id="sample6_detailAddress" placeholder="상세주소" name="address">
+									<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 								</div>
 							</div>
 							<hr>
@@ -214,7 +217,8 @@
 	width: 100%;
 }
 </style>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 	var pwd1 = document.querySelector("#password");
 	var pwd2 = document.querySelector("#password2");
@@ -245,7 +249,7 @@
 			});
 		});
 	});
-	
+
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
 				{

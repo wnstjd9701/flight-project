@@ -19,7 +19,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>탑승객 정보</h2>
+							<h2>탑승객 정보 확인 및 결제</h2>
 							<div class="bar_search_panel">
 								<p class="search">왕복</p>
 								<p class="search">도시:
