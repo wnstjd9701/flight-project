@@ -45,7 +45,7 @@
 							<div class="content"></div>
 							<section class="viewmypage">
 								<div class="col-lg-12">
-									<h2>회원 정보 조회</h2>
+									<h2>예약 내역 조회</h2>
 									<hr>
 									<form action="<c:url value='/member/reservationlist'/>"
 										method="get">
@@ -71,34 +71,38 @@
 
 											<c:forEach var="member" items="${memberList}"
 												varStatus="status">
-												<tbody>
-													<tr>
-														<td>${member.reservationId}</td>
-														<td>${member.name}</td>
-														<td>${member.departmentNation}->
-															${member.arrivalNation}</td>
-														<td>${member.departmentDate}</td>
-														<td>${member.departmentTime}~<br>
-															${member.arrivalTime}
-														</td>
-														<%-- <td>${member.phoneNumber}</td> --%>
-														<td><c:choose>
-																<c:when test="${passenger.seatType eq '1' }">
+												<c:if
+													test="${member.reservationStatus.equalsIgnoreCase('예약 완료')}">
+
+													<tbody>
+														<tr>
+															<td>${member.reservationId}</td>
+															<td>${member.name}</td>
+															<td>${member.departmentNation}->
+																${member.arrivalNation}</td>
+															<td>${member.departmentDate}</td>
+															<td>${member.departmentTime}~<br>
+																${member.arrivalTime}
+															</td>
+															<%-- <td>${member.phoneNumber}</td> --%>
+															<td><c:choose>
+																	<c:when test="${passenger.seatType eq '1' }">
 																	이코노미 클래스
 																</c:when>
-																<c:when test="${passenger.seatType eq '2'}">
+																	<c:when test="${passenger.seatType eq '2'}">
 																	비즈니스 클래스
 																</c:when>
-																<c:otherwise>
+																	<c:otherwise>
 																	퍼스트 클래스
 																</c:otherwise>
-															</c:choose></td>
-														<%-- <td>${member.ticketType}</td> --%>
-														<td>${member.reservationStatus}</td>
-														<td>${member.totalPrice}</td>
-													</tr>
+																</c:choose></td>
+															<%-- <td>${member.ticketType}</td> --%>
+															<td>${member.reservationStatus}</td>
+															<td>${member.totalPrice}</td>
+														</tr>
+													</tbody>
+												</c:if>
 											</c:forEach>
-											</tbody>
 										</table>
 									</form>
 								</div>
@@ -111,7 +115,9 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
-	<style>
+
+</body>
+<style>
 .submenu {
 	color: #415094;
 }
@@ -138,5 +144,4 @@ li a:hover {
 	color: #007bff;
 }
 </style>
-</body>
 </html>

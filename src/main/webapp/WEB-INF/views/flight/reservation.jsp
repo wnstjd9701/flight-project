@@ -24,9 +24,9 @@
 							<h2>항공권 예약</h2>
 							<div class="bar_search_panel">
 								<p class="search">왕복</p>
-								<p class="search">도시 ${sessionScope.search.departmentNation}
+								<p class="search">도시:  ${sessionScope.search.departmentNation}
 									→ ${sessionScope.search.arrivalNation}</p>
-								<p class="search">날짜${sessionScope.search.departmentDate} ~
+								<p class="search">날짜: ${sessionScope.search.departmentDate} ~
 									${sessionScope.search.arrivalDate}</p>
 								<p class="search">인원: ${sessionScope.search.person}명</p>
 								<c:choose>
