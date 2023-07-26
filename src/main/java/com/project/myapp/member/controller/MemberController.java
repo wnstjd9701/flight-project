@@ -10,15 +10,22 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
+import com.project.myapp.flight.model.Search;
+import com.project.myapp.flight.service.IFlightService;
+
 import com.project.myapp.member.model.Member;
 import com.project.myapp.member.service.IMemberService;
 
@@ -32,6 +39,8 @@ public class MemberController {
 
 	private final IMemberService memberService;
 
+	private final IFlightService flightService;
+	
 	private final MemberValidator memberValidator;
 
 	//스프링 밸리데이터 메서드 추가(유효성검사)
@@ -325,7 +334,6 @@ public String viewReservation(HttpSession session, Model model,Member member) {
 	if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
 		memberList = memberService.viewReservation(memberId);
 		model.addAttribute("memberList", memberList);
-		System.out.println(memberList);
 		model.addAttribute("message", "VIEW_RESERVATION");
 		return "member/reservationlist";
 	}else {
@@ -355,6 +363,47 @@ public String idCheck(String memberId) {
 		e.printStackTrace();
 	}
 	return result;
+}
+
+// 마이페이지에서 결제 하게 만들려 했는데 세션 죽으면 결제를 할 수가 없네 .. 너무 졸려서 자러갈게 안녕 이거 내일 좀 지워줘 
+@GetMapping("/member/flight/check/seat")
+@ResponseBody
+public ResponseEntity<Boolean> checkRemainSeat(HttpSession session){
+	boolean result = true;
+	return ResponseEntity.ok(result);
+}
+
+// 마이페이지 -> 예약 내역 -> 결제 버튼
+@GetMapping("/member/flight/payment")
+public String changeMemberReservationStatus(String reservationId, HttpSession session) {
+	String memberId = (String) session.getAttribute("memberId");
+	
+	int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
+	int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
+	
+	Search search = (Search) session.getAttribute("search");
+	
+	int grade = search.getGrade();
+	int person = search.getPerson();
+	
+	int remainSeatToGo = flightService.getRemainSeatByGrade(scheduleIdToGo, grade);
+	int remainSeatToCome = flightService.getRemainSeatByGrade(scheduleIdToCome, grade);
+
+	// 예약 reservation Status 완료로 변경
+	int reservationStatus = flightService.updateReservationStatusByReservationId(reservationId);
+	if(reservationStatus >= 1) {
+		logger.info("좌석 업데이트가 성공적으로 되었습니다.");
+	}
+	
+	// 예약이 완료되었으므로 좌석 업데이트
+	int resultToGo = flightService.updateRemainSeatByScheduleId(scheduleIdToGo, remainSeatToGo - person, grade);
+	int resultToCome = flightService.updateRemainSeatByScheduleId(scheduleIdToCome, remainSeatToCome - person, grade);
+	
+	int result = resultToGo + resultToCome;
+	Member member = memberService.selectMember(memberId);
+	flightService.sendCompletePaymentEmail(member, search, reservationId);
+
+	return "redirect:/member/reservationlist";
 }
 
 

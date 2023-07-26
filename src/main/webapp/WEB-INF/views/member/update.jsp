@@ -30,9 +30,12 @@
 							<div>
 								<ul>
 									<li><a href="<c:url value='/member/mp'/>">회원 정보 조회</a></li>
-									<li><a href="<c:url value='/member/reservationlist'/>">예약 내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원 정보 수정</a></li>
-									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호 변경</a></li>
+									<li><a href="<c:url value='/member/reservationlist'/>">예약
+											내역</a></li>
+									<li><a href="<c:url value='/member/mp/update'/>">회원 정보
+											수정</a></li>
+									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
+											변경</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
@@ -59,8 +62,7 @@
 											<div class="form-group" style="height: 0px; margin: 0px;">
 												<label for="password"></label>
 												<div class="sign">
-													<h5 style="line-height: 2.5em;">
-													</h5>
+													<h5 style="line-height: 2.5em;"></h5>
 													<input type="hidden" name="password" id="password"
 														value="${member.password}" class="form-control" required />
 												</div>
@@ -130,10 +132,11 @@
 														type="button" onclick="sample6_execDaumPostcode()"
 														value="우편번호 찾기"><br> <input type="text"
 														id="sample6_address" placeholder="주소" name="address"
-														value="${member.address}"class="form-control-2"><br> <input
-														type="text" id="sample6_detailAddress" placeholder="상세주소"
-														name="address" class="form-control-2"> <input type="text"
-														id="sample6_extraAddress" placeholder="참고항목" class="form-control-2">
+														value="${member.address}" class="form-control-2"><br>
+													<input type="text" id="sample6_detailAddress"
+														placeholder="상세주소" name="address" class="form-control-2">
+													<input type="text" id="sample6_extraAddress"
+														placeholder="참고항목" class="form-control-2">
 												</div>
 											</div>
 											<hr>
@@ -162,8 +165,7 @@
 											<div class="form-group">
 
 												<input type="submit" class="genric-btn success" value="수정하기">
-												<input type="reset" class="genric-btn success"
-													value="취소">
+												<input type="reset" class="genric-btn success" value="취소">
 											</div>
 										</form>
 									</div>
@@ -177,7 +179,9 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
-	<style>
+
+</body>
+<style>
 .submenu {
 	color: #415094;
 }
@@ -208,7 +212,6 @@ li a:hover {
 	width: 100%;
 }
 </style>
-</body>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">

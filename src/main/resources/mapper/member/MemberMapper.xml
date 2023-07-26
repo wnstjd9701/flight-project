@@ -124,6 +124,7 @@
 				s.arrival_nation				AS "arrivalNation", 
 				s.arrival_date					AS "arrivalDate", 
 				s.arrival_time					AS "arrivalTime",
+				t.reservation_id 				AS "reservationId",
 				t.phone_number					AS "phoneNumber",
 				t.seat_type						AS "seatType", 
 				t.ticket_type					AS "ticketType",

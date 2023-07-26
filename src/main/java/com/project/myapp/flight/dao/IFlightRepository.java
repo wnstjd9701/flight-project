@@ -36,5 +36,5 @@ public interface IFlightRepository {
 	
 	// 예약 상태 변경
 	int	updateReservationStatusByReservationId(String reservationId);
-
+	
 }

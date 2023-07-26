@@ -81,14 +81,14 @@ h5 {
 			<div class="col-lg-12" style="margin-top: 3%;">
 				<h5>예약자 아이디</h5>
 				<h3>${sessionScope.memberId}</h3>
-				
+				<hr>
 				<c:forEach var="passenger" items="${sessionScope.passengerList}"
 					varStatus="status">
 					<table>
 						<tr>
-							<th><h5>예약 번호</h5></th>
-							<th><h5>탑승객 번호</h5></th>
-							<th class="text-right"><h5>예약 상태</h5></th>
+							<th>예약 번호</th>
+							<th>탑승객 번호</th>
+							<th class="text-right">예약 상태</th>
 						</tr>
 						<tr>
 							<td>
@@ -222,6 +222,9 @@ h5 {
 				} else {
 					console.log(rsp);
 					alert(rsp.error_msg);
+					if(merchantUid == null){
+						window.location.href = "/";
+					}
 					window.location.href = "/flight/payment";
 				}
 			});
