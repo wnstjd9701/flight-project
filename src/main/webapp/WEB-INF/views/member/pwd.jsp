@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+<title>여행떠나조</title>
 <style type="text/css">
 .mybtn {
 	display: inline;

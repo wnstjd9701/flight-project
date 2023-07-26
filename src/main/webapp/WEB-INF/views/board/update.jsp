@@ -5,6 +5,7 @@
 <!DOCTYPE html> 
 <html>
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp"/>
+<title>여행떠나조</title>
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
 <div class="container">

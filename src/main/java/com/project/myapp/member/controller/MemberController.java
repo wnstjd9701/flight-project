@@ -17,15 +17,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.project.myapp.flight.model.Search;
-import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.flight.service.IFlightService;
+
 import com.project.myapp.member.model.Member;
 import com.project.myapp.member.service.IMemberService;
 
@@ -335,7 +335,7 @@ public String viewReservation(HttpSession session, Model model,Member member) {
 		memberList = memberService.viewReservation(memberId);
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("message", "VIEW_RESERVATION");
-		return "member/reservationList";
+		return "member/reservationlist";
 	}else {
 		model.addAttribute("message", "NOT_LOGIN_MEMBER");
 		return "member/login";   

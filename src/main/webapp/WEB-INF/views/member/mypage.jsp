@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+<title>여행떠나조</title>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="breadcrumb breadcrumb_bg">
@@ -28,10 +29,13 @@
 						<li style="width: 30%; padding: 5%;" class="submenu">
 							<div>
 								<ul>
-									<li><a href="<c:url value='/member/mp'/>">회원정보 조회</a></li>
-									<li><a href="<c:url value='/member/reservationlist'/>">예약 내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원정보 수정</a></li>
-									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호 수정</a></li>
+									<li><a href="<c:url value='/member/mp'/>">회원 정보 조회</a></li>
+									<li><a href="<c:url value='/member/reservationlist'/>">예약
+											내역</a></li>
+									<li><a href="<c:url value='/member/mp/update'/>">회원 정보
+											수정</a></li>
+									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
+											수정</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
@@ -41,6 +45,13 @@
 								<section class="viewmypage">
 									<div class="col-lg-12">
 										<h2>회원 정보 조회</h2>
+										<hr>
+										<label for="memberID"></label>
+										<div class="view">
+											<h5 style="line-height: 2.5em;">ID</h5>
+											<h3>${member.memberId}</h3>
+
+										</div>
 										<hr>
 										<label for="name"></label>
 										<div class="view">
@@ -108,7 +119,10 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 
-	<style>
+
+</body>
+
+<style>
 .submenu {
 	color: #415094;
 }
@@ -135,5 +149,4 @@ li a:hover {
 	color: #007bff;
 }
 </style>
-</body>
 </html>

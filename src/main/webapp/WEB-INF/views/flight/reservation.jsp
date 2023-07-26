@@ -11,6 +11,7 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+<title>여행떠나조</title>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -23,10 +24,11 @@
 							<h2>항공권 예약</h2>
 							<div class="bar_search_panel">
 								<p class="search">왕복</p>
-								<p class="search">도시 ${sessionScope.search.departmentNation}
-									→ ${sessionScope.search.arrivalNation}</p>
-								<p class="search">날짜${sessionScope.search.departmentDate} ~
-									${sessionScope.search.arrivalDate}</p>
+								<p class="search">도시:
+									${sessionScope.search.departmentNation} →
+									${sessionScope.search.arrivalNation}</p>
+								<p class="search">날짜: ${sessionScope.search.departmentDate}
+									~ ${sessionScope.search.arrivalDate}</p>
 								<p class="search">인원: ${sessionScope.search.person}명</p>
 								<c:choose>
 									<c:when test="${sessionScope.search.grade eq '1' }">
@@ -87,27 +89,42 @@
 <input type="text" id="impNumber" name="impNumber" value="${sessionScope.impNumber}"> --%>
 				<div style="width: 100%;">
 					<ul style="display: flex;">
-						<li style="width: 50%; padding: 5%;" class="ToGO">
+						<li
+							style="width: 50%; margin: 3%; padding: 2%; background: #f9f9ff;"
+							class="ToGO">
 							<div>
-								<h3>가는 편 항공권</h3>
+								<h3>
+									<img src="<c:url value="/img/tackoff.png" />"
+										style="width: 10%; margin-right: 10px;"> 가는 편 항공권
+								</h3>
 								<hr>
 								<div class="view">
-									<h4>항공사 이름 / 비행기 기종</h4>
-									<p>${sessionScope.selectScheduleToGo.airlineName}/
-										${sessionScope.selectScheduleToGo.airplaneTypeName}</p>
+									<h4>항공사 / 비행기 기종</h4>
+									<p>
+										<img
+											src="<c:url value="/img/${sessionScope.selectScheduleToGo.image}"/>"
+											style="width: 5%; margin-right: 10px;">
+										${sessionScope.selectScheduleToGo.airlineName} /
+										${sessionScope.selectScheduleToGo.airplaneTypeName}
+									</p>
 								</div>
 								<hr>
 								<div class="view">
-									<h4>출발 도시 -> 도착도시</h4>
-									<p>${sessionScope.selectScheduleToGo.departmentNation}->
-										${sessionScope.selectScheduleToGo.arrivalNation}</p>
+									<h4>
+										출발 도시 <img src="<c:url value="/img/right.png"/>"
+											style="width: 5%; margin: 0px 10px;"> 도착도시
+									</h4>
+									<p>${sessionScope.selectScheduleToGo.departmentNation}<img
+											src="<c:url value="/img/right.png"/>"
+											style="width: 5%; margin: 0px 10px;">
+										${sessionScope.selectScheduleToGo.arrivalNation}
+									</p>
 								</div>
 								<hr>
 								<div class="view">
-									<h4>출발 날짜 및 시간 / 도착 날짜 및 시간</h4>
-									<p>${sessionScope.selectScheduleToGo.departmentDate},
-										${sessionScope.selectScheduleToGo.departmentTime} /
-										${sessionScope.selectScheduleToGo.arrivalDate},
+									<h4>날짜 및 시간</h4>
+									<p>${sessionScope.selectScheduleToGo.departmentDate}/
+										${sessionScope.selectScheduleToGo.departmentTime} ~
 										${sessionScope.selectScheduleToGo.arrivalTime}</p>
 								</div>
 								<hr>
@@ -115,41 +132,57 @@
 									<c:when test="${sessionScope.search.grade eq '1' }">
 										<h4>좌석 등급 및 금액</h4>
 										<p>이코노미 /
-											${sessionScope.selectScheduleToGo.economyClassFare}</p>
+											${sessionScope.selectScheduleToGo.economyClassFare}원</p>
 									</c:when>
 									<c:when test="${sessionScope.search.grade eq '2'}">
 										<h4>좌석 등급 및 금액</h4>
 										<p>비즈니스 /
-											${sessionScope.selectScheduleToGo.businessClassFare}</p>
+											${sessionScope.selectScheduleToGo.businessClassFare}원</p>
 									</c:when>
 									<c:otherwise>
 										<h4>좌석 등급 및 금액</h4>
-										<p>퍼스트 / ${sessionScope.selectScheduleToGo.firstClassFare}</p>
+										<p>퍼스트 /
+											${sessionScope.selectScheduleToGo.firstClassFare}원</p>
 									</c:otherwise>
 								</c:choose>
 							</div>
 						</li>
-						<li style="width: 50%; padding: 5%;" class="ToCome">
+						<li
+							style="width: 50%; margin: 3%; padding: 2%; background: #f9f9ff;"
+							class="ToCome">
 							<div>
-								<h3>오는 편 항공권</h3>
+								<h3>
+									<img src="<c:url value="/img/landing.png"/>"
+										style="width: 10%; margin-right: 10px;"> 오는 편 항공권
+								</h3>
 								<hr>
 								<div class="view">
-									<h4>항공사 이름 / 비행기 기종</h4>
-									<p>${sessionScope.selectScheduleToCome.airlineName}/
-										${sessionScope.selectScheduleToCome.airplaneTypeName}</p>
+									<h4>항공사 / 비행기 기종</h4>
+									<p>
+										<img
+											src="<c:url value="/img/${sessionScope.selectScheduleToCome.image}"/>"
+											style="width: 5%; margin-right: 10px;">
+										${sessionScope.selectScheduleToCome.airlineName} /
+										${sessionScope.selectScheduleToCome.airplaneTypeName}
+									</p>
 								</div>
 								<hr>
 								<div class="view">
-									<h4>출발 도시 -> 도착도시</h4>
-									<p>${sessionScope.selectScheduleToCome.departmentNation}->
-										${sessionScope.selectScheduleToCome.arrivalNation}</p>
+									<h4>
+										출발 도시 <img src="<c:url value="/img/right.png"/>"
+											style="width: 5%; margin: 0px 10px;"> 도착도시
+									</h4>
+									<p>${sessionScope.selectScheduleToCome.departmentNation}<img
+											src="<c:url value="/img/right.png"/>"
+											style="width: 5%; margin: 0px 10px;">
+										${sessionScope.selectScheduleToCome.arrivalNation}
+									</p>
 								</div>
 								<hr>
 								<div class="view">
-									<h4>출발 날짜 및 시간 / 도착 날짜 및 시간</h4>
-									<p>${sessionScope.selectScheduleToCome.departmentDate},
-										${sessionScope.selectScheduleToCome.departmentTime} /
-										${sessionScope.selectScheduleToCome.arrivalDate},
+									<h4>날짜 및 시간</h4>
+									<p>${sessionScope.selectScheduleToCome.departmentDate}/
+										${sessionScope.selectScheduleToCome.departmentTime} ~
 										${sessionScope.selectScheduleToCome.arrivalTime}</p>
 								</div>
 								<hr>
@@ -157,17 +190,17 @@
 									<c:when test="${sessionScope.search.grade eq '1' }">
 										<h4>좌석 등급 및 금액</h4>
 										<p>이코노미 /
-											${sessionScope.selectScheduleToCome.economyClassFare}</p>
+											${sessionScope.selectScheduleToCome.economyClassFare}원</p>
 									</c:when>
 									<c:when test="${sessionScope.search.grade eq '2'}">
 										<h4>좌석 등급 및 금액</h4>
 										<p>비즈니스 /
-											${sessionScope.selectScheduleToCome.businessClassFare}</p>
+											${sessionScope.selectScheduleToCome.businessClassFare}원</p>
 									</c:when>
 									<c:otherwise>
 										<h3>좌석 등급 및 금액</h3>
 										<p>퍼스트 /
-											${sessionScope.selectScheduleToCome.firstClassFare}</p>
+											${sessionScope.selectScheduleToCome.firstClassFare}원</p>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -177,7 +210,6 @@
 					<h3 style="color: red; text-align: right; margin-bottom: 10px;">총
 						결제 금액: ${sessionScope.totalPrice}</h3>
 				</div>
-				<h3>인원수: ${sessionScope.search.person}</h3>
 				<hr>
 				<div class="container">
 					<div class="row" style="justify-content: center;">
@@ -208,19 +240,26 @@
 									</c:otherwise>
 								</c:choose>
 								<c:forEach var="i" begin="1" end="${sessionScope.search.person}">
-									<div class="nc_select" style="margin-bottom:10px;">
-										<p>${i}번탑승객 정보 입력</p>
+									<div class="nc_select" style="margin-bottom: 10px;">
+										<h4>${i}번탑승객정보입력</h4>
 										<hr>
-										이름: <input type="text" name="name" class="form-control">
-										영문 이름:<input type="text" name="firstName" class="form-control">
-										영문 성:<input type="text" name="lastName" class="form-control">
-										전화 번호: <input type="text" name="phoneNumber"
+
+										<h5>이름:</h5>
+										<input type="text" name="name" class="form-control">
+										<h5>영문 이름:</h5>
+										<input type="text" name="firstName" class="form-control">
+										<h5>영문 성:</h5>
+										<input type="text" name="lastName" class="form-control">
+										<h5>전화 번호:</h5>
+										<input type="text" name="phoneNumber" class="form-control">
+										<hr>
+										<h5>생일:</h5>
+										<input type="date" name="birthday" id="birthday-${i}"
 											class="form-control">
-										<hr>
-										생일: <input type="date" name="birthday" id="birthday-${i}" class="form-control">
-										여권 번호: <input type="text" name="passportNumber"
-											class="form-control"> 
-										여권 만료일: <input type="date" id="passportExpiryDate-${i}"
+										<h5>여권 번호:</h5>
+										<input type="text" name="passportNumber" class="form-control">
+										<h5>여권 만료일:</h5>
+										<input type="date" id="passportExpiryDate-${i}"
 											name="passportExpiryDate" class="form-control">
 										<!-- 생일은 오늘 이전 날짜만 선택 가능 / 여권 만료일은 오늘 이후만 가능 -->
 									</div>
@@ -246,11 +285,12 @@
 			</div>
 		</div>
 	</section>
-
-	<style>
+</body>
+<style>
 .form-control {
 	display: inline-block;
-	width: 18%;
+	width: 16%;
+	margin: 0px 10px;
 }
 
 .search {
@@ -265,7 +305,9 @@
 .bar_search_panel {
 	display: inline-flex;
 }
-</style>
-</body>
 
+h5 {
+	display: contents;
+}
+</style>
 </html>

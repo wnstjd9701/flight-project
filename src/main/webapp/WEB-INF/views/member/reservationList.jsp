@@ -151,7 +151,9 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
-	<style>
+	
+</body>
+<style>
 .submenu {
 	color: #415094;
 }
@@ -178,5 +180,4 @@ li a:hover {
 	color: #007bff;
 }
 </style>
-</body>
 </html>
