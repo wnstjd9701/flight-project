@@ -25,12 +25,13 @@
 				member_id	"memberId",
 				title		"title",
 				content		"content",
+				created_at	"createdAt",
 				views		"views",
 				board_category.board_category_name	"boardCategoryName"
 				FROM
 				(
 				SELECT
-				    board_id, category_id, member_id, title, content, views, rownum AS rnum
+				    board_id, category_id, member_id, title, content,created_at, views, rownum AS rnum
 				FROM(
 				    SELECT * FROM BOARD
 				    WHERE category_id = #{categoryId}
@@ -58,11 +59,9 @@
 				board.member_id						AS	"memberId",
 				title							    AS	"title",
 				content							    AS	"content",
-				views							    AS	"views",
-				reply.reply_content				    AS	"replyContent"
+				views							    AS	"views"
 			FROM BOARD
 			LEFT OUTER JOIN board_category ON board.category_id = board_category.board_category_id
-			LEFT OUTER JOIN reply ON board.board_id = reply.board_id
 			WHERE board.board_id = #{boardId}
 		]]>
 	</select>

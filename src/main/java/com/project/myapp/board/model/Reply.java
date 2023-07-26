@@ -1,8 +1,11 @@
 package com.project.myapp.board.model;
 
-import java.sql.Clob;
+
 import java.sql.Timestamp;
 
+import lombok.Data;
+
+@Data
 public class Reply {
 	private int replyId;
 	private String memberId;

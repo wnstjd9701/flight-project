@@ -100,7 +100,7 @@ public class MemberController {
 		Member member = memberService.selectMember(memberId);
 		if(member!=null) {
 			String dbpassword = member.getPassword();
-			if(dbpassword == null && member.getIsDeleted() == 1) { //아이디가 없는 경우
+			if(dbpassword == null && member.getIsDeleted() == 1 && member.getIsDeleted()==1) { //아이디가 없는 경우
 				model.addAttribute("message", "NOT_VALID_MEMBER");
 			}else {
 				if(dbpassword.equals(password)) {
