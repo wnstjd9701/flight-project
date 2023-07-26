@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
-
+<title>여행떠나조</title>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="breadcrumb breadcrumb_bg">
@@ -120,8 +120,8 @@
 							<br> <br>
 							<div class="login-sub ">
 								<a href="<c:url value='/member/insert'/>"
-									class="genric-btn link">회원가입</a> <a
-									href="<c:url value='/member/findpwd'/>" class="genric-btn link">비밀번호 찾기</a>
+									class="genric-btn success-border radius">회원가입</a> <a
+									href="<c:url value='/member/findpwd'/>" class="genric-btn success-border radius">비밀번호 찾기</a>
 
 							</div>
 						</div>

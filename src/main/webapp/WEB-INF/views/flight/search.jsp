@@ -5,6 +5,7 @@
 <title>항공권 검색</title>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+<title>여행떠나조</title>
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	<section class="breadcrumb breadcrumb_bg">
@@ -16,10 +17,11 @@
 							<h2>항공권 검색</h2>
 							<div class="bar_search_panel">
 								<p class="search">왕복</p>
-								<p class="search">도시 ${sessionScope.search.departmentNation}
-									→ ${sessionScope.search.arrivalNation}</p>
-								<p class="search">날짜${sessionScope.search.departmentDate} ~
-									${sessionScope.search.arrivalDate}</p>
+								<p class="search">도시:
+									${sessionScope.search.departmentNation} →
+									${sessionScope.search.arrivalNation}</p>
+								<p class="search">날짜: ${sessionScope.search.departmentDate}
+									~ ${sessionScope.search.arrivalDate}</p>
 								<p class="search">인원: ${sessionScope.search.person}명</p>
 								<c:choose>
 									<c:when test="${sessionScope.search.grade eq '1' }">
@@ -44,8 +46,14 @@
 
 			<c:choose>
 				<c:when test="${goListCount eq '0' || comeListCount eq '0'}">
-		검색된 항공권이 없습니다.
-	</c:when>
+					<div style="text-align: center;">
+						<h2>
+							검색된 항공권이 없습니다. <img src="<c:url value="/img/sadface.png" />"
+								style="width: 10%; margin-left: 10px;">
+						</h2>
+						<a class="genric-btn info" href="<c:url value='/'/>">다시 검색하기</a>
+					</div>
+				</c:when>
 				<c:otherwise>
 					<form action="<c:url value="/flight/ticket/select"/>" method="get">
 						<input type="hidden" name="grade"
@@ -53,20 +61,23 @@
 							type="hidden" name="person" value="${sessionScope.search.person}">
 						<input type="hidden" name="requestCount" value="${requestCount}">
 						<div style="margin-bottom: 30px;">
-							<h3>가는편 항공권: ${goListCount}</h3>
+							<h3>
+								<img src="<c:url value="/img/tackoff.png" />"
+									style="width: 3%; margin-right: 10px;"> 가는편 항공권:
+								${goListCount}건
+							</h3>
 							<div style="margin: 20px 0;">
 								<table>
 									<thead>
 										<tr>
-											<th>선택</th>
-											<th>항공사 이미지</th>
-											<th>항공사 이름</th>
-											<th>비행기 기종</th>
-											<th>도시</th>
-											<th>날짜 및 시간</th>
-											<th>비행 시간</th>
-											<th>잔여 좌석</th>
-											<th>좌석 금액</th>
+											<th style="width: 7%">선택</th>
+											<th colspan="2" style="width: 16%">항공사</th>
+											<th style="width: 12%">비행기 기종</th>
+											<th style="width: 15%">도시</th>
+											<th style="width: 15%">날짜 및 시간</th>
+											<th style="width: 15%">비행 시간</th>
+											<th style="width: 10%">잔여 좌석</th>
+											<th style="width: 10%">좌석 금액</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -76,15 +87,15 @@
 												<td><input type="checkbox" name="scheduleListIdToGo"
 													value="${flightScheduleToGo.scheduleId}"
 													class="confirm-checkbox"></td>
-												<!-- 여기 이미지가 안떠서 수정 해주시면 됩니다. -->
-												<td><img src="" alt="${flightScheduleToGo.image}"></td>
+												<td><img
+													src="<c:url value="/img/${flightScheduleToGo.image}"/>"></td>
 												<td>${flightScheduleToGo.airlineName}</td>
 												<td>${flightScheduleToGo.airplaneTypeName}</td>
-												<td>${flightScheduleToGo.departmentNation} -> ${flightScheduleToGo.arrivalNation}
-												</td>
-												<td>
-													<c:choose>
-														<c:when test="${flightScheduleToGo.departmentDate eq flightScheduleToGo.arrivalDate}">
+												<td>${flightScheduleToGo.departmentNation} ->
+													${flightScheduleToGo.arrivalNation}</td>
+												<td><c:choose>
+														<c:when
+															test="${flightScheduleToGo.departmentDate eq flightScheduleToGo.arrivalDate}">
 														출발: ${flightScheduleToGo.departmentDate}<br>
 														${flightScheduleToGo.departmentTime} -> ${flightScheduleToGo.arrivalTime}														
 														</c:when>
@@ -92,8 +103,7 @@
 														출발: ${flightScheduleToGo.departmentDate} (+1)<br>
 														${flightScheduleToGo.arrivalDate} -> ${flightScheduleToGo.arrivalTime} 
 														</c:otherwise>
-													</c:choose>
-												</td>
+													</c:choose></td>
 												<td>${flightScheduleToGo.flightTimeDetail}</td>
 												<c:choose>
 													<c:when test="${sessionScope.search.grade eq '1'}">
@@ -116,20 +126,23 @@
 							</div>
 						</div>
 						<div>
-							<h3>오는편 항공권: ${comeListCount}</h3>
+							<h3>
+								<img src="<c:url value="/img/landing.png"/>"
+									style="width: 3%; margin-right: 10px;"> 오는편 항공권:
+								${comeListCount}건
+							</h3>
 							<div style="margin: 20px 0;">
 								<table>
 									<thead>
 										<tr>
-											<th>선택</th>
-											<th>항공사 이미지</th>
-											<th>항공사 이름</th>
-											<th>비행기 기종</th>
-											<th>도시</th>
-											<th>날짜 및 시간</th>
-											<th>비행 시간</th>
-											<th>잔여 좌석</th>
-											<th>좌석 금액</th>
+											<th style="width: 7%">선택</th>
+											<th colspan="2" style="width: 16%">항공사</th>
+											<th style="width: 12%">비행기 기종</th>
+											<th style="width: 15%">도시</th>
+											<th style="width: 15%">날짜 및 시간</th>
+											<th style="width: 15%">비행 시간</th>
+											<th style="width: 10%">잔여 좌석</th>
+											<th style="width: 10%">좌석 금액</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -139,14 +152,15 @@
 												<td><input type="checkbox" name="scheduleListIdToCome"
 													value="${flightScheduleToCome.scheduleId}"
 													class="confirm-checkbox"></td>
-												<td><img src="" alt="${flightScheduleToCome.image}"></td>
+												<td><img
+													src="<c:url value="/img/${flightScheduleToCome.image}"/>"></td>
 												<td>${flightScheduleToCome.airlineName}</td>
 												<td>${flightScheduleToCome.airplaneTypeName}</td>
-												<td>${flightScheduleToCome.departmentNation} -> ${flightScheduleToCome.arrivalNation}
-												</td>
-												<td>
-													<c:choose>
-														<c:when test="${flightScheduleToCome.departmentDate eq flightScheduleToCome.arrivalDate}">
+												<td>${flightScheduleToCome.departmentNation} ->
+													${flightScheduleToCome.arrivalNation}</td>
+												<td><c:choose>
+														<c:when
+															test="${flightScheduleToCome.departmentDate eq flightScheduleToCome.arrivalDate}">
 															출발: ${flightScheduleToCome.departmentDate}<br>
 															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
 														</c:when>
@@ -154,8 +168,7 @@
 															출발: ${flightScheduleToCome.departmentDate} (+1)<br>
 															${flightScheduleToCome.departmentTime} -> ${flightScheduleToCome.arrivalTime}
 														</c:otherwise>
-													</c:choose>
-												</td>
+													</c:choose></td>
 												<td>${flightScheduleToCome.flightTimeDetail}</td>
 												<c:choose>
 													<c:when test="${sessionScope.search.grade eq '1'}">
@@ -189,19 +202,19 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 	<script>
-	$('.schedule').on('click', function(event){
-		  console.log("a");
-		  var currentTarget = $(event.target);
-		  var row = currentTarget.closest('tr'); 
-		  
-		  if ($(event.target).is('input[type=checkbox]')) {
-			    return;
-		  }
-		  if (row.find('input[type=checkbox]').prop('checked')) {
-		    row.find('input[type=checkbox]').prop('checked', false);
-		  } else {
-		    row.find('input[type=checkbox]').prop('checked', true);
-		  }
+		$('.schedule').on('click', function(event) {
+			console.log("a");
+			var currentTarget = $(event.target);
+			var row = currentTarget.closest('tr');
+
+			if ($(event.target).is('input[type=checkbox]')) {
+				return;
+			}
+			if (row.find('input[type=checkbox]').prop('checked')) {
+				row.find('input[type=checkbox]').prop('checked', false);
+			} else {
+				row.find('input[type=checkbox]').prop('checked', true);
+			}
 		});
 	</script>
 </body>
@@ -260,7 +273,7 @@ table {
 	margin-top: 20px;
 }
 /* 항공권 선택 마우스 올려놓을 때 색상  */
-.schedule:hover{
+.schedule:hover {
 	background-color: #b0dbff;
 	transition: 1.5s ease;
 	cursor: pointer;

@@ -17,15 +17,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.project.myapp.flight.model.Search;
-import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.flight.service.IFlightService;
+
 import com.project.myapp.member.model.Member;
 import com.project.myapp.member.service.IMemberService;
 
@@ -299,6 +299,7 @@ public class MemberController {
 	/*   API no.11
       method : GET
       information : 예약정보조회
+<<<<<<< HEAD
 	 */
 	@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
 	public String viewReservation(HttpSession session, Model model,Member member) {
@@ -313,6 +314,22 @@ public class MemberController {
 			model.addAttribute("message", "NOT_LOGIN_MEMBER");
 			return "member/login";   
 		}
+=======
+ */
+@RequestMapping(value="/member/reservationlist", method=RequestMethod.GET)
+public String viewReservation(HttpSession session, Model model,Member member) {
+	String memberId = (String) session.getAttribute("memberId");
+	
+	List<Member> memberList = null;
+	if(memberId!=null && !memberId.equals("")&& member.getIsDeleted()!=1) {
+		memberList = memberService.viewReservation(memberId);
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("message", "VIEW_RESERVATION");
+		return "member/reservationlist";
+	}else {
+		model.addAttribute("message", "NOT_LOGIN_MEMBER");
+		return "member/login";   
+>>>>>>> 62defb32392bd47644eb0b4174ff8c4ea76ab3ca
 	}
 	/*   API no.15
    		method : POST
