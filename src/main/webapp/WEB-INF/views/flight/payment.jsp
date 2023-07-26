@@ -212,7 +212,7 @@ h5 {
 						success : function(data) {
 							alert("좌석이 성공적으로 예약되었습니다.");
 							console.log(data);
-							window.location.href = "/"; // 여기에 누나 마이페이지 예약조회 url 넣으면 됨 ㅇㅋㅇㅋ ㅇㅋㅋ
+							window.location.href = "/member/reservationlist"; // 여기에 누나 마이페이지 예약조회 url 넣으면 됨 ㅇㅋㅇㅋ ㅇㅋㅋ
 						},
 						error : function(err) {
 							alert(err);

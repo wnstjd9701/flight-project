@@ -40,7 +40,6 @@ public class BoardController {
 	*/
 	@RequestMapping("/board/cat/{categoryId}/{page}")
 	public String getListByCategory(@PathVariable int categoryId, @PathVariable int page, HttpSession session, Model model) {
-		System.out.println("타나용");
 		session.setAttribute("page", page);
 		model.addAttribute("categoryId", categoryId);
 		List<Board> boardList = boardService.selectBoardListByCategory(categoryId, page);

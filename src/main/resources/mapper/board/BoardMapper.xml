@@ -19,22 +19,25 @@
 	<select id="selectBoardListByCategory" parameterType="hashmap"
 		resultType="com.project.myapp.board.model.Board">
 		<![CDATA[
-			SELECT
+				SELECT
 				board_id	"boardId",
 				category_id	"categoryId",
 				member_id	"memberId",
 				title		"title",
 				content		"content",
-				views		"views"
-			FROM(
+				views		"views",
+				board_category.board_category_name	"boardCategoryName"
+				FROM
+				(
 				SELECT
-					board_id, category_id, member_id, title, content, views, rownum AS rnum
+				    board_id, category_id, member_id, title, content, views, rownum AS rnum
 				FROM(
-					SELECT * FROM BOARD
-					WHERE category_id = #{categoryId}
-					ORDER BY board_id DESC
-					)
+				    SELECT * FROM BOARD
+				    WHERE category_id = #{categoryId}
+				    ORDER BY board_id DESC
+				    )
 				)
+				LEFT OUTER JOIN board_category  ON category_id = board_category.board_category_id
 				WHERE rnum BETWEEN #{start} AND #{end}
 		]]>
 	</select>
@@ -51,14 +54,14 @@
 			<![CDATA[
 			SELECT
 				board.board_id						AS	"boardId",
-				board_category.category_name	    AS	"categoryName",
+				board_category.board_category_name	    AS	"boardCategoryName",
 				board.member_id						AS	"memberId",
 				title							    AS	"title",
 				content							    AS	"content",
 				views							    AS	"views",
 				reply.reply_content				    AS	"replyContent"
 			FROM BOARD
-			LEFT OUTER JOIN board_category ON board.category_id = board_category.category_id
+			LEFT OUTER JOIN board_category ON board.category_id = board_category.board_category_id
 			LEFT OUTER JOIN reply ON board.board_id = reply.board_id
 			WHERE board.board_id = #{boardId}
 		]]>

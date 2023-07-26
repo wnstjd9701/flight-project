@@ -14,17 +14,17 @@
 	    <div class="row">
 	        <div class="col-md-6 pc">
 	            <h2><fmt:message key="BOARD_LIST"/> 
-	            <c:if test="${empty name}">
+<%-- 	            <c:if test="${empty name}">
 	            <small style="color:red;"><fmt:message key="LOGIN"/></small>
-	            </c:if>
+	            </c:if> --%>
 	            </h2>
 	        </div>
-	        <div class="col-md-6">
+<%-- 	        <div class="col-md-6">
 	            <ol class="breadcrumb">
 	                <li><fmt:message key="BOARD"/></li>
 	                <li class="active"><fmt:message key="BOARD_LIST"/></li>
 	            </ol>
-	        </div>
+	        </div> --%>
 	    </div>
     </div>
 	${message}
@@ -49,10 +49,11 @@
 		</thead>
 		<c:forEach var="board" items="${boardList}">
 		<tr>
-			<td>${board.boardId}<!-- (${board.categoryId})--></td>
+			<td value="${board.boardCategoryName}"></td>
+			
 			<td class="pc">${board.memberId}</td>
 			<td>
-			<c:url var="viewLink" value="/board/${board.boardId}/${page}"/>
+			<c:url var="viewLink" value="/board/${board.boardId}/${board.page}"/>
 			<a href='${viewLink}'>${board.title}</a>
 			</td>
 			<td class="pc"><fmt:formatDate value="${board.createdAt}" pattern="YYYY-MM-dd"/></td>

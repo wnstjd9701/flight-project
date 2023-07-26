@@ -15,25 +15,10 @@
             <div class="col-md-6 pc">
                 <h2><fmt:message key="CONTENT"/></h2>
             </div>
-            <div class="col-md-6">
-                <ol class="breadcrumb">
-                    <li><fmt:message key="BOARD"/></li>
-                    <li class="active"><fmt:message key="CONTENT"/></li>
-                </ol>
-            </div>
         </div>
     </div>
-	<div class="content">
+<%-- 	<div class="content">
 	<table class="table table-bordered">
-	<tr class="pc">
-		<td colspan=2 align="right">
-		<a href='<c:url value="/board/cat/${categoryId}/${page}"/>'><button type="button" class="btn btn-info"><fmt:message key="BOARD_LIST"/></button></a>
-		<a href='<c:url value="/board/write/${categoryId}"/>'><button type="button" class="btn btn-info"><fmt:message key="WRITE_NEW_ARTICLE"/></button></a>
-		<a href='<c:url value="/board/reply/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="REPLY"/></button></a>
-		<a href='<c:url value="/board/update/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="UPDATE"/></button></a>
-		<a href='<c:url value="/board/delete/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="DELETE"/></button></a>
-		</td>
-	</tr>
 	<tr>
 		<td width="20%"><fmt:message key="BOARD_ID"/></td>
 		<td>${board.boardId}</td>
@@ -54,16 +39,35 @@
 		<td><fmt:message key="CONTENT"/></td>
 		<td class="board_content">${board.content}</td>
 	</tr>
-	<tr>
-		<td colspan=2 align="right">
-		<a href='<c:url value="/board/cat/${categoryId}/${page}"/>'><button type="button" class="btn btn-info"><fmt:message key="BOARD_LIST"/></button></a>
-		<a href='<c:url value="/board/write/${categoryId}"/>'><button type="button" class="btn btn-info"><fmt:message key="WRITE_NEW_ARTICLE"/></button></a>
-		<a href='<c:url value="/board/reply/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="REPLY"/></button></a>
-		<a href='<c:url value="/board/update/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="UPDATE"/></button></a>
-		<a href='<c:url value="/board/delete/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="DELETE"/></button></a>
-		</td>
-	</tr>
-	</table>
+	</table> --%>
+
+	<!-- Q&A 형식으로 답변 표시를 위한 부분 -->
+	<h3><fmt:message key="QNA_SECTION"/></h3>
+	<div class="question">
+		<p><strong>${board.title}</strong> (${board.createdAt})</p>
+		<p>${board.content}</p>
+	</div> 
+
+	<!-- 답변 표시 -->
+	<c:if test="${not empty answer}">
+		<h3><fmt:message key="ANSWER"/></h3>
+		<div class="answer">
+			<p><strong>${answer.writer}</strong> (${answer.createdAt})</p>
+			<p>${answer.content}</p>
+		</div>
+	</c:if>
+
+	<!-- 답변 작성 폼 -->
+	<form action="/board/addAnswer" method="post">
+		<input type="hidden" name="questionId" value="${board.boardId}" />
+		<label for="writer"><fmt:message key="WRITER"/>: </label>
+		<input type="text" name="writer" />
+		<br/>
+		<label for="content"><fmt:message key="ANSWER"/>: </label>
+		<textarea name="content" rows="3" cols="40"></textarea>
+		<br/>
+		<input type="submit" value="<fmt:message key='ADD_ANSWER'/>" />
+	</form>
 </div>
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

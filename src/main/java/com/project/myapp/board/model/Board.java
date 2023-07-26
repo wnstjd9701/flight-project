@@ -20,4 +20,8 @@ public class Board {
 	
 	private int page;
 	
+	//join칼럼
+	private String boardCategoryName;
+	private String replyContent;
+	
 }
