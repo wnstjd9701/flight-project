@@ -217,22 +217,26 @@
 										전화 번호: <input type="text" name="phoneNumber"
 											class="form-control">
 										<hr>
-										생일: <input type="date" name="birthday" id="birthday" class="form-control">
+										생일: <input type="date" name="birthday" id="birthday-${i}" class="form-control">
 										여권 번호: <input type="text" name="passportNumber"
 											class="form-control"> 
-										여권 만료일: <input type="date" id="passportExpiryDate"
+										여권 만료일: <input type="date" id="passportExpiryDate-${i}"
 											name="passportExpiryDate" class="form-control">
 										<!-- 생일은 오늘 이전 날짜만 선택 가능 / 여권 만료일은 오늘 이후만 가능 -->
-										<script>
-											var now_utc = Date.now()
-											var timeOff = new Date().getTimezoneOffset()*60000;
-											var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-											document.getElementById("birthday").setAttribute("max", today);
-											document.getElementById("passportExpiryDate").setAttribute("min", today);
-										</script>
 									</div>
 									<hr>
 								</c:forEach>
+								<script>
+								    var now_utc = Date.now();
+								    var timeOff = new Date().getTimezoneOffset() * 60000;
+								    var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
+								
+								    // 모든 입력 필드에 대해 반복문을 사용하여 설정
+								    for (var i = 1; i <= ${sessionScope.search.person}; i++) {
+								        document.getElementById("birthday-" + i).setAttribute("max", today);
+								        document.getElementById("passportExpiryDate-" + i).setAttribute("min", today);
+								    }
+								</script>
 								<input type="submit" value="탑승객 정보 입력"
 									class="genric-btn info radius">
 							</form>

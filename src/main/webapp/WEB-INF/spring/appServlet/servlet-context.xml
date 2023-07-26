@@ -16,8 +16,11 @@
       Java코드에서 @Value('#{id['properties속성']}')
    -->
    <util:properties id="impNumber" location="classpath:/config/application.properties"/>
-   <util:properties id="adminId" location="classpath:/config/application.properties"/>
-   <util:properties id="adminPassword" location="classpath:/config/application.properties"/>
+   <util:properties id="hostSMTPid" location="classpath:/config/application.properties"/>
+   <util:properties id="hostSMTPpwd" location="classpath:/config/application.properties"/>
+   <util:properties id="fromEmail" location="classpath:/config/application.properties"/>
+   <util:properties id="fromName" location="classpath:/config/application.properties"/>
+
    <!-- 시작화면 설정 -->
    <!-- 
 		View-Controller

@@ -233,6 +233,9 @@
 				} else {
 					console.log(rsp);
 					alert(rsp.error_msg);
+					if(merchantUid == null){
+						window.location.href = "/";
+					}
 					window.location.href = "/flight/payment";
 				}
 			});
