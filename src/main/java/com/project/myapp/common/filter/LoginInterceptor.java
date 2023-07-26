@@ -18,10 +18,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 			throws Exception {
 		// 로그인 처리 로직
 		// jwt
-		String userId = (String) request.getSession().getAttribute("id"); 
+		String userId = (String) request.getSession().getAttribute("memberId"); 
 		try {
 			if(userId == null || userId.equals("")) {
-				logger.info("URI:" + request.getRequestURI() + " ID: " + request.getSession().getAttribute("id") + " Password: " + request.getSession().getAttribute("password"));
+				logger.info("URI:" + request.getRequestURI() + " ID: " + request.getSession().getAttribute("memberId") + " Email: " + request.getSession().getAttribute("email"));
 				response.sendRedirect(request.getContextPath() + "/signin");
 				return false;
 			}

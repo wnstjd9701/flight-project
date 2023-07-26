@@ -80,7 +80,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
-	public String login() {
+	public String login() { 
 		return "member/login";
 	}
 	/*   API no.2

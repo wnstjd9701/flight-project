@@ -8,12 +8,11 @@ import java.util.Properties;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.project.myapp.flight.model.Ticket;
 import com.project.myapp.member.dao.IMemberRepository;
 import com.project.myapp.member.model.Companion;
 import com.project.myapp.member.model.Member;
@@ -23,9 +22,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberService implements IMemberService {
-
-   private final IMemberRepository IMemberRepository;
-   private final JavaMailSenderImpl mailSender;
+	@Value("${mail.adminid}")
+	public String adminId; 
+	
+	@Value("${mail.adminpassword}")
+	public String adminPassword;
+	
+	private final IMemberRepository IMemberRepository;
+	private final JavaMailSenderImpl mailSender;
 
    @Override
    public void insertMember(Member member) {
@@ -76,47 +80,47 @@ public class MemberService implements IMemberService {
 
    @Override
    public void sendEmail(Member member, String method) {
-      // Mail Server 설정
-      String charSet = "UTF-8";
-      String hostSMTP = "smtp.naver.com";
-      String hostSMTPid = "flightservice@naver.com";
-      String hostSMTPpwd = "fs4679123!@#";
+	      // Mail Server 설정
+	      String charSet = "UTF-8";
+	      String hostSMTP = "smtp.naver.com";
+	      String hostSMTPid = adminId;
+	      String hostSMTPpwd = adminPassword; 
 
-      // 보내는 사람 EMail, 제목, 내용
-      String fromEmail = "flightservice@naver.com";
-      String fromName = "flighteasy";
-      String subject = "";
-      String msg = "";
+	      // 보내는 사람 EMail, 제목, 내용
+	      String fromEmail = adminId;
+	      String fromName = "flighteasy";
+	      String subject = "";
+	      String msg = "";
 
-      if(method.equals("findpassword")) {
-         subject = "flightEasy 임시 비밀번호 입니다.";
-         msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-         msg += "<h3 style='color: blue;'>";
-         msg += member.getMemberId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-         msg += "<p>임시 비밀번호 : ";
-         msg += member.getPassword() + "</p></div>";
-      }
+	      if(method.equals("findpassword")) {
+	         subject = "flightEasy 임시 비밀번호 입니다.";
+	         msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+	         msg += "<h3 style='color: blue;'>";
+	         msg += member.getMemberId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+	         msg += "<p>임시 비밀번호 : ";
+	         msg += member.getPassword() + "</p></div>";
+	      }
 
-      // 받는 사람 E-Mail 주소
-      String mail = member.getEmail();
-      try {
-         Properties javaMailProperties = new Properties();
-         javaMailProperties.setProperty("mail.smtp.starttls.enable", "true");
-         javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
-         javaMailProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+	      // 받는 사람 E-Mail 주소
+	      String mail = member.getEmail();
+	      try {
+	         Properties javaMailProperties = new Properties();
+	         javaMailProperties.setProperty("mail.smtp.starttls.enable", "true");
+	         javaMailProperties.setProperty("mail.smtp.ssl.enable", "true");
+	         javaMailProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
 
-         mailSender.setJavaMailProperties(javaMailProperties);
-           MimeMessage message = mailSender.createMimeMessage();
-           MimeMessageHelper helper = new MimeMessageHelper(message, true,charSet);
-           helper.setFrom(fromEmail, fromName);
-           helper.setTo(mail);
-           helper.setSubject(subject);
-           helper.setText(msg, true);
+	         mailSender.setJavaMailProperties(javaMailProperties);
+	           MimeMessage message = mailSender.createMimeMessage();
+	           MimeMessageHelper helper = new MimeMessageHelper(message, true,charSet);
+	           helper.setFrom(fromEmail, fromName);
+	           helper.setTo(mail);
+	           helper.setSubject(subject);
+	           helper.setText(msg, true);
 
-           mailSender.send(message);
-      } catch (Exception e) {
-         System.out.println("메일발송 실패 : " + e);
-      }
+	           mailSender.send(message); // 이거만 있으면 이메일은 가는거지? ㅇㅇㅇ마자 이메일보내느 메서드라구생각하면됨
+	      } catch (Exception e) {
+	         System.out.println("메일발송 실패 : " + e);
+	      }
    }
 
    @Override
@@ -126,7 +130,7 @@ public class MemberService implements IMemberService {
       PrintWriter checkout;
       try {
          checkout = response.getWriter();
-         // 가입된 아이디가 없으면
+         // 가입된 아이디가 없으면 이거 없어도 이메일 보내지지 웅
          if(IMemberRepository.idCheck(member.getMemberId()) == null){
             checkout.print("등록되지 않은 아이디입니다.");
             checkout.close();

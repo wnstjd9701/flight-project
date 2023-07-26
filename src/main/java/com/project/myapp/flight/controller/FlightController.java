@@ -201,9 +201,8 @@ public class FlightController {
 			ArrayList<Ticket> passengerList = new ArrayList<Ticket>();
 			for(int i=0; i<personCount; i++) {
 				Ticket passenger = new Ticket();
-				
 				// 세션 설정시 "wh4679 -> memberId로 바꾸기
-				passenger.setMemberId("wh4679");
+				passenger.setMemberId("wh4679"); 
 				passenger.setScheduleIdToGo(scheduleIdToGo);
 				passenger.setScheduleIdToCome(scheduleIdToCome);
 				

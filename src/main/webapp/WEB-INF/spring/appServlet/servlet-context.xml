@@ -16,7 +16,8 @@
       Java코드에서 @Value('#{id['properties속성']}')
    -->
    <util:properties id="impNumber" location="classpath:/config/application.properties"/>
-   
+   <util:properties id="adminId" location="classpath:/config/application.properties"/>
+   <util:properties id="adminPassword" location="classpath:/config/application.properties"/>
    <!-- 시작화면 설정 -->
    <!-- 
 		View-Controller
@@ -27,6 +28,7 @@
 	-->
 	<view-controller path="/" view-name="/home"/>
 	<view-controller path="/flight/payment" view-name="/flight/payment"/>
+	
 	
    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
    	<resources mapping="/resources/**" location="/resources/" />
@@ -51,17 +53,16 @@
   
    <!-- 로그인을 위한 인터셉터 -->
    <!-- 로그인을 해야 들어갈 수 있는 페이지 추가 -->
-<!--    <interceptors>
+    <interceptors>
       <interceptor>
-         <mapping path="/"/>
-         <mapping path="/mp"/>
+         <mapping path="/mp/**"/>
          <mapping path="/flight/ticket/select"/>
          <mapping path="/flight/ticket/insert"/>
          <mapping path="/flight/seat/check"/>
          <mapping path="/flight/ticket/paymentCompleted"/>
          <beans:bean class="com.project.myapp.common.filter.LoginInterceptor"/>
       </interceptor>
-   </interceptors> --> 
+   </interceptors> 
    
    <!-- URL을 Logging을 위한 Interceptor -->
    <interceptors>
