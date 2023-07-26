@@ -216,6 +216,22 @@ public class BoardController {
 		return "redirect:/board/" + reply.getBoardId();
 	}
 	
+	@RequestMapping(value="/board/deletereply", method=RequestMethod.POST)
+	public String deleteReply(Reply reply, RedirectAttributes redirectAttrs,Model model) {
+		Member member = memberService.selectMember(reply.getMemberId());
+		try {
+			model.addAttribute("member", member);
+			if(member.getIsAdmin()==1) {
+				replyService.deleteReply(reply.getReplyId());				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			redirectAttrs.addFlashAttribute("message",e.getMessage());
+		}
+		System.out.println(reply.getBoardId());
+		return "redirect:/board/" + reply.getBoardId();
+	}
+	
 
 }
 
