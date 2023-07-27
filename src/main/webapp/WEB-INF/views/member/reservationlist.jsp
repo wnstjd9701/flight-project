@@ -110,7 +110,6 @@
 										</table>
 									</form>
 								</div>
->>>>>>> f8d6136bec48e0216f5817e1391f5398bf61f5ac
 							</section>
 						</li>
 					</ul>
@@ -120,11 +119,6 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> f8d6136bec48e0216f5817e1391f5398bf61f5ac
 </body>
 <style>
 .submenu {

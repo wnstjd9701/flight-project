@@ -52,10 +52,8 @@ public class BoardController {
 		session.setAttribute("page", page);
 		model.addAttribute("categoryId", categoryId);
 		List<Board> boardList = boardService.selectBoardListByCategory(categoryId, page);
-		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		int bbsCount = boardService.selectTotalBoardCountByCategoryId(categoryId);
-		System.out.println(bbsCount);
 		int totalPage = 0;
 		if(bbsCount>0) {
 			totalPage = (int)Math.ceil(bbsCount/10.0);
@@ -105,7 +103,6 @@ public class BoardController {
 	@RequestMapping(value="/board/write/{boardCategoryId}",method = RequestMethod.GET)
 	public String writeBoard(@PathVariable int boardCategoryId, Model model) {
 		List<BoardCategory> categoryList = boardCategoryService.selectAllCategory();
-		System.out.println(categoryList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("boardCategoryId", boardCategoryId);
 		return "board/write";
@@ -118,7 +115,6 @@ public class BoardController {
 	public String wirteBoard(Board board, BindingResult result, RedirectAttributes redirectAttrs) {
 		logger.info("board/wirte :" + board.toString());
 		try {
-//			board.setContent(board.getContent().replace("\r\n", "<br>"));
 			board.setTitle(Jsoup.clean(board.getTitle(), Safelist.basic()));
 			board.setContent(Jsoup.clean(board.getContent(), Safelist.basic()));
 			boardService.insertBoard(board);
@@ -163,13 +159,24 @@ public class BoardController {
 			return "redirect:/board/"+board.getBoardId();
 	}
 	
+	/*  API no.23
+		method : GET
+		information : Q&A글 삭제
+	*/
+	@RequestMapping(value="/board/delete", method=RequestMethod.GET)
+	public String deleteArticle(Board board, int replyId, int boardId, HttpSession session) {
+		session.setAttribute("boardId", boardId);
+		return "board/delete";
+	}
+		
 	/*  API no.24
 		method : POST
 		information : Q&A글 삭제
 	*/
 	@RequestMapping(value="/board/delete",method=RequestMethod.POST)
-	public String deleteBoard(Board board, RedirectAttributes model, HttpSession session) {
+	public String deleteBoard(Board board, Reply reply,RedirectAttributes model, HttpSession session) {
 		try {
+			System.out.println(board);
 			boardService.deleteBoard(board.getBoardId());
 			return "redirect:/board/cat/"+board.getCategoryId() + "/" + (Integer)session.getAttribute("page");
 		}catch(Exception e) {

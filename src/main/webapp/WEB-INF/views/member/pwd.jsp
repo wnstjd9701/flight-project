@@ -108,7 +108,7 @@
 .form-control {
 	width: 100%;
 }
-</style>
 .sign input { margin: 0 0 20px; padding: 10px 15px; border: 1px solid
 #ccc; color: #ccc; } .form-control { width: 100%; }
+</style>
 </html>

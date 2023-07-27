@@ -18,6 +18,8 @@ public class BoardService implements IBoardService {
 	
 	private final IBoardRepository IBoardRepository;
 	
+	private final IReplyRepository IReplyRepository;
+	
 
 	@Override
 	public List<Board> selectBoardListByCategory(int categoryId, int page) {
@@ -50,9 +52,11 @@ public class BoardService implements IBoardService {
 		
 	}
 
+	@Transactional
 	@Override
 	public void deleteBoard(int boardId) {
 		IBoardRepository.deleteBoard(boardId);
+		IReplyRepository.deleteReply(boardId);
 		
 	}
 
