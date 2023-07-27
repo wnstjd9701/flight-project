@@ -50,12 +50,12 @@
 		<c:forEach var="board" items="${boardList}">
 		<tr>
 			<td>${board.boardId}<!-- (${board.categoryId})--></td>
-			<td class="pc">${board.writer}</td>
+			<td class="pc">${board.memberId}</td>
 			<td>
 			<a href='<c:url value="/board/${board.boardId}"/>'>${board.title}</a>
 			</td>
-			<td class="pc"><fmt:formatDate value="${board.writeDate}" pattern="YYYY-MM-dd"/></td>
-			<td class="pc">${board.readCount}</td>
+			<td class="pc"><fmt:formatDate value="${board.createdAt}" pattern="YYYY-MM-dd"/></td>
+			<td class="pc">${board.views}</td>
 		</tr>
 		</c:forEach>
 		</table>

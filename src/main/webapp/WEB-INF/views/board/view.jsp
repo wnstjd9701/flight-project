@@ -95,7 +95,7 @@ input[type="submit"]:hover {
 		<h3></h3>
 		<div class="question">
 			<p>
-				<strong>${board.title}</strong> (${board.createdAt})
+				<strong>${board.title}</strong>
 			</p>
 			<p>${board.content}</p>
 		</div>
@@ -125,7 +125,7 @@ input[type="submit"]:hover {
 			<form action="/board/reply" method="post">
 				<input type="hidden" name="boardId" value="${board.boardId}" /> <label
 					for="writer"><fmt:message key="WRITER" />: </label> <input
-					type="text" readonly="readonly" name="memberId"
+					type="text" readonly="readonly" name="memberId" 
 					value="${member.memberId}" /> <br /> <label for="content"></label>
 				<textarea name="replyContent" rows="3" cols="40"></textarea>
 				<br /> <input type="submit" />
@@ -135,6 +135,7 @@ input[type="submit"]:hover {
 			<p>관리자 권한이 필요합니다.</p>
 		</c:if>
 	</div>
+			<a href='<c:url value="/board/update/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="UPDATE"/></button></a>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 

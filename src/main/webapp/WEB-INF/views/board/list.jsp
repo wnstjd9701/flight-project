@@ -17,6 +17,11 @@
     </div>
 <%-- 	${message} --%>
 	<div class="content">
+		<td align="right">
+			<a href='<c:url value="/board/cat/1"/>'><button type="button" class="btn btn-info">항공</button></a>
+			<a href='<c:url value="/board/cat/2"/>'><button type="button" class="btn btn-info">환불</button></a>
+			<a href='<c:url value="/board/cat/3"/>'><button type="button" class="btn btn-info">회원</button></a>
+		</td>
 	    <table class="table table-hover table-bordered">
 		<thead>
 		<tr>
@@ -50,14 +55,14 @@
 			</td>
 		</tr>
 		</table>
-				<form action="<c:url value='/board/search/1'/>" method="get">
+<%-- 				<form action="<c:url value='/board/search/1'/>" method="get">
 			<div class="pull-right" style="margin-bottom: 5px;">
 			<div class="col-xs-9">
 		        <input type="text" name="keyword" class="form-control">
 		        <input type="submit" class="btn btn-warning" value="<fmt:message key="SEARCH"/>">
 		    </div>
 			</div>
-		</form>
+		</form> --%>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
