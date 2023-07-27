@@ -78,7 +78,7 @@
 		$(function() {
 			$("#findBtn").click(function() {
 				$.ajax({
-					url : "/myapp/member/findpwd",
+					url : "/member/findpwd",
 					type : "POST",
 					data : {
 						memberId : $("#memberId").val(),

@@ -2,6 +2,7 @@ package com.project.myapp.board.model;
 
 
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -15,9 +16,13 @@ public class Board {
 	private String title;
 	private String content;
 	private int views;
-	private Timestamp createdAt;
+	private Date createdAt;
 	private Timestamp updatedAt;
 	
 	private int page;
+	
+	//join칼럼
+	private String boardCategoryName;
+	private String replyContent;
 	
 }
