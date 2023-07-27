@@ -22,7 +22,7 @@
 	        <div class="col-md-6">
 	            <ol class="breadcrumb">
 	                <li><fmt:message key="BOARD"/></li>
-	                <li class="active"><fmt:message key="BOARD_LIST"/></li>
+	                <li class="active" ><fmt:message key="BOARD_LIST"/></li>
 	            </ol>
 	        </div>
 	    </div>
