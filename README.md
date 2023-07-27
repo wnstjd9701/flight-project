@@ -10,4 +10,5 @@ spring flight reservation application
 <br>
 
 ## 🔧 Infra Stack
+- Spring MVC
 
