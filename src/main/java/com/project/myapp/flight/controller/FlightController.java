@@ -173,7 +173,7 @@ public class FlightController {
             @RequestParam(value="fareToCome", required = false) int fareToCome,
             HttpSession session) {
 		if(session.getAttribute("scheduleIdToGo") == null || session.getAttribute("scheduleIdToCome") == null || session.getAttribute("search") == null) {
-			return "/";
+			return "redirect:/";
 		}
 		int scheduleIdToGo = Integer.parseInt(session.getAttribute("scheduleIdToGo").toString());
 		int scheduleIdToCome = Integer.parseInt(session.getAttribute("scheduleIdToCome").toString());
@@ -198,7 +198,6 @@ public class FlightController {
 			List<Ticket> passengerList = new ArrayList<Ticket>();
 			for(int i=0; i<personCount; i++) {
 				Ticket passenger = new Ticket();
-				
 				// 세션 설정시 "wh4679 -> memberId로 바꾸기
 				passenger.setMemberId(memberId);
 				passenger.setScheduleIdToGo(scheduleIdToGo);

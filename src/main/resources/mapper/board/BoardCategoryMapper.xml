@@ -4,7 +4,7 @@
 		<select id="selectMaxCategoryId" resultType="int">
 		<![CDATA[
 			SELECT 
-				NVL(MAX(category_id),0) AS "categoryId"
+				NVL(MAX(board_category_id),0) AS "boardCategoryId"
 			FROM board_category
 		]]>
 	</select>
@@ -12,8 +12,8 @@
 	<select id="selectAllCategory" resultType="com.project.myapp.board.model.BoardCategory">
 		<![CDATA[
 			SELECT
-				category_id		"categoryId",
-				category_name	"categoryName"
+				board_category_id		"boardCategoryId",
+				board_category_name	"boardCategoryName"
 			FROM BOARD_CATEGORY
 			ORDER BY category_id
 		]]>
@@ -22,9 +22,9 @@
 	<insert id="insertNewCategory" parameterType="com.project.myapp.board.model.BoardCategory">
 		<![CDATA[
 			INSERT INTO BOARD_CATEGORY
-				(category_id, category_name)
+				(board_category_id, board_category_name)
 			VALUES
-				(#{categoryId}, #{categoryName})
+				(#{boardCategoryId}, #{boardCategoryName})
 		]]>
 	</insert>
 	
@@ -33,9 +33,9 @@
 		<![CDATA[
 			UPDATE BOARD_CATEGORY
 				SET
-					category_name = #{categoryName}
+					board_category_name = #{boardCategoryName}
 				WHERE
-					category_id	= #{categoryId}
+					board_category_id	= #{boardCategoryId}
 		]]>
 	</update>
 	

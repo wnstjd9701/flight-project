@@ -24,11 +24,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="loginform">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<script>	
+	<script>	
 	$(document).ready(function(){
 		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var key = getCookie("key");
@@ -89,6 +85,61 @@
 		return unescape(cookieValue);
 	}
 </script>
+	<!-- 아이디와 패스워드를 입력받는 로그인 폼 코드 (생략) -->
+
+	<script>
+  $(document).ready(function() {
+    // 폼 제출 시 이벤트 처리
+    $("form").submit(function(event) {
+      // 아이디와 패스워드 값을 가져옴
+      var memberId = $("#memberId").val();
+      var password = $("#password").val();
+      
+      // 아이디와 패스워드가 유효하지 않으면 모달 창 띄움
+      if (memberId.trim() === '' || password.trim() === '') {
+        event.preventDefault(); // 폼 제출을 막음
+        showModal("ID 및 비밀번호를 모두 입력해주세요.");
+      }
+    });
+
+    $(document).ready(function() {
+        // 폼 제출 시 이벤트 처리
+        $("form").submit(function(event) {
+          // 아이디와 패스워드 값을 가져옴
+          var memberId = $("#memberId").val();
+          var password = $("#password").val();
+          
+          // 아이디와 패스워드가 유효하지 않으면 모달 창 띄움
+          if (memberId.trim() === '' || password.trim() === '') {
+            event.preventDefault(); // 폼 제출을 막음
+            showModal("ID 및 비밀번호를 모두 입력해주세요.");
+          }
+        });
+
+        // 모달 창 띄우는 함수
+        function showModal(message) {
+          var modalHtml = `
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <p>${message}</p>
+                <button id="closeModal">확인</button>
+              </div>
+            </div>
+          `;
+          $("body").append(modalHtml);
+
+          // 모달 닫기 버튼 클릭 시 이벤트 처리
+          $("#closeModal").click(function() {
+            $("#myModal").remove(); // 모달 창 제거
+          });
+        }
+      });
+</script>
+
+	<section class="loginform">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 					<form action="<c:url value='/member/login'/>" method="post"
 						style="border-shadow: 3px solid; width: 70%; margin: 0 auto; padding: 40px;">
 						<div class="form-group">
@@ -146,6 +197,39 @@
 
 .form-control {
 	width: 100%;
+}
+
+/* 모달 스타일 */
+.modal {
+	display: none; /* 처음에는 모달 창 숨김 */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 모달 닫기 버튼 스타일 */
+#closeModal {
+	margin-top: 10px;
+	cursor: pointer;
+	padding: 5px 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
 }
 </style>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.myapp.board.dao.IBoardRepository;
+import com.project.myapp.board.dao.IReplyRepository;
 import com.project.myapp.board.model.Board;
 
 
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardService implements IBoardService {
 	
 	private final IBoardRepository IBoardRepository;
+	
 
 	@Override
 	public List<Board> selectBoardListByCategory(int categoryId, int page) {

@@ -17,9 +17,9 @@
 	<insert id="insertReply" parameterType="com.project.myapp.board.model.Reply">
 		<![CDATA[
 			INSERT INTO REPLY
-				(member_id, board_id, reply_content)
+				(reply_id,member_id, board_id, reply_content)
 			VALUES
-				(#{memberId}, #{boardId}, #{replyContent})
+				(REPLY_SEQ.NEXTVAL,#{memberId}, #{boardId}, #{replyContent})
 		]]>
 	</insert>
 	
