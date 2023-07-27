@@ -9,5 +9,5 @@ public interface IReplyService {
 	List<Reply> selectReply(int boardId); //댓글 조회
 	void insertReply(Reply reply); //댓글 작성
 	void updateReply(Reply reply); //댓글 수정
-	void deleteReply(int replyId); //댓글 삭제
+	void deleteReply(int replybo); //댓글 삭제
 }

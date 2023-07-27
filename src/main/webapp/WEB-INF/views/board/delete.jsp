@@ -23,25 +23,9 @@
         </div>
     </div>
 	<div class="content">
-		<h3><fmt:message key="DELETE_MSG"/></h3>
 		<form action='<c:url value="/board/delete"/>' class="form-inline" method="post">
 		<input type="hidden" name="boardId" value="${boardId}">
-		<input type="hidden" name="replyContent" value="${replyContent}">
-		<input type="hidden" name="categoryId" value="${categoryId}">
-		<div class="form-group">
-		<div class="col-sm-8">
-		<input type="password" name="password" class="form-control" required>
-		<c:if test="${!empty message}">
-		<br><span style="color:red;"><fmt:message key="${message}"/></span>
-		</c:if>
-		</div>
-		<div class="col-sm-2">
-		<input type="submit" class="btn btn-danger" value="<fmt:message key="DELETE_ARTICLE"/>">
-		</div>
-		</div>
 		</form>
-		<div class="form-group pc"><div class="col-sm-10">
-		</div></div>
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

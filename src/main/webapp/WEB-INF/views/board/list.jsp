@@ -9,22 +9,7 @@
 <title>여행떠나조</title>
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp"/>
-	<section class="breadcrumb breadcrumb_bg">
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-
-					<div class="breadcrumb_iner">
-						<div class="breadcrumb_iner_item text-center">
-							<h2>비밀번호 찾기</h2>
-							<hr>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 <div class="container">
 	<div class="pg-opt">
 	    <div class="row">
