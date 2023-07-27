@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,14 +102,15 @@ public class BoardController {
 	  	method : GET
 		information : Q&A글 쓰기
 	*/
-	@RequestMapping(value="/board/write/{categoryId}",method = RequestMethod.GET)
-	public String writeBoard(@PathVariable int categoryId, Model model) {
+	@RequestMapping(value="/board/write/{boardCategoryId}",method = RequestMethod.GET)
+	public String writeBoard(@PathVariable int boardCategoryId, Model model) {
 		List<BoardCategory> categoryList = boardCategoryService.selectAllCategory();
+		System.out.println(categoryList);
 		model.addAttribute("categoryList", categoryList);
-		model.addAttribute("categoryId", categoryId);
+		model.addAttribute("boardCategoryId", boardCategoryId);
 		return "board/write";
 	}
-	/*   API no.22
+	/*  API no.22
 		method : POST
 		information : Q&A글 쓰기
 	*/
@@ -116,14 +118,16 @@ public class BoardController {
 	public String wirteBoard(Board board, BindingResult result, RedirectAttributes redirectAttrs) {
 		logger.info("board/wirte :" + board.toString());
 		try {
-			board.setContent(board.getContent().replace("\r\n", "<br>"));
+//			board.setContent(board.getContent().replace("\r\n", "<br>"));
 			board.setTitle(Jsoup.clean(board.getTitle(), Safelist.basic()));
 			board.setContent(Jsoup.clean(board.getContent(), Safelist.basic()));
+			boardService.insertBoard(board);
 		}catch(Exception e){
 			e.printStackTrace();
 			redirectAttrs.addFlashAttribute("message",e.getMessage());
 		}
-		return "redirect:/board/cat" + board.getCategoryId();
+		System.out.println(board);
+		return "redirect:/board/cat/" + board.getCategoryId();
 	}
 	
 	/*  API no.23
@@ -215,6 +219,24 @@ public class BoardController {
 		System.out.println(reply.getBoardId());
 		return "redirect:/board/" + reply.getBoardId();
 	}
+	
+	@RequestMapping(value="/board/deletereply", method=RequestMethod.POST)
+	public String deleteReply(Reply reply, RedirectAttributes redirectAttrs,Model model) {
+		Member member = memberService.selectMember(reply.getMemberId());
+		try {
+			model.addAttribute("member", member);
+			if(member.getIsAdmin()==1) {
+				replyService.deleteReply(reply.getReplyId());				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			redirectAttrs.addFlashAttribute("message",e.getMessage());
+		}
+		System.out.println(reply.getBoardId());
+		return "redirect:/board/" + reply.getBoardId();
+	}
+	
+
 	
 
 }

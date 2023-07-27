@@ -10,6 +10,11 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	<!-- MVC 어노테이션 위한 태그 -->
 	<annotation-driven />
+	
+	<!-- multipartResolver -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="50000000"/>
+	</beans:bean>
 
    <!-- 
       Properties 파일을 읽어 오기 위한 태그 
@@ -60,6 +65,7 @@
       <interceptor>
          <mapping path="/mp/**"/>
          <mapping path="/flight/ticket/select"/>
+         <mapping path="/board/write"/>
          <mapping path="/flight/ticket/insert"/>
          <mapping path="/flight/seat/check"/>
          <mapping path="/flight/ticket/paymentCompleted"/>

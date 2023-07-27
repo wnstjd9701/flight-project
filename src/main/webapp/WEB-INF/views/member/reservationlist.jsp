@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+
 <title>여행떠나조</title>
+
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -15,6 +17,7 @@
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
 							<h2>마이페이지</h2>
+
 							<p>예약 내역 확인 및 회원 정보 수정</p>
 						</div>
 					</div>
@@ -41,6 +44,7 @@
 								</ul>
 							</div>
 						</li>
+						
 						<li style="width: 75%; padding: 5%;">
 							<div class="content"></div>
 							<section class="viewmypage">
@@ -106,6 +110,7 @@
 										</table>
 									</form>
 								</div>
+>>>>>>> f8d6136bec48e0216f5817e1391f5398bf61f5ac
 							</section>
 						</li>
 					</ul>
@@ -115,7 +120,11 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> f8d6136bec48e0216f5817e1391f5398bf61f5ac
 </body>
 <style>
 .submenu {
