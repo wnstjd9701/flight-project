@@ -72,11 +72,11 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-8">
 							<input type="hidden" name="boardId" value="${board.boardId}">
-							<input type="hidden" name="replyContent"
+							<input type="hidden" name="replyContent" 
 								value="${board.replyContent}"> <input type="submit"
 								id="i_submit" class="btn btn-info"
 								value="<fmt:message key="UPDATE"/>"> <input type="reset"
-								class="btn btn-info" value="<fmt:message key="CANCEL"/>">
+								class="genric-btn info" value="<fmt:message key="CANCEL"/>">
 						</div>
 					</div>
 				</form>
