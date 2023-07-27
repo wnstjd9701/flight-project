@@ -38,7 +38,7 @@
 			
 			<td class="pc">${board.memberId}</td>
 			<td>
-			<c:url var="viewLink" value="/board/${board.boardId}/${board.page}"/>
+			<c:url var="viewLink" value="/board/${board.boardId}"/>
 			<a href='${viewLink}'>${board.title}</a>
 			</td>
 			<td>${board.createdAt}</td>

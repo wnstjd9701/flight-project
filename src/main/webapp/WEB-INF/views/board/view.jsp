@@ -175,11 +175,9 @@ input[type="submit"]:hover {
    <c:if test="${board.memberId == sessionScope.memberId || member.isAdmin==1}">
    	<div class="boardBtns">
          <a class="updateBtn" href='<c:url value="/board/update/${board.boardId}"/>'><button type="button" class="btn btn-info"><fmt:message key="UPDATE"/></button></a>
-            <form id="deleteBoard" action="/board/delete" method="post">
-                  <input type="hidden" readonly="readonly" name="memberId" value="${member.memberId}" />
-                  <input type="hidden" name="boardId" value="${board.boardId}" />
-         <a class="deleteBtn"><button type="submit" id="deleteBoard" class="btn btn-info"><fmt:message key="DELETE"/></button></a>
-           </form>
+                  <input type="hidden" id="memberId" readonly="readonly" name="memberId" value="${member.memberId}" />
+                  <input type="hidden" id="boardId" name="boardId" value="${board.boardId}" />
+         <a class="deleteBtn"><button type="button" id="deleteBoard" class="btn btn-info"><fmt:message key="DELETE"/></button></a>
    	</div>
    </c:if>
    <br>
@@ -199,7 +197,7 @@ input[type="submit"]:hover {
 					},
 					success : function(result) {
 						alert("삭제되었습니다.");
-						location.href = '/board/cat/1';
+						location.href = "/board/cat/1";
 					},
 					error : function(err) {
 						console.log(err);
