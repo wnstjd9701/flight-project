@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
+
+<title>여행떠나조</title>
+
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />
 
@@ -13,7 +16,8 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>mypage</h2>
+							<h2>마이페이지</h2>
+
 							<p>예약 내역 확인 및 회원 정보 수정</p>
 						</div>
 					</div>
@@ -26,122 +30,87 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<ul style="display: flex;">
-						<li style="width: 30%; padding: 5%;" class="submenu">
+						<li style="width: 25%; padding: 5%;" class="submenu">
 							<div>
 								<ul>
-									<li><a href="<c:url value='/member/mp'/>">회원정보 조회</a></li>
+									<li><a href="<c:url value='/member/mp'/>">회원 정보 조회</a></li>
 									<li><a href="<c:url value='/member/reservationlist'/>">예약
 											내역</a></li>
-									<li><a href="<c:url value='/member/mp/update'/>">회원정보
+									<li><a href="<c:url value='/member/mp/update'/>">회원 정보
 											수정</a></li>
 									<li><a href="<c:url value='/member/updatepwd'/>">비밀번호
-											수정</a></li>
+											변경</a></li>
 									<li><a href="<c:url value='/member/mp/delete'/>">회원 탈퇴</a></li>
 								</ul>
 							</div>
 						</li>
-						<li style="width: 70%; padding: 5%;">
+						
+						<li style="width: 75%; padding: 5%;">
 							<div class="content"></div>
 							<section class="viewmypage">
 								<div class="col-lg-12">
-									<h2>회원 정보 조회</h2>
+									<h2>예약 내역 조회</h2>
 									<hr>
-									<label for="memberId"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ID</h5>
-										<h3>${sessionScope.memberId}</h3>
-									</div>
-									<c:forEach var="member"
-									items="${memberList}" varStatus="status">
-									<hr>
-									<label for="reservationId"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">RESERVATION ID</h5>
-										<h3>${member.reservationId}</h3>
-									</div>
-									<label for="name"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">NAME(KOREAN)</h5>
-										<h3>${member.name}</h3>
-									</div>
-									<hr>
-									<label for="deartmentNation"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">DEPARTMENT</h5>
-										<h3>${member.departmentNation}</h3>
-									</div>
-									<hr>
-									<label for="deartmentDate"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">DEPARTMENT DATE</h5>
-										<h3>${member.departmentDate}</h3>
-									</div>
-									<hr>
-									<label for="deartmentTime"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">DEPARTMENT TIME</h5>
-										<h3>${member.departmentTime}</h3>
-									</div>
-									<hr>
-									<label for="arrivalNation"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ARRIVAL</h5>
-										<h3>${member.arrivalNation}</h3>
-									</div>
-									<hr>
-									<label for="arrivalDate"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ARRIVAL DATE</h5>
-										<h3>${member.arrivalDate}</h3>
-									</div>
-									<hr>
-									<label for="arrivalTime"></label>
-									<div class="view">
-										<h5 style="line-height: 2.5em;">ARRIVAL TIME</h5>
-										<h3>${member.arrivalTime}</h3>
-									</div>
-									<label for="phoneNumber"></label>
-									<div class="sign">
-										<h5 style="line-height: 1.7em;">PHONENUMBER</h5>
-										<h3>${member.phoneNumber}</h3>
-									</div>
-									<hr>
-									<label for="seatType"></label>
-									<div class="sign">
-										<h5>SEAT TYPE</h5>
-										<h3>${member.seatType}</h3>
-									</div>
+									<form action="<c:url value='/member/reservationlist'/>"
+										method="get">
+										<label for="memberId"></label>
+										<div class="view">
+											<h4 style="line-height: 2.5em;">ID: ${memberId}</h4>
+										</div>
+										<table>
+											<thead style="background: #f9f9ff;">
+												<tr>
+													<th>예약번호</th>
+													<th>이름</th>
+													<th>나라</th>
+													<th>날짜</th>
+													<th>시간</th>
+													<!-- <th>휴대폰 번호</th> -->
+													<th>좌석 타입</th>
+													<!-- <th>티켓 타입</th> -->
+													<th>예약상태</th>
+													<th>총합 <br>요금</th>
+												</tr>
+											</thead>
+
+											<c:forEach var="member" items="${memberList}"
+												varStatus="status">
+										<%-- 		<c:if
+													test="${member.reservationStatus.equalsIgnoreCase('예약 완료')}"> --%>
+
+													<tbody>
+														<tr>
+															<td>${member.reservationId}</td>
+															<td>${member.name}</td>
+															<td>${member.departmentNation}->
+																${member.arrivalNation}</td>
+															<td>${member.departmentDate}</td>
+															<td>${member.departmentTime}~<br>
+																${member.arrivalTime}
+															</td>
+															<%-- <td>${member.phoneNumber}</td> --%>
+															<td><c:choose>
+																	<c:when test="${passenger.seatType eq '1' }">
+																	이코노미 클래스
+																</c:when>
+																	<c:when test="${passenger.seatType eq '2'}">
+																	비즈니스 클래스
+																</c:when>
+																	<c:otherwise>
+																	퍼스트 클래스
+																</c:otherwise>
+																</c:choose></td>
+															<%-- <td>${member.ticketType}</td> --%>
+															<td>${member.reservationStatus}</td>
+															<td>${member.totalPrice}</td>
+														</tr>
+													</tbody>
 									
-									<hr>
-									<label for="ticketType"></label>
-									<div class="sign">
-										<h5>TICKET TYPE</h5>
-										<h3>${member.ticketType}</h3>
-									</div>
-									<hr>
-									<label for="ticketType"></label>
-									<div class="sign">
-										<h5>티켓 타입</h5>
-										<h3>${member.ticketType}</h3>
-									</div>
-									<hr>
-									<label for="reservationStatus"></label>
-									<div class="sign">
-										<h5>예약 상태</h5>
-										<h3>${member.reservationStatus}</h3>
-									</div>
-									<label for="totalPrice"></label>
-									<div class="sign">
-										<h5>총합 요금</h5>
-										<h3>${member.totalPrice}</h3>
-									</div>
-									<c:if test="${member.reservationStatus eq '예약중'}">
-										<form action="<c:url value="/member/flight/payment"/>" method="post">
-											<input type="hidden" name="reservationId" value="${member.reservationId}">
-											<input type="submit" value="결제">
-										</form>
-									</c:if>
-									</c:forEach>
+											</c:forEach>
+										</table>
+									</form>
+								</div>
+>>>>>>> f8d6136bec48e0216f5817e1391f5398bf61f5ac
 							</section>
 						</li>
 					</ul>
@@ -151,7 +120,11 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> f8d6136bec48e0216f5817e1391f5398bf61f5ac
 </body>
 <style>
 .submenu {

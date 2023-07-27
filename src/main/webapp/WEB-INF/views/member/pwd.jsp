@@ -32,8 +32,7 @@
 
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>Find Password</h2>
-							<p>비밀번호 찾기</p>
+							<h2>비밀번호 찾기</h2>
 							<hr>
 						</div>
 					</div>
@@ -50,20 +49,19 @@
 						<div class="form-group">
 							<label for="memberId"></label>
 							<div class="sign">
-								<h5>ID</h5>
+								<h5>아이디</h5>
 								<input class="form-control" name="memberId" type="text"
 									placeholder="회원가입한 아이디를 입력하세요" required>
 							</div>
 							<label for="password"></label>
 							<div class="sign">
-								<h5>Password</h5>
+								<h5>이메일</h5>
 								<input class="form-control" name="email" type="text"
 									placeholder="회원가입한 이메일주소를 입력하세요" required>
 							</div>
 							<br>
 							<div class="login-sub ">
-								<button type="button" id="findBtn"
-									class="genric-btn success">찾기</button>
+								<button type="button" id="findBtn" class="genric-btn success">찾기</button>
 								<button type="button" onclick="history.go(-1);"
 									class="genric-btn success">로그인으로</button>
 
@@ -99,4 +97,18 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 </body>
+<style>
+.sign input {
+	margin: 0 0 20px;
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+	color: #ccc;
+}
+
+.form-control {
+	width: 100%;
+}
+</style>
+.sign input { margin: 0 0 20px; padding: 10px 15px; border: 1px solid
+#ccc; color: #ccc; } .form-control { width: 100%; }
 </html>

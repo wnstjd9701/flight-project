@@ -13,7 +13,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>mypage</h2>
+							<h2>마이페이지</h2>
 							<p>예약 내역 확인 및 회원 정보 수정</p>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<ul style="display: flex;">
-						<li style="width: 30%; padding: 5%;" class="submenu">
+						<li style="width: 25%; padding: 5%;" class="submenu">
 							<div>
 								<ul>
 									<li><a href="<c:url value='/member/mp'/>">회원 정보 조회</a></li>
@@ -40,7 +40,7 @@
 								</ul>
 							</div>
 						</li>
-						<li style="width: 70%; padding: 5%;">
+						<li style="width: 75%; padding: 5%;">
 							<div class="content">
 								<section class="updatepwd">
 									<div class="col-lg-12">
