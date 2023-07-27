@@ -27,7 +27,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<ul style="display: flex;">
-						<li style="width: 30%; padding: 5%;" class="submenu">
+						<li style="width: 25%; padding: 5%;" class="submenu">
 							<div>
 								<ul>
 									<li><a href="<c:url value='/member/mp'/>">회원 정보 조회</a></li>
@@ -41,7 +41,7 @@
 								</ul>
 							</div>
 						</li>
-						<li style="width: 70%; padding: 5%;">
+						<li style="width: 75%; padding: 5%;">
 							<div class="content"></div>
 							<section class="viewmypage">
 								<div class="col-lg-12">
@@ -57,7 +57,7 @@
 											<thead style="background: #f9f9ff;">
 												<tr>
 													<th>예약번호</th>
-													<th>이름(한글)</th>
+													<th>이름</th>
 													<th>나라</th>
 													<th>날짜</th>
 													<th>시간</th>
@@ -65,14 +65,14 @@
 													<th>좌석 타입</th>
 													<!-- <th>티켓 타입</th> -->
 													<th>예약상태</th>
-													<th>총합 요금</th>
+													<th>총합 <br>요금</th>
 												</tr>
 											</thead>
 
 											<c:forEach var="member" items="${memberList}"
 												varStatus="status">
-												<c:if
-													test="${member.reservationStatus.equalsIgnoreCase('예약 완료')}">
+										<%-- 		<c:if
+													test="${member.reservationStatus.equalsIgnoreCase('예약 완료')}"> --%>
 
 													<tbody>
 														<tr>
@@ -101,7 +101,7 @@
 															<td>${member.totalPrice}</td>
 														</tr>
 													</tbody>
-												</c:if>
+									
 											</c:forEach>
 										</table>
 									</form>

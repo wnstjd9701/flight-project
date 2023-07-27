@@ -46,35 +46,7 @@
 			</div>
 		</div>
 	</section>
-	<style>
-table {
-	overflow: hidden;
-	width: 80%;
-	table-layout: fixed;
-}
 
-td, th {
-	text-align: left;
-	border: 1px solid #ddd;
-	padding: 10px;
-}
-
-th {
-	background-color: #f2f2f2;
-}
-
-.text-right {
-	text-align: right;
-}
-
-h3 {
-	font-size: 1.75em;
-}
-
-h5 {
-	line-height: 2.5em;
-}
-</style>
 
 	<div class="container">
 		<div class="row">
@@ -92,15 +64,15 @@ h5 {
 						</tr>
 						<tr>
 							<td>
-								<h3>${passenger.reservationId}</h3>
+								<h4>${passenger.reservationId}</h4>
 							</td>
 							<td>
-								<h3>
+								<h4>
 									<c:out value="${status.count}" />
-								</h3>
+								</h4>
 							</td>
 							<td>
-								<h3 class="text-right">${passenger.reservationStatus}</h3>
+								<h4 class="text-right">${passenger.reservationStatus}</h4>
 							</td>
 						</tr>
 						<tr>
@@ -109,26 +81,26 @@ h5 {
 							<th>영문 성</th>
 						</tr>
 						<tr>
-							<td><h3>${passenger.name}</h3></td>
-							<td><h3>${passenger.firstName}</h3></td>
-							<td><h3>${passenger.lastName}</h3></td>
+							<td><h4>${passenger.name}</h4></td>
+							<td><h4>${passenger.firstName}</h4></td>
+							<td><h4>${passenger.lastName}</h4></td>
 						</tr>
 						<tr>
 							<th>핸드폰 번호</th>
 							<th>생일</th>
 						</tr>
 						<tr>
-							<td><h3>${passenger.phoneNumber}</h3></td>
-							<td><h3>${passenger.birthday}</h3></td>
+							<td><h4>${passenger.phoneNumber}</h4></td>
+							<td><h4>${passenger.birthday}</h4></td>
 						</tr>
 						<tr>
 							<th>여권 번호</th>
 							<th>여권 만료일</th>
 						</tr>
 						<tr>
-							<td><h3>${passenger.passportNumber}</h3></td>
-							<td><h3>${passenger.passportExpiryDate}</h3></td>
-						</tr>
+							<td><h4>${passenger.passportNumber}</h4></td>
+							<td><h4>${passenger.passportExpiryDate}</h4></td>
+							</t4>
 						<tr>
 							<th>좌석 등급</th>
 							<th colspan="2" class="text-right">총 결제 금액</th>
@@ -137,17 +109,18 @@ h5 {
 						<tr>
 							<td><c:choose>
 									<c:when test="${passenger.seatType eq '1' }">
-										<h3>이코노미</h3>
+										<h4>이코노미</h4>
 									</c:when>
 									<c:when test="${passenger.seatType eq '2'}">
-										<h3>비즈니스</h3>
+										<h4>비즈니스</h4>
 									</c:when>
 									<c:otherwise>
-										<h3>퍼스트</h3>
+										<h4>퍼스트</h4>
 									</c:otherwise>
 								</c:choose>
-							<td colspan="2" class="text-right"><h3>${passenger.fareToGo}+
-									${passenger.fareToCome}= ${passenger.totalPrice}</h3></td>
+							<td colspan="2" class="text-right"><h4>${passenger.fareToGo}(가는요금) + 
+									${passenger.fareToCome} (오는 요금) = ${passenger.totalPrice}
+									</h3></td>
 						</tr>
 					</table>
 				</c:forEach>
@@ -222,7 +195,7 @@ h5 {
 				} else {
 					console.log(rsp);
 					alert(rsp.error_msg);
-					if(merchantUid == null){
+					if (merchantUid == null) {
 						window.location.href = "/";
 					}
 					window.location.href = "/flight/payment";
@@ -233,6 +206,35 @@ h5 {
 
 </body>
 <style>
+table {
+	overflow: hidden;
+	width: 80%;
+	table-layout: fixed;
+	margin-bottom: 4%;
+}
+
+td, th {
+	text-align: left;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+.text-right {
+	text-align: right;
+}
+
+h3 {
+	font-size: 1.75em;
+}
+
+h5 {
+	line-height: 2.5em;
+}
+
 .search {
 	color: #a2a2a2;
 	font-family: "Open Sans", sans-serif;

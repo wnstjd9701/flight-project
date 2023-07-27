@@ -240,10 +240,9 @@
 									</c:otherwise>
 								</c:choose>
 								<c:forEach var="i" begin="1" end="${sessionScope.search.person}">
-									<div class="nc_select" style="margin-bottom: 10px;">
-										<h4>${i}번탑승객정보입력</h4>
+									<div class="nc_select" style="margin-bottom: 30px;">
+										<h4>${i}번 탑승객 정보 입력</h4>
 										<hr>
-
 										<h5>이름:</h5>
 										<input type="text" name="name" class="form-control">
 										<h5>영문 이름:</h5>
@@ -261,9 +260,8 @@
 										<h5>여권 만료일:</h5>
 										<input type="date" id="passportExpiryDate-${i}"
 											name="passportExpiryDate" class="form-control">
-										<!-- 생일은 오늘 이전 날짜만 선택 가능 / 여권 만료일은 오늘 이후만 가능 -->
 									</div>
-									<hr>
+									<!-- 생일은 오늘 이전 날짜만 선택 가능 / 여권 만료일은 오늘 이후만 가능 -->
 								</c:forEach>
 								<script>
 								    var now_utc = Date.now();
@@ -276,8 +274,11 @@
 								        document.getElementById("passportExpiryDate-" + i).setAttribute("min", today);
 								    }
 								</script>
-								<input type="submit" value="탑승객 정보 입력"
-									class="genric-btn info radius">
+								<div style="text-align: right;">
+
+									<input type="submit" value="탑승객 정보 입력"
+										class="genric-btn info radius">
+								</div>
 							</form>
 						</div>
 					</div>

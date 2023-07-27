@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Martine</title>
-    <link rel="icon" href="<c:url value='/img/favicon.png'/>">
+    <link rel="icon" href="<c:url value='/img/favicon.ico'/>">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
     <!-- animate CSS -->
