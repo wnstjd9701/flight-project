@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.myapp.board.model.Board;
@@ -73,15 +74,14 @@ public class BoardController {
 		method : GET
 		information : Q&A글 보기
 	 */
-	@RequestMapping(value="/board/{boardId}/{page}",method=RequestMethod.GET)
-	public String getBoardDetail(@PathVariable int boardId, @PathVariable int page, Model model,HttpSession session) {
+	@RequestMapping(value="/board/{boardId}",method=RequestMethod.GET)
+	public String getBoardDetail(@PathVariable int boardId,  Model model,HttpSession session) {
 		try {
 		Board board = boardService.selectBoard(boardId);
 		Member member = memberService.selectMember((String)session.getAttribute("memberId"));
 		model.addAttribute("member", member);
 		List<Reply> replyList= replyService.selectReply(boardId);
 		model.addAttribute("board", board);
-		model.addAttribute("page", page);
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("categoryId", board.getCategoryId());
 		logger.info("getBoardDetails"+board.toString());
@@ -91,10 +91,10 @@ public class BoardController {
 		return "board/view";
 	}
 	
-	@RequestMapping("/board/{boardId}")
-	public String getBoardDetail(@PathVariable int boardId, Model model,HttpSession session) {
-		return getBoardDetail(boardId, 1, model,session);
-	}
+//	@RequestMapping("/board/{boardId}")
+//	public String getBoardDetail(@PathVariable int boardId, Model model,HttpSession session) {
+//		return getBoardDetail(boardId, 1, model,session);
+//	}
 	
 	/*   API no.22
 	  	method : GET
@@ -163,22 +163,22 @@ public class BoardController {
 		method : GET
 		information : Q&A글 삭제
 	*/
-	@RequestMapping(value="/board/delete", method=RequestMethod.GET)
-	public String deleteArticle(Board board, int replyId, int boardId, HttpSession session) {
-		session.setAttribute("boardId", boardId);
-		return "board/delete";
-	}
-		
+//	@RequestMapping(value="/board/delete", method=RequestMethod.GET)
+//	public String deleteArticle(Board board, int replyId, int boardId, HttpSession session) {
+//		session.setAttribute("boardId", boardId);
+//		return "board/delete";
+//	}
+//		
 	/*  API no.24
 		method : POST
 		information : Q&A글 삭제
 	*/
 	@RequestMapping(value="/board/delete",method=RequestMethod.POST)
-	public String deleteBoard(Board board, Reply reply,RedirectAttributes model, HttpSession session) {
+	@ResponseBody
+	public String deleteBoard(String memberId, int boardId,RedirectAttributes model, HttpSession session) {
 		try {
-			System.out.println(board);
-			boardService.deleteBoard(board.getBoardId());
-			return "redirect:/board/cat/"+board.getCategoryId() + "/" + (Integer)session.getAttribute("page");
+			boardService.deleteBoard(boardId);
+			return "redirect:/board/cat/" ;
 		}catch(Exception e) {
 			model.addAttribute("message", e.getMessage());
 			e.printStackTrace();
