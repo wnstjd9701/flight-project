@@ -91,23 +91,10 @@
 											</div>
 											<!-- 출발 도착 날짜 선택 시 오늘 - 출발 - 도착 순으로 선택 가능하도록 -->
 											<script>
-<<<<<<< HEAD
 												var now_utc = Date.now()
-												var timeOff = new Date()
-														.getTimezoneOffset() * 60000;
-												var today = new Date(now_utc
-														- timeOff)
-														.toISOString().split(
-																"T")[0];
-												document.getElementById(
-														"department_date")
-														.setAttribute("min",
-																today);
-												document.getElementById(
-														"arrival_date")
-														.setAttribute("min",
-																today);
-=======
+												var timeOff = new Date().getTimezoneOffset() * 60000;
+												var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
+												
 											  var departmentDate = document.getElementById("department_date");
 											  var arrivalDate = document.getElementById("arrival_date");
 											
@@ -129,7 +116,6 @@
 											
 											    departmentDate.setAttribute("max", previousDay.toISOString().split("T")[0]);
 											  });
->>>>>>> refs/remotes/origin/master
 											</script>
 											<div class="form_colum">
 												<input class="nc_input" type="number" name="person"
