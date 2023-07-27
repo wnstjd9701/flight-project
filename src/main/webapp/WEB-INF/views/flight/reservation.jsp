@@ -307,12 +307,8 @@
 	display: inline-flex;
 }
 
-<<<<<<< HEAD
-</html>
-=======
 h5 {
 	display: contents;
 }
 </style>
 </html>
->>>>>>> 62defb32392bd47644eb0b4174ff8c4ea76ab3ca
