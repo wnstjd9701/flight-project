@@ -19,27 +19,28 @@
 	<select id="selectBoardListByCategory" parameterType="hashmap"
 		resultType="com.project.myapp.board.model.Board">
 		<![CDATA[
-				SELECT
-				board_id	"boardId",
-				category_id	"categoryId",
-				member_id	"memberId",
-				title		"title",
-				content		"content",
-				created_at	"createdAt",
-				views		"views",
-				board_category.board_category_name	"boardCategoryName"
-				FROM
-				(
-				SELECT
-				    board_id, category_id, member_id, title, content,created_at, views, rownum AS rnum
-				FROM(
-				    SELECT * FROM BOARD
-				    WHERE category_id = #{categoryId}
-				    ORDER BY board_id DESC
-				    )
-				)
-				LEFT OUTER JOIN board_category  ON category_id = board_category.board_category_id
-				WHERE rnum BETWEEN #{start} AND #{end}
+			SELECT
+			    c.board_id AS "boardId",
+			    c.category_id AS "categoryId",
+			    c.member_id AS "memberId",
+			    c.title AS "title",
+			    c.content AS "content",
+			    c.created_at AS "createdAt",
+			    c.views AS "views",
+			    b.board_category_name AS "boardCategoryName"
+			FROM
+			(
+			    SELECT
+			        board_id, category_id, member_id, title, content, created_at, views, rownum AS rnum
+			    FROM
+			    (
+			        SELECT * FROM BOARD
+			        WHERE category_id = #{categoryId}
+			        ORDER BY board_id DESC
+			    )
+			) c
+			LEFT OUTER JOIN board_category b ON c.category_id = b.category_id
+			WHERE c.rnum BETWEEN #{start} AND #{end}
 		]]>
 	</select>
 	
@@ -54,15 +55,15 @@
 		resultType="com.project.myapp.board.model.Board">
 			<![CDATA[
 			SELECT
-				board.board_id						AS	"boardId",
-				board_category.board_category_name	    AS	"boardCategoryName",
-				board.member_id						AS	"memberId",
-				title							    AS	"title",
-				content							    AS	"content",
-				views							    AS	"views"
-			FROM BOARD
-			LEFT OUTER JOIN board_category ON board.category_id = board_category.board_category_id
-			WHERE board.board_id = #{boardId}
+				b.board_id						AS	"boardId",
+				c.board_category_name	AS	"boardCategoryName",
+				b.member_id						AS	"memberId",
+				b.title							    AS	"title",
+				b.content							    AS	"content",
+				b.views							    AS	"views"
+			FROM BOARD b
+			LEFT OUTER JOIN board_category c ON  b.category_id = c.category_id
+			WHERE b.board_id = #{boardId}
 		]]>
 	</select>
 
@@ -70,9 +71,9 @@
 		parameterType="com.project.myapp.board.model.Board">
 		<![CDATA[
 			INSERT INTO BOARD
-				(category_id,member_id, title, content, views)
+				(board_id,category_id,member_id, title, content)
 			VALUES
-				(#{categoryId},#{memberId},#{title},#{content},#{views})
+				(BOARD_SEQ.NEXTVAL,#{categoryId},#{memberId},#{title},#{content})
 		]]>
 	</insert>
 
@@ -80,7 +81,7 @@
 		parameterType="com.project.myapp.board.model.Board">
 		<![CDATA[
 			UPDATE BOARD SET
-				(category_id=#{categoryId}, title=#{title}, content=#{content})
+				category_id=#{categoryId}, title=#{title}, content=#{content}
 			WHERE board_id = #{boardId}                                                    
 		]]>
 	</update>

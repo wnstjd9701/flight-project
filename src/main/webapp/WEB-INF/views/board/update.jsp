@@ -30,29 +30,17 @@
       <div class="col-sm-4">
         <select name="categoryId" id="categoryId" class="form-control" required>
         	<c:forEach var="category" items="${categoryList}">
-        	<option value="${category.categoryId}" ${category.categoryId eq board.categoryId ? "selected" : ""}>${category.categoryName}</option>
+        	<option value="${category.categoryId}" ${category.categoryId eq board.categoryId ? "selected" : ""}>${category.boardCategoryName}</option>
         	</c:forEach>
         </select>
       </div>
     </div>
     </c:if>
 	<div class="form-group">
-      <label class="control-label col-sm-2" for="writer"><fmt:message key="WRITER"/></label>
+      <label class="control-label col-sm-2" for="memberId"><fmt:message key="WRITER"/></label>
       <div class="col-sm-2">
-        <input type="text" name="writer" id="writer" class="form-control" value="${board.writer}" readonly>
+        <input type="text" name="memberId" id="memberId" class="form-control" value="${board.memberId}" readonly>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email"><fmt:message key="EMAIL"/></label>
-      <div class="col-sm-4">
-        <input type="text" name="email" id="email" class="form-control" value="${board.email}" required readonly>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="password"><fmt:message key="PASSWORD"/></label>
-      <div class="col-sm-2">
-        <input type="password" name="password" id="password" class="form-control" required>
-      </div>${passwordError}
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="title"><fmt:message key="TITLE"/></label>
@@ -66,21 +54,11 @@
         <textarea name="content" rows="15" cols="100" class="form-control">${board.content}</textarea>
       </div>
     </div>
-    <!-- c:if test="${!empty userid}"-->
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="photo"><fmt:message key="FILE"/></label>
-      <div class="col-sm-8">
-      	<input type="hidden" name="fileId" value="${board.fileId}">
-        <input type="file" id="i_file" name="file">${board.fileName}
-      </div>
-    </div>
     <!-- /c:if-->
     <div class="form-group">
     	<div class="col-sm-offset-2 col-sm-8">
 			<input type="hidden" name="boardId" value="${board.boardId}">
-			<input type="hidden" name="masterId" value="${board.masterId}">
-			<input type="hidden" name="replyNumber" value="${board.replyNumber}">
-			<input type="hidden" name="replyStep" value="${board.replyStep}">
+			<input type="hidden" name="replyContent" value="${board.replyContent}">
 			<input type="submit" id="i_submit" class="btn btn-info" value="<fmt:message key="UPDATE"/>"> <input type="reset" class="btn btn-info" value="<fmt:message key="CANCEL"/>">
 		</div>
 	</div>
