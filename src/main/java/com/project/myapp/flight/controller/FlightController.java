@@ -330,10 +330,6 @@ public class FlightController {
 		flightService.sendCompletePaymentEmail(member, search, reservationId);
 		
 		// 여기서 회원 session정보 빼고 나머지 다 지우기
-		session.invalidate();
-		session.setAttribute("memberId", member.getMemberId());
-		session.setAttribute("email", member.getEmail());
-		session.setAttribute("phoneNumber", member.getPhoneNumber());
 		
 		return ResponseEntity.ok(result);
 	}
