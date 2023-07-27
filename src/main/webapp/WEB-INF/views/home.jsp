@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <title>여행떠나조</title>
+<link rel="shortcut icon" type="image/x-icon" href="<c:url value='imgs/favicon.ico'/>">
 <jsp:include page="/WEB-INF/views/include/staticCssFile.jsp" />
 <body>
 	<jsp:include page="/WEB-INF/views/include/header.jsp" />

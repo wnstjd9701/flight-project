@@ -104,27 +104,28 @@
 	
  	<select id="viewReservation" parameterType="string" resultType="com.project.myapp.member.model.Member">
 		<![CDATA[ 
-			SELECT
-			 	t.member_id						AS "memberId", 	
-                t.name                          AS "name",
-			 	t.reservation_id				AS "reservationId",  
-			 	a.airline_name					AS "airlineName",
-				s.department_nation				AS "departmentNation", 
-				s.department_date				AS "departmentDate", 
-				s.department_time				AS "departmentTime", 
-				s.arrival_nation				AS "arrivalNation", 
-				s.arrival_date					AS "arrivalDate", 
-				s.arrival_time					AS "arrivalTime",
-				t.phone_number					AS "phoneNumber",
-				t.seat_type						AS "seatType", 
-				t.ticket_type					AS "ticketType",
-				t.reservation_status			AS "reservationStatus",
-				t.total_price					AS "totalPrice"
-			FROM TICKET t
-				INNER JOIN SCHEDULE s ON t.schedule_id = s.schedule_id
-				INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
-			WHERE t.member_id = #{memberId} 
-		]]>
+
+					SELECT
+						t.member_id					AS "memberId", 	
+						t.name                      AS "name",
+						t.reservation_id			AS "reservationId",  
+						a.airline_name				AS "airlineName",
+						s.department_nation			AS "departmentNation", 
+						s.department_date			AS "departmentDate", 
+						s.department_time			AS "departmentTime", 
+						s.arrival_nation			AS "arrivalNation", 
+						s.arrival_date				AS "arrivalDate", 
+						s.arrival_time				AS "arrivalTime",
+						t.phone_number				AS "phoneNumber",
+						t.seat_type					AS "seatType", 
+						t.ticket_type				AS "ticketType",
+						t.reservation_status		AS "reservationStatus",
+						t.total_price				AS "totalPrice"
+					FROM TICKET t
+						INNER JOIN SCHEDULE s ON t.schedule_id = s.schedule_id
+						INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
+					WHERE t.member_id = #{memberId} AND t.reservation_status = '예약 완료'
+
 	</select>
  
 	

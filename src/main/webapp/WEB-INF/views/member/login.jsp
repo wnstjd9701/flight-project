@@ -16,8 +16,7 @@
 
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item text-center">
-							<h2>login</h2>
-							<p>로그인</p>
+							<h2>로그인</h2>
 							<hr>
 						</div>
 					</div>
@@ -186,6 +185,8 @@
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<jsp:include page="/WEB-INF/views/include/staticScriptFile.jsp" />
 
+
+</body>
 	<style>
 .sign input {
 	margin: 0 0 20px;
@@ -231,5 +232,4 @@
 	border-radius: 3px;
 }
 </style>
-</body>
 </html>
