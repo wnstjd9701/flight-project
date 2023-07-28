@@ -50,13 +50,13 @@
 							<label for="memberId"></label>
 							<div class="sign">
 								<h5>아이디</h5>
-								<input class="form-control" name="memberId" type="text"
+								<input class="form-control" name="memberId" type="text" id="memberId"
 									placeholder="회원가입한 아이디를 입력하세요" required>
 							</div>
 							<label for="password"></label>
 							<div class="sign">
 								<h5>이메일</h5>
-								<input class="form-control" name="email" type="text"
+								<input class="form-control" name="email" type="text" id="email"
 									placeholder="회원가입한 이메일주소를 입력하세요" required>
 							</div>
 							<br>

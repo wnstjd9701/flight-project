@@ -124,6 +124,7 @@
 						INNER JOIN SCHEDULE s ON t.schedule_id = s.schedule_id
 						INNER JOIN AIRLINE a ON s.airline_id = a.airline_id
 					WHERE t.member_id = #{memberId} AND t.reservation_status = '예약 완료'
+					ORDER BY t.reservation_id, t.name
 		]]>
 
 	</select>
