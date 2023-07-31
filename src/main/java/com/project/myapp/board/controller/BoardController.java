@@ -242,9 +242,6 @@ public class BoardController {
 		System.out.println(reply.getBoardId());
 		return "redirect:/board/" + reply.getBoardId();
 	}
-	
-
-	
 
 }
 
